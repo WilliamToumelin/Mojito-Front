@@ -1,1 +1,1 @@
- hello world
+Bienvenue sur Mojit'O !
