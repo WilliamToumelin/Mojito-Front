@@ -1,0 +1,9 @@
+.menu {
+  background-color: chocolate;
+  height: 15vh;
+
+  .menu-nav {
+    display: flex;
+    justify-content: space-around;
+  }
+}
