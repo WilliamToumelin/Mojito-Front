@@ -55,32 +55,22 @@ export default function App() {
   return (
     <div className="app">
       <Header categoriesData={CategoriesDataMemo} />
-      <div className="container">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                categoriesData={CategoriesDataMemo}
-                cocktailList={CocktailListMemo}
-              />
-            }
-          />
-          <Route
-            path="/:categoryName?"
-            element={
-              <CocktailByCat
-                categoriesData={CategoriesDataMemo}
-                cocktailList={CocktailListMemo}
-              />
-            }
-          />
-          <Route
-            path="/cocktail/:slug"
-            element={<CocktailById cocktailList={CocktailListMemo} />}
-          />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home cocktailList={CocktailListMemo} />} />
+        <Route
+          path="/:categoryName?"
+          element={
+            <CocktailByCat
+              categoriesData={CategoriesDataMemo}
+              cocktailList={CocktailListMemo}
+            />
+          }
+        />
+        <Route
+          path="/cocktail/:slug"
+          element={<CocktailById cocktailList={CocktailListMemo} />}
+        />
+      </Routes>
     </div>
   );
 }
