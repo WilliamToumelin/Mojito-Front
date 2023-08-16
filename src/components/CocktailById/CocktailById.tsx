@@ -1,5 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import Page404 from '../Error/Page404';
+
+import '../../styles/index.scss';
 
 type Cocktails = {
   categoryId: number;
@@ -19,14 +22,24 @@ const CocktailById: React.FC<Props> = ({ cocktailList }) => {
   const cocktailItem = cocktailList.find((cocktail) => cocktail.slug === slug);
 
   if (!cocktailItem) {
-    return <div>Cocktail introuvable</div>;
+    return <Page404 />;
   }
 
   return (
-    <article className="posts">
-      <h1>{cocktailItem.title}</h1>
-      <div>{cocktailItem.content}</div>
-    </article>
+    <div className="main">
+      <div className="main-container">
+        <div className="main-cocktail-list">
+          <article className="main-cocktail-single-article">
+            <h1 className="main-cocktail-single-article-tile">
+              {cocktailItem.title}
+            </h1>
+            <div className="main-cocktail-single-article-content">
+              {cocktailItem.content}
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
   );
 };
 

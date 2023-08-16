@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import '../../styles/index.scss';
+
 type Cocktails = {
   id: number;
   slug: string;
@@ -16,10 +18,9 @@ const SecondaryNavbar: React.FC<Props> = ({ filteredCocktails }) => {
   return (
     <div className="secondary-navbar">
       <ul>
-        <li>Liste Complète</li>
         {filteredCocktails.map((cocktail: Cocktails, key) => (
           <li key={key}>
-            <Link to={`/cocktail/${cocktail.slug}`}>{cocktail.categoryId}</Link>
+            <Link to={`/cocktail/${cocktail.slug}`}>{cocktail.id}</Link>
           </li>
         ))}
       </ul>

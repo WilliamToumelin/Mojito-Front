@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './Header.scss';
+
+import '../../styles/index.scss';
 
 type Category = {
   id: number;

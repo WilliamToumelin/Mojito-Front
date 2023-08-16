@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import './Home.scss';
 import { Link } from 'react-router-dom';
+
+import '../../styles/index.scss';
 
 type Cocktails = {
   categoryId: number;
@@ -23,24 +24,41 @@ const Home: React.FC<Props> = ({ cocktailList }) => {
     setDisplayMode((prevToggle) => !prevToggle);
   };
   return (
-    <div className={`home ${displayMode ? 'top5-mode' : 'all-mode'}`}>
-      <h1>Home</h1>
-      <button type="button" onClick={handleToggle}>
-        {displayMode ? 'Tout les cocktails' : 'Le Top 5'}
-      </button>
-      <ul>
-        {displayMode
-          ? cocktailTop5.map((cocktail, key) => (
-              <Link key={key} to={`/cocktail/${cocktail.slug}`}>
-                <li>{cocktail.slug}</li>
-              </Link>
-            ))
-          : cocktailList.map((cocktail, key) => (
-              <Link key={key} to={`/cocktail/${cocktail.slug}`}>
-                <li>{cocktail.slug}</li>
-              </Link>
-            ))}
-      </ul>
+    <div className="main">
+      <div className="secondary-navbar--home" />
+      <div className="main-container">
+        <h1 className="main-title">
+          {displayMode
+            ? 'Les 5 cinq cocktail les mieux notés'
+            : 'Tout nos cocktails'}
+        </h1>
+        <div className="main-cocktail-list">
+          <button type="button" onClick={handleToggle}>
+            {displayMode ? 'All' : 'Top 5'}
+          </button>
+          <ul>
+            {displayMode
+              ? cocktailTop5.map((cocktail, key) => (
+                  <Link key={key} to={`/cocktail/${cocktail.slug}`}>
+                    <article className="main-cocktail-list-article">
+                      <h3 className="main-cocktail-list-article-title">
+                        {cocktail.slug}
+                      </h3>
+                    </article>
+                  </Link>
+                ))
+              : cocktailList.map((cocktail, key) => (
+                  <Link key={key} to={`/cocktail/${cocktail.slug}`}>
+                    <article className="main-cocktail-list-article">
+                      <h3 className="main-cocktail-list-article-title">
+                        {cocktail.slug}
+                      </h3>
+                    </article>
+                  </Link>
+                ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,9 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import SecondaryNavbar from '../SecondaryNavbar/SecondaryNavbar';
+import Page404 from '../Error/Page404';
+
+import '../../styles/index.scss';
 
 type Category = {
   id: number;
@@ -32,18 +35,22 @@ const CocktailByCat: React.FC<Props> = ({ categoriesData, cocktailList }) => {
     (cocktail) => cocktail.categoryId === categoryId
   );
 
+  if (!categoryId) {
+    return <Page404 />;
+  }
+
   return (
-    <div className="cocktailByCat-main">
-      <div className="cocktailList-sidebar">
-        <SecondaryNavbar filteredCocktails={filteredCocktails} />
-      </div>
-      <div className="cocktailsByCat">
-        <h1>{categoryName}</h1>
-        <div className="cocktail-list">
+    <div className="main">
+      <SecondaryNavbar filteredCocktails={filteredCocktails} />
+      <div className="main-container">
+        <h1 className="main-title">{categoryName}</h1>
+        <div className="main-cocktail-list">
           {filteredCocktails.map((cocktailItemData: Cocktails, key) => (
             <Link key={key} to={`/cocktail/${cocktailItemData.slug}`}>
-              <article>
-                <h3>{cocktailItemData.categoryId}</h3>{' '}
+              <article className="main-cocktail-list-article">
+                <h3 className="main-cocktail-list-article-title">
+                  {cocktailItemData.slug}
+                </h3>
               </article>
             </Link>
           ))}
