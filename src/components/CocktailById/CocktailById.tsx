@@ -1,27 +1,31 @@
-/* eslint-disable no-console */
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './CocktailById.scss';
+import { useParams } from 'react-router-dom';
 
 type Cocktails = {
   categoryId: number;
   id: number;
   slug: string;
   content: string;
+  title: string;
 };
 
 type Props = {
-  cocktailItem: Cocktails;
+  cocktailList: Cocktails[];
 };
 
-const CocktailById: React.FC<Props> = ({ cocktailItem }) => {
-  // console.log(cocktailItem);
+const CocktailById: React.FC<Props> = ({ cocktailList }) => {
+  const { slug } = useParams<{ slug: string }>();
+
+  const cocktailItem = cocktailList.find((cocktail) => cocktail.slug === slug);
+
+  if (!cocktailItem) {
+    return <div>Cocktail introuvable</div>;
+  }
+
   return (
     <article className="posts">
-      <Link to={`/cocktail/${cocktailItem.slug}`}>
-        <div>{cocktailItem.categoryId}</div>
-        {/* <div>{cocktailItem.content}</div> */}
-      </Link>
+      <h1>{cocktailItem.title}</h1>
+      <div>{cocktailItem.content}</div>
     </article>
   );
 };

@@ -19,6 +19,7 @@ type Cocktails = {
   slug: string;
   categoryId: number;
   content: string;
+  title: string;
 };
 
 export default function App() {
@@ -75,17 +76,8 @@ export default function App() {
             }
           />
           <Route
-            path="/cocktail"
-            element={
-              <CocktailById
-                cocktailItem={{
-                  categoryId: 0,
-                  id: 0,
-                  slug: '',
-                  content: '',
-                }}
-              />
-            }
+            path="/cocktail/:slug"
+            element={<CocktailById cocktailList={CocktailListMemo} />}
           />
         </Routes>
       </div>

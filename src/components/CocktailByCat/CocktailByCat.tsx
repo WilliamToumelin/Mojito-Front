@@ -1,6 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router';
-import CocktailById from '../CocktailById/CocktailById';
+import { useParams, Link } from 'react-router-dom';
 import SecondaryNavbar from '../SecondaryNavbar/SecondaryNavbar';
 
 type Category = {
@@ -14,6 +13,7 @@ type Cocktails = {
   id: number;
   slug: string;
   content: string;
+  title: string;
 };
 
 type Props = {
@@ -41,7 +41,11 @@ const CocktailByCat: React.FC<Props> = ({ categoriesData, cocktailList }) => {
         <h1>{categoryName}</h1>
         <div className="cocktail-list">
           {filteredCocktails.map((cocktailItemData: Cocktails, key) => (
-            <CocktailById key={key} cocktailItem={cocktailItemData} />
+            <Link key={key} to={`/cocktail/${cocktailItemData.slug}`}>
+              <article>
+                <h3>{cocktailItemData.categoryId}</h3>{' '}
+              </article>
+            </Link>
           ))}
         </div>
       </div>
