@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import Home from '../Home/Home';
@@ -8,6 +8,8 @@ import CocktailByCat from '../CocktailByCat/CocktailByCat';
 import CocktailById from '../CocktailById/CocktailById';
 
 import '../../styles/index.scss';
+import Spinner from '../Spinner/Spinner';
+// import ConnectModal from '../ConnectModal/ConnectModal';
 
 type Category = {
   id: number;
@@ -24,18 +26,19 @@ type Cocktails = {
 };
 
 export default function App() {
-  const [isLoading, setIsloading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [categoriesData, setCategoriesData] = useState<Category[]>([]);
   const [cocktailList, setCocktailList] = useState<Cocktails[]>([]);
   const { pathname: url } = useLocation();
 
-  const endLoading = (): void => {
-    setIsloading(false);
-  };
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 4000);
+  }, [url]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 });
-  }, [url]);
+  }, []);
 
   useEffect(() => {
     fetch('https://oblog-react.vercel.app/api/categories')
@@ -50,32 +53,33 @@ export default function App() {
       .then((response) => response.json())
       .then((data: Cocktails[]) => {
         setCocktailList(data);
-        setIsloading(false);
+        setIsLoading(false);
         console.log(data);
       })
       .catch((err) => console.error(err));
   }, []);
 
-  const CategoriesDataMemo = useMemo(() => categoriesData, [categoriesData]);
-  const CocktailListMemo = useMemo(() => cocktailList, [cocktailList]);
+  const categoriesDataMemo = useMemo(() => categoriesData, [categoriesData]);
+  const cocktailListMemo = useMemo(() => cocktailList, [cocktailList]);
 
   return (
-    <div className="app">
-      <Header categoriesData={CategoriesDataMemo} />
+    <div className="app flex flex-col">
+      <Header categoriesData={categoriesDataMemo} />
+
       <Routes>
-        <Route path="/" element={<Home cocktailList={CocktailListMemo} />} />
+        <Route path="/" element={<Home cocktailList={cocktailListMemo} />} />
         <Route
           path="/:categoryName?"
           element={
             <CocktailByCat
-              categoriesData={CategoriesDataMemo}
-              cocktailList={CocktailListMemo}
+              categoriesData={categoriesDataMemo}
+              cocktailList={cocktailListMemo}
             />
           }
         />
         <Route
           path="/cocktail/:slug"
-          element={<CocktailById cocktailList={CocktailListMemo} />}
+          element={<CocktailById cocktailList={cocktailListMemo} />}
         />
       </Routes>
     </div>

@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
+import anime from 'animejs';
 import '../../styles/index.scss';
+import ConnectModal from '../ConnectModal/ConnectModal';
 
 type Category = {
   id: number;

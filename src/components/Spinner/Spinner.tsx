@@ -17,7 +17,7 @@ const Spinner: React.FC<Props> = ({ isLoading }) => {
         transition: isLoading ? 'none' : '0.5s',
       }}
     >
-      <span>Mojit`&apos;`O</span>
+      <p>Mojit`&apos;`O</p>
     </main>
   );
 };

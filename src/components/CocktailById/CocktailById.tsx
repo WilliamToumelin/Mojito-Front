@@ -26,13 +26,11 @@ const CocktailById: React.FC<Props> = ({ cocktailList }) => {
   }
 
   return (
-    <div className="main">
-      <div className="main-container">
-        <div className="main-cocktail-list">
+    <div className="bg-black flex justify-center items-center flex-1">
+      <div className="w-3/5 h-4/5 flex flex-col overflow-y-auto shadow-amber-700 shadow-2xl rounded-2xl bg-black">
+        <div className="text-center pb-12">
           <article className="main-cocktail-single-article">
-            <h1 className="main-cocktail-single-article-tile">
-              {cocktailItem.title}
-            </h1>
+            <h1 className="text-amber-700 text-2xl">{cocktailItem.title}</h1>
             <div className="main-cocktail-single-article-content">
               {cocktailItem.content}
             </div>
