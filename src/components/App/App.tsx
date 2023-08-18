@@ -9,6 +9,9 @@ import CocktailById from '../CocktailById/CocktailById';
 
 import '../../styles/index.scss';
 import Spinner from '../Spinner/Spinner';
+import Footer from '../Footer/Footer';
+import Contact from '../Contact/Contact';
+import AboutUs from '../AboutUs/AboutUs';
 // import ConnectModal from '../ConnectModal/ConnectModal';
 
 type Category = {
@@ -63,7 +66,7 @@ export default function App() {
   const cocktailListMemo = useMemo(() => cocktailList, [cocktailList]);
 
   return (
-    <div className="app flex flex-col text-sm">
+    <div className="app flex flex-col text-sm h-[100vh]">
       <Header categoriesData={categoriesDataMemo} />
 
       <Routes>
@@ -81,7 +84,10 @@ export default function App() {
           path="/cocktail/:slug"
           element={<CocktailById cocktailList={cocktailListMemo} />}
         />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about-us" element={<AboutUs />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

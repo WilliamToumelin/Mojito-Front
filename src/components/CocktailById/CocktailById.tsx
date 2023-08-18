@@ -28,20 +28,22 @@ const CocktailById: React.FC<Props> = ({ cocktailList }) => {
     <div className="bg-black flex justify-center items-center flex-1 h-[85vh]">
       <div className="w-4/5 lg:w-3/5 h-4/5 flex flex-col overflow-y-auto shadow-amber-700 shadow-2xl rounded-2xl bg-black">
         <article className="h-full w-3/3 flex">
-          <div style={{ width: '33.33%' }} className="flex just">
-            <div className="w-52 h-52 rounded-full overflow-hidden shadow-amber-700 shadow-2xl ">
-              <div className="relative w-full h-full my-auto">
-                <img
-                  src={image}
-                  alt="cocktail"
-                  className="absolute w-full h-full object-cover transform-center "
-                />
-              </div>
+          <div
+            style={{ width: '33.33%' }}
+            className="flex items-center justify-center"
+          >
+            <div className="shadow-amber-700 shadow h-6/8 w-4/5 rounded-2xl overflow-hidden">
+              <img src={image} alt="cocktail" className="h-full w-full " />
             </div>
           </div>
-          <div style={{ width: '66.67%' }}>
-            <h1 className="text-amber-700 text-2xl">{cocktailItem.title}</h1>
-            <div className="">{cocktailItem.content}</div>
+          <div
+            style={{ width: '66.67%' }}
+            className="flex flex-col items-center"
+          >
+            <h1 className="text-amber-700 text-5xl p-5 w-2/3">
+              {cocktailItem.title}
+            </h1>
+            <div className="p-6">{cocktailItem.content}</div>
           </div>
         </article>
       </div>

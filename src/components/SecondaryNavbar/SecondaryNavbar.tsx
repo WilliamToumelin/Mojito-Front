@@ -1,6 +1,6 @@
 // SecondaryNavbar.tsx
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 type Cocktails = {
   id: number;
@@ -14,8 +14,17 @@ type Props = {
 };
 
 const SecondaryNavbar: React.FC<Props> = ({ filteredCocktails }) => {
+  const [animate, setAnimate] = useState(true);
+  const url = useParams();
+
+  useEffect(() => {
+    setAnimate(false);
+  }, [url]);
+
   return (
-    <div className="absolute top-26 left-0 bg-[#2E1603] text-white min-h-[40vh] shadow-amber-700 shadow-lg hidden lg:block w-56">
+    <div
+      className={`absolute top-26 left-0 bg-[#2E1603] text-white min-h-[40vh] shadow-amber-700 shadow-lg hidden lg:block w-56 ${animate}`}
+    >
       <h3 className="text-lg font-semibold mb-2 p-4">Liste à parcourir</h3>
       <ul className="list-disc pl-6 p-3">
         {filteredCocktails.map((cocktail: Cocktails, key) => (

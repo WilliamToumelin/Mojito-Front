@@ -1,6 +1,7 @@
+/* eslint-disable no-nested-ternary */
 // CocktailByCat.tsx
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { BiSolidStar } from 'react-icons/bi';
 import SecondaryNavbar from '../SecondaryNavbar/SecondaryNavbar';
 import Page404 from '../Error/Page404';
@@ -27,6 +28,9 @@ type Props = {
 
 const CocktailByCat: React.FC<Props> = ({ categoriesData, cocktailList }) => {
   const { categoryName } = useParams<{ categoryName: string }>();
+  const [animate, setAnimate] = useState(true);
+  const url = useLocation();
+
   const categoryId = categoriesData.find(
     (category) => category.slug === categoryName
   )?.id;
@@ -35,12 +39,16 @@ const CocktailByCat: React.FC<Props> = ({ categoriesData, cocktailList }) => {
     (cocktail) => cocktail.categoryId === categoryId
   );
 
+  useEffect(() => {
+    setAnimate(false);
+  }, [url]);
+
   if (!categoryId) {
     return <Page404 />;
   }
 
   return (
-    <div className="relative bg-black flex justify-center items-center flex-1 h-[85vh]">
+    <div className="relative bg-black flex justify-center items-center flex-1 h-[75vh]">
       <SecondaryNavbar filteredCocktails={filteredCocktails} />
       <div className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto shadow-amber-700 shadow-2xl rounded-2xl bg-black">
         <div className="text-center pb-12">
@@ -52,7 +60,15 @@ const CocktailByCat: React.FC<Props> = ({ categoriesData, cocktailList }) => {
               <article
                 className={`mb-12 flex items-center ${
                   key % 2 === 0 ? '' : 'flex-row-reverse'
-                }`}
+                } ${
+                  key % 2 === 0
+                    ? animate
+                      ? 'opacity-0 translate-x-28'
+                      : ''
+                    : animate
+                    ? 'opacity-0 -translate-x-28'
+                    : ''
+                } transition-all ease-in duration-1200`}
               >
                 <div className="w-52 h-52 rounded-full overflow-hidden shadow-amber-700 shadow-sm">
                   <div className="relative w-full h-full shadow-amber-700 shadow-2xl">
