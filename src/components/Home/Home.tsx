@@ -1,6 +1,6 @@
-// Home.tsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import image from '../../images/image.jpeg';
 
 type Cocktails = {
   categoryId: number;
@@ -25,8 +25,8 @@ const Home: React.FC<Props> = ({ cocktailList }) => {
   };
 
   return (
-    <div className="bg-black flex justify-center items-center flex-1">
-      <div className="w-3/5 h-4/5 flex flex-col overflow-y-auto shadow-amber-700 shadow-2xl rounded-2xl bg-black">
+    <div className="bg-black flex justify-center items-center flex-1 h-[85vh]">
+      <div className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto shadow-amber-700 shadow-2xl rounded-2xl bg-black">
         <div className="text-center pb-12">
           <h1 className="text-amber-700 text-2xl">
             {displayMode
@@ -48,10 +48,21 @@ const Home: React.FC<Props> = ({ cocktailList }) => {
             {displayMode
               ? cocktailTop5.map((cocktail, key) => (
                   <Link key={key} to={`/cocktail/${cocktail.slug}`}>
-                    <article className="main-cocktail-list-article">
-                      <h3 className="space-y-2 py-2 text-base leading-7">
+                    <article className="mb-4 flex items-center">
+                      <div className="w-52 h-52 rounded-full overflow-hidden shadow-amber-700 shadow-sm">
+                        <div className="relative w-full h-full shadow-amber-700 shadow-2xl">
+                          <img
+                            src={image}
+                            alt="cocktail"
+                            className="absolute w-full h-full object-cover transform-center"
+                          />
+                        </div>
+                      </div>
+                      <h3 className="ml-3 space-y-2 py-2 text-base leading-7">
                         {cocktail.slug}
                       </h3>
+                      <p className="text-white p-4 flex">Facile</p>
+                      <p className="text-white p-4 flex">BiSolidStar</p>
                     </article>
                   </Link>
                 ))

@@ -15,7 +15,7 @@ type Props = {
 
 const SecondaryNavbar: React.FC<Props> = ({ filteredCocktails }) => {
   return (
-    <div className="absolute top-[10em] left-0 bg-[#2E1603] text-white min-h-[40vh] shadow-amber-700 shadow-lg ">
+    <div className="absolute top-26 left-0 bg-[#2E1603] text-white min-h-[40vh] shadow-amber-700 shadow-lg hidden lg:block w-56">
       <h3 className="text-lg font-semibold mb-2 p-4">Liste à parcourir</h3>
       <ul className="list-disc pl-6 p-3">
         {filteredCocktails.map((cocktail: Cocktails, key) => (
@@ -24,7 +24,7 @@ const SecondaryNavbar: React.FC<Props> = ({ filteredCocktails }) => {
               to={`/cocktail/${cocktail.slug}`}
               className="text-blue-500 hover:underline"
             >
-              {cocktail.id}
+              {cocktail.slug}
             </Link>
           </li>
         ))}

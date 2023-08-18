@@ -63,7 +63,7 @@ export default function App() {
   const cocktailListMemo = useMemo(() => cocktailList, [cocktailList]);
 
   return (
-    <div className="app flex flex-col">
+    <div className="app flex flex-col text-sm">
       <Header categoriesData={categoriesDataMemo} />
 
       <Routes>
