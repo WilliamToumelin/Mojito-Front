@@ -51,7 +51,7 @@ const Home: React.FC<Props> = ({ cocktailList }) => {
             {displayMode ? <CgInfinity /> : <BsTrophy />}
           </button>
         </div>
-        <div className="text-white flex p-12">
+        <div className="text-white flex px-12 pt-9">
           <ul className="w-full">
             {displayMode
               ? cocktailTop5.map((cocktail, index) => (

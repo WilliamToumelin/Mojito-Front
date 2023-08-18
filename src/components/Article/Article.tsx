@@ -14,20 +14,18 @@ type Cocktails = {
 type ArticleProps = {
   cocktail: Cocktails;
   animate: boolean;
-  key: number;
   modulo: boolean;
 };
 
-const Article: React.FC<ArticleProps> = ({
-  cocktail,
-  animate,
-  key,
-  modulo,
-}) => {
+const Article: React.FC<ArticleProps> = ({ cocktail, animate, modulo }) => {
   return (
     <article
       className={`mb-12 flex items-center ${modulo ? 'flex-row-reverse' : ''} ${
-        animate ? 'opacity-0 translate-x-28' : ''
+        animate
+          ? modulo
+            ? 'opacity-0 -translate-x-28'
+            : 'opacity-0 translate-x-28'
+          : ''
       } transition-all ease-in duration-1200`}
     >
       <div className="w-52 h-52 rounded-full overflow-hidden shadow-amber-700 shadow-sm">
@@ -48,19 +46,23 @@ const Article: React.FC<ArticleProps> = ({
           {cocktail.slug}
         </h3>
         <p
-          className={`text-white p-4 flex ${
-            key % 2 === 0 ? '' : 'justify-end'
-          } ${
-            animate ? 'opacity-0 translate-x-12' : ''
+          className={`text-white p-4 flex ${modulo ? 'justify-end' : ''} ${
+            animate
+              ? modulo
+                ? 'opacity-0 translate-y-12'
+                : 'opacity-0 translate-x-12'
+              : ''
           } transition-all ease-in duration-1200`}
         >
           Difficulté : Facile
         </p>
         <p
-          className={`text-white p-4 flex ${
-            key % 2 === 0 ? '' : 'justify-end'
-          } ${
-            animate ? 'opacity-0 translate-y-12' : ''
+          className={`text-white p-4 flex ${modulo ? 'justify-end' : ''} ${
+            animate
+              ? modulo
+                ? 'opacity-0 -translate-x-12'
+                : 'opacity-0 translate-y-12'
+              : ''
           } transition-all ease-in duration-1200`}
         >
           Note : &nbsp;
