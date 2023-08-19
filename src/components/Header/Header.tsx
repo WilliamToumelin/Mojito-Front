@@ -1,6 +1,8 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import anime from 'animejs';
+import anime from 'animejs/lib/anime';
 // import ConnectModal from '../ConnectModal/ConnectModal';
 
 type Category = {
@@ -14,23 +16,23 @@ type Props = {
 };
 
 const Header: React.FC<Props> = ({ categoriesData }) => {
-  const [categoryId, setCategoryId] = React.useState<number | null>(null);
+  const [categoryId, setCategoryId] = useState<number | null>(null);
 
-  const z = () => {
+  const category = () => {
     const random = () => {
-      return anime.random(100, 150);
+      return anime.random(0, 80);
     };
 
     anime({
-      targets: '.menu-button div',
+      targets: '.menu-link div',
       translateY: () => random(),
       scale: [0, 1],
-      delay: anime.stagger(100),
+      delay: anime.stagger(200),
     });
   };
 
-  React.useEffect(() => {
-    z();
+  useEffect(() => {
+    category();
   }, [categoryId]);
 
   const handleCategoryClick = (clickedCategoryId: number) => {
@@ -39,18 +41,9 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
 
   return (
     <header className="menu">
-      <div>
-        <div>CategoryId: {categoryId}</div>
-      </div>
+      {/* <div>CategoryId: {categoryId}</div> */}
       <nav className="menu-nav">
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? 'menu-link menu-link--selected' : 'menu-link menu-link'
-          }
-        >
-          Home
-        </NavLink>
+        <NavLink to="/">Home</NavLink>
         {categoriesData.map((categoryItem: Category) => (
           <NavLink
             key={categoryItem.id}
@@ -61,16 +54,7 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
             }
             to={`/${categoryItem.slug}`}
           >
-            <div
-              onClick={() => handleCategoryClick(categoryItem.id)}
-              role="button"
-              tabIndex={0}
-              onKeyPress={(e) => {
-                if (e.key === 'Space' || e.key === '') {
-                  handleCategoryClick(categoryItem.id);
-                }
-              }}
-            >
+            <div onClick={() => handleCategoryClick(categoryItem.id)}>
               {categoryItem.name}
             </div>
           </NavLink>
