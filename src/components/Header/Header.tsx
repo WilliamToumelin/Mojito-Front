@@ -39,11 +39,17 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
     setCategoryId(clickedCategoryId);
   };
 
+  const handleResetCategoryId = () => {
+    setCategoryId(null);
+  };
+
   return (
     <header className="menu">
-      {/* <div>CategoryId: {categoryId}</div> */}
+      <div>CategoryId: {categoryId}</div>
       <nav className="menu-nav">
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/" onClick={handleResetCategoryId}>
+          Home
+        </NavLink>
         {categoriesData.map((categoryItem: Category) => (
           <NavLink
             key={categoryItem.id}
