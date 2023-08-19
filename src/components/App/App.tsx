@@ -48,7 +48,6 @@ export default function App() {
       .then((response) => response.json())
       .then((data: Category[]) => {
         setCategoriesData(data);
-        console.log(data);
       })
       .catch((err) => console.error(err));
 
@@ -57,13 +56,15 @@ export default function App() {
       .then((data: Cocktails[]) => {
         setCocktailList(data);
         setIsLoading(false);
-        console.log(data);
       })
       .catch((err) => console.error(err));
   }, []);
 
   const categoriesDataMemo = useMemo(() => categoriesData, [categoriesData]);
   const cocktailListMemo = useMemo(() => cocktailList, [cocktailList]);
+
+  console.log(categoriesDataMemo);
+  console.log(cocktailListMemo);
 
   return (
     <div className="app flex flex-col text-sm h-[100vh]">

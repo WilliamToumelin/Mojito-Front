@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 /* eslint-disable no-nested-ternary */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { BsTrophy } from 'react-icons/bs';
 import { CgInfinity } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
@@ -18,9 +19,6 @@ type Props = {
 };
 
 const Home: React.FC<Props> = ({ cocktailList }) => {
-  const cocktailTop5 = cocktailList.filter(
-    (cocktail5) => cocktail5.categoryId <= 2
-  );
   const [displayMode, setDisplayMode] = useState(true);
   const [animate, setAnimate] = useState(true);
 
@@ -31,6 +29,13 @@ const Home: React.FC<Props> = ({ cocktailList }) => {
   const handleToggle = () => {
     setDisplayMode((prevToggle) => !prevToggle);
   };
+
+  const cocktailTop5 = useMemo(() => {
+    return cocktailList.filter((cocktail5) => cocktail5.categoryId <= 2);
+  }, [cocktailList]);
+
+  console.log(cocktailTop5);
+  console.log(cocktailList);
 
   return (
     <div className="bg-black flex justify-center items-center flex-1 h-[75vh]">

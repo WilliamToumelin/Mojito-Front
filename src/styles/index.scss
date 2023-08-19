@@ -1,57 +1,6 @@
 @use 'reset';
 @use 'variables' as v;
 
-body {
-  background-color: v.$background-color;
-  color: v.$text-color;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-a {
-  color: v.$primary-color;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
 a:hover {
   color: darken(v.$primary-color, 20%);
-}
-
-.menu {
-  background-color: v.$background-color;
-  padding: 10px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.menu-nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.menu-link {
-  color: v.$text-color;
-  text-decoration: none;
-  padding: 5px 10px;
-  transition: color 0.3s;
-}
-
-.menu-link--selected {
-  color: v.$primary-color;
-}
-
-.app {
-  height: 100vh;
-  max-height: 100vh;
-
-  .menu {
-    min-height: 15vh;
-
-    .menu-nav {
-      display: flex;
-      justify-content: space-around;
-    }
-  }
 }
