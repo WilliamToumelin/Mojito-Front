@@ -23,7 +23,7 @@ const SecondaryNavbar: React.FC<Props> = ({ filteredCocktails }) => {
 
   return (
     <div
-      className={`absolute top-26 left-0 bg-[#2E1603] text-white min-h-[40vh] shadow-amber-700 shadow-lg hidden lg:block w-56 ${animate}`}
+      className={`absolute top-26 left-0 bg-black text-white min-h-[40vh] shadow-purple-700 shadow-lg hidden lg:block w-56 ${animate}`}
     >
       <h3 className="text-lg font-semibold mb-2 p-4">Liste à parcourir</h3>
       <ul className="list-disc pl-6 p-3">

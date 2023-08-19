@@ -26,7 +26,7 @@ const CocktailById: React.FC<Props> = ({ cocktailList }) => {
 
   return (
     <div className="bg-black flex justify-center items-center flex-1 h-[85vh]">
-      <div className="w-4/5 lg:w-3/5 h-4/5 flex flex-col overflow-y-auto shadow-amber-700 shadow-2xl rounded-2xl bg-black">
+      <div className="w-4/5 lg:w-3/5 h-4/5 flex flex-col overflow-y-auto shadow-purple-700 shadow-2xl rounded-2xl bg-black">
         <article className="h-full w-3/3 flex">
           <div
             style={{ width: '33.33%' }}

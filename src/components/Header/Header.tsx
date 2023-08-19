@@ -59,10 +59,10 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
 
   return (
     <header className="bg-black px-3 pt-2 pb-24">
-      <nav className="flex justify-around no-underline text-white delay-30">
-        <NavLink to="/" onClick={handleResetCategoryId}>
-          <div className="text-white">Home</div>
-        </NavLink>
+      <NavLink to="/" onClick={handleResetCategoryId}>
+        <div className="text-white">Home</div>
+      </NavLink>
+      <nav className="flex justify-center gap-40 no-underline text-white delay-30">
         {categoriesData.map((categoryItem: Category) => (
           <NavLink
             key={categoryItem.id}
@@ -74,10 +74,12 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
             to={`/${categoryItem.slug}`}
           >
             <div
-              className="w-16 h-16 bg-amber-700 flex items-center justify-center"
+              className="flex justify-center items-center w-28 h-12 rounded-full bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 border-white transition duration-100 ease-in-out"
               onClick={() => handleCategoryClick(categoryItem.id)}
             >
-              {categoryItem.name}
+              <span className="text-white font-bold text-base">
+                {categoryItem.name}
+              </span>
             </div>
           </NavLink>
         ))}
