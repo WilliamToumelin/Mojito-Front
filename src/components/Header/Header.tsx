@@ -20,7 +20,7 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
 
   const animeCategory = () => {
     const random = () => {
-      return anime.random(0, 100);
+      return anime.random(0, 80);
     };
 
     anime({
@@ -44,9 +44,15 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
   };
 
   return (
-    <header className="bg-black px-3 pt-2 pb-24">
+    <header className="relative bg-black px-3 pt-2 pb-24">
       <NavLink to="/" onClick={handleResetCategoryId}>
-        <div className="text-white">Home</div>
+        <img
+          className="absolute top-12 left-36"
+          width="90"
+          height="90"
+          src="https://img.icons8.com/external-icongeek26-outline-gradient-icongeek26/64/external-cocktail-party-icongeek26-outline-gradient-icongeek26.png"
+          alt="external-cocktail-party-icongeek26-outline-gradient-icongeek26"
+        />
       </NavLink>
       <nav className="flex justify-center gap-40 no-underline text-white delay-30">
         {categoriesData.map((categoryItem: Category) => (
@@ -70,7 +76,7 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
           </NavLink>
         ))}
       </nav>
-      <div className="text-white">CategoryId: {categoryId}</div>
+      {/* <div className="text-white">CategoryId: {categoryId}</div> */}
     </header>
   );
 };
