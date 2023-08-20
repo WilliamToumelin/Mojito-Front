@@ -47,14 +47,14 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
     <header className="relative bg-black px-3 pt-2 pb-24">
       <NavLink to="/" onClick={handleResetCategoryId}>
         <img
-          className="absolute top-12 left-36"
+          className="absolute top-2 left-2 pt-6 pl-6"
           width="90"
           height="90"
           src="https://img.icons8.com/external-icongeek26-outline-gradient-icongeek26/64/external-cocktail-party-icongeek26-outline-gradient-icongeek26.png"
           alt="external-cocktail-party-icongeek26-outline-gradient-icongeek26"
         />
       </NavLink>
-      <nav className="flex justify-center gap-40 no-underline text-white delay-30">
+      <nav className="flex justify-center gap-20 no-underline text-white delay-30">
         {categoriesData.map((categoryItem: Category) => (
           <NavLink
             key={categoryItem.id}

@@ -43,7 +43,7 @@ const Article: React.FC<ArticleProps> = ({ cocktail, animate, modulo }) => {
             animate ? 'opacity-0 -translate-y-12' : ''
           } transition-all ease-in duration-1200`}
         >
-          {cocktail.slug}
+          {cocktail.title}
         </h3>
         <p
           className={`text-white p-4 flex ${modulo ? 'justify-end' : ''} ${

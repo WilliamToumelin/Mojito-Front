@@ -41,15 +41,15 @@ const SecondaryNavbar: React.FC<Props> = ({ filteredCocktails }) => {
   };
 
   return (
-    <div className="absolute top-20 left-0 bg-grey lg:block w-56">
+    <div className="absolute top-20 left-0 lg:block w-56">
       {filteredCocktails.map((cocktail: Cocktails) => (
         <NavLink
           to={`/cocktail/${cocktail.slug}`}
-          className="menu-button"
+          className="menu-button p-1"
           key={cocktail.id}
         >
           <div
-            className="menu-button pb-1 w-24 h-10 flex justify-center items-center bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 border-white transition-transform duration-400 ease-out hover:scale-125"
+            className="menu-button w-32 h-8 flex justify-center items-center bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 border-white rounded-r-lg transition-transform duration-400 ease-out hover:scale-125"
             onClick={() => handleCocktailClick(cocktail.categoryId)}
           >
             <span className="text-white font-bold text-base">
