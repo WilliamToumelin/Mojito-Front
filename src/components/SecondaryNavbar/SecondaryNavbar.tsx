@@ -1,6 +1,9 @@
-// SecondaryNavbar.tsx
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import anime from 'animejs/lib/anime';
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 type Cocktails = {
   id: number;
@@ -14,30 +17,47 @@ type Props = {
 };
 
 const SecondaryNavbar: React.FC<Props> = ({ filteredCocktails }) => {
-  const [animate, setAnimate] = useState(true);
-  const url = useParams();
+  const [categoryId, setCategoryId] = useState(1);
+
+  const animeCocktail = () => {
+    const random = () => {
+      return anime.random(0, 0);
+    };
+
+    anime({
+      targets: '.menu-button div',
+      translateX: () => random(),
+      scale: [0, 1],
+      delay: anime.stagger(200),
+    });
+  };
 
   useEffect(() => {
-    setAnimate(false);
-  }, [url]);
+    animeCocktail();
+  }, [categoryId]);
+
+  const handleCocktailClick = (clickedCategoryId: number) => {
+    setCategoryId(clickedCategoryId);
+  };
 
   return (
-    <div
-      className={`absolute top-26 left-0 bg-black text-white min-h-[40vh] shadow-purple-700 shadow-lg hidden lg:block w-56 ${animate}`}
-    >
-      <h3 className="text-lg font-semibold mb-2 p-4">Liste à parcourir</h3>
-      <ul className="list-disc pl-6 p-3">
-        {filteredCocktails.map((cocktail: Cocktails, key) => (
-          <li key={key} className="mb-2">
-            <Link
-              to={`/cocktail/${cocktail.slug}`}
-              className="text-blue-500 hover:underline"
-            >
-              {cocktail.slug}
-            </Link>
-          </li>
-        ))}
-      </ul>
+    <div className="absolute top-20 left-0 bg-grey lg:block w-56">
+      {filteredCocktails.map((cocktail: Cocktails) => (
+        <NavLink
+          to={`/cocktail/${cocktail.slug}`}
+          className="menu-button"
+          key={cocktail.id}
+        >
+          <div
+            className="menu-button pb-1 w-24 h-10 flex justify-center items-center bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 border-white transition-transform duration-400 ease-out hover:scale-125"
+            onClick={() => handleCocktailClick(cocktail.categoryId)}
+          >
+            <span className="text-white font-bold text-base">
+              {cocktail.categoryId}
+            </span>
+          </div>
+        </NavLink>
+      ))}
     </div>
   );
 };

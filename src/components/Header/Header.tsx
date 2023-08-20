@@ -29,20 +29,6 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
       scale: [0, 1],
       delay: anime.stagger(200),
     });
-
-    anime({
-      targets: [
-        '.svg-attributes-demo polygon',
-        'feTurbulence',
-        'feDisplacementMap',
-      ],
-      points: '64 128 8.574 96 8.574 32 64 0 119.426 32 119.426 96',
-      baseFrequency: 0,
-      scale: 1,
-      loop: false,
-      direction: 'alternate',
-      easing: 'easeInOutExpo',
-    });
   };
 
   useEffect(() => {
@@ -68,8 +54,8 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
             key={categoryItem.id}
             className={
               categoryId === categoryItem.id
-                ? 'menu-link menu-link--selected text-black delay-75'
-                : 'menu-link menu-link delay-75 hover:text-amber-500'
+                ? 'menu-link menu-link--selected animate-bounce'
+                : 'menu-link menu-link'
             }
             to={`/${categoryItem.slug}`}
           >
