@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Register: React.FC = () => {
   return (
@@ -14,22 +15,44 @@ const Register: React.FC = () => {
             <label htmlFor="email" className="p-2">
               Votre adresse Email
             </label>
-            <input type="email" placeholder="email@mail.com" className="p-2" />
+            <input
+              type="email"
+              placeholder="email@mail.com"
+              className="p-2"
+              required
+            />
             <label htmlFor="password" className="p-2">
               Votre mot de passe
             </label>
-            <input type="password" placeholder="*****" className="p-2" />
+            <input
+              type="password"
+              placeholder="*****"
+              className="p-2"
+              required
+            />
             <div className="py-2">
               <label htmlFor="majeur" className="p-2">
                 Avez-vous plus de 18 ans
               </label>
-              <input type="checkbox" name="majeur" className="p-2" />
+              <input type="checkbox" name="majeur" className="p-2" required />
             </div>
             <div className="py-2">
               <label htmlFor="consentement" className="p-2">
-                Consentez vous aux mentions légales
+                Consentez vous aux{' '}
+                <Link
+                  to="/mentions-legales"
+                  target={'_blank'}
+                  className="text-amber-700"
+                >
+                  mentions légales
+                </Link>
               </label>
-              <input type="checkbox" name="consentement" className="p-2" />
+              <input
+                type="checkbox"
+                name="consentement"
+                className="p-2"
+                required
+              />
             </div>
             <button type="button" className="p-2">
               S'inscrire

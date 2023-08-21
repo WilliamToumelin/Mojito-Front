@@ -88,6 +88,7 @@ export default function App() {
         />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/mentions-legales" element={<LegalMentions />} />
       </Routes>
       <Footer />
     </div>
