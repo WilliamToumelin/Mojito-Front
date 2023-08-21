@@ -13,7 +13,7 @@ export default {
     "./src/components/SideBar/SideBar.tsx",
     "./src/components/Article/Article.tsx",
     "./src/components/AboutUs/AboutUs.tsx",
-    "./src/components/Contact/Contact.tsx",
+    "./src/components/LegalMentions/LegalMentions.tsx",
     "./src/components/ConnectModal/ConnectModal.tsx",
     "./src/components/CocktailSubmit/CocktailSubmit.tsx",
     "./src/components/Register/Register.tsx",

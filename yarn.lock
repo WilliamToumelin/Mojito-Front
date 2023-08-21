@@ -446,7 +446,7 @@
 
 "@types/animejs@^3.1.7":
   version "3.1.7"
-  resolved "https://registry.npmjs.org/@types/animejs/-/animejs-3.1.7.tgz"
+  resolved "https://registry.yarnpkg.com/@types/animejs/-/animejs-3.1.7.tgz#4d9b23fff04b52e755119625a6087e2bc024527a"
   integrity sha512-kFSyjM+fLo3oE9noWEtUvF82ttN8fTrKohiEMIrSzEzEjnsCmtO0rBCUQBlSPEb2w8vfN+v4/Zo0tK21Bgmq4g==
 
 "@types/json-schema@^7.0.9":
@@ -981,7 +981,7 @@ dom@^0.0.3:
 
 dompurify@^3.0.5:
   version "3.0.5"
-  resolved "https://registry.npmjs.org/dompurify/-/dompurify-3.0.5.tgz"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-3.0.5.tgz#eb3d9cfa10037b6e73f32c586682c4b2ab01fbed"
   integrity sha512-F9e6wPGtY+8KNMRAVfxeCOHU0/NPWMSENNq4pQctuXRqqdEPW7q3CrLbR5Nse044WwacyjHGOMlvNsBe1y6z9A==
 
 electron-to-chromium@^1.4.477:
@@ -2223,7 +2223,7 @@ queue-microtask@^1.2.2:
 
 react-dom@^18.2.0:
   version "18.2.0"
-  resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
   dependencies:
     loose-envify "^1.1.0"
@@ -2246,7 +2246,7 @@ react-refresh@^0.14.0:
 
 react-router-dom@^6.15.0:
   version "6.15.0"
-  resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.15.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.15.0.tgz#6da7db61e56797266fbbef0d5e324d6ac443ee40"
   integrity sha512-aR42t0fs7brintwBGAv2+mGlCtgtFQeOzK0BM1/OiqEzRejOZtpMZepvgkscpMUnKb8YO84G7s3LsHnnDNonbQ==
   dependencies:
     "@remix-run/router" "1.8.0"
@@ -2254,7 +2254,7 @@ react-router-dom@^6.15.0:
 
 react-router@6.15.0, react-router@^6.15.0:
   version "6.15.0"
-  resolved "https://registry.npmjs.org/react-router/-/react-router-6.15.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.15.0.tgz#bf2cb5a4a7ed57f074d4ea88db0d95033f39cac8"
   integrity sha512-NIytlzvzLwJkCQj2HLefmeakxxWHWAP+02EGqWEZy+DgfHHKQMUoBBjUQLOtFInBMhWtb3hiUy6MfFgwLjXhqg==
   dependencies:
     "@remix-run/router" "1.8.0"
