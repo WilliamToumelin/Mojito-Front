@@ -68,8 +68,8 @@ export default function App() {
   console.log(cocktailListMemo);
 
   return (
-      <div className="app flex flex-col text-sm h-[100vh]">
-        <Header categoriesData={categoriesDataMemo} />
+    <div className="app flex flex-col text-sm h-[100vh]">
+      <Header categoriesData={categoriesDataMemo} />
       <Routes>
         <Route path="/" element={<Home cocktailList={cocktailListMemo} />} />
         <Route
@@ -85,10 +85,9 @@ export default function App() {
           path="/cocktail/:slug"
           element={<CocktailById cocktailList={cocktailListMemo} />}
         />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/about-us" element={<AboutUs />} />
       </Routes>
       <Footer />
-      </div>
+    </div>
   );
 }

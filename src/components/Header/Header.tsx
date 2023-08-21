@@ -4,8 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import anime from 'animejs/lib/anime';
 import ConnectModal from '../ConnectModal/ConnectModal';
-import ConnectModalButton from '../ConnectModal/ConnectModal';
-// import ConnectModal from '../ConnectModal/ConnectModal';
 
 type Category = {
   id: number;
@@ -18,7 +16,7 @@ type Props = {
 };
 
 const Header: React.FC<Props> = ({ categoriesData }) => {
-  const [categoryId, setCategoryId] = useState<number | null>(null);
+  const [categoryId, setCategoryId] = useState<number | null>(0);
 
   const animeCategory = () => {
     const random = () => {
@@ -46,7 +44,7 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
   };
 
   return (
-    <header className="relative bg-zinc-600 px-3 pt-2 pb-24">
+    <header className="relative bg-black px-3 pt-2 pb-24">
       <NavLink to="/" onClick={handleResetCategoryId}>
         <img
           className="absolute top-2 left-2 pt-6 pl-6"

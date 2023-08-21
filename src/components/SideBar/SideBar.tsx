@@ -16,7 +16,7 @@ type Props = {
   filteredCocktails: Cocktails[];
 };
 
-const SideBar: React.FC<Props> = ({ filteredCocktails }) => {
+const SideBar: React.FC<Props> = ({ filteredCocktails, currentCategory }) => {
   const [categoryId, setCategoryId] = useState(1);
 
   const animeCocktail = () => {
@@ -34,30 +34,33 @@ const SideBar: React.FC<Props> = ({ filteredCocktails }) => {
 
   useEffect(() => {
     animeCocktail();
-  }, [categoryId]);
+    console.log('refresh or re-render');
+  }, [categoryId, currentCategory]);
 
   const handleCocktailClick = (clickedCategoryId: number) => {
     setCategoryId(clickedCategoryId);
   };
 
   return (
-    <div className="absolute top-20 left-0 lg:block w-56">
-      {filteredCocktails.map((cocktail: Cocktails) => (
-        <NavLink
-          to={`/cocktail/${cocktail.slug}`}
-          className="menu-button p-1"
-          key={cocktail.id}
-        >
-          <div
-            className="menu-button w-32 h-8 flex justify-center items-center rounded-lg bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 border-white transition-transform duration-400 ease-out hover:scale-125"
-            onClick={() => handleCocktailClick(cocktail.categoryId)}
+    <div className="absolute top-20 lg:block w-56 z-10 left-0">
+      <div className="flex flex-col gap-1">
+        {filteredCocktails.map((cocktail: Cocktails) => (
+          <NavLink
+            to={`/cocktail/${cocktail.slug}`}
+            className="menu-button"
+            key={cocktail.id}
           >
-            <span className="text-white font-bold text-base">
-              {cocktail.categoryId}
-            </span>
-          </div>
-        </NavLink>
-      ))}
+            <div
+              className="menu-button w-32 h-8 flex justify-center items-center rounded-r-lg bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 border-white transition-transform duration-400 ease-out hover:scale-125"
+              onClick={() => handleCocktailClick(cocktail.categoryId)}
+            >
+              <span className="text-white font-bold text-base">
+                {cocktail.categoryId}
+              </span>
+            </div>
+          </NavLink>
+        ))}
+      </div>
     </div>
   );
 };
