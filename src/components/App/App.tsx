@@ -11,6 +11,7 @@ import '../../styles/index.scss';
 // import Spinner from '../Spinner/Spinner';
 import Footer from '../Footer/Footer';
 import AboutUs from '../AboutUs/AboutUs';
+import { AuthProvider } from '../../contexts/AuthProvider';
 import LegalMentions from '../LegalMentions/LegalMentions';
 // import ConnectModal from '../ConnectModal/ConnectModal';
 
@@ -67,9 +68,8 @@ export default function App() {
   console.log(cocktailListMemo);
 
   return (
-    <div className="app flex flex-col text-sm h-[100vh]">
-      <Header categoriesData={categoriesDataMemo} />
-
+      <div className="app flex flex-col text-sm h-[100vh]">
+        <Header categoriesData={categoriesDataMemo} />
       <Routes>
         <Route path="/" element={<Home cocktailList={cocktailListMemo} />} />
         <Route
@@ -85,12 +85,10 @@ export default function App() {
           path="/cocktail/:slug"
           element={<CocktailById cocktailList={cocktailListMemo} />}
         />
-
-        <Route path="/a-propos-de-nous" element={<AboutUs />} />
-        <Route path="/mentions-legales" element={<LegalMentions />} />
-        {/* <Route path="/proposition-cocktail" element={<CocktailSubmit />} /> */}
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about-us" element={<AboutUs />} />
       </Routes>
-      {/* <Footer /> */}
-    </div>
+      <Footer />
+      </div>
   );
 }
