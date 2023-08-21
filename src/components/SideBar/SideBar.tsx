@@ -16,7 +16,7 @@ type Props = {
   filteredCocktails: Cocktails[];
 };
 
-const SecondaryNavbar: React.FC<Props> = ({ filteredCocktails }) => {
+const SideBar: React.FC<Props> = ({ filteredCocktails }) => {
   const [categoryId, setCategoryId] = useState(1);
 
   const animeCocktail = () => {
@@ -62,4 +62,4 @@ const SecondaryNavbar: React.FC<Props> = ({ filteredCocktails }) => {
   );
 };
 
-export default SecondaryNavbar;
+export default SideBar;

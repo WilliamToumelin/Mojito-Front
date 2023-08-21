@@ -8,7 +8,7 @@ import CocktailByCat from '../CocktailByCat/CocktailByCat';
 import CocktailById from '../CocktailById/CocktailById';
 
 import '../../styles/index.scss';
-import Spinner from '../Spinner/Spinner';
+// import Spinner from '../Spinner/Spinner';
 import Footer from '../Footer/Footer';
 import Contact from '../Contact/Contact';
 import AboutUs from '../AboutUs/AboutUs';
