@@ -53,7 +53,7 @@ const SideBar: React.FC<Props> = ({ filteredCocktails }) => {
             onClick={() => handleCocktailClick(cocktail.categoryId)}
           >
             <span className="text-white font-bold text-base">
-              {cocktail.categoryId}
+              {cocktail.id}
             </span>
           </div>
         </NavLink>

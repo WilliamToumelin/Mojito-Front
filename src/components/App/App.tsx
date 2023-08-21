@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import Home from '../Home/Home';
 import CocktailByCat from '../CocktailByCat/CocktailByCat';
 import CocktailById from '../CocktailById/CocktailById';
+import Register from '../Register/Register';
 
 import '../../styles/index.scss';
 // import Spinner from '../Spinner/Spinner';
@@ -68,8 +69,8 @@ export default function App() {
   console.log(cocktailListMemo);
 
   return (
-      <div className="app flex flex-col text-sm h-[100vh]">
-        <Header categoriesData={categoriesDataMemo} />
+    <div className="app flex flex-col text-sm h-[100vh]">
+      <Header categoriesData={categoriesDataMemo} />
       <Routes>
         <Route path="/" element={<Home cocktailList={cocktailListMemo} />} />
         <Route
@@ -85,10 +86,10 @@ export default function App() {
           path="/cocktail/:slug"
           element={<CocktailById cocktailList={cocktailListMemo} />}
         />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
       <Footer />
-      </div>
+    </div>
   );
 }
