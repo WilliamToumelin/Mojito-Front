@@ -50,14 +50,6 @@ const SideBar: React.FC<Props> = ({ filteredCocktails, currentCategory }) => {
             className="menu-button"
             key={cocktail.id}
           >
-
-            <span className="text-white font-bold text-base">
-              {cocktail.id}
-            </span>
-          </div>
-        </NavLink>
-      ))}
-
             <div
               className="menu-button w-32 h-8 flex justify-center items-center rounded-r-lg bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 border-white transition-transform duration-400 ease-out hover:scale-125"
               onClick={() => handleCocktailClick(cocktail.categoryId)}
@@ -69,7 +61,6 @@ const SideBar: React.FC<Props> = ({ filteredCocktails, currentCategory }) => {
           </NavLink>
         ))}
       </div>
-
     </div>
   );
 };
