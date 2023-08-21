@@ -12,6 +12,7 @@ import Spinner from '../Spinner/Spinner';
 import Footer from '../Footer/Footer';
 import Contact from '../Contact/Contact';
 import AboutUs from '../AboutUs/AboutUs';
+import { AuthProvider } from '../../contexts/AuthProvider';
 // import ConnectModal from '../ConnectModal/ConnectModal';
 
 type Category = {
@@ -67,28 +68,30 @@ export default function App() {
   console.log(cocktailListMemo);
 
   return (
-    <div className="app flex flex-col text-sm h-[100vh]">
-      <Header categoriesData={categoriesDataMemo} />
+    <AuthProvider>
+      <div className="app flex flex-col text-sm h-[100vh]">
+        <Header categoriesData={categoriesDataMemo} />
 
-      <Routes>
-        <Route path="/" element={<Home cocktailList={cocktailListMemo} />} />
-        <Route
-          path="/:categoryName?"
-          element={
-            <CocktailByCat
-              categoriesData={categoriesDataMemo}
-              cocktailList={cocktailListMemo}
-            />
-          }
-        />
-        <Route
-          path="/cocktail/:slug"
-          element={<CocktailById cocktailList={cocktailListMemo} />}
-        />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about-us" element={<AboutUs />} />
-      </Routes>
-      <Footer />
-    </div>
+        <Routes>
+          <Route path="/" element={<Home cocktailList={cocktailListMemo} />} />
+          <Route
+            path="/:categoryName?"
+            element={
+              <CocktailByCat
+                categoriesData={categoriesDataMemo}
+                cocktailList={cocktailListMemo}
+              />
+            }
+          />
+          <Route
+            path="/cocktail/:slug"
+            element={<CocktailById cocktailList={cocktailListMemo} />}
+          />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about-us" element={<AboutUs />} />
+        </Routes>
+        <Footer />
+      </div>
+    </AuthProvider>
   );
 }
