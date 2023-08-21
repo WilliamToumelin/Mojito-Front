@@ -49,7 +49,7 @@ const Article: React.FC<ArticleProps> = ({ cocktail, animate, modulo }) => {
           className={`text-white p-4 flex ${modulo ? 'justify-end' : ''} ${
             animate
               ? modulo
-                ? 'opacity-0 translate-y-12'
+                ? 'opacity-0 -translate-x-12'
                 : 'opacity-0 translate-x-12'
               : ''
           } transition-all ease-in duration-1200`}
@@ -58,11 +58,7 @@ const Article: React.FC<ArticleProps> = ({ cocktail, animate, modulo }) => {
         </p>
         <p
           className={`text-white p-4 flex ${modulo ? 'justify-end' : ''} ${
-            animate
-              ? modulo
-                ? 'opacity-0 -translate-x-12'
-                : 'opacity-0 translate-y-12'
-              : ''
+            animate ? 'opacity-0 translate-y-12' : ''
           } transition-all ease-in duration-1200`}
         >
           Note : &nbsp;

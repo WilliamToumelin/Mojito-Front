@@ -16,7 +16,7 @@ type Props = {
   filteredCocktails: Cocktails[];
 };
 
-const SecondaryNavbar: React.FC<Props> = ({ filteredCocktails }) => {
+const SideBar: React.FC<Props> = ({ filteredCocktails }) => {
   const [categoryId, setCategoryId] = useState(1);
 
   const animeCocktail = () => {
@@ -49,7 +49,7 @@ const SecondaryNavbar: React.FC<Props> = ({ filteredCocktails }) => {
           key={cocktail.id}
         >
           <div
-            className="menu-button w-32 h-8 flex justify-center items-center bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 border-white rounded-r-lg transition-transform duration-400 ease-out hover:scale-125"
+            className="menu-button w-32 h-8 flex justify-center items-center rounded-lg bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 border-white transition-transform duration-400 ease-out hover:scale-125"
             onClick={() => handleCocktailClick(cocktail.categoryId)}
           >
             <span className="text-white font-bold text-base">
@@ -62,4 +62,4 @@ const SecondaryNavbar: React.FC<Props> = ({ filteredCocktails }) => {
   );
 };
 
-export default SecondaryNavbar;
+export default SideBar;
