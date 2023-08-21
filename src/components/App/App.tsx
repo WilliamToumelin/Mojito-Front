@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import Home from '../Home/Home';
 import CocktailByCat from '../CocktailByCat/CocktailByCat';
 import CocktailById from '../CocktailById/CocktailById';
+import Register from '../Register/Register';
 
 import '../../styles/index.scss';
 // import Spinner from '../Spinner/Spinner';
@@ -86,6 +87,7 @@ export default function App() {
           element={<CocktailById cocktailList={cocktailListMemo} />}
         />
         <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
       <Footer />
     </div>
