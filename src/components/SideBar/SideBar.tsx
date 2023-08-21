@@ -14,6 +14,7 @@ type Cocktails = {
 
 type Props = {
   filteredCocktails: Cocktails[];
+  currentCategory?: string | undefined;
 };
 
 const SideBar: React.FC<Props> = ({ filteredCocktails, currentCategory }) => {
@@ -34,7 +35,6 @@ const SideBar: React.FC<Props> = ({ filteredCocktails, currentCategory }) => {
 
   useEffect(() => {
     animeCocktail();
-    console.log('refresh or re-render');
   }, [categoryId, currentCategory]);
 
   const handleCocktailClick = (clickedCategoryId: number) => {
@@ -63,6 +63,10 @@ const SideBar: React.FC<Props> = ({ filteredCocktails, currentCategory }) => {
       </div>
     </div>
   );
+};
+
+SideBar.defaultProps = {
+  currentCategory: undefined,
 };
 
 export default SideBar;
