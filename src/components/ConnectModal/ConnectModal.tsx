@@ -156,3 +156,35 @@ const ConnectModal: FC = () => {
 };
 
 export default ConnectModal;
+
+// Code pour se connecter une fois l'API prête
+
+// const handleLogin = async () => {
+//    Appeler votre backend pour l'authentification
+//   try {
+//     const response = await fetch('/api/login', {
+//       method: 'POST',
+//       body: JSON.stringify({ email, password }),
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     });
+
+//     if (response.ok) {
+//       const { token } = await response.json();
+//        Stocker le token JWT dans le local storage
+//       localStorage.setItem('authToken', token);
+//       login();
+//     } else {
+//        Gérer les erreurs d'authentification ici
+//     }
+//   } catch (error) {
+//      Gérer les erreurs réseau ici
+//   }
+// };
+
+// const handleLogout = () => {
+//    Supprimer le token JWT du local storage
+//   localStorage.removeItem('authToken');
+//   logout();
+// };

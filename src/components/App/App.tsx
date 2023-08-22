@@ -10,6 +10,7 @@ import Register from '../Register/Register';
 // import Spinner from '../Spinner/Spinner';
 import Footer from '../Footer/Footer';
 import AboutUs from '../AboutUs/AboutUs';
+import LegalMentions from '../LegalMentions/LegalMentions';
 
 type Category = {
   id: number;
@@ -83,6 +84,7 @@ export default function App() {
         />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/mentions-legales" element={<LegalMentions />} />
       </Routes>
       <Footer />
     </div>
