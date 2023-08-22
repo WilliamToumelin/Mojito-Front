@@ -1,135 +1,315 @@
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 
 const CocktailSubmit: React.FC = () => {
-  const [alcoholCount, setAlcoholCount] = useState(1);
-  const [softCount, setSoftCount] = useState(1);
+  const [selectedAlcohols, setSelectedAlcohols] = useState<string[]>([]);
+  const [selectedSofts, setSelectedSofts] = useState<string[]>([]);
+  const [selectedAromatics, setSelectedAromatics] = useState<string[]>([]);
+  const [selectedTechnique, setSelectedTechnique] = useState<string[]>([]);
 
-  const handleAlcoholChange = () => {
-    setAlcoholCount(alcoholCount + 1);
-  };
+  const [alcohol, setAlcohol] = useState<string>('');
+  const [soft, setSoft] = useState<string>('');
+  const [aromatic, setAromatic] = useState<string>('');
+  const [technique, setTechnique] = useState<string>('');
 
-  const handleSoftChange = () => {
-    setSoftCount(softCount + 1);
-  };
+  const [alcoholAmount, setAlcoholAmount] = useState<number>(0);
+  const [softAmount, setSoftAmount] = useState<number>(0);
 
-  const deleteSelect = (type: string, index: number) => {
-    if (type === 'alcohol') {
-      setAlcoholCount(alcoholCount - 1);
-    } else if (type === 'soft') {
-      setSoftCount(softCount - 1);
+  const [description, setDescription] = useState<string>('');
+
+  const alcoholsList = [
+    'Rhum',
+    'Whisky',
+    'Gin' /* Ajouter d'autres alcools ici */,
+  ];
+  const softsList = [
+    'Coca',
+    'Tonic',
+    "Jus d'orange" /* Ajouter d'autres softs ici */,
+  ];
+
+  const aromaticsList = ['Basilic', 'Menthe', 'Poivre', 'Thym'];
+
+  const techniqueList = ['Shaker', 'Cuillère', 'Assemblage'];
+
+  const handleAlcoholAdd = () => {
+    if (alcohol && alcoholAmount > 0) {
+      setSelectedAlcohols([
+        ...selectedAlcohols,
+        `${alcohol} (${alcoholAmount} cl)`,
+      ]);
+      setAlcohol('');
+      setAlcoholAmount(0);
     }
   };
 
-  const quantityOptions = Array.from({ length: 41 }).map((_, i) => (
-    <option key={i} value={`${i} cl`}>{`${i} cl`}</option>
-  ));
+  const handleSoftAdd = () => {
+    if (soft && softAmount > 0) {
+      setSelectedSofts([...selectedSofts, `${soft} (${softAmount} cl)`]);
+      setSoft('');
+      setSoftAmount(0);
+    }
+  };
 
-  const alcoholSelects = [];
-  for (let i = 0; i < alcoholCount; i++) {
-    alcoholSelects.push(
-      <div key={i}>
-        <div>
-          <label htmlFor={`alcool-${i}`}>Alcool {i + 1}</label>
-          <select
-            name={`alcool-${i}`}
-            id={`alcool-${i}`}
-            className="text-black"
-          >
-            <option value="">--Please choose an option--</option>
-            <option value="rhum">rhum</option>
-            <option value="vodka">vodka</option>
-            <option value="gin">gin</option>
-            <option value="whisky">Whisky</option>
-            <option value="martini-rouge">Martini Rouge</option>
-            <option value="martini-blanc">Martini Blanc</option>
-          </select>
-          <label htmlFor={`alcool-${i}-quantity`}>
-            Quantité
-            <select
-              name={`alcool-${i}-quantity`}
-              id={`alcool-${i}-quantity`}
-              className="text-black"
-            >
-              <option value="">--Please choose an option--</option>
-              {quantityOptions}
-            </select>
-          </label>
-          <button
-            type="button"
-            onClick={() => deleteSelect('alcohol', i)} // Appeler la fonction de suppression pour les alcools
-            className="bg-red-500 text-white rounded-md p-2 mt-2"
-          >
-            Supprimer
-          </button>
-        </div>
-      </div>
-    );
-  }
+  const handleAromaticAdd = () => {
+    if (aromatic != '') {
+      setSelectedAromatics([...selectedAromatics, `${aromatic}`]);
+      setAromatic('');
+    }
+  };
 
-  const softSelects = [];
-  for (let i = 0; i < softCount; i++) {
-    softSelects.push(
-      <div key={i}>
-        <div>
-          <label htmlFor={`soft-${i}`}>Soft/Mixer {i + 1}</label>
-          <select name={`soft-${i}`} id={`soft-${i}`} className="text-black">
-            <option value="">--Please choose an option--</option>
-            <option value="coca">coca</option>
-            <option value="tonic">tonic</option>
-            <option value="perrier">perrier</option>
-            <option value="jus-orange">jus d'orange</option>
-          </select>
-          <label htmlFor="quantity">
-            Quantité
-            <select
-              name={`soft-${i}-quantity`}
-              id={`soft-${i}-quantity`}
-              className="text-black"
-            >
-              <option value="">--Please choose an option--</option>
-              {quantityOptions}
-            </select>
-          </label>
-          <button
-            type="button"
-            onClick={() => deleteSelect('soft', i)} // Appeler la fonction de suppression pour les softs/mixers
-            className="bg-red-500 text-white rounded-md p-2 mt-2"
-          >
-            Supprimer
-          </button>
-        </div>
-      </div>
-    );
-  }
+  const handleTechniqueAdd = () => {
+    if (technique != '') {
+      setSelectedTechnique([...selectedTechnique, `${technique}`]);
+      setTechnique('');
+    }
+  };
+
+  const handleAlcoholRemove = (index: number) => {
+    const updatedAlcohols = [...selectedAlcohols];
+    updatedAlcohols.splice(index, 1);
+    setSelectedAlcohols(updatedAlcohols);
+  };
+
+  const handleSoftRemove = (index: number) => {
+    const updatedSofts = [...selectedSofts];
+    updatedSofts.splice(index, 1);
+    setSelectedSofts(updatedSofts);
+  };
+
+  const handleAromaticRemove = (index: number) => {
+    const updatedAromatics = [...selectedAromatics];
+    updatedAromatics.splice(index, 1);
+    setSelectedAromatics(updatedAromatics);
+  };
+
+  const handleTechniqueRemove = (index: number) => {
+    const updatedTechnique = [...selectedTechnique];
+    updatedTechnique.splice(index, 1);
+    setSelectedTechnique(updatedTechnique);
+  };
+
+  const handleSubmit = async () => {
+    const cocktailSubmitData = {
+      alcohols: selectedAlcohols,
+      softs: selectedSofts,
+      description: description,
+    };
+
+    try {
+      const response = await fetch('YOUR_SYMFONY_API_URL', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cocktailSubmitData),
+      });
+
+      if (response.ok) {
+        // Handle success, e.g., show a success message
+        console.log('Cocktail submitted successfully!');
+      } else {
+        // Handle error, e.g., show an error message
+        console.error('Failed to submit cocktail.');
+      }
+    } catch (error) {
+      console.error('An error occurred while submitting cocktail:', error);
+    }
+  };
 
   return (
-    <div className="relative bg-black flex justify-center items-center flex-1 h-[100vh]">
-      <div className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto shadow-purple-700 shadow-2xl rounded-2xl bg-black">
-        <div className="text-center pb-12">
-          <h1 className="text-amber-700 text-2xl pt-5">Propose ton cocktail</h1>
-          <form
-            action="POST"
-            className="text-white text-center flex flex-col content-center"
+    <div className="bg-black flex justify-center items-center flex-1 h-[75vh]">
+      <div className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto over shadow-purple-700 shadow-2xl rounded-2xl bg-black">
+        <div className="p-4 text-white">
+          <h2 className="text-2xl font-bold mb-4">Proposer un Cocktail</h2>
+
+          {/* Alcools section */}
+          <div className="mb-4">
+            <h3 className="text-lg font-medium mb-2">Alcools</h3>
+            <div className="flex space-x-2">
+              <select
+                value={alcohol}
+                onChange={(e) => setAlcohol(e.target.value)}
+                className="border rounded p-1 text-black"
+              >
+                <option value="">Sélectionner un alcool</option>
+                {alcoholsList.map((alcoholOption, index) => (
+                  <option key={index} value={alcoholOption}>
+                    {alcoholOption}
+                  </option>
+                ))}
+              </select>
+              <label htmlFor="cl" className="pt-1">
+                Centilitres:
+              </label>
+              <input
+                type="number"
+                value={alcoholAmount}
+                onChange={(e) => setAlcoholAmount(parseInt(e.target.value))}
+                className="border rounded p-1 w-16 text-black"
+              />
+              <button
+                onClick={handleAlcoholAdd}
+                className="bg-blue-500 text-white px-2 rounded"
+              >
+                Ajouter
+              </button>
+            </div>
+            <ul>
+              {selectedAlcohols.map((item, index) => (
+                <li key={index} className="flex items-center gap-2 m-1">
+                  {item}
+                  <button
+                    onClick={() => handleAlcoholRemove(index)}
+                    className="bg-red-500 text-white px-2 py-1 rounded"
+                  >
+                    Supprimer
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Softs section */}
+          <div className="mb-4">
+            <h3 className="text-lg font-medium mb-2">Softs</h3>
+            <div className="flex space-x-2">
+              <select
+                value={soft}
+                onChange={(e) => setSoft(e.target.value)}
+                className="border rounded p-1 text-black"
+              >
+                <option value="">Sélectionner un soft</option>
+                {softsList.map((softOption, index) => (
+                  <option key={index} value={softOption}>
+                    {softOption}
+                  </option>
+                ))}
+              </select>
+              <label htmlFor="cl" className="pt-1">
+                Centilitres:
+              </label>
+              <input
+                type="number"
+                value={softAmount}
+                onChange={(e) => setSoftAmount(parseInt(e.target.value))}
+                className="border rounded p-1 w-16 text-black"
+              />
+              <button
+                onClick={handleSoftAdd}
+                className="bg-blue-500 text-white px-2 rounded"
+              >
+                Ajouter
+              </button>
+            </div>
+            <ul>
+              {selectedSofts.map((item, index) => (
+                <li key={index} className="flex items-center gap-2 m-1">
+                  {item}
+                  <button
+                    onClick={() => handleSoftRemove(index)}
+                    className="bg-red-500 text-white px-2 py-1 rounded"
+                  >
+                    Supprimer
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Aromatic section */}
+          <div className="mb-4">
+            <h3 className="text-lg font-medium mb-2">Aromates</h3>
+            <div className="flex space-x-2">
+              <select
+                value={aromatic}
+                onChange={(e) => setAromatic(e.target.value)}
+                className="border rounded p-1 text-black"
+              >
+                <option value="">Sélectionner des aromates</option>
+                {aromaticsList.map((aromaticOption, index) => (
+                  <option key={index} value={aromaticOption}>
+                    {aromaticOption}
+                  </option>
+                ))}
+              </select>
+
+              <button
+                onClick={handleAromaticAdd}
+                className="bg-blue-500 text-white px-2 rounded"
+              >
+                Ajouter
+              </button>
+            </div>
+            <ul>
+              {selectedAromatics.map((item, index) => (
+                <li key={index} className="flex items-center gap-2 m-1">
+                  {item}
+                  <button
+                    onClick={() => handleAromaticRemove(index)}
+                    className="bg-red-500 text-white px-2 py-1 rounded"
+                  >
+                    Supprimer
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Technique section */}
+          <div className="mb-4">
+            <h3 className="text-lg font-medium mb-2">Technique</h3>
+            <div className="flex space-x-2">
+              <select
+                value={technique}
+                onChange={(e) => setTechnique(e.target.value)}
+                className="border rounded p-1 text-black"
+              >
+                <option value="">Sélectionner une technique</option>
+                {techniqueList.map((techniqueOption, index) => (
+                  <option key={index} value={techniqueOption}>
+                    {techniqueOption}
+                  </option>
+                ))}
+              </select>
+
+              <button
+                onClick={handleTechniqueAdd}
+                className="bg-blue-500 text-white px-2 rounded"
+              >
+                Ajouter
+              </button>
+            </div>
+            <ul className="">
+              {selectedTechnique.map((item, index) => (
+                <li key={index} className="flex items-center gap-2 m-1">
+                  {item}
+                  <button
+                    onClick={() => handleTechniqueRemove(index)}
+                    className="bg-red-500 text-white px-2 py-1 rounded"
+                  >
+                    Supprimer
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mb-4">
+            <h3 className="text-lg font-medium mb-2">Description</h3>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="border rounded p-1 w-full"
+              rows={4}
+            />
+          </div>
+
+          <button
+            onClick={handleSubmit}
+            className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-300"
           >
-            <h3>Alcool</h3>
-            {alcoholSelects}
-            <button
-              type="button"
-              onClick={handleAlcoholChange}
-              className="bg-amber-700 text-white rounded-md p-2 mt-2"
-            >
-              Ajouter un nouvel alcool
-            </button>
-            <h3>Soft/Mixer</h3>
-            {softSelects}
-            <button
-              type="button"
-              onClick={handleSoftChange}
-              className="bg-amber-700 text-white rounded-md p-2 mt-2"
-            >
-              Ajouter un nouveau soft/mixer
-            </button>
-          </form>
+            Soumettre le Cocktail
+          </button>
         </div>
       </div>
     </div>

@@ -42,7 +42,7 @@ const Register: React.FC = () => {
     <div className="relative bg-black flex justify-center items-center flex-1 h-[100vh]">
       <div className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto shadow-purple-700 shadow-2xl rounded-2xl bg-black">
         <div className="text-center pb-12">
-          <h1 className="text-amber-700 text-2xl pt-5">
+          <h1 className="text-amber-700 text-2xl pt-5 font-bold text-xl">
             Créer son compte membre
           </h1>
         </div>
@@ -107,7 +107,7 @@ const Register: React.FC = () => {
                 </div>
                 <button
                   type="button"
-                  className="p-2 bg-amber-700 rounded-xl"
+                  className="p-2 mt-6 bg-amber-700 rounded-xl"
                   onClick={signIn}
                 >
                   Inscription
@@ -116,7 +116,7 @@ const Register: React.FC = () => {
             </div>
           </div>
           <div className="text-white w-[50%] h-full p-10">
-            <h3 className=" font-semibold text-amber-700 text-xl">
+            <h3 className=" font-semibold text-amber-700 text-lg">
               Être membre c'est quoi ?
             </h3>
             <br />
