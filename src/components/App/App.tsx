@@ -7,6 +7,7 @@ import Home from '../Home/Home';
 import CocktailByCat from '../CocktailByCat/CocktailByCat';
 import CocktailById from '../CocktailById/CocktailById';
 import Register from '../Register/Register';
+import CocktailSubmit from '../CocktailSubmit/CocktailSubmit';
 // import Spinner from '../Spinner/Spinner';
 import Footer from '../Footer/Footer';
 import AboutUs from '../AboutUs/AboutUs';
@@ -85,6 +86,7 @@ export default function App() {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/register" element={<Register />} />
         <Route path="/mentions-legales" element={<LegalMentions />} />
+        <Route path="/proposition-cocktail" element={<CocktailSubmit />} />
       </Routes>
       <Footer />
     </div>
