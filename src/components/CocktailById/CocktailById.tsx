@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { AiFillStar } from 'react-icons/ai';
+import { FaCocktail } from 'react-icons/fa';
 import { FiChevronRight } from 'react-icons/fi';
 import { BsClockFill } from 'react-icons/bs';
 import Rating from './Rating';
@@ -44,8 +44,8 @@ const CocktailById: React.FC<Props> = ({ cocktailList }) => {
           <div className="w-3/5 flex-1 overflow-y-auto p-12 text-white space-y-12">
             <h2 className=" text-3xl font-semibold">{cocktailItem.title}</h2>
             <div className="flex items-center text-2xl">
-              <div className=" text-yellow-300 mr-1">
-                <AiFillStar />
+              <div className=" text-yellow-400 mr-1">
+                <FaCocktail />
               </div>
               <p className="ml-2 text-lg mr-1 font-bold">4.95 {}</p>
               <span className="w-2 h-2 mx-1.5 bg-white rounded-full" />

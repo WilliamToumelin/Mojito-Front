@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState } from 'react';
-import { AiFillStar } from 'react-icons/ai';
+import { FaCocktail } from 'react-icons/fa';
 
 const Rating = () => {
   const [rating, setRating] = useState(0);
@@ -18,11 +18,11 @@ const Rating = () => {
         <span
           key={index}
           onClick={() => handleClick(index)}
-          className={`text-3xl ${
+          className={`text-3xl p-1 ${
             index <= rating ? 'text-yellow-400' : 'text-gray-300'
           }`}
         >
-          <AiFillStar />
+          <FaCocktail />
         </span>
       ))}
       {/* {rating} */}
