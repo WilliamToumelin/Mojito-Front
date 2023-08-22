@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
 
+import './Register.scss';
+
 const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,58 +46,94 @@ const Register: React.FC = () => {
             Créer son compte membre
           </h1>
         </div>
-        <div className="text-white p-6 ">
-          <form action="POST" className="flex flex-col items-start">
-            <label htmlFor="email" className="p-2">
-              Votre adresse Email
-            </label>
-            <input
-              type="email"
-              placeholder="email@mail.com"
-              className="p-2"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <label htmlFor="password" className="p-2">
-              Votre mot de passe
-            </label>
-            <input
-              type="password"
-              placeholder="*****"
-              className="p-2"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <div className="py-2">
-              <label htmlFor="majeur" className="p-2">
-                Avez-vous plus de 18 ans
-              </label>
-              <input type="checkbox" name="majeur" className="p-2" required />
-            </div>
-            <div className="py-2">
-              <label htmlFor="consentement" className="p-2">
-                Consentez vous aux{' '}
-                <Link
-                  to="/mentions-legales"
-                  target="blank"
-                  className="text-amber-700"
+        <div className="flex">
+          <div className="w-[50%] flex flex-row h-full p-10">
+            <div className="text-white p-6 ">
+              <form action="POST" className="flex flex-col items-start">
+                <div className="input-group mb-5">
+                  <input
+                    type="email"
+                    className="input-group__input"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <label htmlFor="email" className="input-group__label">
+                    Email address
+                  </label>
+                </div>
+                <div className="input-group mb-5">
+                  <input
+                    type="password"
+                    className="input-group__input"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <label htmlFor="password" className="input-group__label">
+                    Mot de passe
+                  </label>
+                </div>
+
+                <div className="py-2">
+                  <label htmlFor="majeur" className="p-2">
+                    Avez-vous plus de 18 ans
+                  </label>
+                  <input
+                    type="checkbox"
+                    name="majeur"
+                    className="p-2"
+                    required
+                  />
+                </div>
+
+                <div className="py-2">
+                  <label htmlFor="consentement" className="p-2">
+                    Consentez vous aux{' '}
+                    <Link
+                      to="/mentions-legales"
+                      target="blank"
+                      className="text-amber-700"
+                    >
+                      mentions légales
+                    </Link>
+                  </label>
+                  <input
+                    type="checkbox"
+                    name="consentement"
+                    className="p-2"
+                    required
+                  />
+                </div>
+                <button
+                  type="button"
+                  className="p-2 bg-amber-700 rounded-xl"
+                  onClick={signIn}
                 >
-                  mentions légales
-                </Link>
-              </label>
-              <input
-                type="checkbox"
-                name="consentement"
-                className="p-2"
-                required
-              />
+                  Inscription
+                </button>
+              </form>
             </div>
-            <button type="button" className="p-2" onClick={signIn}>
-              Inscription
-            </button>
-          </form>
+          </div>
+          <div className="text-white w-[50%] h-full p-10">
+            <h3 className=" font-semibold text-amber-700 text-xl">
+              Être membre c'est quoi ?
+            </h3>
+            <br />
+            <p>
+              Il vous permet de commenter les recettes de cocktails. Vous
+              pourrez ainsi suggérer votre touche personnelle aux autres
+              utilisateurs et développer votre goût pour la créativité !
+            </p>
+            <br />
+            <p>
+              Vous pourrez également noter les cocktails et ainsi éclairer les
+              autres utilisateurs sur la qualité de ces dernières. Cela nous
+              permettra également de faire le tri et de ne garder que les
+              meilleures recettes sur notre site !
+            </p>
+            <p></p>
+          </div>
         </div>
       </div>
     </div>
@@ -103,3 +141,8 @@ const Register: React.FC = () => {
 };
 
 export default Register;
+
+//    <div class="input-group">
+//   <input type="text" id="email" class="input-group__input" required />
+//   <label htmlFor="" class="input-group__label">Email adress</label>
+// </div>;
