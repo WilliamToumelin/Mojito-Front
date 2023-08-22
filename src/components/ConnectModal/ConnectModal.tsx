@@ -9,17 +9,17 @@ const ConnectModal: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  if (!useAuth) {
-    // Si le contexte n'est pas défini, tu peux gérer cette situation ici
-    return null;
-  }
-
   const { isLoggedIn, login, logout } = useAuth();
 
   // --- handleToggleModal sert à toggle le modal
   const handleToggleModal = useCallback((): void => {
     setDisplayModal((prevstate) => !prevstate);
   }, []);
+
+  if (!useAuth) {
+    // Si le contexte n'est pas défini, tu peux gérer cette situation ici
+    return null;
+  }
 
   const handleLogin = () => {
     // Simuler l'authentification avec les informations fournies

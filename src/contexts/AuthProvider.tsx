@@ -10,6 +10,7 @@ type AuthContextType = {
   isLoggedIn: boolean;
   login: () => void;
   logout: () => void;
+  signIn: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -31,13 +32,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setIsLoggedIn(false);
   };
 
-<<<<<<< HEAD
   const signIn = () => {
     // Ici, on pourra ajouter la logique de création de compte (appeler l'API, etc.)
   };
-=======
-  const logMemo = useMemo(() => ({ isLoggedIn, login, logout }), [isLoggedIn]);
->>>>>>> d06653f8eded8b635c49351ea3b3f8a657af80df
+
+  const logMemo = useMemo(
+    () => ({ isLoggedIn, login, logout, signIn }),
+    [isLoggedIn]
+  );
 
   return (
     <AuthContext.Provider value={logMemo}>{children}</AuthContext.Provider>

@@ -6,35 +6,35 @@ const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const { signIn } = useAuth();
+
   if (!useAuth) {
     // Si le contexte n'est pas défini, tu peux gérer cette situation ici
     return null;
   }
 
-  const { isLoggedIn, login, logout } = useAuth();
-
-  const signIn = () => {
-    // // Appeler votre backend pour l'authentification
-    // try {
-    //   const response = await fetch('/api/signIn', {
-    //     method: 'POST',
-    //     body: JSON.stringify({ email, password }),
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //   });
-    //   if (response.ok) {
-    //     const { token } = await response.json();
-    //     //  Stocker le token JWT dans le local storage
-    //     localStorage.setItem('authToken', token);
-    //     login();
-    //   } else {
-    //     //  Gérer les erreurs d'authentification ici
-    //   }
-    // } catch (error) {
-    //   //  Gérer les erreurs réseau ici
-    // }
-  };
+  // const signIn = () => {
+  //   // Appeler votre backend pour l'authentification
+  //   try {
+  //     const response = await fetch('/api/signIn', {
+  //       method: 'POST',
+  //       body: JSON.stringify({ email, password }),
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
+  //     if (response.ok) {
+  //       const { token } = await response.json();
+  //       //  Stocker le token JWT dans le local storage
+  //       localStorage.setItem('authToken', token);
+  //       login();
+  //     } else {
+  //       //  Gérer les erreurs d'authentification ici
+  //     }
+  //   } catch (error) {
+  //     //  Gérer les erreurs réseau ici
+  //   }
+  // };
 
   return (
     <div className="relative bg-black flex justify-center items-center flex-1 h-[100vh]">
@@ -79,7 +79,7 @@ const Register: React.FC = () => {
                 Consentez vous aux{' '}
                 <Link
                   to="/mentions-legales"
-                  target={'_blank'}
+                  target="blank"
                   className="text-amber-700"
                 >
                   mentions légales
@@ -93,7 +93,7 @@ const Register: React.FC = () => {
               />
             </div>
             <button type="button" className="p-2" onClick={signIn}>
-              S'inscrire
+              Inscription
             </button>
           </form>
         </div>
