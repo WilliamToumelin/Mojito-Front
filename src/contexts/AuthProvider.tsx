@@ -31,6 +31,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setIsLoggedIn(false);
   };
 
+  const signIn = () => {
+    // Ici, on pourra ajouter la logique de création de compte (appeler l'API, etc.)
+  };
+
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
       {children}

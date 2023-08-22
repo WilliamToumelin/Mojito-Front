@@ -159,7 +159,7 @@ export default ConnectModal;
 // Code pour se connecter une fois l'API prête
 
 // const handleLogin = async () => {
-//    Appeler votre backend pour l'authentification
+//  Appeler votre backend pour l'authentification
 //   try {
 //     const response = await fetch('/api/login', {
 //       method: 'POST',
