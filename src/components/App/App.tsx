@@ -82,7 +82,7 @@ export default function App() {
           path="/cocktail/:slug"
           element={<CocktailById cocktailList={cocktailListMemo} />}
         />
-        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/a-propos-de-nous" element={<AboutUs />} />
         <Route path="/register" element={<Register />} />
         <Route path="/mentions-legales" element={<LegalMentions />} />
       </Routes>
