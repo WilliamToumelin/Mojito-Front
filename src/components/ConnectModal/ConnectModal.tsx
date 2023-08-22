@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react/button-has-type */
 import { FC, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -137,7 +138,7 @@ const ConnectModal: FC = () => {
                   <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
                     Pas encore Membre?{' '}
                     <Link
-                      to={'/register'}
+                      to="/register"
                       className="text-blue-700 hover:underline dark:text-blue-500"
                       onClick={handleToggleModal}
                     >
