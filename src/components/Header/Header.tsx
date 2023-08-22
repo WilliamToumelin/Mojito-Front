@@ -20,7 +20,7 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
 
   const animeCategory = () => {
     const random = () => {
-      return anime.random(0, 80);
+      return anime.random(10, 40);
     };
 
     anime({
@@ -44,7 +44,7 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
   };
 
   return (
-    <header className="relative bg-black px-3 pt-2 pb-24">
+    <header className="relative bg-black px-3 pt-2 pb-12">
       <NavLink to="/" onClick={handleResetCategoryId}>
         <img
           className="absolute top-2 left-2 pt-6 pl-6"
