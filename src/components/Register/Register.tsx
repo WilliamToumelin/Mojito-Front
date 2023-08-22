@@ -141,8 +141,3 @@ const Register: React.FC = () => {
 };
 
 export default Register;
-
-//    <div class="input-group">
-//   <input type="text" id="email" class="input-group__input" required />
-//   <label htmlFor="" class="input-group__label">Email adress</label>
-// </div>;
