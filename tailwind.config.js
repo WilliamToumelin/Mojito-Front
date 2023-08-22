@@ -17,6 +17,8 @@ export default {
     "./src/components/ConnectModal/ConnectModal.tsx",
     "./src/components/CocktailSubmit/CocktailSubmit.tsx",
     "./src/components/Register/Register.tsx",
+    "./src/components/Reviews/Reviews.tsx",
+
   ],
   plugins: [],
   theme: {
