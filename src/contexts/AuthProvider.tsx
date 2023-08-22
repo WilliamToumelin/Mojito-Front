@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useMemo,
+} from 'react';
 
 type AuthContextType = {
   isLoggedIn: boolean;
@@ -6,16 +12,10 @@ type AuthContextType = {
   logout: () => void;
 };
 
-const initialAuthContext: AuthContextType = {
-  isLoggedIn: false,
-  login: () => {},
-  logout: () => {},
-};
-
-const AuthContext = createContext<AuthContextType>(initialAuthContext);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 type AuthProviderProps = {
-  children: ReactNode; // Définir le type de children comme ReactNode
+  children: ReactNode;
 };
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
@@ -31,10 +31,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setIsLoggedIn(false);
   };
 
+  const logMemo = useMemo(() => ({ isLoggedIn, login, logout }), [isLoggedIn]);
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={logMemo}>{children}</AuthContext.Provider>
   );
 };
 

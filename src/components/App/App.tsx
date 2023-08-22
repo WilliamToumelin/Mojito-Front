@@ -7,14 +7,9 @@ import Home from '../Home/Home';
 import CocktailByCat from '../CocktailByCat/CocktailByCat';
 import CocktailById from '../CocktailById/CocktailById';
 import Register from '../Register/Register';
-
-import '../../styles/index.scss';
 // import Spinner from '../Spinner/Spinner';
 import Footer from '../Footer/Footer';
 import AboutUs from '../AboutUs/AboutUs';
-import { AuthProvider } from '../../contexts/AuthProvider';
-import LegalMentions from '../LegalMentions/LegalMentions';
-// import ConnectModal from '../ConnectModal/ConnectModal';
 
 type Category = {
   id: number;
