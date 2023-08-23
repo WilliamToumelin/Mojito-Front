@@ -13,8 +13,8 @@ const CocktailSubmit: React.FC = () => {
   const [aromatic, setAromatic] = useState<string>('');
   const [technique, setTechnique] = useState<string>('');
 
-  const [alcoholAmount, setAlcoholAmount] = useState<number>(0);
-  const [softAmount, setSoftAmount] = useState<number>(0);
+  const [alcoholAmount, setAlcoholAmount] = useState<number>(1);
+  const [softAmount, setSoftAmount] = useState<number>(1);
   const [description, setDescription] = useState<string>('');
 
   const alcoholsList = ['Rhum', 'Whisky', 'Gin'];
@@ -169,7 +169,7 @@ const CocktailSubmit: React.FC = () => {
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="border rounded p-1 w-1/2"
+              className="border-xs rounded p-1 w-1/2 bg-gray-800"
               rows={3}
             />
           </div>
@@ -178,7 +178,7 @@ const CocktailSubmit: React.FC = () => {
             <button
               type="button"
               onClick={handleSubmit}
-              className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white py-2 rounded-lg"
+              className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white p-2 rounded-lg"
             >
               Soumettre le Cocktail
             </button>
