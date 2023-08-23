@@ -19,7 +19,7 @@ const Page404: React.FC = () => {
               aussi ...
             </p>
             <p className="m-5 text-gray-500 dark:text-gray-400">
-              Pour revenir a la page d&apos;acceuil c&apos;est par
+              Pour revenir a la page d&apos;acceuil c&apos;est par{' '}
               <Link to="/" className="text-amber-700">
                 ici !
               </Link>
