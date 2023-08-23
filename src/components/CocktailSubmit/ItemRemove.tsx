@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { BsTrash } from 'react-icons/bs';
+import { TiDelete } from 'react-icons/ti';
 
 type Props = {
   items: string[];
@@ -11,15 +11,15 @@ const ItemRemove: React.FC<Props> = ({ items, onRemove }) => {
     <div>
       <ul>
         {items.map((item, index) => (
-          <li key={index} className="flex items-center gap-2 m-1">
-            {item}
+          <li key={index} className="flex items-center gap-2 m-3">
             <button
               type="button"
               onClick={() => onRemove(index)}
-              className="bg-red-500 text-white px-2 py-1 rounded"
+              className="bg-red-700 text-white text-2xl p-1 rounded"
             >
-              <BsTrash />
+              <TiDelete />
             </button>
+            {item}
           </li>
         ))}
       </ul>

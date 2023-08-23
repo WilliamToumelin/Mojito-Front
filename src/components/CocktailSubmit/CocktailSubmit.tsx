@@ -100,8 +100,8 @@ const CocktailSubmit: React.FC = () => {
         <h2 className="text-3xl font-bold mb-4 text-center">
           Proposer un Cocktail
         </h2>
-        <div>
-          <div className="inline-block w-1/2 p-10 ">
+        <div className="p-8 flex">
+          <div className="inline-block w-3/5 pr-4">
             <ItemAdd
               title="Alcools"
               itemsList={alcoholsList}
@@ -149,40 +149,40 @@ const CocktailSubmit: React.FC = () => {
                 ))}
               </div>
             </div>
+          </div>
 
-            <div>
-              <div className="boite2 w-1/2">
-                <ItemRemove
-                  items={selectedAlcohols}
-                  onRemove={handleAlcoholRemove}
-                />
-                <ItemRemove items={selectedSofts} onRemove={handleSoftRemove} />
-                <ItemRemove
-                  items={selectedAromatics}
-                  onRemove={handleAromaticRemove}
-                />
-              </div>
-            </div>
+          <div className="flex w-2/5 h-full">
+            <ItemRemove
+              items={selectedAlcohols}
+              onRemove={handleAlcoholRemove}
+            />
+            <ItemRemove items={selectedSofts} onRemove={handleSoftRemove} />
+            <ItemRemove
+              items={selectedAromatics}
+              onRemove={handleAromaticRemove}
+            />
           </div>
         </div>
         <div>
-          <div className="mb-4">
+          <div className="mb-4 text-center">
             <h3 className="text-lg font-medium mb-2">Description</h3>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="border rounded p-1 w-full"
-              rows={4}
+              className="border rounded p-1 w-1/2"
+              rows={3}
             />
           </div>
 
-          <button
-            type="button"
-            onClick={handleSubmit}
-            className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white py-2 rounded-lg"
-          >
-            Soumettre le Cocktail
-          </button>
+          <div className="text-center py-2">
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white py-2 rounded-lg"
+            >
+              Soumettre le Cocktail
+            </button>
+          </div>
         </div>
       </div>
     </div>
