@@ -17,6 +17,8 @@ export default {
     "./src/components/LegalMentions/LegalMentions.tsx",
     "./src/components/ConnectModal/ConnectModal.tsx",
     "./src/components/CocktailSubmit/CocktailSubmit.tsx",
+    "./src/components/CocktailSubmit/ItemAdd.tsx",
+    "./src/components/CocktailSubmit/ItemRemove.tsx",
     "./src/components/Register/Register.tsx",
     "./src/components/Reviews/Reviews.tsx",
 
