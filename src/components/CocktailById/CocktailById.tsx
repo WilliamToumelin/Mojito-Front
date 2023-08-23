@@ -49,7 +49,9 @@ const CocktailById: React.FC<Props> = ({ cocktailList }) => {
               </div>
               <p className="ml-2 text-lg mr-1 font-bold">4.95 {}</p>
               <span className="w-2 h-2 mx-1.5 bg-white rounded-full" />
-              <div className="ml-1 text-lg">{}73 reviews</div>
+              <Link to={`/cocktail/${cocktailItem.slug}/commentaires`}>
+                <div className="ml-1 text-lg">{}73 reviews</div>
+              </Link>
             </div>
             <div className="pt-6 text-3xl flex items-center">
               <BsClockFill className="" />
