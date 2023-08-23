@@ -1,6 +1,12 @@
+/* eslint-disable react/prop-types */
 import { BsTrash } from 'react-icons/bs';
 
-const ItemRemove = ({ items, onRemove }) => {
+type Props = {
+  items: string[];
+  onRemove: (index: number) => void;
+};
+
+const ItemRemove: React.FC<Props> = ({ items, onRemove }) => {
   return (
     <div>
       <ul>

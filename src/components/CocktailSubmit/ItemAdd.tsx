@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Dispatch, SetStateAction } from 'react';
 import { BsPlusCircleFill } from 'react-icons/bs';
 
