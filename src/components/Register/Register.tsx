@@ -7,6 +7,7 @@ import './Register.scss';
 const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
 
   const { signIn } = useAuth();
 
@@ -50,28 +51,49 @@ const Register: React.FC = () => {
           <div className="w-[50%] flex flex-row h-full p-10">
             <div className="text-white p-6 ">
               <form action="POST" className="flex flex-col items-start">
-                <div className="input-group mb-5">
+                <div className="register-input-group mb-5">
                   <input
                     type="email"
-                    className="input-group__input"
+                    className="register-input-group__input"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
                   />
-                  <label htmlFor="email" className="input-group__label">
+                  <label
+                    htmlFor="email"
+                    className="register-input-group__label"
+                  >
                     Email address
                   </label>
                 </div>
-                <div className="input-group mb-5">
+                <div className="register-input-group mb-5">
                   <input
                     type="password"
-                    className="input-group__input"
+                    className="register-input-group__input"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                  <label htmlFor="password" className="input-group__label">
+                  <label
+                    htmlFor="password"
+                    className="register-input-group__label"
+                  >
                     Mot de passe
+                  </label>
+                </div>
+                <div className="register-input-group mb-5">
+                  <input
+                    type="username"
+                    className="register-input-group__input"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                  <label
+                    htmlFor="password"
+                    className="register-input-group__label"
+                  >
+                    Pseudo
                   </label>
                 </div>
 

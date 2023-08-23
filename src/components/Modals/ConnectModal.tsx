@@ -3,6 +3,7 @@
 import { FC, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
+import './Modal.scss';
 
 const ConnectModal: FC = () => {
   const [displayModal, setDisplayModal] = useState(false);
@@ -57,7 +58,9 @@ const ConnectModal: FC = () => {
       )}
       {displayModal && (
         <div
-          className="fixed top-0 right-0 z-50 w-2/6 md:w-auto p-4 overflow-x-hidden overflow-y-auto h-[calc(100%-1rem)] max-h-full"
+          className={`fixed top-0 right-0 z-50 w-2/6 md:w-auto p-4 overflow-x-hidden overflow-y-auto h-[calc(100% - 1rem)] max-h-full ${
+            displayModal ? 'open-modal' : 'close-modal'
+          }`}
           id="authentication-modal"
           tabIndex={-1}
           aria-hidden="true"
@@ -92,41 +95,36 @@ const ConnectModal: FC = () => {
                   Se connecter
                 </h3>
                 <form className="space-y-6" action="#">
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Email
-                    </label>
+                  <div className="modal-input-group mb-5">
                     <input
                       type="email"
                       name="email"
                       id="email"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                      placeholder="nom@gmail.com"
+                      className="modal-input-group__input"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
                     />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="password"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Mot de passe
+                    <label htmlFor="email" className="modal-input-group__label">
+                      Email adress
                     </label>
+                  </div>
+                  <div className="modal-input-group mb-5">
                     <input
                       type="password"
                       name="password"
                       id="password"
-                      placeholder="••••••••"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      className="modal-input-group__input"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
                     />
+                    <label
+                      htmlFor="password"
+                      className="modal-input-group__label"
+                    >
+                      Mot de passe
+                    </label>
                   </div>
                   <button
                     type="submit"

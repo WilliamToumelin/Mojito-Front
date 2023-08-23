@@ -15,7 +15,8 @@ export default {
     "./src/components/Article/Article.tsx",
     "./src/components/AboutUs/AboutUs.tsx",
     "./src/components/LegalMentions/LegalMentions.tsx",
-    "./src/components/ConnectModal/ConnectModal.tsx",
+    "./src/components/Modals/ConnectModal.tsx",
+    "./src/components/Modals/CommentModal.tsx",
     "./src/components/CocktailSubmit/CocktailSubmit.tsx",
     "./src/components/CocktailSubmit/ItemAdd.tsx",
     "./src/components/CocktailSubmit/ItemRemove.tsx",
@@ -27,6 +28,7 @@ export default {
   theme: {
     extend: {
       transitionDuration: {
+        '500': '1.5s',
         '1100': '1100ms',
         '1200': '1200ms',
         '1300': '1300ms',

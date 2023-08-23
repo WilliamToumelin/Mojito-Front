@@ -1,7 +1,7 @@
-.input-group {
+.register-input-group {
   position: relative;
 }
-.input-group__input {
+.register-input-group__input {
   font: inherit;
   color: #fff;
   padding: 10px;
@@ -11,10 +11,10 @@
   background-color: transparent;
   transition: outline-color 500ms;
 }
-.input-group__input:is(:focus, :valid) {
+.register-input-group__input:is(:focus, :valid) {
   outline-color: #531688;
 }
-.input-group__label {
+.register-input-group__label {
   position: absolute;
   top: 0;
   left: 0;
@@ -22,10 +22,10 @@
   color: #fff;
   transition: translate 500ms, scale 500ms;
 }
-.input-group__input:focus + .input-group__label,
-.input-group__input:valid + .input-group__label {
+.register-input-group__input:focus + .register-input-group__label,
+.register-input-group__input:valid + .register-input-group__label {
   padding-inline: 5px;
   translate: 10px -14px;
-  scale: 0.8;
-  background-color: #000;
+  scale: 0.9;
+  background-color: black;
 }

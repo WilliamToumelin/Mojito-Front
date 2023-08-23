@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import anime from 'animejs/lib/anime';
-import ConnectModal from '../ConnectModal/ConnectModal';
+import ConnectModal from '../Modals/ConnectModal';
 
 type Category = {
   id: number;

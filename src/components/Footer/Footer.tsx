@@ -7,11 +7,6 @@ const Footer: React.FC = () => {
   // Vérifier si vous êtes sur la page de proposition de cocktail
   const CocktailSubmitPage = location.pathname === '/proposition-cocktail';
 
-  // Conditionnellement rendre le footer
-  if (CocktailSubmitPage) {
-    return null; // Rendre rien si sur la page de proposition de cocktail
-  }
-
   return (
     <div className="h-[3em] bg-black flex justify-evenly items-center text-white">
       <Link to="/a-propos-de-nous" className="text-white">
@@ -19,10 +14,13 @@ const Footer: React.FC = () => {
       </Link>
       <Link
         to="/proposition-cocktail"
-        className="text-white rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 p-2 font-bold"
+        className={`text-white rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 p-2 font-bold ${
+          CocktailSubmitPage ? 'opacity-0' : ''
+        }`}
       >
         Propose un cocktail !
       </Link>
+
       <Link to="/mentions-legales" className="text-white">
         Mentions Légales
       </Link>
