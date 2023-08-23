@@ -1,6 +1,6 @@
 import { BsTrash } from 'react-icons/bs';
 
-function ItemRemove({ items, onRemove }) {
+const ItemRemove = ({ items, onRemove }) => {
   return (
     <div>
       <ul>
@@ -19,6 +19,6 @@ function ItemRemove({ items, onRemove }) {
       </ul>
     </div>
   );
-}
+};
 
 export default ItemRemove;

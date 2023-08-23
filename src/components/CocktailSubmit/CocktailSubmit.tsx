@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { BsPlusCircleFill } from 'react-icons/bs';
 import ItemRemove from './ItemRemove';
+import ItemAdd from './ItemAdd';
 
 const CocktailSubmit: React.FC = () => {
   const [selectedAlcohols, setSelectedAlcohols] = useState<string[]>([]);
@@ -15,14 +15,11 @@ const CocktailSubmit: React.FC = () => {
 
   const [alcoholAmount, setAlcoholAmount] = useState<number>(0);
   const [softAmount, setSoftAmount] = useState<number>(0);
-
   const [description, setDescription] = useState<string>('');
 
   const alcoholsList = ['Rhum', 'Whisky', 'Gin'];
   const softsList = ['Coca', 'Tonic', "Jus d'orange"];
-
   const aromaticsList = ['Basilic', 'Menthe', 'Poivre', 'Thym'];
-
   const techniqueList = ['Shaker', 'Cuillère', 'Assemblage'];
 
   const handleAlcoholAdd = () => {
@@ -105,106 +102,36 @@ const CocktailSubmit: React.FC = () => {
         </h2>
         <div>
           <div className="inline-block w-1/2 p-10 ">
-            {/* Alcools */}
-            <h3 className="text-lg font-medium">Alcools</h3>
-            <div className="flex mb-5">
-              <div className="flex items-center space-x-4 h-full">
-                <select
-                  value={alcohol}
-                  onChange={(e) => setAlcohol(e.target.value)}
-                  className="max-w-lg border rounded p-1 text-black"
-                >
-                  <option value="">A vous de jouer !</option>
-                  {alcoholsList.map((alcoholOption, index) => (
-                    <option key={index} value={alcoholOption}>
-                      {alcoholOption}
-                    </option>
-                  ))}
-                </select>
-                <label htmlFor="cl" className="">
-                  en Cl:
-                </label>
-                <input
-                  type="number"
-                  value={alcoholAmount}
-                  onChange={(e) =>
-                    setAlcoholAmount(parseInt(e.target.value, 10))
-                  }
-                  className="border rounded p-1 w-16 text-black"
-                />
-                <button
-                  type="button"
-                  onClick={handleAlcoholAdd}
-                  className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white p-2 rounded ml-auto text-xl"
-                >
-                  <BsPlusCircleFill />
-                </button>
-              </div>
-            </div>
+            <ItemAdd
+              title="Alcools"
+              itemsList={alcoholsList}
+              itemValue={alcohol}
+              setItemValue={setAlcohol}
+              amount={alcoholAmount}
+              setAmount={setAlcoholAmount}
+              handleAdd={handleAlcoholAdd}
+            />
 
-            {/* Softs */}
-            <h3 className="text-lg font-medium">Softs</h3>
-            <div className="flex mb-5">
-              <div className="flex items-center space-x-4 h-full">
-                <select
-                  value={soft}
-                  onChange={(e) => setSoft(e.target.value)}
-                  className="max-w-lg border rounded p-1 text-black"
-                >
-                  <option value="">A vous de jouer !</option>
-                  {softsList.map((softOption, index) => (
-                    <option key={index} value={softOption}>
-                      {softOption}
-                    </option>
-                  ))}
-                </select>
-                <label htmlFor="cl" className="">
-                  en Cl:
-                </label>
-                <input
-                  type="number"
-                  value={softAmount}
-                  onChange={(e) => setSoftAmount(parseInt(e.target.value, 10))}
-                  className="border rounded p-1 w-16 text-black"
-                />
-                <button
-                  type="button"
-                  onClick={handleSoftAdd}
-                  className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white p-2 rounded ml-auto text-xl"
-                >
-                  <BsPlusCircleFill />
-                </button>
-              </div>
-            </div>
+            <ItemAdd
+              title="Softs"
+              itemsList={softsList}
+              itemValue={soft}
+              setItemValue={setSoft}
+              amount={softAmount}
+              setAmount={setSoftAmount}
+              handleAdd={handleSoftAdd}
+            />
 
-            {/* Aromatic */}
-            <h3 className="text-lg font-medium">Aromates</h3>
-            <div className="flex mb-5">
-              <div className="flex items-center space-x-4 h-full justify-end">
-                <select
-                  value={aromatic}
-                  onChange={(e) => setAromatic(e.target.value)}
-                  className="max-w-lg border rounded p-1 text-black"
-                >
-                  <option value="">A vous de jouer !</option>
-                  {aromaticsList.map((aromaticOption, index) => (
-                    <option key={index} value={aromaticOption}>
-                      {aromaticOption}
-                    </option>
-                  ))}
-                </select>
+            <ItemAdd
+              title="Aromates"
+              itemsList={aromaticsList}
+              itemValue={aromatic}
+              setItemValue={setAromatic}
+              amount={0}
+              setAmount={() => {}}
+              handleAdd={handleAromaticAdd}
+            />
 
-                <button
-                  type="button"
-                  onClick={handleAromaticAdd}
-                  className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white p-2 rounded ml-auto text-xl"
-                >
-                  <BsPlusCircleFill />
-                </button>
-              </div>
-            </div>
-
-            {/* Technique */}
             <div className="mb-4">
               <h3 className="text-lg font-medium mb-2">Technique</h3>
               <div className="flex">
