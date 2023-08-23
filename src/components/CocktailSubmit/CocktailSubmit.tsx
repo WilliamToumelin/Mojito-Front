@@ -139,7 +139,7 @@ const CocktailSubmit: React.FC = () => {
                     <div
                       className={`w-8 h-8 rounded-full border-gray-400 border-4 flex items-center justify-center ${
                         technique === techniqueOption
-                          ? 'bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 text-black border-none'
+                          ? 'bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 text-black border-none'
                           : ''
                       }`}
                     >
