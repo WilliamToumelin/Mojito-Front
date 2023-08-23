@@ -28,7 +28,7 @@ const CommentModal: FC = () => {
       {/* Afficher la modal si l'utilisateur est connecté et displayModal est vrai */}
       {displayModal && isLoggedIn && (
         <div
-          className="absolute top-5 w-[30vw] right-0 mr-8"
+          className="absolute top-5 w-[30vw] right-0 mr-8 open-modal"
           id="authentication-modal"
           tabIndex={-1}
           aria-hidden="true"
@@ -37,7 +37,7 @@ const CommentModal: FC = () => {
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
               <button
                 type="button"
-                className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                className="close-modal absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 data-modal-hide="authentication-modal"
                 onClick={handleToggleModal}
               >
@@ -63,34 +63,31 @@ const CommentModal: FC = () => {
                   Votre commentaire
                 </h3>
                 <form className="space-y-6" action="#">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Votre nom
-                    </label>
+                  <div className="modal-input-group mb-5">
                     <input
                       type="name"
                       name="name"
                       id="name"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      className="modal-input-group__input"
                       required
                     />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="review"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Votre commentaire
+                    <label htmlFor="name" className="modal-input-group__label">
+                      Votre nom
                     </label>
+                  </div>
+                  <div className="modal-input-group mb-5">
                     <textarea
                       name="review"
                       id="review"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      className="modal-input-group__input w-full h-[10vh]"
                       required
                     />
+                    <label
+                      htmlFor="review"
+                      className="modal-input-group__label"
+                    >
+                      Votre commentaire
+                    </label>
                   </div>
                   <button
                     type="submit"
@@ -108,7 +105,7 @@ const CommentModal: FC = () => {
       {/* Afficher un message si l'utilisateur n'est pas connecté */}
       {displayModal && !isLoggedIn && (
         <div
-          className="absolute top-5 w-[30vw] right-0 mr-8"
+          className="absolute top-5 w-[30vw] right-0 mr-8 open-modal"
           id="authentication-modal"
           tabIndex={-1}
           aria-hidden="true"
