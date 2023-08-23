@@ -13,6 +13,7 @@ import Footer from '../Footer/Footer';
 import AboutUs from '../AboutUs/AboutUs';
 import Reviews from '../Reviews/Reviews';
 import LegalMentions from '../LegalMentions/LegalMentions';
+import Page403 from '../Error/Page403';
 
 type Category = {
   id: number;
@@ -92,6 +93,7 @@ export default function App() {
           path="/cocktail/:slug/commentaires"
           element={<Reviews cocktailList={cocktailListMemo} />}
         />
+        <Route path="/page403" element={<Page403 />} />
       </Routes>
       <Footer />
     </div>
