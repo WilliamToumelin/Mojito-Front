@@ -5,6 +5,7 @@ export default {
     "./src/components/App/App.tsx",
     "./src/components/CocktailByCat/CocktailByCat.tsx",
     "./src/components/CocktailById/CocktailById.tsx",
+    "./src/components/CocktailById/Rating.tsx",
     "./src/components/Error/Page404.tsx",
     "./src/components/Error/Page403.tsx",
     "./src/components/Header/Header.tsx",
