@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-import { Dispatch, SetStateAction } from 'react';
-import { BsPlusCircleFill } from 'react-icons/bs';
+import React, { Dispatch, SetStateAction } from 'react';
+import { BsFillCheckCircleFill } from 'react-icons/bs';
+import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 
 type Props = {
   title: string;
@@ -21,6 +22,15 @@ const ItemAdd: React.FC<Props> = ({
   setAmount,
   handleAdd,
 }) => {
+  const handleIncrement = () => {
+    setAmount(amount + 1);
+  };
+
+  const handleDecrement = () => {
+    if (amount > 1) {
+      setAmount(amount - 1);
+    }
+  };
   return (
     <>
       <h3 className="text-lg font-medium">{title}</h3>
@@ -29,7 +39,7 @@ const ItemAdd: React.FC<Props> = ({
           <select
             value={itemValue}
             onChange={(e) => setItemValue(e.target.value)}
-            className="max-w-lg border rounded p-1 text-black"
+            className="max-w-lg border rounded p-1 text-white text-bold bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400"
           >
             <option value="">A vous de jouer !</option>
             {itemsList.map((itemOption, index) => (
@@ -38,27 +48,28 @@ const ItemAdd: React.FC<Props> = ({
               </option>
             ))}
           </select>
-          <input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(parseInt(e.target.value, 10))}
-            className={`border rounded p-1 pl-4 w-16 text-black ${
+          <div
+            className={`flex p-1 pl-4 w-32 text-white text-3xl ${
               title === 'Aromates' ? 'opacity-0' : ''
             }`}
-          />
-          <label
-            htmlFor="cl"
-            className={`${title === 'Aromates' ? 'opacity-0' : ''}`}
           >
-            cl
-          </label>
+            <div className="flex items-center space-x-4">
+              <button type="button" className="" onClick={handleDecrement}>
+                <AiOutlineMinusCircle />
+              </button>
+              <div>{amount}</div>
+              <button type="button" className="" onClick={handleIncrement}>
+                <AiOutlinePlusCircle />
+              </button>
+            </div>
+          </div>
           <div className="w-1/6 text-center">
             <button
               type="button"
               onClick={handleAdd}
-              className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white p-2 rounded text-xl"
+              className="bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 text-white p-2 rounded text-xl"
             >
-              <BsPlusCircleFill />
+              <BsFillCheckCircleFill />
             </button>
           </div>
         </div>
