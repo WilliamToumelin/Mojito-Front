@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
+import { BsTrash, BsPlusCircleFill } from 'react-icons/bs';
 
 const CocktailSubmit: React.FC = () => {
   const [selectedAlcohols, setSelectedAlcohols] = useState<string[]>([]);
   const [selectedSofts, setSelectedSofts] = useState<string[]>([]);
   const [selectedAromatics, setSelectedAromatics] = useState<string[]>([]);
-  const [selectedTechnique, setSelectedTechnique] = useState<string[]>([]);
 
   const [alcohol, setAlcohol] = useState<string>('');
   const [soft, setSoft] = useState<string>('');
@@ -17,16 +17,8 @@ const CocktailSubmit: React.FC = () => {
 
   const [description, setDescription] = useState<string>('');
 
-  const alcoholsList = [
-    'Rhum',
-    'Whisky',
-    'Gin' /* Ajouter d'autres alcools ici */,
-  ];
-  const softsList = [
-    'Coca',
-    'Tonic',
-    "Jus d'orange" /* Ajouter d'autres softs ici */,
-  ];
+  const alcoholsList = ['Rhum', 'Whisky', 'Gin'];
+  const softsList = ['Coca', 'Tonic', "Jus d'orange"];
 
   const aromaticsList = ['Basilic', 'Menthe', 'Poivre', 'Thym'];
 
@@ -58,13 +50,6 @@ const CocktailSubmit: React.FC = () => {
     }
   };
 
-  const handleTechniqueAdd = () => {
-    if (technique !== '') {
-      setSelectedTechnique([...selectedTechnique, `${technique}`]);
-      setTechnique('');
-    }
-  };
-
   const handleAlcoholRemove = (index: number) => {
     const updatedAlcohols = [...selectedAlcohols];
     updatedAlcohols.splice(index, 1);
@@ -81,12 +66,6 @@ const CocktailSubmit: React.FC = () => {
     const updatedAromatics = [...selectedAromatics];
     updatedAromatics.splice(index, 1);
     setSelectedAromatics(updatedAromatics);
-  };
-
-  const handleTechniqueRemove = (index: number) => {
-    const updatedTechnique = [...selectedTechnique];
-    updatedTechnique.splice(index, 1);
-    setSelectedTechnique(updatedTechnique);
   };
 
   const handleSubmit = async () => {
@@ -119,28 +98,29 @@ const CocktailSubmit: React.FC = () => {
 
   return (
     <div className="bg-black flex justify-center items-center flex-1 h-[75vh]">
-      <div className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto over shadow-purple-700 shadow-2xl rounded-2xl bg-black">
-        <div className="p-4 text-white">
-          <h2 className="text-2xl font-bold mb-4">Proposer un Cocktail</h2>
-
-          {/* Alcools section */}
-          <div className="mb-4">
-            <h3 className="text-lg font-medium mb-2">Alcools</h3>
-            <div className="flex space-x-2">
+      <div className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto over shadow-purple-700 shadow-2xl rounded-2xl bg-black text-white">
+        <h2 className="text-3xl font-bold mb-4 text-center">
+          Proposer un Cocktail
+        </h2>
+        <div className="px-12 py-6">
+          {/* Alcools */}
+          <h3 className="text-lg font-medium mb-2">Alcools</h3>
+          <div className="mb-4 flex flex-wrap">
+            <div className="flex w-4/12">
               <select
                 value={alcohol}
                 onChange={(e) => setAlcohol(e.target.value)}
-                className="border rounded p-1 text-black"
+                className="max-w-lg border rounded p-1 text-black"
               >
-                <option value="">Sélectionner un alcool</option>
+                <option value="">A vous de jouer !</option>
                 {alcoholsList.map((alcoholOption, index) => (
                   <option key={index} value={alcoholOption}>
                     {alcoholOption}
                   </option>
                 ))}
               </select>
-              <label htmlFor="cl" className="pt-1">
-                Centilitres:
+              <label htmlFor="cl" className="pl-6 p-2">
+                en Cl:
               </label>
               <input
                 type="number"
@@ -151,45 +131,31 @@ const CocktailSubmit: React.FC = () => {
               <button
                 type="button"
                 onClick={handleAlcoholAdd}
-                className="bg-blue-500 text-white px-2 rounded"
+                className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white p-2 rounded ml-auto text-xl"
               >
-                Ajouter
+                <BsPlusCircleFill />
               </button>
             </div>
-            <ul>
-              {selectedAlcohols.map((item, index) => (
-                <li key={index} className="flex items-center gap-2 m-1">
-                  {item}
-                  <button
-                    type="button"
-                    onClick={() => handleAlcoholRemove(index)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
-                  >
-                    Supprimer
-                  </button>
-                </li>
-              ))}
-            </ul>
           </div>
 
-          {/* Softs section */}
-          <div className="mb-4">
-            <h3 className="text-lg font-medium mb-2">Softs</h3>
-            <div className="flex space-x-2">
+          {/* Softs */}
+          <h3 className="text-lg font-medium mb-2">Softs</h3>
+          <div className="mb-4 flex flex-wrap">
+            <div className="flex w-4/12">
               <select
                 value={soft}
                 onChange={(e) => setSoft(e.target.value)}
-                className="border rounded p-1 text-black"
+                className="max-w-lg border rounded p-1 text-black"
               >
-                <option value="">Sélectionner un soft</option>
+                <option value="">A vous de jouer !</option>
                 {softsList.map((softOption, index) => (
                   <option key={index} value={softOption}>
                     {softOption}
                   </option>
                 ))}
               </select>
-              <label htmlFor="cl" className="pt-1">
-                Centilitres:
+              <label htmlFor="cl" className="pl-6 p-2">
+                en Cl:
               </label>
               <input
                 type="number"
@@ -200,37 +166,23 @@ const CocktailSubmit: React.FC = () => {
               <button
                 type="button"
                 onClick={handleSoftAdd}
-                className="bg-blue-500 text-white px-2 rounded"
+                className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white p-2 rounded ml-auto text-xl"
               >
-                Ajouter
+                <BsPlusCircleFill />
               </button>
             </div>
-            <ul>
-              {selectedSofts.map((item, index) => (
-                <li key={index} className="flex items-center gap-2 m-1">
-                  {item}
-                  <button
-                    type="button"
-                    onClick={() => handleSoftRemove(index)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
-                  >
-                    Supprimer
-                  </button>
-                </li>
-              ))}
-            </ul>
           </div>
 
-          {/* Aromatic section */}
-          <div className="mb-4">
-            <h3 className="text-lg font-medium mb-2">Aromates</h3>
-            <div className="flex space-x-2">
+          {/* Aromatic */}
+          <h3 className="text-lg font-medium mb-2">Aromates</h3>
+          <div className="mb-4 flex flex-wrap">
+            <div className="flex w-4/12">
               <select
                 value={aromatic}
                 onChange={(e) => setAromatic(e.target.value)}
-                className="border rounded p-1 text-black"
+                className="max-w-lg border rounded p-1 text-black"
               >
-                <option value="">Sélectionner des aromates</option>
+                <option value="">A vous de jouer !</option>
                 {aromaticsList.map((aromaticOption, index) => (
                   <option key={index} value={aromaticOption}>
                     {aromaticOption}
@@ -241,68 +193,33 @@ const CocktailSubmit: React.FC = () => {
               <button
                 type="button"
                 onClick={handleAromaticAdd}
-                className="bg-blue-500 text-white px-2 rounded"
+                className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white p-2 rounded ml-auto text-xl"
               >
-                Ajouter
+                <BsPlusCircleFill />
               </button>
             </div>
-            <ul>
-              {selectedAromatics.map((item, index) => (
-                <li key={index} className="flex items-center gap-2 m-1">
-                  {item}
-                  <button
-                    type="button"
-                    onClick={() => handleAromaticRemove(index)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
-                  >
-                    Supprimer
-                  </button>
-                </li>
-              ))}
-            </ul>
           </div>
 
-          {/* Technique section */}
+          {/* Technique */}
           <div className="mb-4">
             <h3 className="text-lg font-medium mb-2">Technique</h3>
-            <div className="flex space-x-2">
-              <select
-                value={technique}
-                onChange={(e) => setTechnique(e.target.value)}
-                className="border rounded p-1 text-black"
-              >
-                <option value="">Sélectionner une technique</option>
-                {techniqueList.map((techniqueOption, index) => (
-                  <option key={index} value={techniqueOption}>
-                    {techniqueOption}
-                  </option>
-                ))}
-              </select>
-
-              <button
-                type="button"
-                onClick={handleTechniqueAdd}
-                className="bg-blue-500 text-white px-2 rounded"
-              >
-                Ajouter
-              </button>
-            </div>
-            <ul className="">
-              {selectedTechnique.map((item, index) => (
-                <li key={index} className="flex items-center gap-2 m-1">
-                  {item}
-                  <button
-                    type="button"
-                    onClick={() => handleTechniqueRemove(index)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
-                  >
-                    Supprimer
-                  </button>
-                </li>
+            <div className="flex">
+              {techniqueList.map((techniqueOption, index) => (
+                <label key={index} className="flex items-center gap-2 m-1">
+                  <input
+                    type="radio"
+                    value={techniqueOption}
+                    checked={technique === techniqueOption}
+                    onChange={(e) => setTechnique(e.target.value)}
+                    className="mr-2"
+                  />
+                  {techniqueOption}
+                </label>
               ))}
-            </ul>
+            </div>
           </div>
-
+        </div>
+        <div>
           <div className="mb-4">
             <h3 className="text-lg font-medium mb-2">Description</h3>
             <textarea
@@ -316,7 +233,7 @@ const CocktailSubmit: React.FC = () => {
           <button
             type="button"
             onClick={handleSubmit}
-            className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-300"
+            className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white rounded-lg p-2"
           >
             Soumettre le Cocktail
           </button>
