@@ -93,7 +93,7 @@ const CocktailById: React.FC<Props> = ({ cocktailList }) => {
               Commenter ce cocktail
             </Link> */}
               <div className="text-base">
-                <p className="pb-3">Donnez vous avis !</p>
+                <p className="pb-3">Donnez votre avis !</p>
                 <Rating />
               </div>
             </div>
