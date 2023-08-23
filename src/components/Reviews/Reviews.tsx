@@ -37,6 +37,7 @@ const Reviews: React.FC<Props> = ({ cocktailList }) => {
         </h1>
         <div className="absolute top-5 right-5 ">
           <button
+            type="button"
             className="block text-white bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             onClick={handleToggleModal}
           >
@@ -128,19 +129,18 @@ const Reviews: React.FC<Props> = ({ cocktailList }) => {
             je suis sur je vais pas y arriver ouin ouin.
           </p>
           <p className=" font-semibold p-5 italic">
-            Christophe Totof{' '}
+            Christophe Totof
             <span className="text-sm font-base text-gray-500">
-              {' '}
               le 12/06/2023
             </span>
           </p>
         </article>
         <article className="p-3 border rounded-lg w-[55%] my-5 flex flex-col items-center">
           <p className="text-xl font-semibold p-5">
-            J'aime me beurer la biscotte en regardant votre site{' '}
+            J&apos;aime me beurer la biscotte en regardant votre site
           </p>
           <p className=" font-semibold p-5 italic">
-            Erwin Zebezu{' '}
+            Erwin Zebezu
             <span className="text-sm font-base text-gray-500"> 13/06/2023</span>
           </p>
         </article>

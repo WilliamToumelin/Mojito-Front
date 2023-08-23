@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState } from 'react';
 
 const CocktailSubmit: React.FC = () => {
@@ -51,14 +52,14 @@ const CocktailSubmit: React.FC = () => {
   };
 
   const handleAromaticAdd = () => {
-    if (aromatic != '') {
+    if (aromatic !== '') {
       setSelectedAromatics([...selectedAromatics, `${aromatic}`]);
       setAromatic('');
     }
   };
 
   const handleTechniqueAdd = () => {
-    if (technique != '') {
+    if (technique !== '') {
       setSelectedTechnique([...selectedTechnique, `${technique}`]);
       setTechnique('');
     }
@@ -92,7 +93,7 @@ const CocktailSubmit: React.FC = () => {
     const cocktailSubmitData = {
       alcohols: selectedAlcohols,
       softs: selectedSofts,
-      description: description,
+      description,
     };
 
     try {
@@ -144,10 +145,11 @@ const CocktailSubmit: React.FC = () => {
               <input
                 type="number"
                 value={alcoholAmount}
-                onChange={(e) => setAlcoholAmount(parseInt(e.target.value))}
+                onChange={(e) => setAlcoholAmount(parseInt(e.target.value, 10))}
                 className="border rounded p-1 w-16 text-black"
               />
               <button
+                type="button"
                 onClick={handleAlcoholAdd}
                 className="bg-blue-500 text-white px-2 rounded"
               >
@@ -159,6 +161,7 @@ const CocktailSubmit: React.FC = () => {
                 <li key={index} className="flex items-center gap-2 m-1">
                   {item}
                   <button
+                    type="button"
                     onClick={() => handleAlcoholRemove(index)}
                     className="bg-red-500 text-white px-2 py-1 rounded"
                   >
@@ -191,10 +194,11 @@ const CocktailSubmit: React.FC = () => {
               <input
                 type="number"
                 value={softAmount}
-                onChange={(e) => setSoftAmount(parseInt(e.target.value))}
+                onChange={(e) => setSoftAmount(parseInt(e.target.value, 10))}
                 className="border rounded p-1 w-16 text-black"
               />
               <button
+                type="button"
                 onClick={handleSoftAdd}
                 className="bg-blue-500 text-white px-2 rounded"
               >
@@ -206,6 +210,7 @@ const CocktailSubmit: React.FC = () => {
                 <li key={index} className="flex items-center gap-2 m-1">
                   {item}
                   <button
+                    type="button"
                     onClick={() => handleSoftRemove(index)}
                     className="bg-red-500 text-white px-2 py-1 rounded"
                   >
@@ -234,6 +239,7 @@ const CocktailSubmit: React.FC = () => {
               </select>
 
               <button
+                type="button"
                 onClick={handleAromaticAdd}
                 className="bg-blue-500 text-white px-2 rounded"
               >
@@ -245,6 +251,7 @@ const CocktailSubmit: React.FC = () => {
                 <li key={index} className="flex items-center gap-2 m-1">
                   {item}
                   <button
+                    type="button"
                     onClick={() => handleAromaticRemove(index)}
                     className="bg-red-500 text-white px-2 py-1 rounded"
                   >
@@ -273,6 +280,7 @@ const CocktailSubmit: React.FC = () => {
               </select>
 
               <button
+                type="button"
                 onClick={handleTechniqueAdd}
                 className="bg-blue-500 text-white px-2 rounded"
               >
@@ -284,6 +292,7 @@ const CocktailSubmit: React.FC = () => {
                 <li key={index} className="flex items-center gap-2 m-1">
                   {item}
                   <button
+                    type="button"
                     onClick={() => handleTechniqueRemove(index)}
                     className="bg-red-500 text-white px-2 py-1 rounded"
                   >
@@ -305,6 +314,7 @@ const CocktailSubmit: React.FC = () => {
           </div>
 
           <button
+            type="button"
             onClick={handleSubmit}
             className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-300"
           >
