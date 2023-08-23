@@ -11,6 +11,7 @@ import CocktailSubmit from '../CocktailSubmit/CocktailSubmit';
 // import Spinner from '../Spinner/Spinner';
 import Footer from '../Footer/Footer';
 import AboutUs from '../AboutUs/AboutUs';
+import Reviews from '../Reviews/Reviews';
 import LegalMentions from '../LegalMentions/LegalMentions';
 
 type Category = {
@@ -87,6 +88,10 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/mentions-legales" element={<LegalMentions />} />
         <Route path="/proposition-cocktail" element={<CocktailSubmit />} />
+        <Route
+          path="/cocktail/:slug/commentaires"
+          element={<Reviews cocktailList={cocktailListMemo} />}
+        />
       </Routes>
       <Footer />
     </div>

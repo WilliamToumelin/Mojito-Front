@@ -86,14 +86,17 @@ const CocktailById: React.FC<Props> = ({ cocktailList }) => {
             <h3 className="text-base">L&apos;histoire du {}:</h3>
             <p>{cocktailItem.content}</p>
             <div>
-              {/* <Link
-              to="/commentaire"
-              class="text-white bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
-            >
-              Commenter ce cocktail
-            </Link> */}
               <div className="text-base">
                 <p className="pb-3">Donnez votre avis !</p>
+
+                <p className="pb-3">Donnez vous avis !</p>
+                <Link
+                  to={`/cocktail/${cocktailItem.slug}/commentaires`}
+                  className="text-white bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 font-medium rounded-lg text-sm p-1 "
+                >
+                  Commenter ce cocktail
+                </Link>
+
                 <Rating />
               </div>
             </div>
