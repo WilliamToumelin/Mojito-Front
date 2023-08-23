@@ -100,7 +100,7 @@ const CocktailSubmit: React.FC = () => {
         <h2 className="text-3xl font-bold mb-4 text-center">
           Proposer un Cocktail
         </h2>
-        <div className="p-8 flex">
+        <div className="py-6 px-12 flex">
           <div className="inline-block w-3/5 pr-4">
             <ItemAdd
               title="Alcools"

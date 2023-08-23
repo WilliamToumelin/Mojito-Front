@@ -25,7 +25,7 @@ const ItemAdd: React.FC<Props> = ({
     <>
       <h3 className="text-lg font-medium">{title}</h3>
       <div className="flex mb-5">
-        <div className="flex items-center space-x-4 h-full">
+        <div className="flex items-center space-x-4 w-full">
           <select
             value={itemValue}
             onChange={(e) => setItemValue(e.target.value)}
@@ -38,28 +38,29 @@ const ItemAdd: React.FC<Props> = ({
               </option>
             ))}
           </select>
-          <label
-            htmlFor="cl"
-            className={`${title === 'Aromates' ? 'hidden' : ''}`}
-          >
-            en Cl:
-          </label>
           <input
             type="number"
             value={amount}
             onChange={(e) => setAmount(parseInt(e.target.value, 10))}
-            className={`border rounded p-1 w-16 text-black ${
-              title === 'Aromates' ? 'hidden' : ''
+            className={`border rounded p-1 pl-4 w-16 text-black ${
+              title === 'Aromates' ? 'opacity-0' : ''
             }`}
           />
-
-          <button
-            type="button"
-            onClick={handleAdd}
-            className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white p-2 rounded ml-auto text-xl"
+          <label
+            htmlFor="cl"
+            className={`${title === 'Aromates' ? 'opacity-0' : ''}`}
           >
-            <BsPlusCircleFill />
-          </button>
+            cl
+          </label>
+          <div className="w-1/6 text-center">
+            <button
+              type="button"
+              onClick={handleAdd}
+              className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white p-2 rounded text-xl"
+            >
+              <BsPlusCircleFill />
+            </button>
+          </div>
         </div>
       </div>
     </>
