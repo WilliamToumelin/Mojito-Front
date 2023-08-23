@@ -51,7 +51,7 @@ const SideBar: React.FC<Props> = ({ filteredCocktails, currentCategory }) => {
             key={cocktail.id}
           >
             <div
-              className="menu-button w-32 h-8 flex justify-center items-center rounded-r-lg bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 border-white transition-transform duration-400 ease-out hover:scale-125"
+              className="menu-button w-32 h-8 flex justify-center items-center rounded-r-lg bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 border-white transition-transform duration-400 ease-out hover:scale-125"
               onClick={() => handleCocktailClick(cocktail.categoryId)}
             >
               <span className="text-white font-bold text-base">

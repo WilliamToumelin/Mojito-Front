@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
       </Link>
       <Link
         to="/proposition-cocktail"
-        className="text-white rounded-full bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 p-2 font-bold"
+        className="text-white rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 p-2 font-bold"
       >
         Propose un cocktail !
       </Link>

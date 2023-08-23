@@ -39,7 +39,7 @@ const ItemAdd: React.FC<Props> = ({
           <select
             value={itemValue}
             onChange={(e) => setItemValue(e.target.value)}
-            className="max-w-lg border rounded p-1 text-black bg-gradient-to-r from-purple-500 via-pink-400 to-orange-400 focus:bg-gray-800 focus:outline-none hover:bg-gradient-to-r hover:from-purple-700 hover:via-pink-500 hover:to-orange-500"
+            className="max-w-lg border rounded p-1 text-white text-bold bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400"
           >
             <option value="">A vous de jouer !</option>
             {itemsList.map((itemOption, index) => (
@@ -67,7 +67,7 @@ const ItemAdd: React.FC<Props> = ({
             <button
               type="button"
               onClick={handleAdd}
-              className="bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 text-white p-2 rounded text-xl"
+              className="bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 text-white p-2 rounded text-xl"
             >
               <BsFillCheckCircleFill />
             </button>

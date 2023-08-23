@@ -99,7 +99,7 @@ const CocktailById: React.FC<Props> = ({ cocktailList }) => {
                 <Rating />
                 <Link
                   to={`/cocktail/${cocktailItem.slug}/commentaires`}
-                  className="text-white bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 font-medium rounded-lg text-sm p-2"
+                  className="text-white font-semibold bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 rounded-lg text-sm p-2"
                 >
                   Commenter ce cocktail
                 </Link>
