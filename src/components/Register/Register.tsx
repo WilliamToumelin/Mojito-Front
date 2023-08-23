@@ -7,6 +7,7 @@ import './Register.scss';
 const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
 
   const { signIn } = useAuth();
 
@@ -72,6 +73,18 @@ const Register: React.FC = () => {
                   />
                   <label htmlFor="password" className="input-group__label">
                     Mot de passe
+                  </label>
+                </div>
+                <div className="input-group mb-5">
+                  <input
+                    type="username"
+                    className="input-group__input"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                  <label htmlFor="password" className="input-group__label">
+                    Pseudo
                   </label>
                 </div>
 
