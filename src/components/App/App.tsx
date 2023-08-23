@@ -91,7 +91,7 @@ export default function App() {
         <Route path="/proposition-cocktail" element={<CocktailSubmit />} />
         <Route
           path="/cocktail/:slug/commentaires"
-          element={<Reviews cocktailList={cocktailListMemo} modulo={true} />}
+          element={<Reviews cocktailList={cocktailListMemo} modulo />}
         />
         <Route path="/page403" element={<Page403 />} />
       </Routes>

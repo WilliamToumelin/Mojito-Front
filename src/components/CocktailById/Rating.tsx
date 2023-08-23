@@ -28,6 +28,7 @@ const Rating = () => {
           key={index}
           onClick={() => handleIconClick(index)}
           onMouseOver={() => handleIconMouseOver(index)}
+          onFocus={() => handleIconMouseOver(index)}
           onMouseLeave={handleIconMouseLeave}
           className={`text-3xl p-1 ${
             index <= rating || index <= hoveredIndex
