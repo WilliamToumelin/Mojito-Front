@@ -1,7 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Footer: React.FC = () => {
+  const location = useLocation();
+
+  // Vérifier si vous êtes sur la page de proposition de cocktail
+  const CocktailSubmitPage = location.pathname === '/proposition-cocktail';
+
+  // Conditionnellement rendre le footer
+  if (CocktailSubmitPage) {
+    return null; // Rendre rien si sur la page de proposition de cocktail
+  }
+
   return (
     <div className="h-[3em] bg-black flex justify-evenly items-center text-white">
       <Link to="/a-propos-de-nous" className="text-white">
