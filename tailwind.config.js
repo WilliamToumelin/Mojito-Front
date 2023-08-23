@@ -28,6 +28,7 @@ export default {
   theme: {
     extend: {
       transitionDuration: {
+        '500': '1.5s',
         '1100': '1100ms',
         '1200': '1200ms',
         '1300': '1300ms',
