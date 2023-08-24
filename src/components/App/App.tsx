@@ -8,7 +8,7 @@ import CocktailByCat from '../CocktailByCat/CocktailByCat';
 import CocktailById from '../CocktailById/CocktailById';
 import Register from '../Register/Register';
 import CocktailSubmit from '../CocktailSubmit/CocktailSubmit';
-// import Spinner from '../Spinner/Spinner';
+import Spinner from '../Spinner/Spinner';
 import Footer from '../Footer/Footer';
 import AboutUs from '../AboutUs/AboutUs';
 import Reviews from '../Reviews/Reviews';
