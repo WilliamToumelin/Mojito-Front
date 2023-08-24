@@ -14,20 +14,7 @@ import AboutUs from '../AboutUs/AboutUs';
 import Reviews from '../Reviews/Reviews';
 import LegalMentions from '../LegalMentions/LegalMentions';
 import Page403 from '../Error/Page403';
-
-type Category = {
-  id: number;
-  slug: string;
-  name: string;
-};
-
-type Cocktails = {
-  id: number;
-  slug: string;
-  categoryId: number;
-  content: string;
-  title: string;
-};
+import { Category, Cocktails } from '../../types/types';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -91,7 +78,7 @@ export default function App() {
         <Route path="/proposition-cocktail" element={<CocktailSubmit />} />
         <Route
           path="/cocktail/:slug/commentaires"
-          element={<Reviews cocktailList={cocktailListMemo} modulo />}
+          element={<Reviews cocktailList={cocktailListMemo} />}
         />
         <Route path="/page403" element={<Page403 />} />
       </Routes>

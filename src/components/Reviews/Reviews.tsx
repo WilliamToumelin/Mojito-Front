@@ -1,62 +1,24 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router';
 import Page404 from '../Error/Page404';
 import CommentModal from '../Modals/CommentModal';
-
-const sampleComments = [
-  {
-    id: 1,
-    text: 'Moi je suis sur je vais pas y arriver ouin ouin',
-    author: 'Christophe Totof',
-    date: '12/06/2023',
-  },
-  {
-    id: 2,
-    text: "J'aime me beurer la biscotte en regardant votre site",
-    author: 'Erwin Zebezu',
-    date: '13/06/2023',
-  },
-  {
-    id: 3,
-    text: "J'aime prendre mon bain en buvant ce cocktail",
-    author: 'Celestin Joiris',
-    date: '13/06/2023',
-  },
-  {
-    id: 4,
-    text: 'Nani ?!?!',
-    author: 'Tommy the big D',
-    date: '13/06/2023',
-  },
-  {
-    id: 5,
-    text: "J'adore ce cocktail qui me rapelle le bon temps a Melun.",
-    author: 'Will I Am',
-    date: '13/06/2023',
-  },
-];
-
-type Cocktails = {
-  categoryId: number;
-  id: number;
-  slug: string;
-  content: string;
-  title: string;
-};
+import { Cocktails } from '../../types/types';
 
 type Props = {
   cocktailList: Cocktails[];
-  modulo: boolean;
 };
 
-const Reviews: React.FC<Props> = ({ cocktailList, modulo }) => {
+const Reviews: React.FC<Props> = ({ cocktailList }) => {
   const { slug } = useParams<{ slug: string }>();
-  const [displayModal, setDisplayModal] = useState(false);
 
-  // --- handleToggleModal sert à toggle le modal
-  const handleToggleModal = useCallback((): void => {
-    setDisplayModal((prevstate) => !prevstate);
-  }, []);
+  type CocktailItem = Cocktails & {
+    comments: Array<{
+      id: number;
+      content: string;
+      posted_at: string;
+      user: { id: number; pseudonym: string };
+    }>;
+  };
 
   const cocktailItem = cocktailList.find((cocktail) => cocktail.slug === slug);
 
@@ -77,12 +39,10 @@ const Reviews: React.FC<Props> = ({ cocktailList, modulo }) => {
           <CommentModal />
         </div>
         <div className="w-full h-full overflow-y-auto border-t-2 p-6 pt-0 flex flex-col items-center">
-          {sampleComments.map((comment, index) => (
+          {cocktailItem.comments.map((comment: CocktailItem) => (
             <article
               key={comment.id}
-              className={`w-[80%] mx-auto mt-14 p-4 rounded-lg flex items-center ${
-                modulo && index % 2 !== 0 ? 'flex-row-reverse' : ''
-              }`}
+              className="w-[80%] mx-auto mt-14 p-4 rounded-lg flex items-center "
             >
               <div>
                 <svg
@@ -96,20 +56,19 @@ const Reviews: React.FC<Props> = ({ cocktailList, modulo }) => {
                 </svg>
                 <blockquote>
                   <p className="text-2xl italic font-medium text-gray-900 dark:text-white">
-                    {comment.text}
+                    {comment.content}
                   </p>
                 </blockquote>
                 <figcaption className=" mt-6 space-x-3">
                   <div
-                    className={`divide-x-2 divide-gray-500 dark:divide-gray-700 ${
-                      modulo && index % 2 !== 0 ? 'float-right' : ''
-                    }`}
+                    className="divide-x-2 divide-gray-500 dark:divide-gray-700
+                    "
                   >
                     <cite className="pr-3 font-medium text-gray-900 dark:text-white">
-                      {comment.author}
+                      {comment.user.pseudonym}
                     </cite>
                     <cite className="pl-3 text-sm text-gray-500 dark:text-gray-400">
-                      {comment.date}
+                      {comment.posted_at}
                     </cite>
                   </div>
                 </figcaption>

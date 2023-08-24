@@ -5,14 +5,7 @@ import { BsTrophy } from 'react-icons/bs';
 import { CgInfinity } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import Article from '../Article/Article';
-
-type Cocktails = {
-  categoryId: number;
-  id: number;
-  slug: string;
-  content: string;
-  title: string;
-};
+import { Cocktails } from '../../types/types';
 
 type Props = {
   cocktailList: Cocktails[];
@@ -31,7 +24,7 @@ const Home: React.FC<Props> = ({ cocktailList }) => {
   };
 
   const cocktailTop5 = useMemo(() => {
-    return cocktailList.filter((cocktail5) => cocktail5.categoryId <= 2);
+    return cocktailList.filter((cocktail5) => cocktail5.rating > 3.8);
   }, [cocktailList]);
 
   console.log(cocktailTop5);

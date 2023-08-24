@@ -1,15 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
-import { BiSolidStar } from 'react-icons/bi';
-import image from '../../images/image.jpeg';
-
-type Cocktails = {
-  categoryId: number;
-  id: number;
-  slug: string;
-  content: string;
-  title: string;
-};
+import { FaCocktail } from 'react-icons/fa';
+import { Cocktails } from '../../types/types';
 
 type ArticleProps = {
   cocktail: Cocktails;
@@ -31,7 +23,7 @@ const Article: React.FC<ArticleProps> = ({ cocktail, animate, modulo }) => {
       <div className="w-52 h-52 rounded-full overflow-hidden shadow-amber-700 shadow-sm">
         <div className="relative w-full h-full shadow-amber-700 shadow-2xl">
           <img
-            src={image}
+            src={cocktail.picture}
             alt="cocktail"
             className="absolute w-full h-full object-cover transform-center"
           />
@@ -43,7 +35,7 @@ const Article: React.FC<ArticleProps> = ({ cocktail, animate, modulo }) => {
             animate ? 'opacity-0 -translate-y-12' : ''
           } transition-all ease-in duration-1200`}
         >
-          {cocktail.title}
+          {cocktail.name}
         </h3>
         <p
           className={`text-white p-4 flex ${modulo ? 'justify-end' : ''} ${
@@ -54,18 +46,17 @@ const Article: React.FC<ArticleProps> = ({ cocktail, animate, modulo }) => {
               : ''
           } transition-all ease-in duration-1200`}
         >
-          Difficulté : Facile
+          Difficulté : {cocktail.difficulty}
         </p>
         <p
           className={`text-white p-4 flex ${modulo ? 'justify-end' : ''} ${
             animate ? 'opacity-0 translate-y-12' : ''
           } transition-all ease-in duration-1200`}
         >
-          Note : &nbsp;
-          <BiSolidStar />
-          <BiSolidStar />
-          <BiSolidStar />
-          <BiSolidStar />
+          Note : {cocktail.rating}
+          <div className=" text-yellow-400 mr-1 pl-1">
+            <FaCocktail />
+          </div>
         </p>
       </div>
     </article>

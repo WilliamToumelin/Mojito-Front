@@ -3,20 +3,7 @@ import { useParams, Link, useLocation } from 'react-router-dom';
 import SideBar from '../SideBar/SideBar';
 import Page404 from '../Error/Page404';
 import Article from '../Article/Article';
-
-type Category = {
-  id: number;
-  slug: string;
-  name: string;
-};
-
-type Cocktails = {
-  categoryId: number;
-  id: number;
-  slug: string;
-  content: string;
-  title: string;
-};
+import { Category, Cocktails } from '../../types/types';
 
 type Props = {
   categoriesData: Category[];
@@ -32,9 +19,10 @@ const CocktailByCat: React.FC<Props> = ({ categoriesData, cocktailList }) => {
     (category) => category.slug === categoryName
   )?.id;
 
-  const filteredCocktails = cocktailList.filter(
-    (cocktail) => cocktail.categoryId === categoryId
-  );
+  const filteredCocktails = cocktailList.filter((cocktail) => {
+    // vérifie si au moins une catégorie d'un cocktail a un id correspondant à categoryId
+    return cocktail.categories.some((category) => category.id === categoryId);
+  });
 
   useEffect(() => {
     setAnimate(false);

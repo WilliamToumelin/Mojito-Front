@@ -54,8 +54,30 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
           alt="external-cocktail-party-icongeek26-outline-gradient-icongeek26"
         />
       </NavLink>
-      <nav className="flex justify-center gap-20 no-underline text-white delay-30">
+      {/* <nav className="flex justify-center gap-20 no-underline text-white delay-30">
         {categoriesData.map((categoryItem: Category) => (
+          <NavLink
+            key={categoryItem.id}
+            className={
+              categoryId === categoryItem.id
+                ? 'menu-link menu-link--selected animate-bounce'
+                : 'menu-link menu-link'
+            }
+            to={`/${categoryItem.slug}`}
+          >
+            <div
+              className="flex justify-center items-center w-28 h-12 rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 border-white transition duration-100 ease-in-out"
+              onClick={() => handleCategoryClick(categoryItem.id)}
+            >
+              <span className="text-white font-bold text-base">
+                {categoryItem.name}
+              </span>
+            </div>
+          </NavLink>
+        ))}
+      </nav> */}
+      <nav className="flex justify-center gap-20 no-underline text-white delay-30">
+        {categoriesData.slice(0, 6).map((categoryItem: Category) => (
           <NavLink
             key={categoryItem.id}
             className={
