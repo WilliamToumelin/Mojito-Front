@@ -41,21 +41,20 @@ export default function App() {
 
   useEffect(() => {
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(true);
-    }, 5000);
     setFirstTime(false);
   }, [firstTime, homepage]);
 
   useEffect(() => {
-    fetch('https://oblog-react.vercel.app/api/categories')
+    fetch('http://localhost:5174/api/categories')
       .then((response) => response.json())
       .then((data: Category[]) => {
         setCategoriesData(data);
+        setIsLoading(false);
       })
+
       .catch((err) => console.error(err));
 
-    fetch('https://oblog-react.vercel.app/api/posts')
+    fetch('http://localhost:5174/api/cocktails')
       .then((response) => response.json())
       .then((data: Cocktails[]) => {
         setCocktailList(data);
@@ -75,7 +74,7 @@ export default function App() {
       <Spinner isLoading={isLoading} />
       <div
         className={`app flex flex-col text-sm  ${
-          isLoading ? 'z-10 hidden' : 'h-[100vh]'
+          isLoading ? 'z-10' : 'h-[100vh] z-50'
         } `}
       >
         <Header categoriesData={categoriesDataMemo} />
