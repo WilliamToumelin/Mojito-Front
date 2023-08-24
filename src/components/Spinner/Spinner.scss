@@ -1,25 +1,103 @@
-.spinner {
-  background-color: dimgray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  p {
-    animation: slider 2s;
-    color: violet;
-    font-size: xx-large;
-    font-weight: bolder;
-    font-style: italic;
-    width: 30vw;
-    height: 15vh;
-  }
-  @keyframes slider {
-    from {
-      opacity: 0;
-    }
-  }
-  to {
+body {
+  overflow: hidden;
+}
+
+.view {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: skew(-5deg);
+}
+
+.left,
+.right {
+  bottom: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+
+.left {
+  left: -5%;
+  right: 50%;
+}
+
+.divider {
+  background-color: white;
+  border-left: solid 2px white;
+  border-right: solid 2px white;
+  bottom: -5%;
+  left: 49.5%;
+  position: absolute;
+  right: 49.5%;
+  top: -5%;
+  z-index: 1;
+}
+
+.right {
+  left: 50%;
+  right: -5%;
+}
+
+.image1,
+.image2 {
+  background-color: white;
+  bottom: -5%;
+  left: -5%;
+  position: absolute;
+  right: -5%;
+  top: -5%;
+  transform: skew(5deg);
+  animation-duration: 6s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+}
+
+.image1 {
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/71829/sun.jpg);
+  background-position: center center;
+  background-size: cover;
+  animation-name: fadeImage1;
+  background-color: white;
+}
+
+.image2 {
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/71829/moon.jpg);
+  background-position: center center;
+  background-size: cover;
+  animation-name: fadeImage2;
+  background-color: white;
+}
+
+@keyframes fadeImage1 {
+  0%,
+  100% {
     opacity: 1;
   }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeImage2 {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animation-done .image1,
+.animation-done .image2 {
+  animation: none;
+  opacity: 0;
+  background-color: white;
+}
+
+.animation-done .view {
+  background-color: white;
 }

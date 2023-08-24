@@ -31,18 +31,21 @@ type Cocktails = {
 
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [firstTime, setFirstTime] = useState<boolean>(true);
   const [categoriesData, setCategoriesData] = useState<Category[]>([]);
   const [cocktailList, setCocktailList] = useState<Cocktails[]>([]);
-  const { pathname: url } = useLocation();
+
+  const location = useLocation();
+
+  const homepage = location.pathname === '/';
 
   useEffect(() => {
     setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 4000);
-  }, [url]);
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0 });
-  }, []);
+    setTimeout(() => {
+      setIsLoading(true);
+    }, 5000);
+    setFirstTime(false);
+  }, [firstTime, homepage]);
 
   useEffect(() => {
     fetch('https://oblog-react.vercel.app/api/categories')
@@ -68,34 +71,41 @@ export default function App() {
   console.log(cocktailListMemo);
 
   return (
-    <div className="app flex flex-col text-sm h-[100vh]">
-      <Header categoriesData={categoriesDataMemo} />
-      <Routes>
-        <Route path="/" element={<Home cocktailList={cocktailListMemo} />} />
-        <Route
-          path="/:categoryName?"
-          element={
-            <CocktailByCat
-              categoriesData={categoriesDataMemo}
-              cocktailList={cocktailListMemo}
-            />
-          }
-        />
-        <Route
-          path="/cocktail/:slug"
-          element={<CocktailById cocktailList={cocktailListMemo} />}
-        />
-        <Route path="/a-propos-de-nous" element={<AboutUs />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/mentions-legales" element={<LegalMentions />} />
-        <Route path="/proposition-cocktail" element={<CocktailSubmit />} />
-        <Route
-          path="/cocktail/:slug/commentaires"
-          element={<Reviews cocktailList={cocktailListMemo} modulo />}
-        />
-        <Route path="/page403" element={<Page403 />} />
-      </Routes>
-      <Footer />
-    </div>
+    <>
+      <Spinner isLoading={isLoading} />
+      <div
+        className={`app flex flex-col text-sm  ${
+          isLoading ? 'z-10 hidden' : 'h-[100vh]'
+        } `}
+      >
+        <Header categoriesData={categoriesDataMemo} />
+        <Routes>
+          <Route path="/" element={<Home cocktailList={cocktailListMemo} />} />
+          <Route
+            path="/:categoryName?"
+            element={
+              <CocktailByCat
+                categoriesData={categoriesDataMemo}
+                cocktailList={cocktailListMemo}
+              />
+            }
+          />
+          <Route
+            path="/cocktail/:slug"
+            element={<CocktailById cocktailList={cocktailListMemo} />}
+          />
+          <Route path="/a-propos-de-nous" element={<AboutUs />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/mentions-legales" element={<LegalMentions />} />
+          <Route path="/proposition-cocktail" element={<CocktailSubmit />} />
+          <Route
+            path="/cocktail/:slug/commentaires"
+            element={<Reviews cocktailList={cocktailListMemo} modulo />}
+          />
+          <Route path="/page403" element={<Page403 />} />
+        </Routes>
+        <Footer />
+      </div>
+    </>
   );
 }
