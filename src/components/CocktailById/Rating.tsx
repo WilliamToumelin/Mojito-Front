@@ -5,35 +5,33 @@ import { FaCocktail } from 'react-icons/fa';
 
 const Rating = () => {
   const [rating, setRating] = useState(0);
-  const [hoveredIndex, setHoveredIndex] = useState(-1);
+  const [index, setIndex] = useState(-1);
 
-  const handleIconMouseOver = (index: number) => {
+  const handleIconMouseOver = (i: number) => {
     if (rating === 0) {
-      setHoveredIndex(index);
+      setIndex(i);
     }
   };
 
   const handleIconMouseLeave = () => {
-    setHoveredIndex(-1);
+    setIndex(-1);
   };
-  const handleIconClick = (index: number) => {
-    setRating(index);
-    setHoveredIndex(-1); // Désactive le survol après le clic
+  const handleIconClick = (i: number) => {
+    setRating(i);
+    setIndex(-1); // Désactive le survol après le clic
   };
 
   return (
     <div className="flex">
-      {[1, 2, 3, 4, 5].map((index) => (
+      {[1, 2, 3, 4, 5].map((i) => (
         <span
-          key={index}
-          onClick={() => handleIconClick(index)}
-          onMouseOver={() => handleIconMouseOver(index)}
-          onFocus={() => handleIconMouseOver(index)}
+          key={i}
+          onClick={() => handleIconClick(i)}
+          onMouseOver={() => handleIconMouseOver(i)}
+          onFocus={() => handleIconMouseOver(i)}
           onMouseLeave={handleIconMouseLeave}
           className={`text-3xl p-1 ${
-            index <= rating || index <= hoveredIndex
-              ? 'text-yellow-400'
-              : 'text-gray-300'
+            i <= rating || i <= index ? 'text-yellow-400' : 'text-gray-300'
           }`}
         >
           <span className="">

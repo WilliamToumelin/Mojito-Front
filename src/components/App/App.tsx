@@ -45,14 +45,14 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    fetch('https://oblog-react.vercel.app/api/categories')
+    fetch('http://localhost:5174/api/categories')
       .then((response) => response.json())
       .then((data: Category[]) => {
         setCategoriesData(data);
       })
       .catch((err) => console.error(err));
 
-    fetch('https://oblog-react.vercel.app/api/posts')
+    fetch('http://localhost:5174/api/cocktails')
       .then((response) => response.json())
       .then((data: Cocktails[]) => {
         setCocktailList(data);
