@@ -45,13 +45,19 @@ const CocktailById: React.FC<Props> = ({ cocktailList }) => {
               <span className="w-2 h-2 mx-1.5 bg-white rounded-full" />
               <Link to={`/cocktail/${cocktailItem.slug}/commentaires`}>
                 <div className="ml-1 text-lg">
-                  {cocktailItem.comments.content}
+                  {cocktailItem.comments.length}{' '}
+                  {cocktailItem.comments.length < 2
+                    ? 'commentaire'
+                    : 'commentaires'}
                 </div>
               </Link>
             </div>
             <div className="pt-6 text-3xl flex items-center">
               <BsClockFill className="" />
-              <div className="pl-3">{cocktailItem.preparation_time}</div>
+              <div className="pl-3">
+                {cocktailItem.preparation_time}{' '}
+                {cocktailItem.preparation_time < 2 ? 'minute' : 'minutes'}
+              </div>
             </div>
             <div>
               <h3 className="text-2xl pb-3">Méthode</h3>

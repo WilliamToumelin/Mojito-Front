@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { FaCocktail } from 'react-icons/fa';
 
+import './Rating.scss';
+
 const Rating = () => {
   const [rating, setRating] = useState(0);
   const [index, setIndex] = useState(-1);
@@ -16,9 +18,16 @@ const Rating = () => {
   const handleIconMouseLeave = () => {
     setIndex(-1);
   };
-  const handleIconClick = (i: number) => {
+  const handleIconClick = (
+    i: number,
+    event: React.MouseEvent<HTMLSpanElement>
+  ) => {
     setRating(i);
-    setIndex(-1); // Désactive le survol après le clic
+    event.currentTarget.classList.add('bounce');
+    setTimeout(() => {
+      event.currentTarget.classList.remove('bounce');
+    }, 750);
+    setIndex(-1);
   };
 
   return (
@@ -26,7 +35,7 @@ const Rating = () => {
       {[1, 2, 3, 4, 5].map((i) => (
         <span
           key={i}
-          onClick={() => handleIconClick(i)}
+          onClick={(event) => handleIconClick(i, event)}
           onMouseOver={() => handleIconMouseOver(i)}
           onFocus={() => handleIconMouseOver(i)}
           onMouseLeave={handleIconMouseLeave}
