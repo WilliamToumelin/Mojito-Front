@@ -20,7 +20,6 @@ const CocktailSubmit: React.FC = () => {
   const [selectedGlasses, setSelectedGlasses] = useState<string[]>([]);
   const [selectedIces, setSelectedIces] = useState<string[]>([]);
   const [selectedTechnicals, setSelectedTechnicals] = useState<string[]>([]);
-  const [selectedUnits, setSelectedUnits] = useState<string[]>([]);
 
   const [alcohol, setAlcohol] = useState<string>('');
   const [soft, setSoft] = useState<string>('');
@@ -28,7 +27,6 @@ const CocktailSubmit: React.FC = () => {
   const [glass, setGlass] = useState<string>('');
   const [ice, setIce] = useState<string>('');
   const [technicals, setTechnicals] = useState<string>('');
-  const [unit, setUnit] = useState<string>('');
 
   const [alcoholAmount, setAlcoholAmount] = useState<number>(1);
   const [softAmount, setSoftAmount] = useState<number>(1);
@@ -78,14 +76,6 @@ const CocktailSubmit: React.FC = () => {
       .then((data: Glasses[]) => {
         const glassNames = data.map((glassItem) => glassItem.name);
         setSelectedGlasses(glassNames);
-      })
-      .catch((err) => console.error(err));
-
-    fetch('http://localhost:5174/api/units')
-      .then((response) => response.json())
-      .then((data: Units[]) => {
-        const unitNames = data.map((unitItem) => unitItem.name);
-        setSelectedUnits(unitNames);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -142,7 +132,6 @@ const CocktailSubmit: React.FC = () => {
       glass,
       ice,
       technicals,
-      unit,
       description,
     };
 
