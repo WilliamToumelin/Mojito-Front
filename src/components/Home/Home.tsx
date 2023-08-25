@@ -23,9 +23,11 @@ const Home: React.FC<Props> = ({ cocktailList }) => {
     setDisplayMode((prevToggle) => !prevToggle);
   };
 
-  const cocktailTop5 = useMemo(() => {
-    return cocktailList.filter((cocktail5) => cocktail5.rating > 3.8);
+  const cocktailsData = useMemo(() => {
+    return cocktailList.slice().sort((a, b) => b.rating - a.rating);
   }, [cocktailList]);
+
+  const cocktailTop5 = cocktailsData.slice(0, 5);
 
   console.log(cocktailTop5);
   console.log(cocktailList);
