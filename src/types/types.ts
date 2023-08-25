@@ -56,6 +56,7 @@ export type Ingredients = {
   id: number;
   name: string;
   ingredients: {
+    map: any;
     id: number;
     name: string;
   };

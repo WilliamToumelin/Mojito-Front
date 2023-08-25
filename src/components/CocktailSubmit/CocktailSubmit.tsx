@@ -36,11 +36,24 @@ const CocktailSubmit: React.FC = () => {
   const [description, setDescription] = useState<string>('');
 
   useEffect(() => {
+    const ingredientsByCategory: {
+      categoryName: string;
+      ingredients: string[];
+    }[] = [];
     fetch('http://localhost:5174/api/typeingredients/ingredients')
       .then((response) => response.json())
       .then((data: Ingredients[]) => {
-        const ingredientNames = data.map((ingredient) => ingredient.name);
-        setIngredientsList(ingredientNames);
+        data.forEach((item) => {
+          const categoryName = item.name;
+          const categoryIngredients = item.ingredients.map(
+            (ingredient: { name: string }) => ingredient.name
+          );
+          ingredientsByCategory.push({
+            categoryName,
+            ingredients: categoryIngredients,
+          });
+        });
+        console.log(ingredientsByCategory);
       })
       .catch((err) => console.error(err));
 
@@ -134,7 +147,7 @@ const CocktailSubmit: React.FC = () => {
     };
 
     try {
-      const response = await fetch('YOUR_SYMFONY_API_URL', {
+      const response = await fetch('API post', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -143,10 +156,8 @@ const CocktailSubmit: React.FC = () => {
       });
 
       if (response.ok) {
-        // Handle success, e.g., show a success message
         console.log('Cocktail submitted successfully!');
       } else {
-        // Handle error, e.g., show an error message
         console.error('Failed to submit cocktail.');
       }
     } catch (error) {
@@ -180,14 +191,14 @@ const CocktailSubmit: React.FC = () => {
               setAmount={setSoftAmount}
               handleAdd={handleSoftAdd}
             />
-            <ListAdd
+            {/* <ListAdd
               title="Aromates"
               itemsList={selectedAromatics}
               itemValue={aromatic}
               setItemValue={setAromatic}
               handleAdd={handleAromaticAdd}
               amount={0}
-              setAmount={function (value: React.SetStateAction<number>): void {
+              setAmount={function (): void {
                 throw new Error('Function not implemented.');
               }}
             />
@@ -203,8 +214,8 @@ const CocktailSubmit: React.FC = () => {
               handleAdd={function (): void {
                 throw new Error('Function not implemented.');
               }}
-            />
-            <div className="mb-4">
+            /> */}
+            {/* <div className="mb-4">
               <h3 className="text-lg font-medium mb-4">Technique</h3>
               <div className="flex items-center gap-4">
                 {technicals.map((technicalsOption, index) => (
@@ -231,7 +242,7 @@ const CocktailSubmit: React.FC = () => {
                   </label>
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className="flex w-2/5 h-full">
