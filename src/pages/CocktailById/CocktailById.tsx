@@ -7,7 +7,7 @@ import { FaGlassMartiniAlt } from 'react-icons/fa';
 import { FiChevronRight } from 'react-icons/fi';
 import { BsClockFill } from 'react-icons/bs';
 import Rating from './Rating';
-import Page404 from '../Error/Page404';
+import Page404 from '../../components/Error/Page404';
 import { Cocktails } from '../../types/types';
 
 type Props = {

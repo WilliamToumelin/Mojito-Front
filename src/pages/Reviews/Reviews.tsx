@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import Page404 from '../Error/Page404';
-import CommentModal from '../Modals/CommentModal';
+import Page404 from '../../components/Error/Page404';
+import CommentModal from '../../components/Modals/CommentModal';
 import { Cocktails } from '../../types/types';
 
 type Props = {

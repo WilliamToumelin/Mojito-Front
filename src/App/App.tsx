@@ -2,19 +2,19 @@
 /* eslint-disable no-console */
 import { useEffect, useMemo, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import Header from '../Header/Header';
-import Home from '../Home/Home';
-import CocktailByCat from '../CocktailByCat/CocktailByCat';
-import CocktailById from '../CocktailById/CocktailById';
-import Register from '../Register/Register';
-import CocktailSubmit from '../CocktailSubmit/CocktailSubmit';
+import Header from '../components/Header/Header';
+import Home from '../pages/Home/Home';
+import CocktailByCat from '../components/CocktailByCat/CocktailByCat';
+import CocktailById from '../pages/CocktailById/CocktailById';
+import Register from '../pages/Register/Register';
+import CocktailSubmit from '../pages/CocktailSubmit/CocktailSubmit';
 // import Spinner from '../Spinner/Spinner';
-import Footer from '../Footer/Footer';
-import AboutUs from '../AboutUs/AboutUs';
-import Reviews from '../Reviews/Reviews';
-import LegalMentions from '../LegalMentions/LegalMentions';
-import { Category, Cocktails } from '../../types/types';
-import Page404 from '../Error/Page404';
+import Footer from '../components/Footer/Footer';
+import AboutUs from '../pages/AboutUs/AboutUs';
+import Reviews from '../pages/Reviews/Reviews';
+import LegalMentions from '../pages/LegalMentions/LegalMentions';
+import { Category, Cocktails } from '../types/types';
+import Page404 from '../components/Error/Page404';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
