@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FaCocktail } from 'react-icons/fa';
+import { GiIceCube } from 'react-icons/gi';
+import { GoDotFill } from 'react-icons/go';
+import { FaGlassMartiniAlt } from 'react-icons/fa';
 import { FiChevronRight } from 'react-icons/fi';
 import { BsClockFill } from 'react-icons/bs';
 import Rating from './Rating';
@@ -33,7 +36,7 @@ const CocktailById: React.FC<Props> = ({ cocktailList }) => {
               />
             </div>
           </div>
-          <div className="w-3/5 flex-1 overflow-y-auto p-12 text-white space-y-12">
+          <div className="w-3/5 flex-1 overflow-y-auto p-12 text-white space-y-7">
             <h2 className=" text-3xl font-semibold">{cocktailItem.name}</h2>
             <div className="flex items-center text-2xl">
               <div className=" text-yellow-400 mr-1">
@@ -52,35 +55,51 @@ const CocktailById: React.FC<Props> = ({ cocktailList }) => {
                 </div>
               </Link>
             </div>
-            <div className="pt-6 text-3xl flex items-center">
+            <div className=" text-3xl flex items-center">
               <BsClockFill className="" />
               <div className="pl-3">
                 {cocktailItem.preparation_time}{' '}
                 {cocktailItem.preparation_time < 2 ? 'minute' : 'minutes'}
               </div>
             </div>
+            <div className=" text-3xl flex items-center">
+              <FaGlassMartiniAlt className="" />
+              <div className="pl-3">{cocktailItem.glass.name}</div>
+            </div>
+            <div className=" text-3xl flex items-center">
+              <GiIceCube className="" />
+              <div className="pl-3">{cocktailItem.ice.name}</div>
+            </div>
+            <div className=" text-3xl flex items-center">
+              <p>Technique: </p>
+              <div className="pl-3">{cocktailItem.technical.name}</div>
+            </div>
             <div>
-              <h3 className="text-2xl pb-3">Méthode</h3>
+              <h3 className="text-3xl pb-3 ">Ingredients</h3>
               <ul className="text-xl space-y-1">
                 {cocktailItem.cocktailUses.map((use, index) => (
-                  <li key={index} className="flex items-center">
+                  <li key={index} className="flex items-center ">
                     <FiChevronRight /> {use.ingredient.name} {use.quantity}{' '}
                     {use.unit.name}
                   </li>
                 ))}
               </ul>
             </div>
+
             <div className="text-base">
-              <ul className="">
+              <h3 className="text-3xl pb-3">Etapes :</h3>
+              <ul className="text-xl space-y-1">
                 {cocktailItem.steps.map((step, index) => (
-                  <li key={index} className="flex items-center">
-                    <FiChevronRight /> {step.content}
+                  <li key={index} className="flex items-center ">
+                    - {step.content}
                   </li>
                 ))}
               </ul>
             </div>
-            <h3 className="text-base">Nos astuces :</h3>
-            <p>{cocktailItem.description}</p>
+            <h3 className="text-3xl">Description du cocktail :</h3>
+            <p className="text-xl space-y-1">{cocktailItem.description}</p>
+            <h3 className="text-3xl">Nos astuces :</h3>
+            <p className="text-xl space-y-1">{cocktailItem.trick}</p>
             <div className="text-base items-center">
               <p className="pb-6 text-center">Donnez votre avis !</p>
               <div className="text-base flex items-center gap-8 justify-center">

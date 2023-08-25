@@ -33,6 +33,7 @@ export type Cocktails = {
   ice: { id: number; name: string };
   technical: { id: number; name: string };
   comments: {
+    length: number;
     map(
       arg0: (
         comment: Cocktails & {
@@ -40,6 +41,7 @@ export type Cocktails = {
             id: number;
             content: string;
             posted_at: string;
+            length: number;
             user: { id: number; pseudonym: string };
           }[];
         }
