@@ -1,19 +1,26 @@
 /* eslint-disable no-console */
-/* eslint-disable no-nested-ternary */
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { BsTrophy } from 'react-icons/bs';
 import { CgInfinity } from 'react-icons/cg';
-import { Link } from 'react-router-dom';
-import Article from '../Article/Article';
 import { Cocktails } from '../../types/types';
+import ItemCocktail from '../../components/common/ItemCocktail/ItemCocktail';
 
-type Props = {
-  cocktailList: Cocktails[];
-};
+const Home: React.FC = () => {
+  const { categoryId } = useParams<{ categoryId: string }>();
 
-const Home: React.FC<Props> = ({ cocktailList }) => {
+  const [cocktailList, setCocktailList] = useState<Cocktails[]>([]);
   const [displayMode, setDisplayMode] = useState(true);
   const [animate, setAnimate] = useState(true);
+
+  useEffect(() => {
+    fetch('http://localhost:5174/api/cocktails')
+      .then((response) => response.json())
+      .then((data: Cocktails[]) => {
+        setCocktailList(data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   useEffect(() => {
     setAnimate(false);
@@ -29,8 +36,15 @@ const Home: React.FC<Props> = ({ cocktailList }) => {
 
   const cocktailTop5 = cocktailsData.slice(0, 5);
 
-  console.log(cocktailTop5);
-  console.log(cocktailList);
+  const filteredCocktails = useMemo(() => {
+    if (categoryId) {
+      const categoryIdNumber = parseInt(categoryId, 10); // Convertir categoryId en nombre
+      return cocktailList.filter((cocktail) =>
+        cocktail.categories.some((category) => category.id === categoryIdNumber)
+      );
+    }
+    return cocktailList;
+  }, [cocktailList, categoryId]);
 
   return (
     <div className="bg-black flex justify-center items-center flex-1 h-[75vh]">
@@ -56,7 +70,7 @@ const Home: React.FC<Props> = ({ cocktailList }) => {
             {displayMode
               ? cocktailTop5.map((cocktail, index) => (
                   <Link key={index} to={`/cocktail/${cocktail.slug}`}>
-                    <Article
+                    <ItemCocktail
                       key={index}
                       cocktail={cocktail}
                       animate={animate}
@@ -64,9 +78,9 @@ const Home: React.FC<Props> = ({ cocktailList }) => {
                     />
                   </Link>
                 ))
-              : cocktailList.map((cocktail, index) => (
+              : filteredCocktails.map((cocktail, index) => (
                   <Link key={index} to={`/cocktail/${cocktail.slug}`}>
-                    <Article
+                    <ItemCocktail
                       key={index}
                       cocktail={cocktail}
                       animate={animate}

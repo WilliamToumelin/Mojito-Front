@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { FaCocktail } from 'react-icons/fa';
+import { FaCocktail, FaGlassMartiniAlt } from 'react-icons/fa';
 import { GiIceCube } from 'react-icons/gi';
 import { GoDotFill } from 'react-icons/go';
-import { FaGlassMartiniAlt } from 'react-icons/fa';
 import { FiChevronRight } from 'react-icons/fi';
 import { BsClockFill } from 'react-icons/bs';
 import Rating from './Rating';
-import Page404 from '../Error/Page404';
+import Page404 from '../../components/Error/Page404';
 import { Cocktails } from '../../types/types';
 
 type Props = {
