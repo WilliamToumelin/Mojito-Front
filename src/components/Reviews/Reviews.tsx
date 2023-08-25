@@ -8,6 +8,16 @@ type Props = {
   cocktailList: Cocktails[];
 };
 
+function formatDate(data: any) {
+  const date = new Date(data);
+  const options = {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  };
+  return date.toLocaleDateString('fr-FR', options);
+}
+
 const Reviews: React.FC<Props> = ({ cocktailList }) => {
   const { slug } = useParams<{ slug: string }>();
 
@@ -68,7 +78,7 @@ const Reviews: React.FC<Props> = ({ cocktailList }) => {
                       {comment.user.pseudonym}
                     </cite>
                     <cite className="pl-3 text-sm text-gray-500 dark:text-gray-400">
-                      {comment.posted_at}
+                      {formatDate(comment.posted_at)}
                     </cite>
                   </div>
                 </figcaption>
