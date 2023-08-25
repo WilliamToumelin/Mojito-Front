@@ -13,8 +13,8 @@ import Footer from '../Footer/Footer';
 import AboutUs from '../AboutUs/AboutUs';
 import Reviews from '../Reviews/Reviews';
 import LegalMentions from '../LegalMentions/LegalMentions';
-import Page403 from '../Error/Page403';
 import { Category, Cocktails } from '../../types/types';
+import Page404 from '../Error/Page404';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -26,10 +26,6 @@ export default function App() {
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 4000);
   }, [url]);
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0 });
-  }, []);
 
   useEffect(() => {
     fetch('http://localhost:5174/api/categories')
@@ -80,7 +76,7 @@ export default function App() {
           path="/cocktail/:slug/commentaires"
           element={<Reviews cocktailList={cocktailListMemo} />}
         />
-        <Route path="/page403" element={<Page403 />} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
       <Footer />
     </div>

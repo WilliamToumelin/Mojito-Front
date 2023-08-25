@@ -51,7 +51,7 @@ const Header: React.FC<Props> = ({ categoriesData }) => {
           width="90"
           height="90"
           src="https://img.icons8.com/external-icongeek26-outline-gradient-icongeek26/64/external-cocktail-party-icongeek26-outline-gradient-icongeek26.png"
-          alt="external-cocktail-party-icongeek26-outline-gradient-icongeek26"
+          alt="home"
         />
       </NavLink>
       {/* <nav className="flex justify-center gap-20 no-underline text-white delay-30">
