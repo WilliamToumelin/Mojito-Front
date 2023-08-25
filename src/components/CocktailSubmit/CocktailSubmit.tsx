@@ -1,27 +1,81 @@
 /* eslint-disable no-console */
-import React, { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState } from 'react';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import ItemRemove from './ItemRemove';
-import ItemAdd from './ItemAdd';
+import ListAdd from './ListAdd';
+import {
+  Ingredients,
+  Technicals,
+  Ices,
+  Glasses,
+  Units,
+} from '../../types/types';
 
 const CocktailSubmit: React.FC = () => {
+  const [ingredientsList, setIngredientsList] = useState<string[]>([]);
   const [selectedAlcohols, setSelectedAlcohols] = useState<string[]>([]);
   const [selectedSofts, setSelectedSofts] = useState<string[]>([]);
   const [selectedAromatics, setSelectedAromatics] = useState<string[]>([]);
+  const [selectedGlasses, setSelectedGlasses] = useState<string[]>([]);
+  const [selectedIces, setSelectedIces] = useState<string[]>([]);
+  const [selectedTechnicals, setSelectedTechnicals] = useState<string[]>([]);
+  const [selectedUnits, setSelectedUnits] = useState<string[]>([]);
 
   const [alcohol, setAlcohol] = useState<string>('');
   const [soft, setSoft] = useState<string>('');
   const [aromatic, setAromatic] = useState<string>('');
-  const [technique, setTechnique] = useState<string>('');
+  const [glass, setGlass] = useState<string>('');
+  const [ice, setIce] = useState<string>('');
+  const [technicals, setTechnicals] = useState<string>('');
+  const [unit, setUnit] = useState<string>('');
 
   const [alcoholAmount, setAlcoholAmount] = useState<number>(1);
   const [softAmount, setSoftAmount] = useState<number>(1);
+
   const [description, setDescription] = useState<string>('');
 
-  const alcoholsList = ['Rhum', 'Whisky', 'Gin'];
-  const softsList = ['Coca', 'Tonic', "Jus d'orange"];
-  const aromaticsList = ['Basilic', 'Menthe', 'Poivre', 'Thym'];
-  const techniqueList = ['Shaker', 'Cuillère', 'Assemblage'];
+  useEffect(() => {
+    fetch('http://localhost:5174/api/typeingredients/ingredients')
+      .then((response) => response.json())
+      .then((data: Ingredients[]) => {
+        const ingredientNames = data.map((ingredient) => ingredient.name);
+        setIngredientsList(ingredientNames);
+      })
+      .catch((err) => console.error(err));
+
+    fetch('http://localhost:5174/api/technicals')
+      .then((response) => response.json())
+      .then((data: Technicals[]) => {
+        const technicalNames = data.map((technical) => technical.name);
+        setSelectedTechnicals(technicalNames);
+      })
+      .catch((err) => console.error(err));
+
+    fetch('http://localhost:5174/api/ices')
+      .then((response) => response.json())
+      .then((data: Ices[]) => {
+        const iceNames = data.map((iceItem) => iceItem.name);
+        setSelectedIces(iceNames);
+      })
+      .catch((err) => console.error(err));
+
+    fetch('http://localhost:5174/api/glass')
+      .then((response) => response.json())
+      .then((data: Glasses[]) => {
+        const glassNames = data.map((glassItem) => glassItem.name);
+        setSelectedGlasses(glassNames);
+      })
+      .catch((err) => console.error(err));
+
+    fetch('http://localhost:5174/api/units')
+      .then((response) => response.json())
+      .then((data: Units[]) => {
+        const unitNames = data.map((unitItem) => unitItem.name);
+        setSelectedUnits(unitNames);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   const handleAlcoholAdd = () => {
     if (alcohol && alcoholAmount > 0) {
@@ -30,7 +84,7 @@ const CocktailSubmit: React.FC = () => {
         `${alcohol} (${alcoholAmount} cl)`,
       ]);
       setAlcohol('');
-      setAlcoholAmount(0);
+      setAlcoholAmount(1);
     }
   };
 
@@ -38,7 +92,7 @@ const CocktailSubmit: React.FC = () => {
     if (soft && softAmount > 0) {
       setSelectedSofts([...selectedSofts, `${soft} (${softAmount} cl)`]);
       setSoft('');
-      setSoftAmount(0);
+      setSoftAmount(1);
     }
   };
 
@@ -71,6 +125,11 @@ const CocktailSubmit: React.FC = () => {
     const cocktailSubmitData = {
       alcohols: selectedAlcohols,
       softs: selectedSofts,
+      aromatics: selectedAromatics,
+      glass,
+      ice,
+      technicals,
+      unit,
       description,
     };
 
@@ -103,55 +162,70 @@ const CocktailSubmit: React.FC = () => {
         </h2>
         <div className="py-6 px-12 flex">
           <div className="inline-block w-3/5 pr-4">
-            <ItemAdd
+            <ListAdd
               title="Alcools"
-              itemsList={alcoholsList}
+              itemsList={ingredientsList}
               itemValue={alcohol}
               setItemValue={setAlcohol}
               amount={alcoholAmount}
               setAmount={setAlcoholAmount}
               handleAdd={handleAlcoholAdd}
             />
-            <ItemAdd
+            <ListAdd
               title="Softs"
-              itemsList={softsList}
+              itemsList={selectedSofts}
               itemValue={soft}
               setItemValue={setSoft}
               amount={softAmount}
               setAmount={setSoftAmount}
               handleAdd={handleSoftAdd}
             />
-            <ItemAdd
+            <ListAdd
               title="Aromates"
-              itemsList={aromaticsList}
+              itemsList={selectedAromatics}
               itemValue={aromatic}
               setItemValue={setAromatic}
-              amount={0}
-              setAmount={() => {}}
               handleAdd={handleAromaticAdd}
+              amount={0}
+              setAmount={function (value: React.SetStateAction<number>): void {
+                throw new Error('Function not implemented.');
+              }}
+            />
+            <ListAdd
+              title="Verre"
+              itemsList={selectedGlasses}
+              itemValue={glass}
+              setItemValue={setGlass}
+              amount={0}
+              setAmount={function (): void {
+                throw new Error('Function not implemented.');
+              }}
+              handleAdd={function (): void {
+                throw new Error('Function not implemented.');
+              }}
             />
             <div className="mb-4">
               <h3 className="text-lg font-medium mb-4">Technique</h3>
               <div className="flex items-center gap-4">
-                {techniqueList.map((techniqueOption, index) => (
+                {technicals.map((technicalsOption, index) => (
                   <label key={index} className="flex items-center">
-                    <span className="mr-3">{techniqueOption}</span>
+                    <span className="mr-3">{technicalsOption}</span>
                     <div
                       className={`w-8 h-8 rounded-full border-gray-400 border-4 flex items-center justify-center ${
-                        technique === techniqueOption
+                        technicals === technicalsOption
                           ? 'bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 text-black border-none'
                           : ''
                       }`}
                     >
-                      {technique === techniqueOption && (
+                      {technicals === technicalsOption && (
                         <BsFillCheckCircleFill size={24} />
                       )}
                     </div>
                     <input
                       type="radio"
-                      value={techniqueOption}
-                      checked={technique === techniqueOption}
-                      onChange={(e) => setTechnique(e.target.value)}
+                      value={technicalsOption}
+                      checked={technicals === technicalsOption}
+                      onChange={(e) => setTechnicals(e.target.value)}
                       className="sr-only"
                     />
                   </label>

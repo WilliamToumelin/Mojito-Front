@@ -51,3 +51,31 @@ export type Cocktails = {
     user: { id: number; pseudonym: string };
   };
 };
+
+export type Ingredients = {
+  id: number;
+  name: string;
+  ingredients: {
+    id: number;
+    name: string;
+  };
+};
+
+export type Technicals = {
+  id: number;
+  name: string;
+};
+
+export type Ices = {
+  id: number;
+  name: string;
+};
+
+export type Glasses = {
+  id: number;
+  name: string;
+};
+export type Units = {
+  id: number;
+  name: string;
+};

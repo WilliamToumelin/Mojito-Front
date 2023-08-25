@@ -28,10 +28,6 @@ export default function App() {
   }, [url]);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0 });
-  }, []);
-
-  useEffect(() => {
     fetch('http://localhost:5174/api/categories')
       .then((response) => response.json())
       .then((data: Category[]) => {

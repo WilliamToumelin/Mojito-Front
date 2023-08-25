@@ -13,7 +13,7 @@ type Props = {
   handleAdd: () => void;
 };
 
-const ItemAdd: React.FC<Props> = ({
+const ListAdd: React.FC<Props> = ({
   title,
   itemsList,
   itemValue,
@@ -50,7 +50,7 @@ const ItemAdd: React.FC<Props> = ({
           </select>
           <div
             className={`flex p-1 pl-4 w-32 text-white text-3xl ${
-              title === 'Aromates' ? 'opacity-0' : ''
+              title === 'Aromates' || title === 'Verre' ? 'opacity-0' : ''
             }`}
           >
             <div className="flex items-center space-x-4">
@@ -78,4 +78,4 @@ const ItemAdd: React.FC<Props> = ({
   );
 };
 
-export default ItemAdd;
+export default ListAdd;
