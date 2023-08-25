@@ -4,8 +4,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Home from '../pages/Home/Home';
-import CocktailByCat from '../components/CocktailByCat/CocktailByCat';
-import CocktailById from '../pages/CocktailById/CocktailById';
+import CocktailsByCategories from '../pages/CocktailsByCategory/CocktailsByCategory';
+import CocktailById from '../pages/Cocktail/Cocktail';
 import Register from '../pages/Register/Register';
 import CocktailSubmit from '../pages/CocktailSubmit/CocktailSubmit';
 // import Spinner from '../Spinner/Spinner';
@@ -58,7 +58,7 @@ export default function App() {
         <Route
           path="/:categoryName?"
           element={
-            <CocktailByCat
+            <CocktailsByCategories
               categoriesData={categoriesDataMemo}
               cocktailList={cocktailListMemo}
             />

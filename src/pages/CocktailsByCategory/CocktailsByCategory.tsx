@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
-import SideBar from '../SideBar/SideBar';
-import Page404 from '../Error/Page404';
-import Article from '../Article/Article';
+import SideBar from '../../components/SideBar/SideBar';
+import Page404 from '../../components/Error/Page404';
+import Article from '../../components/CocktailItem/CocktailItem';
 import { Category, Cocktails } from '../../types/types';
 
 type Props = {
@@ -10,7 +10,10 @@ type Props = {
   cocktailList: Cocktails[];
 };
 
-const CocktailByCat: React.FC<Props> = ({ categoriesData, cocktailList }) => {
+const CocktailsByCategory: React.FC<Props> = ({
+  categoriesData,
+  cocktailList,
+}) => {
   const { categoryName } = useParams<{ categoryName: string }>();
   const [animate, setAnimate] = useState(true);
   const url = useLocation();
@@ -59,4 +62,4 @@ const CocktailByCat: React.FC<Props> = ({ categoriesData, cocktailList }) => {
   );
 };
 
-export default CocktailByCat;
+export default CocktailsByCategory;

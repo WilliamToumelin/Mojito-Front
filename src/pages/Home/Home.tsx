@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { BsTrophy } from 'react-icons/bs';
 import { CgInfinity } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
-import Article from '../../components/Article/Article';
+import Article from '../../components/CocktailItem/CocktailItem';
 import { Cocktails } from '../../types/types';
 
 type Props = {

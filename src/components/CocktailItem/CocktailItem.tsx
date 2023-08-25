@@ -2,15 +2,19 @@
 import React from 'react';
 import { FaCocktail } from 'react-icons/fa';
 import { Cocktails } from '../../types/types';
-import './Article.scss';
+import './CocktailItem.scss';
 
-type ArticleProps = {
+type CocktailItemProps = {
   cocktail: Cocktails;
   animate: boolean;
   modulo: boolean;
 };
 
-const Article: React.FC<ArticleProps> = ({ cocktail, animate, modulo }) => {
+const CocktailItem: React.FC<CocktailItemProps> = ({
+  cocktail,
+  animate,
+  modulo,
+}) => {
   const difficultyBar = (difficulty: number) => {
     if (difficulty <= 1) {
       return 'w-1/5 bg-green-600';
@@ -80,4 +84,4 @@ const Article: React.FC<ArticleProps> = ({ cocktail, animate, modulo }) => {
   );
 };
 
-export default Article;
+export default CocktailItem;
