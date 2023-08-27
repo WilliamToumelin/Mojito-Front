@@ -16,6 +16,7 @@ export default {
 
     "./src/components/Error/Page404.tsx",
     "./src/components/Header/Header.tsx",
+    "./src/components/CategorySelectBar/CategorySelectBar.tsx",
     "./src/components/Footer/Footer.tsx",
     "./src/components/SideBar/SideBar.tsx",
     "./src/components/CocktailItem/CocktailItem.tsx",

@@ -3,22 +3,21 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaCocktail, FaGlassMartiniAlt } from 'react-icons/fa';
 import { GiIceCube } from 'react-icons/gi';
-import { GoDotFill } from 'react-icons/go';
 import { FiChevronRight } from 'react-icons/fi';
 import { BsClockFill } from 'react-icons/bs';
 import Rating from './Rating';
-import Page404 from '../../components/Error/Page404';
 import { Cocktails } from '../../types/types';
 
-type Props = {
+interface CocktailProps {
   selectedCocktail: number | null;
-};
+}
 
-const Cocktail: React.FC<Props> = ({ selectedCocktail }) => {
-  const [cocktailById, setCocktailById] = useState<Cocktails>();
+const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
+  // const [cocktailById, setCocktailById] = useState<Cocktails>();
   const [cocktailList, setCocktailList] = useState<Cocktails[]>([]);
 
   useEffect(() => {
+    // fetch(`http://localhost:5174/api/cocktails/${cocktailId}`)
     fetch('http://localhost:5174/api/cocktails')
       .then((response) => response.json())
       .then((data: Cocktails[]) => {
@@ -28,13 +27,19 @@ const Cocktail: React.FC<Props> = ({ selectedCocktail }) => {
   }, []);
 
   const cocktailListMemo = useMemo(() => cocktailList, [cocktailList]);
+  console.log(cocktailListMemo);
 
   const cocktailItem = cocktailListMemo.find(
     (cocktail) => cocktail.id === selectedCocktail
   );
 
   if (!cocktailItem) {
-    return <Page404 />;
+    // TEMPORAIRE !!!!!! a rajouter un loader , parce pour l'instant il n'y a que une fenetre noir si pas de cocktail chargé encore ...
+    return (
+      <div className="bg-black flex justify-center items-center flex-1 h-[75vh]">
+        <div className="w-4/5 lg:w-3/5 h-4/5 flex rounded-2xl shadow-purple-700 shadow-2xl bg-black" />
+      </div>
+    );
   }
 
   return (

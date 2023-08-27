@@ -7,10 +7,9 @@ import { Cocktails } from '../../types/types';
 
 type Props = {
   filteredCocktails: Cocktails[];
-  currentCategory?: string | undefined;
 };
 
-const SideBar: React.FC<Props> = ({ filteredCocktails, currentCategory }) => {
+const SideBar: React.FC<Props> = ({ filteredCocktails }) => {
   const animeCocktail = () => {
     const random = () => {
       return anime.random(0, 0);
@@ -26,10 +25,10 @@ const SideBar: React.FC<Props> = ({ filteredCocktails, currentCategory }) => {
 
   useEffect(() => {
     animeCocktail();
-  }, [currentCategory]);
+  }, [filteredCocktails]);
 
   return (
-    <div className="absolute top-20 lg:block w-56 z-10 left-0">
+    <div className="absolute top-24 lg:block w-56 z-10 left-0">
       <div className="flex flex-col gap-1">
         {filteredCocktails.map((cocktail: Cocktails) => (
           <NavLink
@@ -47,10 +46,6 @@ const SideBar: React.FC<Props> = ({ filteredCocktails, currentCategory }) => {
       </div>
     </div>
   );
-};
-
-SideBar.defaultProps = {
-  currentCategory: undefined,
 };
 
 export default SideBar;
