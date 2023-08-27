@@ -13,8 +13,6 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
   const [categoriesData, setCategoriesData] = useState<Category[]>([]);
 
-  console.log(categoryId);
-
   useEffect(() => {
     fetch('http://localhost:5174/api/categories')
       .then((response) => response.json())
@@ -88,7 +86,6 @@ const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
       <div className="absolute top-2 right-2 pt-6 pl-6">
         <ConnectModal />
       </div>
-      <div className="text-white">CategoryId: {categoryId}</div>
     </header>
   );
 };

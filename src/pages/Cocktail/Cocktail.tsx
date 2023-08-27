@@ -1,5 +1,6 @@
-import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+/* eslint-disable no-console */
+import React, { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FaCocktail, FaGlassMartiniAlt } from 'react-icons/fa';
 import { GiIceCube } from 'react-icons/gi';
 import { GoDotFill } from 'react-icons/go';
@@ -10,13 +11,27 @@ import Page404 from '../../components/Error/Page404';
 import { Cocktails } from '../../types/types';
 
 type Props = {
-  cocktailList: Cocktails[];
+  selectedCocktail: number | null;
 };
 
-const Cocktail: React.FC<Props> = ({ cocktailList }) => {
-  const { slug } = useParams<{ slug: string }>();
+const Cocktail: React.FC<Props> = ({ selectedCocktail }) => {
+  const [cocktailById, setCocktailById] = useState<Cocktails>();
+  const [cocktailList, setCocktailList] = useState<Cocktails[]>([]);
 
-  const cocktailItem = cocktailList.find((cocktail) => cocktail.slug === slug);
+  useEffect(() => {
+    fetch('http://localhost:5174/api/cocktails')
+      .then((response) => response.json())
+      .then((data: Cocktails[]) => {
+        setCocktailList(data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const cocktailListMemo = useMemo(() => cocktailList, [cocktailList]);
+
+  const cocktailItem = cocktailListMemo.find(
+    (cocktail) => cocktail.id === selectedCocktail
+  );
 
   if (!cocktailItem) {
     return <Page404 />;

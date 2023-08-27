@@ -9,14 +9,21 @@ import CocktailItem from '../../components/CocktailItem/CocktailItem';
 
 interface HomeProps {
   categoryId: number | null;
+  selectedCocktail: number | null;
+  setSelectedCocktail: (id: number | null) => void;
 }
 
-const Home: React.FC<HomeProps> = ({ categoryId }) => {
+const Home: React.FC<HomeProps> = ({
+  categoryId,
+  selectedCocktail,
+  setSelectedCocktail,
+}) => {
   const [cocktailList, setCocktailList] = useState<Cocktails[]>([]);
   const [displayMode, setDisplayMode] = useState(true);
   const [animate, setAnimate] = useState(true);
 
   console.log(categoryId);
+  console.log(selectedCocktail);
 
   useEffect(() => {
     fetch('http://localhost:5174/api/cocktails')
@@ -27,6 +34,8 @@ const Home: React.FC<HomeProps> = ({ categoryId }) => {
       .catch((err) => console.error(err));
   }, []);
 
+  const cocktailListMemo = useMemo(() => cocktailList, [cocktailList]);
+
   useEffect(() => {
     setAnimate(false);
   }, []);
@@ -35,9 +44,13 @@ const Home: React.FC<HomeProps> = ({ categoryId }) => {
     setDisplayMode((prevToggle) => !prevToggle);
   };
 
+  const handleSelectCocktail = (cocktailId: number) => {
+    setSelectedCocktail(cocktailId);
+  };
+
   const cocktailsData = useMemo(() => {
-    return cocktailList.slice().sort((a, b) => b.rating - a.rating);
-  }, [cocktailList]);
+    return cocktailListMemo.slice().sort((a, b) => b.rating - a.rating);
+  }, [cocktailListMemo]);
 
   const cocktailTop5 = cocktailsData.slice(0, 5);
 
@@ -74,14 +87,18 @@ const Home: React.FC<HomeProps> = ({ categoryId }) => {
         <div className="text-white flex px-12 pt-9">
           <ul className="w-full">
             {categoryId
-              ? cocktailList
+              ? cocktailListMemo
                   .filter((cocktail) =>
                     cocktail.categories.some(
                       (category) => category.id === categoryId
                     )
                   )
                   .map((cocktail, index) => (
-                    <Link key={index} to={`/cocktail/${cocktail.slug}`}>
+                    <Link
+                      key={index}
+                      to={`/cocktail/${cocktail.slug}`}
+                      onClick={() => handleSelectCocktail(cocktail.id)}
+                    >
                       <CocktailItem
                         key={index}
                         cocktail={cocktail}
@@ -92,7 +109,11 @@ const Home: React.FC<HomeProps> = ({ categoryId }) => {
                   ))
               : displayMode
               ? cocktailTop5.map((cocktail, index) => (
-                  <Link key={index} to={`/cocktail/${cocktail.slug}`}>
+                  <Link
+                    key={index}
+                    to={`/cocktail/${cocktail.slug}`}
+                    onClick={() => handleSelectCocktail(cocktail.id)}
+                  >
                     <CocktailItem
                       key={index}
                       cocktail={cocktail}
@@ -101,8 +122,12 @@ const Home: React.FC<HomeProps> = ({ categoryId }) => {
                     />
                   </Link>
                 ))
-              : cocktailList.map((cocktail, index) => (
-                  <Link key={index} to={`/cocktail/${cocktail.slug}`}>
+              : cocktailListMemo.map((cocktail, index) => (
+                  <Link
+                    key={index}
+                    to={`/cocktail/${cocktail.slug}`}
+                    onClick={() => handleSelectCocktail(cocktail.id)}
+                  >
                     <CocktailItem
                       key={index}
                       cocktail={cocktail}
