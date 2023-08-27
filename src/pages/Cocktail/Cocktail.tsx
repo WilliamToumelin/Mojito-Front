@@ -7,6 +7,7 @@ import { FiChevronRight } from 'react-icons/fi';
 import { BsClockFill } from 'react-icons/bs';
 import Rating from './Rating';
 import { Cocktails } from '../../types/types';
+import { useAuth } from '../../contexts/AuthProvider';
 
 interface CocktailProps {
   selectedCocktail: number | null;
@@ -15,6 +16,7 @@ interface CocktailProps {
 const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
   // const [cocktailById, setCocktailById] = useState<Cocktails>();
   const [cocktailList, setCocktailList] = useState<Cocktails[]>([]);
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
     // fetch(`http://localhost:5174/api/cocktails/${cocktailId}`)
@@ -117,17 +119,23 @@ const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
             </div>
             <h3 className="text-3xl">Description du cocktail :</h3>
             <p className="text-xl space-y-1">{cocktailItem.description}</p>
-            <h3 className="text-3xl">Nos astuces :</h3>
-            <p className="text-xl space-y-1">{cocktailItem.trick}</p>
+            {cocktailItem.trick ? (
+              <>
+                <h3 className="text-3xl">Nos astuces :</h3>
+                <p className="text-xl space-y-1">{cocktailItem.trick}</p>
+              </>
+            ) : (
+              ''
+            )}
             <div className="text-base items-center">
               <p className="pb-6 text-center">Donnez votre avis !</p>
               <div className="text-base flex items-center gap-8 justify-center">
-                <Rating />
+                {!isLoggedIn ? '' : <Rating />}
                 <Link
                   to={`/cocktail/${cocktailItem.slug}/commentaires`}
                   className="text-white font-semibold bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 rounded-lg text-sm p-2"
                 >
-                  Commenter ce cocktail
+                  Voir les commentaires
                 </Link>
               </div>
             </div>

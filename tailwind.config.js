@@ -19,15 +19,20 @@ export default {
     "./src/components/CategorySelectBar/CategorySelectBar.tsx",
     "./src/components/Footer/Footer.tsx",
     "./src/components/SideBar/SideBar.tsx",
-    "./src/components/CocktailItem/CocktailItem.tsx",
+    "./src/components/common/CocktailItem/CocktailItem.tsx",
+    "./src/components/common/buttons/GradiantButtonOval.tsx",
+    "./src/components/common/buttons/GradiantButtonRectangle.tsx",
     "./src/components/Modals/ConnectModal.tsx",
     "./src/components/Modals/CommentModal.tsx",
   ],
   plugins: [],
   theme: {
     extend: {
+      fontFamily: {
+        'gluten': ['Gluten', 'sans-serif']
+      },
       transitionDuration: {
-        '500': '1.5s',
+        '500': '500ms',
         '1100': '1100ms',
         '1200': '1200ms',
         '1300': '1300ms',

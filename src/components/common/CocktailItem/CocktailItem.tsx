@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import { FaCocktail } from 'react-icons/fa';
-import { Cocktails } from '../../types/types';
+import { Cocktails } from '../../../types/types';
 import './CocktailItem.scss';
 
 type CocktailItemProps = {
@@ -18,13 +18,14 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
   const difficultyBar = (difficulty: number) => {
     if (difficulty <= 1) {
       return 'w-1/5 bg-green-600';
-    } else if (difficulty >= 2 && difficulty < 3) {
-      return 'w-2/5 bg-yellow-300';
-    } else if (difficulty >= 3 && difficulty <= 4) {
-      return 'w-3/5 bg-orange-500';
-    } else {
-      return 'w-full bg-red-700';
     }
+    if (difficulty >= 2 && difficulty < 3) {
+      return 'w-2/5 bg-yellow-300';
+    }
+    if (difficulty >= 3 && difficulty <= 4) {
+      return 'w-3/5 bg-orange-500';
+    }
+    return 'w-full bg-red-700';
   };
 
   return (

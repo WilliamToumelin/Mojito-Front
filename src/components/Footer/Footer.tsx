@@ -12,14 +12,6 @@ const Footer: React.FC = () => {
       <Link to="/a-propos-de-nous" className="text-white">
         A propos de nous
       </Link>
-      <Link
-        to="/proposition-cocktail"
-        className={`text-white rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 p-2 font-bold ${
-          CocktailSubmitPage ? 'opacity-0' : ''
-        }`}
-      >
-        Propose un cocktail !
-      </Link>
 
       <Link to="/mentions-legales" className="text-white">
         Mentions Légales

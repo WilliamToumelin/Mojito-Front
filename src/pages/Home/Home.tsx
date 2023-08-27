@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { BsTrophy } from 'react-icons/bs';
 import { CgInfinity } from 'react-icons/cg';
 import { Cocktails } from '../../types/types';
-import CocktailItem from '../../components/CocktailItem/CocktailItem';
+import CocktailItem from '../../components/common/CocktailItem/CocktailItem';
 import SideBar from '../../components/SideBar/SideBar';
 
 interface HomeProps {
