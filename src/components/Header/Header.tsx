@@ -54,8 +54,8 @@ const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
         )}
         <ConnectModal />
       </div>
-      <div className="lg:hidden flex justify-end items-center w-[75%]">
-        <div className="p-4 mr-6 space-y-2 bg-gray-600 rounded shadow">
+      <div className="lg:hidden flex justify-end items-center w-[75%] mr-6 ">
+        <div className="p-4 space-y-2 bg-gray-600 rounded shadow">
           <span className="block w-8 h-0.5 bg-gray-100 animate-pulse" />
           <span className="block w-8 h-0.5 bg-gray-100 animate-pulse" />
           <span className="block w-8 h-0.5 bg-gray-100 animate-pulse" />
