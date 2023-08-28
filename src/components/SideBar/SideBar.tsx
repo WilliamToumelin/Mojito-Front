@@ -8,7 +8,7 @@ type Props = {
 
 const SideBar: React.FC<Props> = ({ filteredCocktails }) => {
   return (
-    <div className="absolute top-24 lg:block w-56 z-10 left-0">
+    <div className="hidden lg:block absolute top-24 lg:block w-56 z-10 left-0">
       <div className="flex flex-col gap-1">
         {filteredCocktails.map((cocktail: Cocktails) => (
           <NavLink

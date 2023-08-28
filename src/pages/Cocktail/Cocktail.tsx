@@ -39,14 +39,14 @@ const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
     // TEMPORAIRE !!!!!! a rajouter un loader , parce pour l'instant il n'y a que une fenetre noir si pas de cocktail chargé encore ...
     return (
       <div className="bg-black flex justify-center items-center flex-1 h-[75vh]">
-        <div className="w-4/5 lg:w-3/5 h-4/5 flex rounded-2xl shadow-purple-700 shadow-2xl bg-black" />
+        <div className="w-full h-full lg:w-3/5 lg:h-4/5 flex rounded-2xl shadow-purple-700 shadow-2xl bg-black" />
       </div>
     );
   }
 
   return (
     <div className="bg-black flex justify-center items-center flex-1 h-[75vh]">
-      <div className="w-4/5 lg:w-3/5 h-4/5 flex rounded-2xl shadow-purple-700 shadow-2xl bg-black">
+      <div className="w-full h-full lg:w-3/5 lg:h-4/5 flex rounded-2xl shadow-purple-700 shadow-2xl bg-black">
         <div className="flex-1 flex">
           <div className="w-2/5">
             <div className="h-full">

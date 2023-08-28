@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
 
   return (
     <header className=" bg-gray-900 px-3 pt-2 pb-12 w-full flex h-[20vh]">
-      <div className="w-[25%] flex items-center">
+      <div className="w-[50%] lg:w-[25%] flex items-center">
         <h1 className="text-white">Mojit&apos;o</h1>
         <NavLink to="/" onClick={handleResetCategoryId}>
           <img
@@ -54,7 +54,7 @@ const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
         )}
         <ConnectModal />
       </div>
-      <div className="lg:hidden flex justify-end items-center w-[75%] mr-6 ">
+      <div className="lg:hidden flex justify-end items-center w-[50%] mr-6 ">
         <div className="p-4 space-y-2 bg-gray-600 rounded shadow">
           <span className="block w-8 h-0.5 bg-gray-100 animate-pulse" />
           <span className="block w-8 h-0.5 bg-gray-100 animate-pulse" />
