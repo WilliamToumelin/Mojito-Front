@@ -75,7 +75,7 @@ const Home: React.FC<HomeProps> = ({
       <div
         className={` ${
           !categoryId ? 'relative' : ''
-        } w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto shadow-purple-700 shadow-2xl rounded-2xl bg-black`}
+        } w-4/5 lg:w-3/5 h-full lg:h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-purple-700 shadow-2xl rounded-2xl bg-black`}
       >
         {/* Haut du composant avec le bouton dependant de SI PAS DE CATEGORYID avec top 5 ou liste complète */}
         {!categoryId ? (
