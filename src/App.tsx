@@ -11,7 +11,7 @@ import Reviews from './pages/Reviews/Reviews';
 import LegalMentions from './pages/LegalMentions/LegalMentions';
 import Page404 from './components/Error/Page404';
 
-export default function App() {
+const App = () => {
   const [categoryId, setCategoryId] = useState<number | null>(null);
   const [selectedCocktail, setSelectedCocktail] = useState<number | null>(null);
 
@@ -46,4 +46,6 @@ export default function App() {
       <Footer />
     </div>
   );
-}
+};
+
+export default App;
