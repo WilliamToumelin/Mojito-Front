@@ -15,25 +15,25 @@ import {
 const CocktailSubmit: React.FC = () => {
   const [ingredientsList, setIngredientsList] = useState<string[]>([]);
   const [selectedAlcohols, setSelectedAlcohols] = useState<string[]>([]);
-  const [selectedSofts, setSelectedSofts] = useState<string[]>([]);
-  const [selectedAromatics, setSelectedAromatics] = useState<string[]>([]);
-  const [selectedGlasses, setSelectedGlasses] = useState<string[]>([]);
-  const [selectedIces, setSelectedIces] = useState<string[]>([]);
-  const [selectedTechnicals, setSelectedTechnicals] = useState<string[]>([]);
-  const [selectedUnits, setSelectedUnits] = useState<string[]>([]);
+  // const [selectedSofts, setSelectedSofts] = useState<string[]>([]);
+  // const [selectedAromatics, setSelectedAromatics] = useState<string[]>([]);
+  // const [selectedGlasses, setSelectedGlasses] = useState<string[]>([]);
+  // const [selectedIces, setSelectedIces] = useState<string[]>([]);
+  // const [selectedTechnicals, setSelectedTechnicals] = useState<string[]>([]);
+  // const [selectedUnits, setSelectedUnits] = useState<string[]>([]);
 
   const [alcohol, setAlcohol] = useState<string>('');
-  const [soft, setSoft] = useState<string>('');
-  const [aromatic, setAromatic] = useState<string>('');
-  const [glass, setGlass] = useState<string>('');
-  const [ice, setIce] = useState<string>('');
-  const [technicals, setTechnicals] = useState<string>('');
-  const [unit, setUnit] = useState<string>('');
+  // const [soft, setSoft] = useState<string>('');
+  // const [aromatic, setAromatic] = useState<string>('');
+  // const [glass, setGlass] = useState<string>('');
+  // const [ice, setIce] = useState<string>('');
+  // const [technicals, setTechnicals] = useState<string>('');
+  // const [unit, setUnit] = useState<string>('');
 
   const [alcoholAmount, setAlcoholAmount] = useState<number>(1);
-  const [softAmount, setSoftAmount] = useState<number>(1);
+  // const [softAmount, setSoftAmount] = useState<number>(1);
 
-  const [description, setDescription] = useState<string>('');
+  // const [description, setDescription] = useState<string>('');
 
   useEffect(() => {
     const ingredientsByCategory: {
@@ -57,37 +57,37 @@ const CocktailSubmit: React.FC = () => {
       })
       .catch((err) => console.error(err));
 
-    fetch('http://localhost:5174/api/technicals')
-      .then((response) => response.json())
-      .then((data: Technicals[]) => {
-        const technicalNames = data.map((technical) => technical.name);
-        setSelectedTechnicals(technicalNames);
-      })
-      .catch((err) => console.error(err));
+    // fetch('http://localhost:5174/api/technicals')
+    //   .then((response) => response.json())
+    //   .then((data: Technicals[]) => {
+    //     const technicalNames = data.map((technical) => technical.name);
+    //     setSelectedTechnicals(technicalNames);
+    //   })
+    //   .catch((err) => console.error(err));
 
-    fetch('http://localhost:5174/api/ices')
-      .then((response) => response.json())
-      .then((data: Ices[]) => {
-        const iceNames = data.map((iceItem) => iceItem.name);
-        setSelectedIces(iceNames);
-      })
-      .catch((err) => console.error(err));
+    // fetch('http://localhost:5174/api/ices')
+    //   .then((response) => response.json())
+    //   .then((data: Ices[]) => {
+    //     const iceNames = data.map((iceItem) => iceItem.name);
+    //     setSelectedIces(iceNames);
+    //   })
+    //   .catch((err) => console.error(err));
 
-    fetch('http://localhost:5174/api/glass')
-      .then((response) => response.json())
-      .then((data: Glasses[]) => {
-        const glassNames = data.map((glassItem) => glassItem.name);
-        setSelectedGlasses(glassNames);
-      })
-      .catch((err) => console.error(err));
+    // fetch('http://localhost:5174/api/glass')
+    //   .then((response) => response.json())
+    //   .then((data: Glasses[]) => {
+    //     const glassNames = data.map((glassItem) => glassItem.name);
+    //     setSelectedGlasses(glassNames);
+    //   })
+    //   .catch((err) => console.error(err));
 
-    fetch('http://localhost:5174/api/units')
-      .then((response) => response.json())
-      .then((data: Units[]) => {
-        const unitNames = data.map((unitItem) => unitItem.name);
-        setSelectedUnits(unitNames);
-      })
-      .catch((err) => console.error(err));
+    // fetch('http://localhost:5174/api/units')
+    //   .then((response) => response.json())
+    //   .then((data: Units[]) => {
+    //     const unitNames = data.map((unitItem) => unitItem.name);
+    //     setSelectedUnits(unitNames);
+    //   })
+    //   .catch((err) => console.error(err));
   }, []);
 
   const handleAlcoholAdd = () => {
@@ -101,20 +101,20 @@ const CocktailSubmit: React.FC = () => {
     }
   };
 
-  const handleSoftAdd = () => {
-    if (soft && softAmount > 0) {
-      setSelectedSofts([...selectedSofts, `${soft} (${softAmount} cl)`]);
-      setSoft('');
-      setSoftAmount(1);
-    }
-  };
+  // const handleSoftAdd = () => {
+  //   if (soft && softAmount > 0) {
+  //     setSelectedSofts([...selectedSofts, `${soft} (${softAmount} cl)`]);
+  //     setSoft('');
+  //     setSoftAmount(1);
+  //   }
+  // };
 
-  const handleAromaticAdd = () => {
-    if (aromatic !== '') {
-      setSelectedAromatics([...selectedAromatics, `${aromatic}`]);
-      setAromatic('');
-    }
-  };
+  // const handleAromaticAdd = () => {
+  //   if (aromatic !== '') {
+  //     setSelectedAromatics([...selectedAromatics, `${aromatic}`]);
+  //     setAromatic('');
+  //   }
+  // };
 
   const handleAlcoholRemove = (index: number) => {
     const updatedAlcohols = [...selectedAlcohols];
@@ -122,28 +122,28 @@ const CocktailSubmit: React.FC = () => {
     setSelectedAlcohols(updatedAlcohols);
   };
 
-  const handleSoftRemove = (index: number) => {
-    const updatedSofts = [...selectedSofts];
-    updatedSofts.splice(index, 1);
-    setSelectedSofts(updatedSofts);
-  };
+  // const handleSoftRemove = (index: number) => {
+  //   const updatedSofts = [...selectedSofts];
+  //   updatedSofts.splice(index, 1);
+  //   setSelectedSofts(updatedSofts);
+  // };
 
-  const handleAromaticRemove = (index: number) => {
-    const updatedAromatics = [...selectedAromatics];
-    updatedAromatics.splice(index, 1);
-    setSelectedAromatics(updatedAromatics);
-  };
+  // const handleAromaticRemove = (index: number) => {
+  //   const updatedAromatics = [...selectedAromatics];
+  //   updatedAromatics.splice(index, 1);
+  //   setSelectedAromatics(updatedAromatics);
+  // };
 
   const handleSubmit = async () => {
     const cocktailSubmitData = {
       alcohols: selectedAlcohols,
-      softs: selectedSofts,
-      aromatics: selectedAromatics,
-      glass,
-      ice,
-      technicals,
-      unit,
-      description,
+      // softs: selectedSofts,
+      // aromatics: selectedAromatics,
+      // glass,
+      // ice,
+      // technicals,
+      // unit,
+      // description,
     };
 
     try {
@@ -182,7 +182,7 @@ const CocktailSubmit: React.FC = () => {
               setAmount={setAlcoholAmount}
               handleAdd={handleAlcoholAdd}
             />
-            <ListAdd
+            {/* <ListAdd
               title="Softs"
               itemsList={selectedSofts}
               itemValue={soft}
@@ -190,7 +190,7 @@ const CocktailSubmit: React.FC = () => {
               amount={softAmount}
               setAmount={setSoftAmount}
               handleAdd={handleSoftAdd}
-            />
+            /> */}
             {/* <ListAdd
               title="Aromates"
               itemsList={selectedAromatics}
@@ -250,15 +250,15 @@ const CocktailSubmit: React.FC = () => {
               items={selectedAlcohols}
               onRemove={handleAlcoholRemove}
             />
-            <ItemRemove items={selectedSofts} onRemove={handleSoftRemove} />
+            {/* <ItemRemove items={selectedSofts} onRemove={handleSoftRemove} />
             <ItemRemove
               items={selectedAromatics}
               onRemove={handleAromaticRemove}
-            />
+            /> */}
           </div>
         </div>
         <div>
-          <div className="mb-4 text-center">
+          {/* <div className="mb-4 text-center">
             <h3 className="text-lg font-medium mb-2">Description</h3>
             <textarea
               value={description}
@@ -266,7 +266,7 @@ const CocktailSubmit: React.FC = () => {
               className="border-xs rounded p-1 w-1/2 bg-gray-800"
               rows={3}
             />
-          </div>
+          </div> */}
 
           <div className="text-center py-2">
             <button

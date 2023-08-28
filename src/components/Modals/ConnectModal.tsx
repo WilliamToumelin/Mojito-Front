@@ -33,6 +33,38 @@ const ConnectModal: FC = () => {
     }
   };
 
+  // Code pour se connecter une fois l'API prête
+
+  // const handleLogin = async () => {
+  //  Appeler votre backend pour l'authentification
+  //   try {
+  //     const response = await fetch('/api/login', {
+  //       method: 'POST',
+  //       body: JSON.stringify({ email, password }),
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
+
+  //     if (response.ok) {
+  //       const { token } = await response.json();
+  //        Stocker le token JWT dans le local storage
+  //       localStorage.setItem('authToken', token);
+  //       login();
+  //     } else {
+  //        Gérer les erreurs d'authentification ici
+  //     }
+  //   } catch (error) {
+  //      Gérer les erreurs réseau ici
+  //   }
+  // };
+
+  // const handleLogout = () => {
+  //    Supprimer le token JWT du local storage
+  //   localStorage.removeItem('authToken');
+  //   logout();
+  // };
+
   const handleLogout = () => {
     logout(); // Appelle la fonction de déconnexion du contexte
     setEmail('');
@@ -45,7 +77,7 @@ const ConnectModal: FC = () => {
         <>
           <button
             type="button"
-            className="relative text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
+            className="relative text-red-900 hover:text-white border border-gray-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-gray-800"
             onClick={handleLogout}
           >
             Déconnexion
@@ -159,35 +191,3 @@ const ConnectModal: FC = () => {
 };
 
 export default ConnectModal;
-
-// Code pour se connecter une fois l'API prête
-
-// const handleLogin = async () => {
-//  Appeler votre backend pour l'authentification
-//   try {
-//     const response = await fetch('/api/login', {
-//       method: 'POST',
-//       body: JSON.stringify({ email, password }),
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     });
-
-//     if (response.ok) {
-//       const { token } = await response.json();
-//        Stocker le token JWT dans le local storage
-//       localStorage.setItem('authToken', token);
-//       login();
-//     } else {
-//        Gérer les erreurs d'authentification ici
-//     }
-//   } catch (error) {
-//      Gérer les erreurs réseau ici
-//   }
-// };
-
-// const handleLogout = () => {
-//    Supprimer le token JWT du local storage
-//   localStorage.removeItem('authToken');
-//   logout();
-// };

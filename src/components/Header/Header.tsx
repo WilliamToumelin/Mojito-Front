@@ -33,13 +33,13 @@ const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
           />
         </NavLink>
       </div>
-      <div className="hidden lg:block flex justify-start items-center w-[50%]">
+      <div className="hidden lg:flex justify-start items-center w-[50%]">
         <CategorySelectBar
           categoryId={categoryId}
           setCategoryId={setCategoryId}
         />
       </div>
-      <div className="hidden lg:block flex justify-end items-center w-[25%]">
+      <div className="hidden lg:flex justify-end items-center w-[25%]">
         {!isLoggedIn ? (
           ''
         ) : (
