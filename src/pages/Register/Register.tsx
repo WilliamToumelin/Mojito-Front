@@ -9,35 +9,37 @@ const Register: React.FC = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
-  const { signIn } = useAuth();
+  const { register } = useAuth();
 
   if (!useAuth) {
     // Si le contexte n'est pas défini, tu peux gérer cette situation ici
     return null;
   }
 
-  // const signIn = () => {
-  //   // Appeler votre backend pour l'authentification
-  //   try {
-  //     const response = await fetch('/api/signIn', {
-  //       method: 'POST',
-  //       body: JSON.stringify({ email, password }),
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //     if (response.ok) {
-  //       const { token } = await response.json();
-  //       //  Stocker le token JWT dans le local storage
-  //       localStorage.setItem('authToken', token);
-  //       login();
-  //     } else {
-  //       //  Gérer les erreurs d'authentification ici
-  //     }
-  //   } catch (error) {
-  //     //  Gérer les erreurs réseau ici
-  //   }
-  // };
+  const handleRegister = async () => {
+    // Appeler votre backend pour l'authentification
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        const { token } = await response.json();
+        //  Stocker le token JWT dans le local storage
+        localStorage.setItem('authToken', token);
+        register();
+      } else {
+        //  Gérer les erreurs d'authentification ici
+        window.alert("Erreur lors de l'inscription");
+      }
+    } catch (error) {
+      //  Gérer les erreurs réseau ici
+      console.error("Erreur réseau lors de l'inscription", error);
+    }
+  };
 
   return (
     <div className="relative bg-black flex justify-center items-center flex-1 h-[100vh]">
@@ -130,7 +132,7 @@ const Register: React.FC = () => {
                 <button
                   type="button"
                   className="p-2 mt-6 bg-amber-700 rounded-xl"
-                  onClick={signIn}
+                  onClick={handleRegister}
                 >
                   Inscription
                 </button>

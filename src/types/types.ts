@@ -54,31 +54,20 @@ export type Cocktails = {
   };
 };
 
-export type Ingredients = {
-  id: number;
-  name: string;
-  ingredients: {
-    map: any;
-    id: number;
-    name: string;
-  };
-};
-
-export type Technicals = {
+export type Ingredient = {
   id: number;
   name: string;
 };
 
-export type Ices = {
-  id: number;
+export type IngredientCategory = {
   name: string;
+  ingredients: Ingredient[];
 };
 
-export type Glasses = {
-  id: number;
-  name: string;
-};
-export type Units = {
-  id: number;
-  name: string;
+export type IngredientsData = {
+  ingredients: IngredientCategory[];
+  glasses: { id: number; name: string }[];
+  ices: { id: number; name: string }[];
+  technicals: { id: number; name: string }[];
+  units: { id: number; name: string }[];
 };

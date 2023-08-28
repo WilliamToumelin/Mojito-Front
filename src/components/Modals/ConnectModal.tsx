@@ -178,16 +178,21 @@ export default ConnectModal;
 //        Stocker le token JWT dans le local storage
 //       localStorage.setItem('authToken', token);
 //       login();
+// setDisplayModal(false);
 //     } else {
 //        Gérer les erreurs d'authentification ici
+// window.alert('Identifiants invalides');
 //     }
 //   } catch (error) {
 //      Gérer les erreurs réseau ici
+// console.error('Erreur réseau lors de la connexion', error);
 //   }
 // };
 
 // const handleLogout = () => {
-//    Supprimer le token JWT du local storage
+//   // Supprimer le token du local storage
 //   localStorage.removeItem('authToken');
 //   logout();
+//   setEmail('');
+//   setPassword('');
 // };

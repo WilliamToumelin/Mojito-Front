@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import Page404 from '../../components/Error/Page404';
 import CommentModal from '../../components/Modals/CommentModal';
 import { Cocktails } from '../../types/types';
-import CocktailItem from '../../components/common/ItemCocktail/CocktailItem';
+import CocktailItem from '../../components/common/CocktailItem/CocktailItem';
 
 interface Props {
   selectedCocktail: number | null;

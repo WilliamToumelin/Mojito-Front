@@ -10,7 +10,7 @@ type AuthContextType = {
   isLoggedIn: boolean;
   login: () => void;
   logout: () => void;
-  signIn: () => void;
+  register: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -24,20 +24,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = () => {
     // Ici, on pourra ajouter la logique de connexion (appeler l'API, etc.)
+    localStorage.setItem('authToken', 'votre_token');
     setIsLoggedIn(true);
   };
 
   const logout = () => {
     // Ici, on pourra ajouter la logique de déconnexion (appeler l'API, etc.)
+    localStorage.removeItem('authToken');
     setIsLoggedIn(false);
   };
 
-  const signIn = () => {
+  const register = () => {
     // Ici, on pourra ajouter la logique de création de compte (appeler l'API, etc.)
   };
 
   const logMemo = useMemo(
-    () => ({ isLoggedIn, login, logout, signIn }),
+    () => ({ isLoggedIn, login, logout, register }),
     [isLoggedIn]
   );
 
