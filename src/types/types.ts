@@ -5,7 +5,15 @@ export type Category = {
   name: string;
 };
 
+export type Comment = {
+  id: number;
+  content: string;
+  posted_at: string;
+  user: { id: number; pseudonym: string };
+};
+
 export type Cocktails = {
+  map(arg0: (data: any) => JSX.Element): import('react').ReactNode;
   id: number;
   name: string;
   slug: string;
@@ -32,26 +40,7 @@ export type Cocktails = {
   glass: { id: number; name: string };
   ice: { id: number; name: string };
   technical: { id: number; name: string };
-  comments: {
-    length: number;
-    map(
-      arg0: (
-        comment: Cocktails & {
-          comments: {
-            id: number;
-            content: string;
-            posted_at: string;
-            length: number;
-            user: { id: number; pseudonym: string };
-          }[];
-        }
-      ) => JSX.Element
-    ): import('react').ReactNode;
-    id: number;
-    content: string;
-    posted_at: string;
-    user: { id: number; pseudonym: string };
-  };
+  comments: Comment[];
 };
 
 export type Ingredient = {
