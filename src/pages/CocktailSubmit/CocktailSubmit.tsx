@@ -9,7 +9,11 @@ import { IngredientsData } from '../../types/types';
 const CocktailSubmit: React.FC = () => {
   const [ingredientsList, setIngredientsList] =
     useState<IngredientsData | null>(null);
-  const [amount, setAmount] = useState(1);
+  const [amounts, setAmounts] = useState<{ [key: string]: number }>({
+    alcohol: 1,
+    aromates: 1,
+    softs: 1,
+  });
   const [description, setDescription] = useState('');
   const [techniques, setTechniques] = useState<string | null>(null);
 
@@ -22,65 +26,11 @@ const CocktailSubmit: React.FC = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  const handleAlcohol = () => {
-    if (ingredientsList) {
-      const alcoolsCategory = ingredientsList.ingredients.find(
-        (category) => category.name === 'alcools'
-      );
-
-      if (alcoolsCategory) {
-        const alcoolsList = alcoolsCategory.ingredients.map(
-          (ingredient) => ingredient.name
-        );
-        console.log(alcoolsList);
-      }
-    }
-  };
-
-  handleAlcohol();
-
-  const handleAromates = () => {
-    if (ingredientsList) {
-      const aromatesCategory = ingredientsList.ingredients.find(
-        (category) => category.name === 'aromates'
-      );
-
-      if (aromatesCategory) {
-        const aromatesList = aromatesCategory.ingredients.map(
-          (ingredient) => ingredient.name
-        );
-        console.log(aromatesList);
-      }
-    }
-  };
-
-  handleAromates();
-
-  const handleSofts = () => {
-    if (ingredientsList) {
-      const softsCategory = ingredientsList.ingredients.find(
-        (category) => category.name === 'softs'
-      );
-
-      if (softsCategory) {
-        const softsList = softsCategory.ingredients.map(
-          (ingredient) => ingredient.name
-        );
-        console.log(softsList);
-      }
-    }
-  };
-
-  handleSofts();
-
-  const handleIncrement = () => {
-    setAmount(amount + 1);
-  };
-
-  const handleDecrement = () => {
-    if (amount > 1) {
-      setAmount(amount - 1);
-    }
+  const handleAmountChange = (type: string, increment: boolean) => {
+    setAmounts((prevAmounts) => ({
+      ...prevAmounts,
+      [type]: increment ? prevAmounts[type] + 1 : prevAmounts[type] - 1,
+    }));
   };
 
   return (
@@ -94,61 +44,100 @@ const CocktailSubmit: React.FC = () => {
             <ul>
               {ingredientsList?.ingredients.map((category) => {
                 return (
-                  <div key={category.name}>
-                    <h3 className="text-xl">Categorie : {category.name}</h3>
-                    <br />
-                    <select
-                      value=""
-                      onChange={() => {}}
-                      className="max-w-lg border rounded p-1 text-white text-bold bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400"
-                    >
-                      <option className="text-black" value="">
-                        A vous de jouer !
-                      </option>
-                      {category.ingredients.map((ingredient) => (
-                        <option
-                          className="text-black"
-                          key={ingredient.id}
-                          value={ingredient.name}
-                        >
-                          {ingredient.name}
+                  <div className="" key={category.name}>
+                    <h3 className="text-xl">{category.name}</h3>
+                    <div className="flex">
+                      <br />
+                      <select
+                        value=""
+                        onChange={() => {}}
+                        className="max-w-lg border rounded p-1 text-white text-bold bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400"
+                      >
+                        <option className="text-black" value="">
+                          A vous de jouer !
                         </option>
-                      ))}
-                    </select>
-                    <div
-                      className={`flex p-1 pl-4 w-32 text-white text-3xl ${
-                        category.name === 'Aromates' ||
-                        category.name === 'Verre'
-                          ? 'opacity-0'
-                          : ''
-                      }`}
-                    >
-                      <div className="flex items-center space-x-4">
-                        <button
-                          type="button"
-                          className=""
-                          onClick={handleDecrement}
-                        >
-                          <AiOutlineMinusCircle />
-                        </button>
-                        <div>{amount}</div>
-                        <button
-                          type="button"
-                          className=""
-                          onClick={handleIncrement}
-                        >
-                          <AiOutlinePlusCircle />
-                        </button>
+                        {category.ingredients.map((ingredient) => (
+                          <option
+                            className="text-black"
+                            key={ingredient.id}
+                            value={ingredient.name}
+                          >
+                            {ingredient.name}
+                          </option>
+                        ))}
+                      </select>
+                      <div
+                        className={`flex p-1 pl-4 w-32 text-white text-3xl ${
+                          category.name === 'Aromates' ||
+                          category.name === 'Verre'
+                            ? 'opacity-0'
+                            : ''
+                        }`}
+                      >
+                        <div className="flex items-center space-x-4">
+                          <button
+                            type="button"
+                            className=""
+                            onClick={() =>
+                              handleAmountChange(
+                                category.name.toLowerCase(),
+                                false
+                              )
+                            }
+                          >
+                            <AiOutlineMinusCircle />
+                          </button>
+                          <div>{amounts[category.name.toLowerCase()]}</div>
+                          <button
+                            type="button"
+                            className=""
+                            onClick={() =>
+                              handleAmountChange(
+                                category.name.toLowerCase(),
+                                true
+                              )
+                            }
+                          >
+                            <AiOutlinePlusCircle />
+                          </button>
+                        </div>
                       </div>
                     </div>
-                    <br />
                   </div>
                 );
               })}
             </ul>
 
             <div className="mb-4">
-              <h3 className="text-lg font-medium mb-4">Technique</h3>
+              <h3 className="text-lg font-medium mb-4">titre</h3>
+              <div className="flex items-center gap-4">
+                {ingredientsList?.ices.map((icesOption, index) => (
+                  <label key={index} className="flex items-center">
+                    <span className="mr-3">{icesOption.name}</span>
+                    <div
+                      className={`w-8 h-8 rounded-full border-gray-400 border-4 flex items-center justify-center ${
+                        techniques === icesOption.name
+                          ? 'bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 text-black border-none'
+                          : ''
+                      }`}
+                    >
+                      {techniques === icesOption.name && (
+                        <BsFillCheckCircleFill size={24} />
+                      )}
+                    </div>
+                    <input
+                      type="radio"
+                      value={icesOption.name}
+                      checked={techniques === icesOption.name}
+                      onChange={(e) => setTechniques(e.target.value)}
+                      className="sr-only"
+                    />
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="mb-4">
+              <h3 className="text-lg font-medium mb-4">titre</h3>
               <div className="flex items-center gap-4">
                 {ingredientsList?.technicals.map((techniqueOption, index) => (
                   <label key={index} className="flex items-center">
