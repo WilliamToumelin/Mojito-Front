@@ -18,9 +18,12 @@ const filterCocktailsByCategoryId = (
   cocktails: Cocktails[],
   categoryId: number | null
 ) => {
-  return cocktails.filter((cocktail) =>
-    cocktail.categories.some((category) => category.id === categoryId)
-  );
+  return cocktails.filter((cocktail) => {
+    if (cocktail.categories && Array.isArray(cocktail.categories)) {
+      return cocktail.categories.some((category) => category.id === categoryId);
+    }
+    return false;
+  });
 };
 
 const Home: React.FC<HomeProps> = ({
