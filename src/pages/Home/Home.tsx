@@ -18,6 +18,7 @@ const filterCocktailsByCategoryId = (
   cocktails: Cocktails[],
   categoryId: number | null
 ) => {
+  console.log('Filtering by categoryId:', categoryId);
   return cocktails.filter((cocktail) =>
     cocktail.categories.some((category) => category.id === categoryId)
   );
@@ -39,6 +40,7 @@ const Home: React.FC<HomeProps> = ({
     fetch('http://localhost:5174/api/cocktails')
       .then((response) => response.json())
       .then((data: Cocktails[]) => {
+        console.log(data);
         setCocktailList(data);
       })
       .catch((err) => console.error(err));
@@ -69,6 +71,8 @@ const Home: React.FC<HomeProps> = ({
     cocktailListMemo,
     categoryId
   );
+
+  console.log(filteredCocktails);
 
   return (
     <div className="relative bg-black flex justify-center items-center flex-1 h-[75vh]">

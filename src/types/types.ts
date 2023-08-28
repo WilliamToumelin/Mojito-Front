@@ -66,7 +66,7 @@ export type IngredientCategory = {
 
 export type IngredientsData = {
   ingredients: IngredientCategory[];
-  glasses: { id: number; name: string }[];
+  glass: { id: number; name: string }[];
   ices: { id: number; name: string }[];
   technicals: { id: number; name: string }[];
   units: { id: number; name: string }[];

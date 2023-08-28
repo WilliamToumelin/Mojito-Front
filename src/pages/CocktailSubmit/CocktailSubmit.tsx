@@ -10,12 +10,16 @@ const CocktailSubmit: React.FC = () => {
   const [ingredientsList, setIngredientsList] =
     useState<IngredientsData | null>(null);
   const [amounts, setAmounts] = useState<{ [key: string]: number }>({
-    alcohol: 1,
-    aromates: 1,
+    alcools: 1,
     softs: 1,
   });
-  const [description, setDescription] = useState('');
+  const [alcool, setAlcool] = useState<string | null>(null);
+  const [soft, setSoft] = useState<string | null>(null);
+  const [aromate, setAromate] = useState<string | null>(null);
+  const [glass, setGlass] = useState<string | null>(null);
+  const [ices, setIces] = useState<string | null>(null);
   const [techniques, setTechniques] = useState<string | null>(null);
+  const [description, setDescription] = useState('');
 
   useEffect(() => {
     fetch('http://localhost:5174/api/propositions/data')
@@ -27,10 +31,16 @@ const CocktailSubmit: React.FC = () => {
   }, []);
 
   const handleAmountChange = (type: string, increment: boolean) => {
-    setAmounts((prevAmounts) => ({
-      ...prevAmounts,
-      [type]: increment ? prevAmounts[type] + 1 : prevAmounts[type] - 1,
-    }));
+    setAmounts((prevAmounts) => {
+      const newValue = increment
+        ? prevAmounts[type] + 1
+        : prevAmounts[type] - 1;
+      const newAmount = Math.max(newValue, 1);
+      return {
+        ...prevAmounts,
+        [type]: newAmount,
+      };
+    });
   };
 
   return (
@@ -66,10 +76,11 @@ const CocktailSubmit: React.FC = () => {
                           </option>
                         ))}
                       </select>
+
                       <div
                         className={`flex p-1 pl-4 w-32 text-white text-3xl ${
-                          category.name === 'Aromates' ||
-                          category.name === 'Verre'
+                          category.name === 'aromates' ||
+                          category.name === 'verre'
                             ? 'opacity-0'
                             : ''
                         }`}
@@ -79,57 +90,59 @@ const CocktailSubmit: React.FC = () => {
                             type="button"
                             className=""
                             onClick={() =>
-                              handleAmountChange(
-                                category.name.toLowerCase(),
-                                false
-                              )
+                              handleAmountChange(category.name, false)
                             }
                           >
                             <AiOutlineMinusCircle />
                           </button>
-                          <div>{amounts[category.name.toLowerCase()]}</div>
+                          <div>{amounts[category.name]}</div>
                           <button
                             type="button"
                             className=""
                             onClick={() =>
-                              handleAmountChange(
-                                category.name.toLowerCase(),
-                                true
-                              )
+                              handleAmountChange(category.name, true)
                             }
                           >
                             <AiOutlinePlusCircle />
                           </button>
                         </div>
                       </div>
+                      <div className="w-1/6 text-center">
+                        <button
+                          type="button"
+                          // onClick={handleAdd}
+                          className="bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 text-white p-2 rounded text-xl"
+                        >
+                          <BsFillCheckCircleFill />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 );
               })}
             </ul>
-
             <div className="mb-4">
-              <h3 className="text-lg font-medium mb-4">titre</h3>
+              <h3 className="text-lg font-medium mb-4">Verres</h3>
               <div className="flex items-center gap-4">
-                {ingredientsList?.ices.map((icesOption, index) => (
+                {ingredientsList?.glass.map((glassOption, index) => (
                   <label key={index} className="flex items-center">
-                    <span className="mr-3">{icesOption.name}</span>
+                    <span className="mr-3">{glassOption.name}</span>
                     <div
                       className={`w-8 h-8 rounded-full border-gray-400 border-4 flex items-center justify-center ${
-                        techniques === icesOption.name
+                        glass === glassOption.name
                           ? 'bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 text-black border-none'
                           : ''
                       }`}
                     >
-                      {techniques === icesOption.name && (
+                      {glass === glassOption.name && (
                         <BsFillCheckCircleFill size={24} />
                       )}
                     </div>
                     <input
                       type="radio"
-                      value={icesOption.name}
-                      checked={techniques === icesOption.name}
-                      onChange={(e) => setTechniques(e.target.value)}
+                      value={glassOption.name}
+                      checked={glass === glassOption.name}
+                      onChange={(e) => setGlass(e.target.value)}
                       className="sr-only"
                     />
                   </label>
@@ -137,7 +150,35 @@ const CocktailSubmit: React.FC = () => {
               </div>
             </div>
             <div className="mb-4">
-              <h3 className="text-lg font-medium mb-4">titre</h3>
+              <h3 className="text-lg font-medium mb-4">Glaces</h3>
+              <div className="flex items-center gap-4">
+                {ingredientsList?.ices.map((icesOption, index) => (
+                  <label key={index} className="flex items-center">
+                    <span className="mr-3">{icesOption.name}</span>
+                    <div
+                      className={`w-8 h-8 rounded-full border-gray-400 border-4 flex items-center justify-center ${
+                        ices === icesOption.name
+                          ? 'bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 text-black border-none'
+                          : ''
+                      }`}
+                    >
+                      {ices === icesOption.name && (
+                        <BsFillCheckCircleFill size={24} />
+                      )}
+                    </div>
+                    <input
+                      type="radio"
+                      value={icesOption.name}
+                      checked={ices === icesOption.name}
+                      onChange={(e) => setIces(e.target.value)}
+                      className="sr-only"
+                    />
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="mb-4">
+              <h3 className="text-lg font-medium mb-4">Techniques</h3>
               <div className="flex items-center gap-4">
                 {ingredientsList?.technicals.map((techniqueOption, index) => (
                   <label key={index} className="flex items-center">
