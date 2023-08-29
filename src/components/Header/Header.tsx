@@ -20,9 +20,8 @@ const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
   };
 
   return (
-    <header className=" bg-gray-900 px-3 pt-2 pb-12 w-full flex h-[20vh]">
+    <header className=" bg-[#132226] px-3 pt-2 pb-12 w-full flex h-[20vh]">
       <div className="w-[50%] lg:w-[25%] flex items-center">
-        <h1 className="text-white">Mojit&apos;o</h1>
         <NavLink to="/" onClick={handleResetCategoryId}>
           <img
             className=""
