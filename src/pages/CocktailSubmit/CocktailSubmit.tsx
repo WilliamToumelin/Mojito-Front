@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IngredientsData } from '../../types/types';
-import ListAdd from './ListAdd';
+import ListManager from './ListManager';
 import RadioAdd from './RadioAdd';
 
 const CocktailSubmit: React.FC = () => {
@@ -38,7 +38,7 @@ const CocktailSubmit: React.FC = () => {
             <div className="inline-block w-3/5 pr-4">
               <ul>
                 {ingredientsList?.ingredients?.map((category) => (
-                  <ListAdd
+                  <ListManager
                     key={category.name}
                     category={category.name}
                     ingredients={category.ingredients}

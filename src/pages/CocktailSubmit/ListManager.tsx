@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { TiDelete } from 'react-icons/ti';
 import { Ingredient } from '../../types/types';
 
 interface Props {
@@ -9,11 +10,19 @@ interface Props {
   register: UseFormRegister<FieldValues>;
 }
 
-const ListAdd: React.FC<Props> = ({ category, ingredients, register }) => {
+const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
   const [selectCount, setSelectCount] = useState(1);
 
   const addSelect = () => {
-    setSelectCount(selectCount + 1);
+    if (selectCount < 3) {
+      setSelectCount(selectCount + 1);
+    }
+  };
+
+  const onRemove = () => {
+    if (selectCount > 1) {
+      setSelectCount(selectCount - 1);
+    }
   };
 
   return (
@@ -22,7 +31,7 @@ const ListAdd: React.FC<Props> = ({ category, ingredients, register }) => {
       {Array.from({ length: selectCount }).map((_, index) => (
         <div key={index} className="flex">
           <select
-            {...register(`${category}_${index}`)} // index unique pour chaque sélecteur
+            {...register(`${category}_${index}`)}
             className="max-w-lg border rounded p-1 text-white text-bold bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400"
           >
             <option className="text-black" value="">
@@ -41,11 +50,20 @@ const ListAdd: React.FC<Props> = ({ category, ingredients, register }) => {
           <div className="w-1/6 text-center">
             <button
               type="button"
-              onClick={addSelect} // +1 sélecteur
+              onClick={addSelect}
               className="bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 text-white p-2 rounded text-xl"
             >
               <BsFillCheckCircleFill />
             </button>
+            {selectCount > 1 && (
+              <button
+                type="button"
+                onClick={onRemove}
+                className="bg-red-700 text-white text-2xl p-1 rounded"
+              >
+                <TiDelete />
+              </button>
+            )}
           </div>
         </div>
       ))}
@@ -53,4 +71,4 @@ const ListAdd: React.FC<Props> = ({ category, ingredients, register }) => {
   );
 };
 
-export default ListAdd;
+export default ListManager;
