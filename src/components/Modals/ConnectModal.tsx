@@ -18,22 +18,6 @@ const ConnectModal: FC = () => {
     setDisplayModal((prevstate) => !prevstate);
   }, []);
 
-  if (!useAuth) {
-    // Si le contexte n'est pas défini, tu peux gérer cette situation ici
-    return null;
-  }
-
-  // const handleLogin = () => {
-  //   // Simuler l'authentification avec les informations fournies
-  //   if (email === 'will@gmail.com' && password === 'niqueRedux') {
-  //     login();
-  //     setDisplayModal(false);
-  //   } else {
-  //     // Gérer les erreurs d'authentification ici
-  //     window.alert('Identifiants invalides');
-  //   }
-  // };
-
   // Code pour se connecter une fois l'API prête
 
   const handleLogin = async () => {
@@ -44,20 +28,17 @@ const ConnectModal: FC = () => {
         body: JSON.stringify({ username, password }),
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer token`,
         },
       });
 
       if (response.ok) {
         const data = await response.json(); // Obtenir les données de la réponse
         const token = data.token; // Extraire le token de la réponse
-        //  Stocker le token JWT dans le local storage
+        //  Stocker le token JWT dans le local storagea
         localStorage.setItem('authToken', token);
         login();
         setDisplayModal(false);
-
-        // Redirection vers la page Home
-        navigate('/');
+        setPassword('');
       } else {
         //  Gérer les erreurs d'authentification ici
         window.alert('Identifiants invalides');
@@ -72,6 +53,8 @@ const ConnectModal: FC = () => {
     //  Supprimer le token JWT du local storage
     localStorage.removeItem('authToken');
     logout();
+    setPassword('');
+    setUsername('');
   };
 
   return (
@@ -138,7 +121,7 @@ const ConnectModal: FC = () => {
                   <div className="modal-input-group mb-5">
                     <input
                       type="email"
-                      name="email"
+                      name="username"
                       id="email"
                       className="modal-input-group__input"
                       value={username}

@@ -21,13 +21,13 @@ const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
 
   return (
     <header className=" bg-[#132226] px-3 pt-2 pb-12 w-full flex h-[20vh]">
-      <div className="w-[50%] lg:w-[25%] flex items-center">
+      <div className="w-[50%] lg:w-[25%] h-full flex align-center">
         <NavLink to="/" onClick={handleResetCategoryId}>
           <img
             className=""
-            width="90"
-            height="90"
-            src="https://img.icons8.com/external-icongeek26-outline-gradient-icongeek26/64/external-cocktail-party-icongeek26-outline-gradient-icongeek26.png"
+            width="140"
+            height="140"
+            src="../../../public/logo-cocktail.png"
             alt="Cocktail and link to home"
           />
         </NavLink>

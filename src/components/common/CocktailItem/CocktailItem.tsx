@@ -25,7 +25,7 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
           : ''
       } transition-all ease-in duration-1200`}
     >
-      <div className="w-52 h-52 rounded-full overflow-hidden shadow-amber-700 shadow-sm">
+      <div className="w-52 h-52 rounded-full overflow-hidden border border-[#A4978E] border-8">
         <div className="relative w-full h-full border-8">
           <img
             src={cocktail.picture}
@@ -36,7 +36,7 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
       </div>
       <div className="pl-10 pr-10 ">
         <h3
-          className={`ml-3 py-2 pr-4 pl-1 leading-7 text-[#A4978E] hover:text-white text-xl${
+          className={`ml-3 py-2 pr-4 pl-1 leading-7 text-[#BE9063] hover:text-white text-3xl${
             animate ? 'opacity-0 -translate-y-12' : ''
           } transition-all ease-in duration-1200`}
         >
@@ -53,10 +53,6 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
         >
           Difficulté : {cocktail.difficulty}/5
         </p>
-        {/*          -----    SKILBAR A GARDER OU NON  ---------*/}
-        {/* <div className="SkillBar flex">
-          <div className={`Skill-fill ${difficultyBar(cocktail.difficulty)}`} />
-        </div> */}
         <p
           className={`text-[#A4978E] p-4 flex ${modulo ? 'justify-end' : ''} ${
             animate ? 'opacity-0 translate-y-12' : ''

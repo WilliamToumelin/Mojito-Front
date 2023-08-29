@@ -44,7 +44,7 @@ const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
         style={{
           boxShadow: '#132226 0px 1px 22px',
         }}
-        className="w-full h-full lg:w-3/5 lg:h-4/5 flex shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]"
+        className="w-full h-full lg:w-4/6 lg:h-4/5 flex shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]"
       >
         {cocktailDetails ? (
           <div className="flex-1 flex text-[#BE9063]">
@@ -68,7 +68,7 @@ const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
                 <p className="ml-2 text-lg mr-1 font-bold text-[#A4978E]">
                   {cocktailDetails.rating}
                 </p>
-                <span className="w-2 h-2 mx-1.5 bg-white rounded-full" />
+                <span className="w-2 h-2 mx-1.5 bg-[#BE9063] rounded-full" />
                 <Link to={`/cocktail/${cocktailDetails.slug}/commentaires`}>
                   <div className="ml-1 text-lg text-[#A4978E]">
                     {cocktailDetails.comments.length}{' '}
@@ -149,7 +149,7 @@ const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
                   {!isLoggedIn ? '' : <Rating />}
                   <Link
                     to={`/cocktail/${cocktailDetails.slug}/commentaires`}
-                    className="menu-link flex justify-center items-center w-44 h-14 text-center rounded-full text-white font-bold text-base bg-gradient-to-r from-[#132226] via-[#525B56] to-[#A4978E] hover:bg-gradient-to-r hover:from-[#1e353b] hover:via-[rgb(106, 116, 110);] hover:to-[#b3a8a0]"
+                    className="menu-link flex justify-center items-center w-44 h-14 text-center rounded-full text-[#BE9063] font-bold text-base bg-gradient-to-r from-[#132226] via-[#525B56] to-[#A4978E] hover:bg-gradient-to-r hover:from-[#1e353b] hover:via-[rgb(106, 116, 110);] hover:to-[#b3a8a0]"
                   >
                     Voir les commentaires
                   </Link>

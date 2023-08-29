@@ -78,13 +78,13 @@ const Home: React.FC<HomeProps> = ({
         }}
         className={` ${
           !categoryId ? 'relative' : ''
-        } w-4/5 lg:w-3/5 h-full lg:h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]`}
+        } w-4/5 lg:w-4/6 h-full lg:h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]`}
       >
         {/* Haut du composant avec le bouton dependant de SI PAS DE CATEGORYID avec top 5 ou liste complète */}
         {!categoryId ? (
           <>
             <div className="text-center pb-12">
-              <h1 className="text-[#A4978E] text-2xl pt-5">
+              <h1 className="text-[#BE9063] text-2xl pt-5">
                 {displayMode
                   ? 'Les 5 cinq cocktails les mieux notés'
                   : 'Tous nos cocktails'}
@@ -92,7 +92,7 @@ const Home: React.FC<HomeProps> = ({
             </div>
             <div className="flex justify-center mb-10 absolute top-10 right-10">
               <button
-                className="text-[#A4978E] text-5xl animate-bounce"
+                className="text-[#BE9063] text-5xl animate-bounce"
                 type="button"
                 onClick={handleToggle}
               >
@@ -109,7 +109,7 @@ const Home: React.FC<HomeProps> = ({
               selectedCocktail={selectedCocktail}
             />
             <div className="text-center pb-12">
-              <h1 className="text-[#A4978E] text-2xl pt-5">
+              <h1 className="text-[#BE9063] text-2xl pt-5">
                 Catégorie : {categoryId}
               </h1>
             </div>

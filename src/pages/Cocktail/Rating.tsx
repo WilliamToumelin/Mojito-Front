@@ -40,7 +40,7 @@ const Rating = () => {
           onFocus={() => handleIconMouseOver(i)}
           onMouseLeave={handleIconMouseLeave}
           className={`text-3xl p-1 ${
-            i <= rating || i <= index ? 'text-[#BE9063]' : 'text-gray-300'
+            i <= rating || i <= index ? 'text-[#BE9063]' : 'text-gray-400'
           }`}
         >
           <span className="">

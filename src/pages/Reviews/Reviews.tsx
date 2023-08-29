@@ -34,14 +34,14 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
   if (!cocktailData) {
     // TEMPORAIRE !!!!!! a rajouter un loader , parce pour l'instant il n'y a que une fenetre noir si pas de cocktail chargé encore ...
     return (
-      <div className="bg-black flex justify-center items-center flex-1 h-[75vh]">
-        <div className="w-4/5 lg:w-3/5 h-4/5 flex rounded-2xl shadow-purple-700 shadow-2xl bg-black" />
+      <div className="bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh]">
+        <div className="relative  w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col over shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]" />
       </div>
     );
   }
 
   return (
-    <div className="bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh] text-white">
+    <div className="bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh]">
       {cocktailData.comments.length > 0 && (
         <div className="relative  w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col over shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]">
           <div className="w-4/5 p-3 flex flex-col items-center">

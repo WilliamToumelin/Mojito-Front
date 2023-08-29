@@ -18,7 +18,7 @@ const CommentModal: FC = () => {
     <div className="absolute top-8 right-5 w-1/5 h-full">
       <button
         type="button"
-        className=" block text-white bg-gradient-to-r from-[#132226] via-[#525B56] to-[#A4978E] hover:bg-gradient-to-r hover:from-[#1e353b] hover:via-[rgb(106, 116, 110);] hover:to-[#b3a8a0] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className=" block text-white bg-gradient-to-r from-[#132226] via-[#525B56] to-[#A4978E] hover:bg-gradient-to-r hover:from-[#1e353b] hover:via-[rgb(106, 116, 110);] hover:to-[#b3a8a0] focus:ring-4 focus:outline-none focus:ring-[#A19A94] font-medium rounded-lg text-sm px-5 py-2.5 text-center"
         onClick={handleToggleModal}
       >
         Laisser un commentaire
@@ -110,7 +110,7 @@ const CommentModal: FC = () => {
           aria-hidden="true"
         >
           <div className="relative w-full max-h-full border-top-white m-8">
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div className="relative bg-[#BE9063] rounded-lg shadow">
               <button
                 type="button"
                 className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
