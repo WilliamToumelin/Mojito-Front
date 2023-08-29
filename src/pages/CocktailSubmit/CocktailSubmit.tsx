@@ -35,7 +35,7 @@ const CocktailSubmit: React.FC = () => {
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-6 px-12 flex">
-            <div className="inline-block w-3/6 pr-4">
+            <div className="w-1/2 pr-4">
               <ul>
                 {ingredientsList?.ingredients?.map((category) => (
                   <ListManager
@@ -47,9 +47,9 @@ const CocktailSubmit: React.FC = () => {
                 ))}
               </ul>
             </div>
-            <div>
+            <div className="flex flex-wrap justify-center pt-5 w-1/2">
               <div className="mb-4">
-                <h3 className="text-lg font-medium mb-4">Verres</h3>
+                <h3 className="text-lg font-medium mb-4 text-center">Verres</h3>
                 <RadioAdd
                   options={
                     ingredientsList?.glass?.map(
@@ -62,7 +62,7 @@ const CocktailSubmit: React.FC = () => {
                 />
               </div>
               <div className="mb-4">
-                <h3 className="text-lg font-medium mb-4">Glaces</h3>
+                <h3 className="text-lg font-medium mb-4 text-center">Glaces</h3>
                 <RadioAdd
                   options={
                     ingredientsList?.ices?.map(
@@ -75,7 +75,9 @@ const CocktailSubmit: React.FC = () => {
                 />
               </div>
               <div className="mb-4">
-                <h3 className="text-lg font-medium mb-4">Techniques</h3>
+                <h3 className="text-lg font-medium mb-4 text-center">
+                  Techniques
+                </h3>
                 <RadioAdd
                   options={
                     ingredientsList?.technicals?.map(

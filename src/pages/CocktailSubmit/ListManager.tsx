@@ -26,9 +26,9 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
   };
 
   return (
-    <div className="block gap-2">
+    <div className="p-6">
       <h3 className="text-xl text-center">{category}</h3>
-      <div key={category} className="flex justify-center p-3">
+      <div key={category} className="flex justify-center p-3 flex-wrap">
         {/* création d'un tableau d'un longueur max de selectCount, dans le map avec _ on ignore l'élément actuel, on a besoin que de l'index */}
         {Array.from({ length: selectCount }).map((_, index) => (
           <div key={index} className="flex p-2">

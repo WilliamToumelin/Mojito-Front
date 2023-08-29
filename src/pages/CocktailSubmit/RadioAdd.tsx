@@ -11,12 +11,12 @@ interface Props {
 
 const RadioAdd: React.FC<Props> = ({ options, selected, name, register }) => {
   return (
-    <div className="flex mb-4">
+    <div className="flex flex-wrap justify-center">
       {options.map((option, index) => (
-        <label key={index} className="flex items-center">
-          <span className="mr-3">{option}</span>
+        <label key={index} className="flex flex-wrap items-center p-3">
+          <span className="p-4">{option}</span>
           <div
-            className={`w-8 h-8 rounded-full border-gray-600 border-4 flex items-center justify-center ${
+            className={`w-8 h-8 rounded-full border-4 flex items-center justify-center ${
               selected === option
                 ? 'bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 text-black border-none'
                 : ''
