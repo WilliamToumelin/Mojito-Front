@@ -14,6 +14,7 @@ const CocktailSubmit: React.FC = () => {
   const techniques = watch('Techniques');
   const ices = watch('Glaces');
   const glass = watch('Verres');
+  const description = watch('description');
 
   useEffect(() => {
     fetch('http://localhost:5174/api/propositions/data')
@@ -31,8 +32,7 @@ const CocktailSubmit: React.FC = () => {
     <div className="bg-white flex justify-center items-center flex-1 h-[75vh]">
       <div
         style={{
-          boxShadow:
-            'rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset',
+          boxShadow: 'rgba(0, 0, 0, 0.08) 0px 4px 12px',
         }}
         className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto over shadow-purple-700 shadow-xl rounded-2xl bg-white"
       >
@@ -101,7 +101,7 @@ const CocktailSubmit: React.FC = () => {
             <div className="mb-4 text-center">
               <h3 className="text-lg font-medium mb-2">Description</h3>
               <textarea
-                // onChange={(e) => setDescription(e.target.value)}
+                {...register('description')}
                 className="border-xs rounded p-1 w-1/2"
                 rows={3}
               />
