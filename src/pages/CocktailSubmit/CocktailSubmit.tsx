@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
@@ -10,15 +11,6 @@ const CocktailSubmit: React.FC = () => {
   const { register, handleSubmit, watch } = useForm();
   const [ingredientsList, setIngredientsList] =
     useState<IngredientsData | null>(null);
-  const [amounts, setAmounts] = useState<{ [key: string]: number }>({
-    alcools: 1,
-    softs: 1,
-  });
-  const [selectedAlcohols, setSelectedAlcohols] = useState<
-    { name: string; quantity: number }[]
-  >([]);
-  const [description, setDescription] = useState('');
-
   const techniques = watch('Techniques');
   const ices = watch('Glaces');
   const glass = watch('Verres');
@@ -32,33 +24,6 @@ const CocktailSubmit: React.FC = () => {
       .catch((err) => console.error(err));
   }, []);
   console.log(ingredientsList);
-  const handleAmountChange = (type: string, increment: boolean) => {
-    setAmounts((prevAmounts) => {
-      const newValue = increment
-        ? prevAmounts[type] + 1
-        : prevAmounts[type] - 1;
-      const newAmount = Math.max(newValue, 1);
-      return {
-        ...prevAmounts,
-        [type]: newAmount,
-      };
-    });
-  };
-
-  const handleAlcoholChange = (selectedAlcoholName: string) => {
-    if (selectedAlcoholName) {
-      setSelectedAlcohols((prevSelectedAlcohols) => [
-        ...prevSelectedAlcohols,
-        { name: selectedAlcoholName, quantity: amounts.alcools },
-      ]);
-    }
-  };
-
-  const handleAlcoholRemove = (name: string) => {
-    setSelectedAlcohols((prevSelectedAlcohols) =>
-      prevSelectedAlcohols.filter((item) => item.name !== name)
-    );
-  };
 
   const onSubmit = (data: any) => console.log(data);
 
@@ -76,10 +41,6 @@ const CocktailSubmit: React.FC = () => {
                   <ListAdd
                     key={category.name}
                     category={category.name}
-                    amounts={amounts}
-                    handleAmountChange={handleAmountChange}
-                    handleChange={handleAlcoholChange}
-                    selected={selectedAlcohols}
                     ingredients={category.ingredients}
                     register={register}
                   />
@@ -137,8 +98,7 @@ const CocktailSubmit: React.FC = () => {
             <div className="mb-4 text-center">
               <h3 className="text-lg font-medium mb-2">Description</h3>
               <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                // onChange={(e) => setDescription(e.target.value)}
                 className="border-xs rounded p-1 w-1/2 bg-gray-800"
                 rows={3}
               />

@@ -1,29 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { Ingredient } from '../../types/types';
 
 interface Props {
   category: string;
-  amounts: any;
-  handleAmountChange: (type: string, increment: boolean) => void;
-  handleChange: (selected: string) => void;
-  selected: any;
   ingredients: Ingredient[];
   register: UseFormRegister<FieldValues>;
 }
 
-const ListAdd: React.FC<Props> = ({
-  category,
-  amounts,
-  handleAmountChange,
-  handleChange,
-  selected,
-  ingredients,
-  register,
-}) => {
+const ListAdd: React.FC<Props> = ({ category, ingredients, register }) => {
   return (
     <div key={category}>
       <h3 className="text-xl">{category}</h3>
@@ -45,37 +32,12 @@ const ListAdd: React.FC<Props> = ({
             </option>
           ))}
         </select>
-        <div
-          className={`flex p-1 pl-4 w-32 text-white text-3xl ${
-            category === 'aromates' || category === 'verre' ? 'opacity-0' : ''
-          }`}
-        >
-          <div className="flex items-center space-x-4">
-            <button
-              type="button"
-              className=""
-              onClick={() => handleAmountChange(category, false)}
-              // {...register()}
-            >
-              <AiOutlineMinusCircle />
-            </button>
-            <div>{amounts[category]}</div>
-            <button
-              type="button"
-              className=""
-              onClick={() => handleAmountChange(category, true)}
-              // {...register()}
-            >
-              <AiOutlinePlusCircle />
-            </button>
-          </div>
-        </div>
         <div className="w-1/6 text-center">
           <button
             type="button"
             onClick={() => {
               if (category === 'alcools') {
-                handleChange(selected);
+                // TODO
               }
             }}
             // {...register()}
