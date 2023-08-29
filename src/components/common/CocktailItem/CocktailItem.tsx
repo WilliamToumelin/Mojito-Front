@@ -27,7 +27,7 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
           : ''
       } transition-all ease-in duration-1200`}
     >
-      <div className="w-60 h-60 rounded-full overflow-hidden border border-[#A4978E] border-8">
+      <div className="w-60 h-60 rounded-full overflow-hidden border-[#A4978E] border-8">
         <div className="relative w-full h-full">
           <img
             src={cocktail.picture}

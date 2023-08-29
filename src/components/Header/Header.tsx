@@ -20,23 +20,28 @@ const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
   };
 
   return (
-    <header className=" bg-[#132226] px-3 pt-2 pb-12 w-full flex h-[20vh]">
+    <header className="bg-[#132226] px-3 pt-2 pb-12 w-full flex h-[20vh]">
       <div className="w-[50%] lg:w-[25%] h-full flex align-center">
         <NavLink to="/" onClick={handleResetCategoryId}>
           <img
-            className=""
-            width="150"
+            className="border-[#A4978E] border-8 rounded-full"
+            width="160"
             height="160"
             src="../../../public/logo-cocktail.png"
             alt="Cocktail and link to home"
           />
         </NavLink>
       </div>
-      <div className="hidden lg:flex justify-start items-center w-[50%]">
-        <CategorySelectBar
-          categoryId={categoryId}
-          setCategoryId={setCategoryId}
-        />
+      <div className="block">
+        <div className="text-8xl text-[#A4978E] text-center font-semibold pb-7">
+          <h1>Mojit&apos;o</h1>
+        </div>
+        <div className="hidden lg:flex justify-start items-center w-[50%]">
+          <CategorySelectBar
+            categoryId={categoryId}
+            setCategoryId={setCategoryId}
+          />
+        </div>
       </div>
       <div className="hidden lg:flex justify-end items-center w-[25%]">
         {!isLoggedIn ? (
@@ -52,13 +57,6 @@ const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
           </Link>
         )}
         <ConnectModal />
-      </div>
-      <div className="lg:hidden flex justify-end items-center w-[50%] mr-6 ">
-        <div className="p-4 space-y-2 bg-gray-600 rounded shadow">
-          <span className="block w-8 h-0.5 bg-gray-100 animate-pulse" />
-          <span className="block w-8 h-0.5 bg-gray-100 animate-pulse" />
-          <span className="block w-8 h-0.5 bg-gray-100 animate-pulse" />
-        </div>
       </div>
     </header>
   );
