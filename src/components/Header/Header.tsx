@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
 
   return (
     <header className="bg-[#132226] px-3 pt-2 pb-12 w-full flex h-[20vh]">
-      <div className="w-[50%] lg:w-[25%] h-full flex align-center">
+      <div className="w-2/12 flex pl-1 pt-1">
         <NavLink to="/" onClick={handleResetCategoryId}>
           <img
             className="border-[#A4978E] border-8 rounded-full"
@@ -32,27 +32,28 @@ const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
           />
         </NavLink>
       </div>
-      <div className="block">
-        <div className="text-8xl text-[#A4978E] text-center font-semibold pb-7">
+      <div className="w-8/12 block">
+        <div className="text-8xl text-[#BE9063] text-center font-semibold pb-7">
           <h1>Mojit&apos;o</h1>
         </div>
-        <div className="hidden lg:flex justify-start items-center w-[50%]">
+        <div className="hidden lg:flex items-center justify-center">
           <CategorySelectBar
             categoryId={categoryId}
             setCategoryId={setCategoryId}
           />
         </div>
       </div>
-      <div className="hidden lg:flex justify-end items-center w-[25%]">
+      <div className="w-2/12 hidden lg:flex justify-end items-center">
         {!isLoggedIn ? (
           ''
         ) : (
           <Link to="/proposition-cocktail">
             <button
               type="button"
-              className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
+              className="text-[#A4978E] border border-[#A4978E] hover:bg-[#BE9063] focus:ring-4 focus:outline-none 
+              focus:ring-[#BE9063] hover:text-[#132226] font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
             >
-              Propose ton cocktail!
+              Propose ton cocktail !
             </button>
           </Link>
         )}
