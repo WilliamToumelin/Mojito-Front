@@ -5,11 +5,11 @@ import { useAuth } from '../../contexts/AuthProvider';
 import './Register.scss';
 
 const Register: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [pseudonym, setPseudonym] = useState('');
 
-  const { register } = useAuth();
+  const { register, login } = useAuth();
 
   if (!useAuth) {
     // Si le contexte n'est pas défini, tu peux gérer cette situation ici
@@ -21,7 +21,7 @@ const Register: React.FC = () => {
     try {
       const response = await fetch('/api/register', {
         method: 'POST',
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password, pseudonym }),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -31,6 +31,7 @@ const Register: React.FC = () => {
         //  Stocker le token JWT dans le local storage
         localStorage.setItem('authToken', token);
         register();
+        login;
       } else {
         //  Gérer les erreurs d'authentification ici
         window.alert("Erreur lors de l'inscription");
@@ -57,8 +58,8 @@ const Register: React.FC = () => {
                   <input
                     type="email"
                     className="register-input-group__input"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     required
                   />
                   <label
@@ -87,8 +88,8 @@ const Register: React.FC = () => {
                   <input
                     type="username"
                     className="register-input-group__input"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    value={pseudonym}
+                    onChange={(e) => setPseudonym(e.target.value)}
                     required
                   />
                   <label

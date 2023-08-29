@@ -4,9 +4,19 @@ import { Cocktails } from '../../types/types';
 
 type Props = {
   filteredCocktails: Cocktails[];
+  selectedCocktail: number | null;
+  setSelectedCocktail: (id: number | null) => void;
 };
 
-const SideBar: React.FC<Props> = ({ filteredCocktails }) => {
+const SideBar: React.FC<Props> = ({
+  filteredCocktails,
+  setSelectedCocktail,
+  selectedCocktail,
+}) => {
+  const handleSelectCocktail = (cocktailId: number) => {
+    setSelectedCocktail(cocktailId);
+  };
+
   return (
     <div className="hidden lg:block absolute top-24 lg:block w-56 z-10 left-0">
       <div className="flex flex-col gap-1">
@@ -15,6 +25,7 @@ const SideBar: React.FC<Props> = ({ filteredCocktails }) => {
             to={`/cocktail/${cocktail.slug}`}
             className="menu-link"
             key={cocktail.id}
+            onClick={() => handleSelectCocktail(cocktail.id)}
           >
             {/* <GradientButtonRectangle
               name={cocktail.name}
