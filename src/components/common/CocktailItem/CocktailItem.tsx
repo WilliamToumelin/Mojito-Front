@@ -17,7 +17,9 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
 }) => {
   return (
     <article
-      className={`mb-12 flex items-center ${modulo ? 'flex-row-reverse' : ''} ${
+      className={`mb-12 h-[20em] flex items-center ${
+        modulo ? 'flex-row-reverse' : ''
+      } ${
         animate
           ? modulo
             ? 'opacity-0 -translate-x-28'
@@ -25,8 +27,8 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
           : ''
       } transition-all ease-in duration-1200`}
     >
-      <div className="w-52 h-52 rounded-full overflow-hidden border border-[#A4978E] border-8">
-        <div className="relative w-full h-full border-8">
+      <div className="w-60 h-60 rounded-full overflow-hidden border border-[#A4978E] border-8">
+        <div className="relative w-full h-full">
           <img
             src={cocktail.picture}
             alt="cocktail"

@@ -25,8 +25,8 @@ const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
         <NavLink to="/" onClick={handleResetCategoryId}>
           <img
             className=""
-            width="140"
-            height="140"
+            width="150"
+            height="160"
             src="../../../public/logo-cocktail.png"
             alt="Cocktail and link to home"
           />

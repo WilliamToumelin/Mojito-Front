@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { FaCocktail, FaGlassMartiniAlt } from 'react-icons/fa';
 import { GiIceCube } from 'react-icons/gi';
 import { FiChevronRight } from 'react-icons/fi';
@@ -8,6 +8,7 @@ import { BsClockFill } from 'react-icons/bs';
 import Rating from './Rating';
 import { Cocktails } from '../../types/types';
 import { useAuth } from '../../contexts/AuthProvider';
+import { CgPacman } from 'react-icons/cg';
 
 interface CocktailProps {
   selectedCocktail: number | null;
@@ -18,16 +19,17 @@ const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
     null
   );
   const { isLoggedIn } = useAuth();
+  const selectedCocktailId = Number(localStorage.getItem('selectedCocktail'));
 
   useEffect(() => {
-    fetch(`http://localhost:5174/api/cocktails/${selectedCocktail}`)
-      // fetch('http://localhost:5174/api/cocktails')
+    fetch(`http://localhost:5174/api/cocktails/${selectedCocktailId}`)
       .then((response) => response.json())
       .then((data) => {
         setCocktailDetails(data);
       })
       .catch((err) => console.error(err));
-  }, [selectedCocktail]);
+    console.log(selectedCocktailId);
+  }, [selectedCocktailId]);
 
   if (!cocktailDetails) {
     // TEMPORAIRE !!!!!! a rajouter un loader , parce pour l'instant il n'y a que une fenetre noir si pas de cocktail chargé encore ...
@@ -70,7 +72,7 @@ const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
                 </p>
                 <span className="w-2 h-2 mx-1.5 bg-[#BE9063] rounded-full" />
                 <Link to={`/cocktail/${cocktailDetails.slug}/commentaires`}>
-                  <div className="ml-1 text-lg text-[#A4978E]">
+                  <div className="ml-1 text-lg text-[#A4978E] hover:text-[#BE9063] ">
                     {cocktailDetails.comments.length}{' '}
                     {cocktailDetails.comments.length < 2
                       ? 'commentaire'
@@ -137,8 +139,10 @@ const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
               </p>
               {cocktailDetails.trick ? (
                 <>
-                  <h3 className="text-3xl">Nos astuces :</h3>
-                  <p className="text-xl space-y-1">{cocktailDetails.trick}</p>
+                  <h3 className="text-3xl ">Nos astuces :</h3>
+                  <p className="text-xl text-[#A4978E] space-y-1">
+                    {cocktailDetails.trick}
+                  </p>
                 </>
               ) : (
                 ''

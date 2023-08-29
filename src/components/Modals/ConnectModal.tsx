@@ -22,6 +22,7 @@ const ConnectModal: FC = () => {
 
   const handleLogin = async () => {
     //  Appeler votre backend pour l'authentification
+    console.log('Tentative de connexion avec', username, password);
     try {
       const response = await fetch('http://localhost:5174/api/login_check', {
         method: 'POST',
@@ -41,6 +42,7 @@ const ConnectModal: FC = () => {
         setPassword('');
       } else {
         //  Gérer les erreurs d'authentification ici
+        console.log('id incorrect');
         window.alert('Identifiants invalides');
       }
     } catch (error) {
@@ -50,6 +52,7 @@ const ConnectModal: FC = () => {
   };
 
   const handleLogout = () => {
+    console.log('Déconnexion en cours');
     //  Supprimer le token JWT du local storage
     localStorage.removeItem('authToken');
     logout();

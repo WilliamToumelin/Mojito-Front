@@ -55,6 +55,7 @@ const Home: React.FC<HomeProps> = ({
 
   const handleSelectCocktail = (cocktailId: number) => {
     setSelectedCocktail(cocktailId);
+    localStorage.setItem('selectedCocktail', cocktailId.toString());
   };
 
   const cocktailsData = useMemo(() => {
