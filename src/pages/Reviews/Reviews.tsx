@@ -11,12 +11,11 @@ interface Props {
 
 function formatDate(data: any) {
   const date = new Date(data);
-  const options = {
-    day: 'numeric',
+  const formattedDate = `${date.getDate()} ${date.toLocaleDateString('fr-FR', {
     month: 'long',
     year: 'numeric',
-  };
-  return date.toLocaleDateString('fr-FR', options);
+  })}`;
+  return formattedDate;
 }
 
 const Reviews: React.FC<Props> = ({ selectedCocktail }) => {

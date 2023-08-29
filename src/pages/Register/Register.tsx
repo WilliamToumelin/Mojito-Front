@@ -8,6 +8,13 @@ const Register: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [pseudonym, setPseudonym] = useState('');
+  const [isOver18, setIsOver18] = useState(false);
+  const [hasConsented, setHasConsented] = useState(false);
+  const [formErrors, setFormErrors] = useState({
+    username: '',
+    password: '',
+    pseudonym: '',
+  });
 
   const { register, login } = useAuth();
 
@@ -21,7 +28,13 @@ const Register: React.FC = () => {
     try {
       const response = await fetch('/api/register', {
         method: 'POST',
-        body: JSON.stringify({ username, password, pseudonym }),
+        body: JSON.stringify({
+          username,
+          password,
+          pseudonym,
+          isOver18,
+          hasConsented,
+        }),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -31,7 +44,7 @@ const Register: React.FC = () => {
         //  Stocker le token JWT dans le local storage
         localStorage.setItem('authToken', token);
         register();
-        login;
+        login();
       } else {
         //  Gérer les erreurs d'authentification ici
         window.alert("Erreur lors de l'inscription");
@@ -68,6 +81,7 @@ const Register: React.FC = () => {
                   >
                     Email address
                   </label>
+                  <div className="error-message">{formErrors.username}</div>
                 </div>
                 <div className="register-input-group mb-5">
                   <input
@@ -83,6 +97,7 @@ const Register: React.FC = () => {
                   >
                     Mot de passe
                   </label>
+                  <div className="error-message">{formErrors.password}</div>
                 </div>
                 <div className="register-input-group mb-5">
                   <input
@@ -98,6 +113,7 @@ const Register: React.FC = () => {
                   >
                     Pseudo
                   </label>
+                  <div className="error-message">{formErrors.pseudonym}</div>
                 </div>
 
                 <div className="py-2">
@@ -109,6 +125,7 @@ const Register: React.FC = () => {
                     name="majeur"
                     className="p-2"
                     required
+                    onChange={() => setIsOver18(!isOver18)}
                   />
                 </div>
 
@@ -128,6 +145,7 @@ const Register: React.FC = () => {
                     name="consentement"
                     className="p-2"
                     required
+                    onChange={() => setHasConsented(!hasConsented)}
                   />
                 </div>
                 <button
