@@ -1,27 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IngredientsData } from '../../types/types';
-import ListAdd from './ListAdd';
+import ListManager from './ListManager';
 import RadioAdd from './RadioAdd';
 
 const CocktailSubmit: React.FC = () => {
   const { register, handleSubmit, watch } = useForm();
   const [ingredientsList, setIngredientsList] =
     useState<IngredientsData | null>(null);
-  const [amounts, setAmounts] = useState<{ [key: string]: number }>({
-    alcools: 1,
-    softs: 1,
-  });
-  const [selectedAlcohols, setSelectedAlcohols] = useState<
-    { name: string; quantity: number }[]
-  >([]);
-  const [description, setDescription] = useState('');
-
   const techniques = watch('Techniques');
   const ices = watch('Glaces');
   const glass = watch('Verres');
+  const description = watch('description');
 
   useEffect(() => {
     fetch('http://localhost:5174/api/propositions/data')
@@ -32,61 +25,37 @@ const CocktailSubmit: React.FC = () => {
       .catch((err) => console.error(err));
   }, []);
   console.log(ingredientsList);
-  const handleAmountChange = (type: string, increment: boolean) => {
-    setAmounts((prevAmounts) => {
-      const newValue = increment
-        ? prevAmounts[type] + 1
-        : prevAmounts[type] - 1;
-      const newAmount = Math.max(newValue, 1);
-      return {
-        ...prevAmounts,
-        [type]: newAmount,
-      };
-    });
-  };
-
-  const handleAlcoholChange = (selectedAlcoholName: string) => {
-    if (selectedAlcoholName) {
-      setSelectedAlcohols((prevSelectedAlcohols) => [
-        ...prevSelectedAlcohols,
-        { name: selectedAlcoholName, quantity: amounts.alcools },
-      ]);
-    }
-  };
-
-  const handleAlcoholRemove = (name: string) => {
-    setSelectedAlcohols((prevSelectedAlcohols) =>
-      prevSelectedAlcohols.filter((item) => item.name !== name)
-    );
-  };
 
   const onSubmit = (data: any) => console.log(data);
 
   return (
-    <div className="bg-black flex justify-center items-center flex-1 h-[75vh]">
-      <div className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto over shadow-purple-700 shadow-2xl rounded-2xl bg-black text-white">
-        <h2 className="text-3xl font-bold mb-4 text-center">
+    <div className="bg-white flex justify-center items-center flex-1 h-[75vh]">
+      <div
+        style={{
+          boxShadow: 'rgba(0, 0, 0, 0.08) 0px 4px 12px',
+        }}
+        className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto over shadow-purple-700 shadow-xl rounded-2xl bg-white"
+      >
+        <h2 className="text-3xl font-bold my-8 text-center">
           Proposer un Cocktail
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-6 px-12 flex">
-            <div className="inline-block w-3/5 pr-4">
+            <div className="w-1/2 pr-4">
               <ul>
                 {ingredientsList?.ingredients?.map((category) => (
-                  <ListAdd
+                  <ListManager
                     key={category.name}
                     category={category.name}
-                    amounts={amounts}
-                    handleAmountChange={handleAmountChange}
-                    handleChange={handleAlcoholChange}
-                    selected={selectedAlcohols}
                     ingredients={category.ingredients}
                     register={register}
                   />
                 ))}
               </ul>
-              <div className="mb-4">
-                <h3 className="text-lg font-medium mb-4">Verres</h3>
+            </div>
+            <div className="flex flex-wrap justify-center pt-5 w-1/2">
+              <div className="">
+                <h3 className="text-lg font-medium mb-4 text-center">Verres</h3>
                 <RadioAdd
                   options={
                     ingredientsList?.glass?.map(
@@ -98,8 +67,8 @@ const CocktailSubmit: React.FC = () => {
                   name="Verres"
                 />
               </div>
-              <div className="mb-4">
-                <h3 className="text-lg font-medium mb-4">Glaces</h3>
+              <div className="">
+                <h3 className="text-lg font-medium mb-4 text-center">Glaces</h3>
                 <RadioAdd
                   options={
                     ingredientsList?.ices?.map(
@@ -111,8 +80,10 @@ const CocktailSubmit: React.FC = () => {
                   name="Glaces"
                 />
               </div>
-              <div className="mb-4">
-                <h3 className="text-lg font-medium mb-4">Techniques</h3>
+              <div className="">
+                <h3 className="text-lg font-medium mb-4 text-center">
+                  Techniques
+                </h3>
                 <RadioAdd
                   options={
                     ingredientsList?.technicals?.map(
@@ -125,28 +96,19 @@ const CocktailSubmit: React.FC = () => {
                 />
               </div>
             </div>
-
-            <div className="flex w-2/5 h-full">
-              {/* <ItemRemove
-                items={selectedAlcohols}
-                onRemove={handleAlcoholRemove}
-              /> */}
-            </div>
           </div>
           <div>
             <div className="mb-4 text-center">
               <h3 className="text-lg font-medium mb-2">Description</h3>
               <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                className="border-xs rounded p-1 w-1/2 bg-gray-800"
+                {...register('description')}
+                className="border-xs rounded p-1 w-1/2"
                 rows={3}
               />
             </div>
             <div className="text-center py-2">
               <button
                 type="submit"
-                // onClick={handleSubmit}
                 className="bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 text-white p-2 rounded-lg"
               >
                 Soumettre le Cocktail

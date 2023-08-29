@@ -1,7 +1,6 @@
 import React from 'react';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
-import Register from '../Register/Register';
 
 interface Props {
   name: string;
@@ -12,14 +11,16 @@ interface Props {
 
 const RadioAdd: React.FC<Props> = ({ options, selected, name, register }) => {
   return (
-    <div className="mb-4">
+    <div className="flex flex-wrap justify-center">
       {options.map((option, index) => (
-        <label key={index} className="flex items-center">
-          <span className="mr-3">{option}</span>
+        <label key={index} className="flex flex-wrap items-center p-3">
+          <div className="p-4 shadow-white border-white rounded-full">
+            {option}
+          </div>
           <div
-            className={`w-8 h-8 rounded-full border-gray-400 border-4 flex items-center justify-center ${
+            className={`w-8 h-8 rounded-full border-4 flex items-center justify-center ${
               selected === option
-                ? 'bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 text-black border-none'
+                ? 'bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 text-white border-none'
                 : ''
             }`}
           >
