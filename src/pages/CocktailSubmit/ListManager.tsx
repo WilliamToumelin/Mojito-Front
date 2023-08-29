@@ -25,6 +25,8 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
     }
   };
 
+  const isAddButtonDisabled = selectCount >= 3;
+
   return (
     <div className="p-6">
       <h3 className="text-xl text-center">{category}</h3>
@@ -34,14 +36,14 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
           <div key={index} className="flex p-2">
             <select
               {...register(`${category}_${index}`)}
-              className="max-w-lg border rounded p-1 text-white text-bold bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400"
+              className="text-white font-bold text-center max-w-xl border rounded p-1 text-bold bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400"
             >
-              <option className="text-black" value="">
+              <option className="" value="">
                 A vous de jouer !
               </option>
               {ingredients.map((ingredient) => (
                 <option
-                  className="text-black"
+                  className=""
                   key={ingredient.id}
                   value={ingredient.name}
                 >
@@ -57,7 +59,12 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
           <button
             type="button"
             onClick={addSelect}
-            className="bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 text-white p-2 rounded text-xl"
+            className={`${
+              isAddButtonDisabled
+                ? 'bg-gray-500 cursor-not-allowed'
+                : 'text-white bg-gradient-to-r  from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400'
+            } p-2 rounded text-xl`}
+            disabled={isAddButtonDisabled}
           >
             <AiFillPlusCircle />
           </button>
@@ -68,7 +75,7 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
             <button
               type="button"
               onClick={onRemove}
-              className="bg-red-700 text-white text-xl p-2 rounded"
+              className="bg-red-700 text-xl p-2 rounded text-white"
             >
               <FaTrashAlt />
             </button>

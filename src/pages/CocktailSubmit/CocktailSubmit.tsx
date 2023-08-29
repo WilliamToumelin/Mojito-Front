@@ -28,9 +28,15 @@ const CocktailSubmit: React.FC = () => {
   const onSubmit = (data: any) => console.log(data);
 
   return (
-    <div className="bg-black flex justify-center items-center flex-1 h-[75vh]">
-      <div className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto over shadow-purple-700 shadow-2xl rounded-2xl bg-black text-white">
-        <h2 className="text-3xl font-bold mb-4 text-center">
+    <div className="bg-white flex justify-center items-center flex-1 h-[75vh]">
+      <div
+        style={{
+          boxShadow:
+            'rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset',
+        }}
+        className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto over shadow-purple-700 shadow-xl rounded-2xl bg-white"
+      >
+        <h2 className="text-3xl font-bold my-8 text-center">
           Proposer un Cocktail
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -48,7 +54,7 @@ const CocktailSubmit: React.FC = () => {
               </ul>
             </div>
             <div className="flex flex-wrap justify-center pt-5 w-1/2">
-              <div className="mb-4">
+              <div className="">
                 <h3 className="text-lg font-medium mb-4 text-center">Verres</h3>
                 <RadioAdd
                   options={
@@ -61,7 +67,7 @@ const CocktailSubmit: React.FC = () => {
                   name="Verres"
                 />
               </div>
-              <div className="mb-4">
+              <div className="">
                 <h3 className="text-lg font-medium mb-4 text-center">Glaces</h3>
                 <RadioAdd
                   options={
@@ -74,7 +80,7 @@ const CocktailSubmit: React.FC = () => {
                   name="Glaces"
                 />
               </div>
-              <div className="mb-4">
+              <div className="">
                 <h3 className="text-lg font-medium mb-4 text-center">
                   Techniques
                 </h3>
@@ -96,14 +102,13 @@ const CocktailSubmit: React.FC = () => {
               <h3 className="text-lg font-medium mb-2">Description</h3>
               <textarea
                 // onChange={(e) => setDescription(e.target.value)}
-                className="border-xs rounded p-1 w-1/2 bg-gray-800"
+                className="border-xs rounded p-1 w-1/2"
                 rows={3}
               />
             </div>
             <div className="text-center py-2">
               <button
                 type="submit"
-                // onClick={handleSubmit}
                 className="bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 text-white p-2 rounded-lg"
               >
                 Soumettre le Cocktail
