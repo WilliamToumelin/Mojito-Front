@@ -1,13 +1,16 @@
 import React from 'react';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
+import Register from '../Register/Register';
 
 interface Props {
+  name: string;
   options: string[];
   selected: string | null;
-  onSelect: (value: string) => void;
+  register: UseFormRegister<FieldValues>;
 }
 
-const RadioAdd: React.FC<Props> = ({ options, selected, onSelect }) => {
+const RadioAdd: React.FC<Props> = ({ options, selected, name, register }) => {
   return (
     <div className="mb-4">
       {options.map((option, index) => (
@@ -24,10 +27,9 @@ const RadioAdd: React.FC<Props> = ({ options, selected, onSelect }) => {
           </div>
           <input
             type="radio"
-            value={option}
-            checked={selected === option}
-            onChange={() => onSelect(option)}
             className="sr-only"
+            value={option}
+            {...register(name)}
           />
         </label>
       ))}

@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { Ingredient } from '../../types/types';
 
 interface Props {
   category: string;
@@ -8,7 +11,8 @@ interface Props {
   handleAmountChange: (type: string, increment: boolean) => void;
   handleChange: (selected: string) => void;
   selected: any;
-  ingredients: { id: string; name: string }[];
+  ingredients: Ingredient[];
+  register: UseFormRegister<FieldValues>;
 }
 
 const ListAdd: React.FC<Props> = ({
@@ -18,14 +22,14 @@ const ListAdd: React.FC<Props> = ({
   handleChange,
   selected,
   ingredients,
+  register,
 }) => {
   return (
     <div key={category}>
       <h3 className="text-xl">{category}</h3>
       <div className="flex">
         <select
-          value={selected}
-          onChange={(e) => handleChange(e.target.value)}
+          {...register(category)}
           className="max-w-lg border rounded p-1 text-white text-bold bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400"
         >
           <option className="text-black" value="">
@@ -51,6 +55,7 @@ const ListAdd: React.FC<Props> = ({
               type="button"
               className=""
               onClick={() => handleAmountChange(category, false)}
+              // {...register()}
             >
               <AiOutlineMinusCircle />
             </button>
@@ -59,6 +64,7 @@ const ListAdd: React.FC<Props> = ({
               type="button"
               className=""
               onClick={() => handleAmountChange(category, true)}
+              // {...register()}
             >
               <AiOutlinePlusCircle />
             </button>
@@ -72,6 +78,7 @@ const ListAdd: React.FC<Props> = ({
                 handleChange(selected);
               }
             }}
+            // {...register()}
             className="bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 text-white p-2 rounded text-xl"
           >
             <BsFillCheckCircleFill />
