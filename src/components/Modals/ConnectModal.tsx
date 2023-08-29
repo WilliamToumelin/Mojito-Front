@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable react/button-has-type */
 import { FC, useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
 import './Modal.scss';
 
@@ -9,6 +9,7 @@ const ConnectModal: FC = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const { isLoggedIn, login, logout } = useAuth();
 
@@ -43,7 +44,7 @@ const ConnectModal: FC = () => {
         body: JSON.stringify({ username, password }),
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer JWT_PASSPHRASE`,
+          Authorization: `Bearer token`,
         },
       });
 
@@ -54,6 +55,9 @@ const ConnectModal: FC = () => {
         localStorage.setItem('authToken', token);
         login();
         setDisplayModal(false);
+
+        // Redirection vers la page Home
+        navigate('/');
       } else {
         //  Gérer les erreurs d'authentification ici
         window.alert('Identifiants invalides');
@@ -81,7 +85,7 @@ const ConnectModal: FC = () => {
           >
             Déconnexion
           </button>
-          <p className="absolute text-white">Bienvenue Will!</p>
+          <p className="absolute text-white">Bienvenue {username}</p>
         </>
       ) : (
         <button

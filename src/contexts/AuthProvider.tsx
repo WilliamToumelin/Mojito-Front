@@ -24,7 +24,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = () => {
     // Ici, on pourra ajouter la logique de connexion (appeler l'API, etc.)
-    localStorage.setItem('authToken', 'votre_token');
+    localStorage.setItem('authToken', 'token');
     setIsLoggedIn(true);
   };
 
