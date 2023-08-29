@@ -35,7 +35,7 @@ const CocktailSubmit: React.FC = () => {
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-6 px-12 flex">
-            <div className="inline-block w-3/5 pr-4">
+            <div className="inline-block w-3/6 pr-4">
               <ul>
                 {ingredientsList?.ingredients?.map((category) => (
                   <ListManager
@@ -46,6 +46,8 @@ const CocktailSubmit: React.FC = () => {
                   />
                 ))}
               </ul>
+            </div>
+            <div>
               <div className="mb-4">
                 <h3 className="text-lg font-medium mb-4">Verres</h3>
                 <RadioAdd
@@ -85,13 +87,6 @@ const CocktailSubmit: React.FC = () => {
                   name="Techniques"
                 />
               </div>
-            </div>
-
-            <div className="flex w-2/5 h-full">
-              {/* <ItemRemove
-                items={selectedAlcohols}
-                onRemove={handleAlcoholRemove}
-              /> */}
             </div>
           </div>
           <div>
