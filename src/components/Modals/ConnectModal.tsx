@@ -7,7 +7,7 @@ import './Modal.scss';
 
 const ConnectModal: FC = () => {
   const [displayModal, setDisplayModal] = useState(false);
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const { isLoggedIn, login, logout } = useAuth();
@@ -22,53 +22,52 @@ const ConnectModal: FC = () => {
     return null;
   }
 
-  const handleLogin = () => {
-    // Simuler l'authentification avec les informations fournies
-    if (email === 'will@gmail.com' && password === 'niqueRedux') {
-      login();
-      setDisplayModal(false);
-    } else {
-      // Gérer les erreurs d'authentification ici
-      window.alert('Identifiants invalides');
-    }
-  };
-
-  // Code pour se connecter une fois l'API prête
-
-  // const handleLogin = async () => {
-  //  Appeler votre backend pour l'authentification
-  //   try {
-  //     const response = await fetch('/api/login', {
-  //       method: 'POST',
-  //       body: JSON.stringify({ email, password }),
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-
-  //     if (response.ok) {
-  //       const { token } = await response.json();
-  //        Stocker le token JWT dans le local storage
-  //       localStorage.setItem('authToken', token);
-  //       login();
-  //     } else {
-  //        Gérer les erreurs d'authentification ici
-  //     }
-  //   } catch (error) {
-  //      Gérer les erreurs réseau ici
+  // const handleLogin = () => {
+  //   // Simuler l'authentification avec les informations fournies
+  //   if (email === 'will@gmail.com' && password === 'niqueRedux') {
+  //     login();
+  //     setDisplayModal(false);
+  //   } else {
+  //     // Gérer les erreurs d'authentification ici
+  //     window.alert('Identifiants invalides');
   //   }
   // };
 
-  // const handleLogout = () => {
-  //    Supprimer le token JWT du local storage
-  //   localStorage.removeItem('authToken');
-  //   logout();
-  // };
+  // Code pour se connecter une fois l'API prête
+
+  const handleLogin = async () => {
+    //  Appeler votre backend pour l'authentification
+    try {
+      const response = await fetch('http://localhost:5174/api/login_check', {
+        method: 'POST',
+        body: JSON.stringify({ username, password }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer JWT_PASSPHRASE`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json(); // Obtenir les données de la réponse
+        const token = data.token; // Extraire le token de la réponse
+        //  Stocker le token JWT dans le local storage
+        localStorage.setItem('authToken', token);
+        login();
+        setDisplayModal(false);
+      } else {
+        //  Gérer les erreurs d'authentification ici
+        window.alert('Identifiants invalides');
+      }
+    } catch (error) {
+      //  Gérer les erreurs réseau ici
+      console.error('Erreur réseau lors de la connexion', error);
+    }
+  };
 
   const handleLogout = () => {
-    logout(); // Appelle la fonction de déconnexion du contexte
-    setEmail('');
-    setPassword('');
+    //  Supprimer le token JWT du local storage
+    localStorage.removeItem('authToken');
+    logout();
   };
 
   return (
@@ -138,8 +137,8 @@ const ConnectModal: FC = () => {
                       name="email"
                       id="email"
                       className="modal-input-group__input"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                       required
                     />
                     <label htmlFor="email" className="modal-input-group__label">
@@ -191,40 +190,3 @@ const ConnectModal: FC = () => {
 };
 
 export default ConnectModal;
-
-// Code pour se connecter une fois l'API prête
-
-// const handleLogin = async () => {
-//  Appeler votre backend pour l'authentification
-//   try {
-//     const response = await fetch('/api/login', {
-//       method: 'POST',
-//       body: JSON.stringify({ email, password }),
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     });
-
-//     if (response.ok) {
-//       const { token } = await response.json();
-//        Stocker le token JWT dans le local storage
-//       localStorage.setItem('authToken', token);
-//       login();
-// setDisplayModal(false);
-//     } else {
-//        Gérer les erreurs d'authentification ici
-// window.alert('Identifiants invalides');
-//     }
-//   } catch (error) {
-//      Gérer les erreurs réseau ici
-// console.error('Erreur réseau lors de la connexion', error);
-//   }
-// };
-
-// const handleLogout = () => {
-//   // Supprimer le token du local storage
-//   localStorage.removeItem('authToken');
-//   logout();
-//   setEmail('');
-//   setPassword('');
-// };

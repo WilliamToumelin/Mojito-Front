@@ -15,19 +15,6 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
   animate,
   modulo,
 }) => {
-  const difficultyBar = (difficulty: number) => {
-    if (difficulty <= 1) {
-      return 'w-1/5 bg-green-600';
-    }
-    if (difficulty >= 2 && difficulty < 3) {
-      return 'w-2/5 bg-yellow-300';
-    }
-    if (difficulty >= 3 && difficulty <= 4) {
-      return 'w-3/5 bg-orange-500';
-    }
-    return 'w-full bg-red-700';
-  };
-
   return (
     <article
       className={`mb-12 flex items-center ${modulo ? 'flex-row-reverse' : ''} ${
@@ -76,9 +63,9 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
           } transition-all ease-in duration-1200`}
         >
           Note : {cocktail.rating}
-          <div className=" text-yellow-400 mr-1 pl-1">
+          <span className=" text-yellow-400 mr-1 pl-1">
             <FaCocktail />
-          </div>
+          </span>
         </p>
       </div>
     </article>

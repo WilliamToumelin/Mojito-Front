@@ -33,9 +33,6 @@ const Home: React.FC<HomeProps> = ({
   const [displayMode, setDisplayMode] = useState(true);
   const [animate, setAnimate] = useState(true);
 
-  console.log(categoryId);
-  console.log(selectedCocktail);
-
   useEffect(() => {
     fetch('http://localhost:5174/api/cocktails')
       .then((response) => response.json())
@@ -47,7 +44,6 @@ const Home: React.FC<HomeProps> = ({
   }, []);
 
   const cocktailListMemo = useMemo(() => cocktailList, [cocktailList]);
-  console.log(cocktailListMemo);
 
   useEffect(() => {
     setAnimate(false);
@@ -104,7 +100,11 @@ const Home: React.FC<HomeProps> = ({
         ) : (
           <>
             {/* Haut du composant avec le bouton du top 5 etc .. qui disparait SI CATEGORYID  */}
-            <SideBar filteredCocktails={filteredCocktails} />
+            <SideBar
+              filteredCocktails={filteredCocktails}
+              setSelectedCocktail={setSelectedCocktail}
+              selectedCocktail={selectedCocktail}
+            />
             <div className="text-center pb-12">
               <h1 className="text-amber-700 text-2xl pt-5">
                 Catégorie : {categoryId}

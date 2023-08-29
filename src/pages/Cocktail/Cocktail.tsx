@@ -19,8 +19,6 @@ const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
   );
   const { isLoggedIn } = useAuth();
 
-  console.log(selectedCocktail);
-
   useEffect(() => {
     fetch(`http://localhost:5174/api/cocktails/${selectedCocktail}`)
       // fetch('http://localhost:5174/api/cocktails')
@@ -29,10 +27,7 @@ const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
         setCocktailDetails(data);
       })
       .catch((err) => console.error(err));
-  }, [selectedCocktail]);
-
-  console.log(selectedCocktail);
-  console.log(cocktailDetails);
+  }, []);
 
   if (!cocktailDetails) {
     // TEMPORAIRE !!!!!! a rajouter un loader , parce pour l'instant il n'y a que une fenetre noir si pas de cocktail chargé encore ...
@@ -69,14 +64,14 @@ const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
                   {cocktailDetails.rating}
                 </p>
                 <span className="w-2 h-2 mx-1.5 bg-white rounded-full" />
-                {/* <Link to={`/cocktail/${cocktailDetails.slug}/commentaires`}>
+                <Link to={`/cocktail/${cocktailDetails.slug}/commentaires`}>
                   <div className="ml-1 text-lg">
                     {cocktailDetails.comments.length}{' '}
                     {cocktailDetails.comments.length < 2
                       ? 'commentaire'
                       : 'commentaires'}
                   </div>
-                </Link> */}
+                </Link>
               </div>
               <div className=" text-3xl flex items-center">
                 <BsClockFill className="" />
@@ -85,7 +80,7 @@ const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
                   {cocktailDetails.preparation_time < 2 ? 'minute' : 'minutes'}
                 </div>
               </div>
-              {/* <div className=" text-3xl flex items-center">
+              <div className=" text-3xl flex items-center">
                 <FaGlassMartiniAlt className="" />
                 <div className="pl-3">{cocktailDetails.glass.name}</div>
               </div>
@@ -96,7 +91,7 @@ const Cocktail: React.FC<CocktailProps> = ({ selectedCocktail }) => {
               <div className=" text-3xl flex items-center">
                 <p>Technique: </p>
                 <div className="pl-3">{cocktailDetails.technical.name}</div>
-              </div> */}
+              </div>
               <div>
                 <h3 className="text-3xl pb-3 ">Ingredients</h3>
                 <ul className="text-xl space-y-1">
