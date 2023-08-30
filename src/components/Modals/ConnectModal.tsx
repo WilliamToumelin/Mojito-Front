@@ -66,17 +66,17 @@ const ConnectModal: FC = () => {
         <>
           <button
             type="button"
-            className="relative text-red-900 hover:text-white border border-[#A4978E] hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-[#A4978E]"
+            className="relative text-red-900 hover:text-white border border-[#A4978E] hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
             onClick={handleLogout}
           >
             Déconnexion
           </button>
-          <p className="absolute text-white">Bienvenue {username}</p>
+          <p className="absolute text-[#A4978E]">Bienvenue {username}</p>
         </>
       ) : (
         <button
           type="button"
-          className="text-gray-900 hover:text-white border border-[#A4978E] hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-[#A4978E]"
+          className="text-[#BE9063] border border-[#A4978E] hover:bg-[#525B56] focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
           onClick={handleToggleModal}
         >
           Se connecter
@@ -92,10 +92,10 @@ const ConnectModal: FC = () => {
           aria-hidden="true"
         >
           <div className="relative w-full max-w-md max-h-full">
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div className="relative bg-[#525B56] rounded-lg shadow ">
               <button
                 type="button"
-                className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                className="absolute top-3 right-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
                 data-modal-hide="authentication-modal"
                 onClick={handleToggleModal}
               >
@@ -117,7 +117,7 @@ const ConnectModal: FC = () => {
                 <span className="sr-only">Close modal</span>
               </button>
               <div className="px-6 py-6 lg:px-8">
-                <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+                <h3 className="mb-4 text-xl font-medium text-[#BE9063]">
                   Se connecter
                 </h3>
                 <form className="space-y-6" action="#">
@@ -154,16 +154,16 @@ const ConnectModal: FC = () => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full text-white font-semibold bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="w-full rounded-lg text-sm px-5 py-2.5 text-center text-[#BE9063] font-bold bg-[#132226] border-[#A4978E] border-4"
                     onClick={handleLogin}
                   >
                     Valider
                   </button>
-                  <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
+                  <div className="text-sm font-medium text-[#A4978E]">
                     Pas encore Membre?{' '}
                     <Link
                       to="/register"
-                      className="text-blue-700 hover:underline dark:text-blue-500"
+                      className="text-[#BE9063] hover:text-[#132226]"
                       onClick={handleToggleModal}
                     >
                       Créer un compte

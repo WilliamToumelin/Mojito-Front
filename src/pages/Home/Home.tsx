@@ -9,7 +9,7 @@ import CocktailItem from '../../components/common/CocktailItem/CocktailItem';
 import SideBar from '../../components/SideBar/SideBar';
 
 interface HomeProps {
-  // categoryName: string | null;
+  categoryName: string | null;
   categoryId: number | null;
   selectedCocktail: number | null;
   setSelectedCocktail: (id: number | null) => void;
@@ -29,6 +29,7 @@ const Home: React.FC<HomeProps> = ({
   categoryId,
   selectedCocktail,
   setSelectedCocktail,
+  categoryName,
 }) => {
   const [cocktailList, setCocktailList] = useState<Cocktails[]>([]);
   const [displayMode, setDisplayMode] = useState(true);
@@ -109,10 +110,7 @@ const Home: React.FC<HomeProps> = ({
               selectedCocktail={selectedCocktail}
             />
             <div className="text-center pb-12">
-              <h1 className="text-[#BE9063] text-5xl pt-8">
-                modif a faire
-                {/* Catégorie : {CategoryName} */}
-              </h1>
+              <h1 className="text-[#BE9063] text-5xl pt-8">{categoryName}</h1>
             </div>
           </>
         )}
@@ -132,6 +130,7 @@ const Home: React.FC<HomeProps> = ({
                       cocktail={cocktail}
                       animate={animate}
                       modulo={index % 2 !== 0}
+                      isLastItem={index === filteredCocktails.length - 1}
                     />
                   </Link>
                 ))
@@ -147,6 +146,7 @@ const Home: React.FC<HomeProps> = ({
                       cocktail={cocktail}
                       animate={animate}
                       modulo={index % 2 !== 0}
+                      isLastItem={index === cocktailTop5.length - 1}
                     />
                   </Link>
                 ))
@@ -161,6 +161,7 @@ const Home: React.FC<HomeProps> = ({
                       cocktail={cocktail}
                       animate={animate}
                       modulo={index % 2 !== 0}
+                      isLastItem={index === cocktailListMemo.length - 1}
                     />
                   </Link>
                 ))}

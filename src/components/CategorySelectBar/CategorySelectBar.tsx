@@ -3,16 +3,20 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import anime from 'animejs/lib/anime';
 import { Category } from '../../types/types';
-import GradiantButtonOval from '../common/buttons/GradiantButtonOval';
+import MenuButton from '../common/buttons/MenuButton';
 
 interface CategorySelectBarProps {
   categoryId: number | null;
   setCategoryId: (id: number | null) => void;
+  categoryName: string | null;
+  setCategoryName: (name: string | null) => void;
 }
 
 const CategorySelectBar: React.FC<CategorySelectBarProps> = ({
   categoryId,
   setCategoryId,
+  categoryName,
+  setCategoryName,
 }) => {
   const [categoriesData, setCategoriesData] = useState<Category[]>([]);
 
@@ -46,17 +50,24 @@ const CategorySelectBar: React.FC<CategorySelectBarProps> = ({
     setCategoryId(clickedCategoryId);
   };
 
+  const handleCategoryNameClick = (clickedCategoryName: string) => {
+    setCategoryName(clickedCategoryName);
+  };
+
   const categoriesDataMemo = useMemo(() => categoriesData, [categoriesData]);
   console.log(categoriesDataMemo);
 
   return (
     <div className="flex">
-      <nav className="flex justify-center gap-4 no-underline text-white delay-30">
+      <nav className="flex justify-center gap-4 no-underline delay-30">
         {categoriesDataMemo.slice(0, 6).map((categoryItem: Category) => (
           <NavLink key={categoryItem.id} to="/">
-            <GradiantButtonOval
+            <MenuButton
               name={categoryItem.name}
-              onClick={() => handleCategoryClick(categoryItem.id)}
+              onClick={() => {
+                handleCategoryClick(categoryItem.id);
+                handleCategoryNameClick(categoryItem.name);
+              }}
             />
           </NavLink>
         ))}

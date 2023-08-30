@@ -8,9 +8,16 @@ import { useAuth } from '../../contexts/AuthProvider';
 interface HeaderProps {
   categoryId: number | null;
   setCategoryId: (id: number | null) => void;
+  categoryName: string | null;
+  setCategoryName: (name: string | null) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
+const Header: React.FC<HeaderProps> = ({
+  categoryId,
+  setCategoryId,
+  categoryName,
+  setCategoryName,
+}) => {
   const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
 
@@ -33,13 +40,15 @@ const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
         </NavLink>
       </div>
       <div className="w-8/12 block">
-        <div className="text-8xl text-[#BE9063] text-center font-semibold pb-7">
+        <div className="text-8xl p-3 text-[#BE9063] text-center font-gluten font-extralight">
           <h1>Mojit&apos;o</h1>
         </div>
         <div className="hidden lg:flex items-center justify-center">
           <CategorySelectBar
             categoryId={categoryId}
             setCategoryId={setCategoryId}
+            categoryName={categoryName}
+            setCategoryName={setCategoryName}
           />
         </div>
       </div>
@@ -50,8 +59,7 @@ const Header: React.FC<HeaderProps> = ({ categoryId, setCategoryId }) => {
           <Link to="/proposition-cocktail">
             <button
               type="button"
-              className="text-[#A4978E] border border-[#A4978E] hover:bg-[#BE9063] focus:ring-4 focus:outline-none 
-              focus:ring-[#BE9063] hover:text-[#132226] font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+              className="text-[#BE9063] border border-[#A4978E] hover:bg-[#525B56] font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
             >
               Propose ton cocktail !
             </button>
