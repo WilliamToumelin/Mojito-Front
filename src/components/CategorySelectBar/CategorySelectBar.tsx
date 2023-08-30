@@ -3,19 +3,17 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import anime from 'animejs/lib/anime';
 import { Category } from '../../types/types';
-import MenuButton from '../common/buttons/MenuButton';
+import RoundedButton from '../common/buttons/RoundedButton';
 
 interface CategorySelectBarProps {
   categoryId: number | null;
   setCategoryId: (id: number | null) => void;
-  categoryName: string | null;
   setCategoryName: (name: string | null) => void;
 }
 
 const CategorySelectBar: React.FC<CategorySelectBarProps> = ({
   categoryId,
   setCategoryId,
-  categoryName,
   setCategoryName,
 }) => {
   const [categoriesData, setCategoriesData] = useState<Category[]>([]);
@@ -62,12 +60,14 @@ const CategorySelectBar: React.FC<CategorySelectBarProps> = ({
       <nav className="flex justify-center gap-4 no-underline delay-30">
         {categoriesDataMemo.slice(0, 6).map((categoryItem: Category) => (
           <NavLink key={categoryItem.id} to="/">
-            <MenuButton
+            <RoundedButton
               name={categoryItem.name}
               onClick={() => {
                 handleCategoryClick(categoryItem.id);
                 handleCategoryNameClick(categoryItem.name);
               }}
+              height={48}
+              width={48}
             />
           </NavLink>
         ))}

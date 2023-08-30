@@ -8,14 +8,12 @@ import { useAuth } from '../../contexts/AuthProvider';
 interface HeaderProps {
   categoryId: number | null;
   setCategoryId: (id: number | null) => void;
-  categoryName: string | null;
   setCategoryName: (name: string | null) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
   categoryId,
   setCategoryId,
-  categoryName,
   setCategoryName,
 }) => {
   const navigate = useNavigate();
@@ -47,7 +45,6 @@ const Header: React.FC<HeaderProps> = ({
           <CategorySelectBar
             categoryId={categoryId}
             setCategoryId={setCategoryId}
-            categoryName={categoryName}
             setCategoryName={setCategoryName}
           />
         </div>

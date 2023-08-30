@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaCocktail, FaGlassMartiniAlt } from 'react-icons/fa';
 import { GiIceCube } from 'react-icons/gi';
-import { FiChevronRight } from 'react-icons/fi';
+import { IoIosCog } from 'react-icons/io';
 import { BsClockFill } from 'react-icons/bs';
-import { CgPacman } from 'react-icons/cg';
+import { ImDiamonds } from 'react-icons/im';
 import Rating from './Rating';
 import { Cocktails } from '../../types/types';
 import { useAuth } from '../../contexts/AuthProvider';
 import Hr from '../../components/common/Hr/Hr';
+import RoundedButton from '../../components/common/buttons/RoundedButton';
 
 const Cocktail: React.FC = () => {
   const [cocktailDetails, setCocktailDetails] = useState<Cocktails | null>(
@@ -97,8 +98,8 @@ const Cocktail: React.FC = () => {
                       key={index}
                       className="flex items-center text-[#A4978E]"
                     >
-                      <FiChevronRight /> {use.ingredient.name} {use.quantity}{' '}
-                      {use.unit.name}
+                      <ImDiamonds className="rotate-90 text-[#BE9063] pr-2" />{' '}
+                      {use.ingredient.name} {use.quantity} {use.unit.name}
                     </li>
                   ))}
                 </ul>
@@ -116,7 +117,7 @@ const Cocktail: React.FC = () => {
                 </div>
               </div>
               <div className=" text-2xl flex items-center">
-                <p>Technique: </p>
+                <IoIosCog />
                 <div className="pl-3 text-[#A4978E]">
                   {cocktailDetails.technical.name}
                 </div>
@@ -157,11 +158,16 @@ const Cocktail: React.FC = () => {
                 <p className="pb-6 text-center">Donnez votre avis !</p>
                 <div className="text-base flex items-center gap-8 justify-center">
                   {!isLoggedIn ? '' : <Rating />}
+
                   <Link
                     to={`/cocktail/${cocktailDetails.slug}/commentaires`}
-                    className="menu-link flex justify-center items-center p-4 hover:bg-[#A4978E] rounded-full text-[#BE9063] hover:text-[#525B56] text-base bg-[#525B56] border-[#A4978E] border-2"
+                    className="menu-link flex justify-center items-center "
                   >
-                    Voir les commentaires
+                    <RoundedButton
+                      name="voir les commentaires"
+                      height={12}
+                      width={52}
+                    />
                   </Link>
                 </div>
               </div>
