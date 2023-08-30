@@ -67,7 +67,7 @@ const CategorySelectBar: React.FC<CategorySelectBarProps> = ({
                 handleCategoryNameClick(categoryItem.name);
               }}
               height={48}
-              width={48}
+              width={112}
             />
           </NavLink>
         ))}

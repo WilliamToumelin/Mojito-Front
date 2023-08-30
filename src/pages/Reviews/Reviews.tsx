@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import CommentModal from '../../components/Modals/CommentModal';
 import { Cocktails } from '../../types/types';
+import RoundedButton from '../../components/common/buttons/RoundedButton';
 
 interface Props {
   selectedCocktail: number | null;
@@ -18,6 +19,7 @@ function formatDate(data: string) {
 
 const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
   const [cocktailData, setCocktailData] = useState<Cocktails | null>(null);
+  const [displayModal, setDisplayModal] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:5174/api/cocktails/${selectedCocktail}/comments`)
@@ -30,6 +32,10 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
 
   console.log(selectedCocktail);
   console.log(cocktailData);
+
+  const handleToggleModal = useCallback((): void => {
+    setDisplayModal((prevstate) => !prevstate);
+  }, []);
 
   if (!cocktailData) {
     // TEMPORAIRE !!!!!! a rajouter un loader , parce pour l'instant il n'y a que une fenetre noir si pas de cocktail chargé encore ...
@@ -44,17 +50,28 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
     <div className="bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh]">
       {cocktailData.comments.length > 0 && (
         <div className="relative  w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col over shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]">
-          <div className="w-4/5 p-3 flex flex-col items-center">
+          <div className="relative w-full p-3 flex flex-col items-center pb-7">
             <h1 className="text-[#a4978e] text-xl pt-5 text-center w-full">
               Commentaires a propos de{' '}
               <span className="text-[#BE9063] text-3xl font-semibold">
                 {cocktailData.name}
               </span>
             </h1>
-
-            <CommentModal />
+            <div className="absolute top-5 right-5">
+              <RoundedButton
+                name="laisse un commentaire"
+                onClick={handleToggleModal}
+                height={48}
+                width={200}
+              />
+            </div>
+            <CommentModal
+              displayModal={displayModal}
+              handleToggleModal={handleToggleModal}
+            />
           </div>
-          <div className="w-full h-full overflow-y-auto border-t-2 p-6 pt-0 flex flex-col items-center">
+          <div className="border-2 border-[#a4978e]" />
+          <div className="w-full h-full overflow-y-auto p-6 pt-0 flex flex-col items-center">
             {cocktailData.comments.map((data) => (
               <article
                 key={data.id}
@@ -75,19 +92,19 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
                       {data.content}
                     </p>
                   </blockquote>
-                  <figcaption className=" mt-6 space-x-3">
+                  <div className=" mt-6 space-x-3">
                     <div
                       className="divide-x-2 divide-gray-500 dark:divide-gray-700
                     "
                     >
-                      <cite className="pr-3 font-medium text-[#BE9063]">
+                      <span className="pr-3 font-medium text-[#BE9063]">
                         {data.user.pseudonym}
-                      </cite>
-                      <cite className="pl-3 text-sm text-[#BE9063]">
+                      </span>
+                      <span className="pl-3 text-sm text-[#BE9063]">
                         {formatDate(data.posted_at)}
-                      </cite>
+                      </span>
                     </div>
-                  </figcaption>
+                  </div>
                 </div>
               </article>
             ))}

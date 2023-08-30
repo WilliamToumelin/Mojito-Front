@@ -1,33 +1,21 @@
-import React, { FC, useCallback, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
 
-const CommentModal: FC = () => {
-  const [displayModal, setDisplayModal] = useState(false);
-  const [name, setName] = useState('');
-  const [comment, setComment] = useState('');
+interface Props {
+  displayModal: boolean;
+  handleToggleModal: () => void;
+}
 
-  const { isLoggedIn, login, logout } = useAuth();
-
-  // --- handleToggleModal sert à toggle le modal
-  const handleToggleModal = useCallback((): void => {
-    setDisplayModal((prevstate) => !prevstate);
-  }, []);
+const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
+  const { isLoggedIn } = useAuth();
 
   return (
-    <div className="absolute top-8 right-5 w-1/5 h-full">
-      <button
-        type="button"
-        className=" block text-white bg-gradient-to-r from-[#132226] via-[#525B56] to-[#A4978E] hover:bg-gradient-to-r hover:from-[#1e353b] hover:via-[rgb(106, 116, 110);] hover:to-[#b3a8a0] focus:ring-4 focus:outline-none focus:ring-[#A19A94] font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-        onClick={handleToggleModal}
-      >
-        Laisser un commentaire
-      </button>
-
-      {/* Afficher la modal si l'utilisateur est connecté et displayModal est vrai */}
+    <div className="absolute top-20 right-5 w-1/5 h-full">
+      {/* si l'utilisateur est connecté et displayModal est vrai */}
       {displayModal && isLoggedIn && (
         <div
-          className="absolute top-5 w-[30vw] right-0 mr-8 open-modal"
+          className="absolute w-[30vw] right-0 mr-8 open-modal"
           id="authentication-modal"
           tabIndex={-1}
           aria-hidden="true"

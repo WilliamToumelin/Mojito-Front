@@ -2,7 +2,7 @@
 import React from 'react';
 
 interface RoundedButtonProps {
-  name: string | boolean;
+  name: string;
   onClick?: () => void;
   height: number;
   width: number;
@@ -23,8 +23,9 @@ const RoundedButton: React.FC<RoundedButtonProps> = ({
       type="button"
       onClick={onClick}
       style={buttonStyle}
-      className={`menu-link flex justify-center items-center w-${width} h-${height} hover:bg-[#A4978E] rounded-full text-[#BE9063] hover:text-[#525B56] 
-    text-base bg-[#525B56] border-[#A4978E] border-2`}
+      className={`menu-link w-${width} h-${height} flex justify-center items-center rounded-r-lg bg-gradient-to-r from-[#132226]
+      via-[#525B56] to-[#A4978E] hover:bg-gradient-to-r hover:from-[#1e353b] hover:via-[rgb(106, 116, 110);] hover:to-[#b3a8a0] 
+      border-white transition-transform duration-400 ease-out hover:scale-125 text-[#BE9063] font-bold text-base`}
     >
       {name}
     </button>

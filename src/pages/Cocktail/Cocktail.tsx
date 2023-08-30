@@ -62,13 +62,14 @@ const Cocktail: React.FC = () => {
                 {cocktailDetails.name}
               </h2>
               <div className="flex justify-between">
-                <div className="flex items-center text-2xl">
+                <div className="flex align-center items-center text-2xl">
                   <div className="mr-1">
                     <FaCocktail />
                   </div>
                   <p className="ml-2 text-lg mr-1 font-bold text-[#A4978E]">
-                    {cocktailDetails.rating}
+                    {cocktailDetails.rating} / 5
                   </p>
+
                   <span className="w-2 h-2 mx-1.5 bg-[#BE9063] rounded-full" />
                   <Link to={`/cocktail/${cocktailDetails.slug}/commentaires`}>
                     <div className="ml-1 text-lg text-[#A4978E] hover:text-[#BE9063] ">
@@ -92,7 +93,7 @@ const Cocktail: React.FC = () => {
               <Hr />
               <div>
                 <h3 className="text-3xl pb-3 ">Ingredients</h3>
-                <ul className="text-xl space-y-1">
+                <ul className="text-xl space-y-1 ">
                   {cocktailDetails.cocktailUses.map((use, index) => (
                     <li
                       key={index}
@@ -104,25 +105,26 @@ const Cocktail: React.FC = () => {
                   ))}
                 </ul>
               </div>
-              <div className=" text-2xl flex items-center">
-                <FaGlassMartiniAlt className="" />
-                <div className="pl-3 text-[#A4978E]">
-                  {cocktailDetails.glass.name}
+              <div className="flex flex-wrap justify-between ">
+                <div className=" text-2xl flex items-center">
+                  <FaGlassMartiniAlt className="" />
+                  <div className="pl-3 text-[#A4978E]">
+                    {cocktailDetails.glass.name}
+                  </div>
+                </div>
+                <div className=" text-2xl flex items-center">
+                  <GiIceCube className="" />
+                  <div className="pl-3 text-[#A4978E]">
+                    {cocktailDetails.ice.name}
+                  </div>
+                </div>
+                <div className=" text-2xl flex items-center">
+                  <IoIosCog className="text-3xl" />
+                  <div className="pl-3 text-[#A4978E]">
+                    {cocktailDetails.technical.name}
+                  </div>
                 </div>
               </div>
-              <div className=" text-2xl flex items-center">
-                <GiIceCube className="" />
-                <div className="pl-3 text-[#A4978E]">
-                  {cocktailDetails.ice.name}
-                </div>
-              </div>
-              <div className=" text-2xl flex items-center">
-                <IoIosCog />
-                <div className="pl-3 text-[#A4978E]">
-                  {cocktailDetails.technical.name}
-                </div>
-              </div>
-
               <Hr />
               <div className="text-base">
                 <h3 className="text-3xl pb-3">Etapes :</h3>
@@ -133,6 +135,7 @@ const Cocktail: React.FC = () => {
                       className="flex items-center text-[#A4978E]"
                     >
                       - {step.content}
+                      <br />
                     </li>
                   ))}
                 </ul>
@@ -165,8 +168,8 @@ const Cocktail: React.FC = () => {
                   >
                     <RoundedButton
                       name="voir les commentaires"
-                      height={12}
-                      width={52}
+                      height={48}
+                      width={208}
                     />
                   </Link>
                 </div>
