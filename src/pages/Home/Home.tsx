@@ -9,6 +9,7 @@ import CocktailItem from '../../components/common/CocktailItem/CocktailItem';
 import SideBar from '../../components/SideBar/SideBar';
 
 interface HomeProps {
+  categoryName: string | null;
   categoryId: number | null;
   selectedCocktail: number | null;
   setSelectedCocktail: (id: number | null) => void;
@@ -28,6 +29,7 @@ const Home: React.FC<HomeProps> = ({
   categoryId,
   selectedCocktail,
   setSelectedCocktail,
+  categoryName,
 }) => {
   const [cocktailList, setCocktailList] = useState<Cocktails[]>([]);
   const [displayMode, setDisplayMode] = useState(true);
@@ -85,15 +87,13 @@ const Home: React.FC<HomeProps> = ({
         {!categoryId ? (
           <>
             <div className="text-center pb-12">
-              <h1 className="text-[#BE9063] text-2xl pt-5">
-                {displayMode
-                  ? 'Les 5 cinq cocktails les mieux notés'
-                  : 'Tous nos cocktails'}
+              <h1 className="text-[#BE9063] text-5xl pt-8">
+                {displayMode ? 'Le top 5' : 'Tous nos cocktails'}
               </h1>
             </div>
-            <div className="flex justify-center mb-10 absolute top-10 right-10">
+            <div className="flex justify-center mb-10 absolute top-12 right-12">
               <button
-                className="text-[#BE9063] text-5xl animate-bounce"
+                className="text-[#BE9063] text-6xl animate-bounce"
                 type="button"
                 onClick={handleToggle}
               >
@@ -110,9 +110,7 @@ const Home: React.FC<HomeProps> = ({
               selectedCocktail={selectedCocktail}
             />
             <div className="text-center pb-12">
-              <h1 className="text-[#BE9063] text-2xl pt-5">
-                Catégorie : {categoryId}
-              </h1>
+              <h1 className="text-[#BE9063] text-5xl pt-8">{categoryName}</h1>
             </div>
           </>
         )}
@@ -132,6 +130,7 @@ const Home: React.FC<HomeProps> = ({
                       cocktail={cocktail}
                       animate={animate}
                       modulo={index % 2 !== 0}
+                      isLastItem={index === filteredCocktails.length - 1}
                     />
                   </Link>
                 ))
@@ -147,6 +146,7 @@ const Home: React.FC<HomeProps> = ({
                       cocktail={cocktail}
                       animate={animate}
                       modulo={index % 2 !== 0}
+                      isLastItem={index === cocktailTop5.length - 1}
                     />
                   </Link>
                 ))
@@ -161,6 +161,7 @@ const Home: React.FC<HomeProps> = ({
                       cocktail={cocktail}
                       animate={animate}
                       modulo={index % 2 !== 0}
+                      isLastItem={index === cocktailListMemo.length - 1}
                     />
                   </Link>
                 ))}

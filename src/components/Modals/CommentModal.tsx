@@ -134,14 +134,14 @@ const CommentModal: FC = () => {
                 </svg>
                 <span className="sr-only">Close modal</span>
               </button>
-              <div className="px-6 py-6 lg:px-8 h-[10vh]">
+              <div className="px-6 py-6 lg:px-8 h-[10vh] text-[#132226]">
                 <p>
                   Vous devez être membre pour pouvoir commenter nos cocktails...
                 </p>
                 <p>
                   Pas de panique,{' '}
                   <Link to="/register" className="text-amber-700">
-                    c`&apos;`est par ici pour se connecter
+                    c&apos;est par ici pour se connecter
                   </Link>{' '}
                 </p>
               </div>

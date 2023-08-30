@@ -29,16 +29,16 @@ const CocktailSubmit: React.FC = () => {
   const onSubmit = (data: any) => console.log(data);
 
   return (
-    <div className="bg-white flex justify-center items-center flex-1 h-[75vh]">
+    <div className="bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh] text-[#BE9063]">
       <div
         style={{
-          boxShadow: 'rgba(0, 0, 0, 0.08) 0px 4px 12px',
+          boxShadow: '#132226 0px 1px 22px',
         }}
-        className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto over shadow-purple-700 shadow-xl rounded-2xl bg-white"
+        className="relative w-4/5 lg:w-4/6 h-full lg:h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]"
       >
-        <h2 className="text-3xl font-bold my-8 text-center">
+        <h1 className="text-[#BE9063] text-5xl pt-8 text-center">
           Proposer un Cocktail
-        </h2>
+        </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-6 px-12 flex">
             <div className="w-1/2 pr-4">
@@ -102,14 +102,15 @@ const CocktailSubmit: React.FC = () => {
               <h3 className="text-lg font-medium mb-2">Description</h3>
               <textarea
                 {...register('description')}
-                className="border-xs rounded p-1 w-1/2"
+                className="border-xs rounded p-1 w-1/2 bg-[#b3a8a0] text-[#132226]"
                 rows={3}
               />
             </div>
             <div className="text-center py-2">
               <button
                 type="submit"
-                className="bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400 text-white p-2 rounded-lg"
+                className="w-48 h-12 rounded-full text-[#BE9063] font-bold text-base bg-gradient-to-r 
+                from-[#132226] via-[#525B56] to-[#A4978E] hover:bg-gradient-to-r hover:from-[#1e353b] hover:via-[rgb(106, 116, 110);] hover:to-[#b3a8a0]"
               >
                 Soumettre le Cocktail
               </button>

@@ -36,7 +36,8 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
           <div key={index} className="flex p-2">
             <select
               {...register(`${category}_${index}`)}
-              className="text-white font-bold text-center max-w-xl border rounded p-1 text-bold bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400"
+              className="text-white font-bold text-center max-w-xl border rounded p-1 text-bold bg-gradient-to-r 
+              from-[#132226] via-[#525B56] to-[#A4978E] hover:bg-gradient-to-r hover:from-[#1e353b] hover:via-[rgb(106, 116, 110);] hover:to-[#b3a8a0]"
             >
               <option className="" value="">
                 A vous de jouer !
@@ -62,7 +63,9 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
             className={`${
               isAddButtonDisabled
                 ? 'bg-gray-500 cursor-not-allowed'
-                : 'text-white bg-gradient-to-r  from-purple-600 via-pink-500 to-orange-500 hover:bg-gradient-to-r hover:from-purple-500 hover:via-pink-400 hover:to-orange-400'
+                : `text-white bg-gradient-to-r from-[#132226] via-[#525B56] to-[#A4978E]
+                hover:bg-gradient-to-r hover:from-[#1e353b] hover:via-[rgb(106, 116,
+                110);] hover:to-[#b3a8a0]`
             } p-2 rounded text-xl`}
             disabled={isAddButtonDisabled}
           >

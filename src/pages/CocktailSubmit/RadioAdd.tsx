@@ -20,7 +20,8 @@ const RadioAdd: React.FC<Props> = ({ options, selected, name, register }) => {
           <div
             className={`w-8 h-8 rounded-full border-4 flex items-center justify-center ${
               selected === option
-                ? 'bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 text-white border-none'
+                ? `bg-gradient-to-r 
+              from-[#132226] via-[#525B56] to-[#A4978E] hover:bg-gradient-to-r hover:from-[#1e353b] hover:via-[rgb(106, 116, 110);] hover:to-[#b3a8a0] text-white border-none`
                 : ''
             }`}
           >
@@ -28,7 +29,7 @@ const RadioAdd: React.FC<Props> = ({ options, selected, name, register }) => {
           </div>
           <input
             type="radio"
-            className="sr-only"
+            className="sr-only bg-[#b3a8a0]"
             value={option}
             {...register(name)}
           />
