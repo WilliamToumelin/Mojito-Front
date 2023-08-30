@@ -26,12 +26,11 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="bg-[#132226] px-3 pt-2 pb-12 w-full flex h-[20vh]">
-      <div className="w-2/12 flex pl-1 pt-1">
+      <div className="w-2/12 flex pl-1 pt-1  ">
         <NavLink to="/" onClick={handleResetCategoryId}>
           <img
-            className="border-[#A4978E] border-8 rounded-full"
+            className=""
             width="160"
-            height="160"
             src="../../../public/logo-cocktail.png"
             alt="Cocktail and link to home"
           />
