@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-console */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthProvider';
 
 interface Props {
@@ -9,10 +11,33 @@ interface Props {
 
 const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
   const { isLoggedIn } = useAuth();
+  const { register, handleSubmit, reset } = useForm<{
+    name: string;
+    review: string;
+  }>();
+
+  const onSubmit = async (data: { name: string; review: string }) => {
+    console.log(data);
+    try {
+      const request = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      };
+      const response = await fetch('API', request);
+      if (response.ok) {
+        console.log('Commentaire soumis avec succès');
+        reset();
+      } else {
+        console.error('Erreur lors de la soumission du commentaire');
+      }
+    } catch (error) {
+      console.error('Erreur inattendue', error);
+    }
+  };
 
   return (
     <div className="absolute top-20 right-5 w-1/5 h-full">
-      {/* si l'utilisateur est connecté et displayModal est vrai */}
       {displayModal && isLoggedIn && (
         <div
           className="absolute w-[30vw] right-0 mr-8 open-modal"
@@ -21,7 +46,7 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
           aria-hidden="true"
         >
           <div className="relative w-full max-h-full border-top-white m-8">
-            <div className="relative bg-[#A4978E] rounded-lg ">
+            <div className="relative bg-[#A4978E] rounded-lg">
               <button
                 type="button"
                 className="close-modal absolute top-3 right-2.5 text-[#132226] rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
@@ -49,14 +74,13 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
                 <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
                   Votre commentaire
                 </h3>
-                <form className="space-y-6" action="#">
+                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                   <div className="modal-input-group mb-5">
                     <input
-                      type="name"
-                      name="name"
+                      type="text"
                       id="name"
                       className="modal-input-group__input"
-                      required
+                      {...register('name')}
                     />
                     <label htmlFor="name" className="modal-input-group__label">
                       Votre nom
@@ -64,10 +88,9 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
                   </div>
                   <div className="modal-input-group mb-5">
                     <textarea
-                      name="review"
                       id="review"
                       className="modal-input-group__input w-full h-[10vh]"
-                      required
+                      {...register('review')}
                     />
                     <label
                       htmlFor="review"
@@ -83,55 +106,6 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
                     Valider
                   </button>
                 </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Afficher un message si l'utilisateur n'est pas connecté */}
-      {displayModal && !isLoggedIn && (
-        <div
-          className="absolute top-5 w-[30vw] right-0 mr-8 open-modal"
-          id="authentication-modal"
-          tabIndex={-1}
-          aria-hidden="true"
-        >
-          <div className="relative w-full max-h-full border-top-white m-8">
-            <div className="relative bg-[#BE9063] rounded-lg shadow">
-              <button
-                type="button"
-                className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                data-modal-hide="authentication-modal"
-                onClick={handleToggleModal}
-              >
-                <svg
-                  className="w-3 h-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 14"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                  />
-                </svg>
-                <span className="sr-only">Close modal</span>
-              </button>
-              <div className="px-6 py-6 lg:px-8 h-[10vh] text-[#132226]">
-                <p>
-                  Vous devez être membre pour pouvoir commenter nos cocktails...
-                </p>
-                <p>
-                  Pas de panique,{' '}
-                  <Link to="/register" className="text-amber-700">
-                    c&apos;est par ici pour se connecter
-                  </Link>{' '}
-                </p>
               </div>
             </div>
           </div>

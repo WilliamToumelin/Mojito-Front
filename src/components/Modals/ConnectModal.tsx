@@ -1,15 +1,25 @@
+/* eslint-disable no-console */
 /* eslint-disable no-alert */
 /* eslint-disable react/button-has-type */
 import { FC, useCallback, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
+
 import './Modal.scss';
 
 const ConnectModal: FC = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<{
+    username: string;
+    password: string;
+  }>();
+
+  const [connectMessage, setConnectMessage] = useState('');
   const [displayModal, setDisplayModal] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const { isLoggedIn, login, logout } = useAuth();
@@ -17,54 +27,41 @@ const ConnectModal: FC = () => {
   // --- handleToggleModal sert à toggle le modal
   const handleToggleModal = useCallback((): void => {
     setDisplayModal((prevstate) => !prevstate);
+    setConnectMessage('');
   }, []);
 
   // Code pour se connecter une fois l'API prête
 
-  const handleLogin = async () => {
-    //  Appeler votre backend pour l'authentification
-    console.log('Tentative de connexion avec', username, password);
+  const handleLogin = async (data: { username: string; password: string }) => {
     try {
       const response = await fetch('http://localhost:5174/api/login_check', {
         method: 'POST',
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
       if (response.ok) {
-        const data = await response.json(); // Obtenir les données de la réponse
-        const { token } = data; // Extraire le token de la réponse
-        //  Stocker le token JWT dans le local storagea
+        const responseData = await response.json();
+        const { token } = responseData;
         localStorage.setItem('authToken', token);
         login();
         setDisplayModal(false);
-        setPassword('');
         navigate('/');
+        setConnectMessage(`Bienvenue ${data.username}`);
       } else {
-        //  Gérer les erreurs d'authentification ici
-        console.log('id incorrect');
-        setErrorMessage('Identifiants ou mot de passe invalides'); // Définir le message d'erreur
+        setConnectMessage('Identifiants ou mot de passe invalides');
       }
     } catch (error) {
-      //  Gérer les erreurs réseau ici
       console.error('Erreur réseau lors de la connexion', error);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // Empêcher le rafraîchissement de la page
-    handleLogin(); // Appeler la fonction de connexion
-  };
-
   const handleLogout = () => {
-    console.log('Déconnexion en cours');
     //  Supprimer le token JWT du local storage
     localStorage.removeItem('authToken');
     logout();
-    setPassword('');
-    setUsername('');
   };
 
   return (
@@ -78,7 +75,7 @@ const ConnectModal: FC = () => {
           >
             Déconnexion
           </button>
-          <p className="absolute text-[#A4978E]">Bienvenue {username}</p>
+          <p className="absolute text-[#A4978E]">{connectMessage}</p>
         </>
       ) : (
         <button
@@ -123,34 +120,37 @@ const ConnectModal: FC = () => {
                 </svg>
                 <span className="sr-only">Close modal</span>
               </button>
+
               <div className="px-6 py-6 lg:px-8">
                 <h3 className="mb-4 text-xl font-medium text-[#BE9063]">
                   Se connecter
                 </h3>
-                <form className="space-y-6" action="#">
+                <form
+                  className="space-y-6"
+                  onSubmit={handleSubmit(handleLogin)}
+                >
                   <div className="modal-input-group mb-5">
                     <input
                       type="email"
-                      name="username"
                       id="email"
                       className="modal-input-group__input"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
                       required
+                      {...register('username')}
                     />
                     <label htmlFor="email" className="modal-input-group__label">
                       Email adress
                     </label>
+                    {errors.username && (
+                      <div className="text-red-500">Email requis</div>
+                    )}
                   </div>
                   <div className="modal-input-group mb-5">
                     <input
                       type="password"
-                      name="password"
                       id="password"
                       className="modal-input-group__input"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
                       required
+                      {...register('password')}
                     />
                     <label
                       htmlFor="password"
@@ -158,17 +158,14 @@ const ConnectModal: FC = () => {
                     >
                       Mot de passe
                     </label>
-                  </div>
-                  <div className="text-sm font-medium text-[#A4978E]">
-                    {/* Afficher le message d'erreur ici */}
-                    {errorMessage && (
-                      <div className="text-red-500">{errorMessage}</div>
+                    {errors.password && (
+                      <div className="text-red-500">Mot de passe requis</div>
                     )}
+                    <p className=" text-red-400">{connectMessage}</p>
                   </div>
                   <button
                     type="submit"
                     className="w-full rounded-lg text-sm px-5 py-2.5 text-center text-[#BE9063] font-bold bg-[#132226] border-[#A4978E] border-4"
-                    onClick={handleSubmit}
                   >
                     Valider
                   </button>

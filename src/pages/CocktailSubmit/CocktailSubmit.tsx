@@ -8,7 +8,7 @@ import ListManager from './ListManager';
 import RadioAdd from './RadioAdd';
 
 const CocktailSubmit: React.FC = () => {
-  const { register, handleSubmit, watch } = useForm();
+  const { register, handleSubmit, watch, reset } = useForm();
   const [ingredientsList, setIngredientsList] =
     useState<IngredientsData | null>(null);
   const techniques = watch('Techniques');
@@ -26,7 +26,35 @@ const CocktailSubmit: React.FC = () => {
   }, []);
   console.log(ingredientsList);
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = async (data: IngredientsData) => {
+    console.log(data);
+    try {
+      const datas = {
+        ingredients: data,
+        techniques,
+        glass,
+        ices,
+        description,
+      };
+
+      const request = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datas),
+      };
+
+      const response = await fetch('API', request);
+
+      if (response.ok) {
+        console.log('Commentaire soumis avec succès');
+        reset();
+      } else {
+        console.error('Erreur lors de la soumission du commentaire');
+      }
+    } catch (error) {
+      console.error('Erreur inattendue', error);
+    }
+  };
 
   return (
     <div className="bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh] text-[#BE9063]">

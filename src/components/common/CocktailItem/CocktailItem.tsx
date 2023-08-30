@@ -49,7 +49,7 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
             {cocktail.name}
           </h1>
           <p
-            className={`text-[#A4978E] text-lg p-4 flex ${
+            className={`text-[#A4978E] text-xl p-4 flex ${
               modulo ? 'justify-end' : ''
             } ${
               animate
@@ -62,7 +62,7 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
             Difficulté : {cocktail.difficulty}/5
           </p>
           <p
-            className={`text-[#A4978E] text-lg p-4 flex ${
+            className={`text-[#A4978E] text-xl p-4 flex ${
               modulo ? 'justify-end' : ''
             } ${
               animate ? 'opacity-0 translate-y-12' : ''
