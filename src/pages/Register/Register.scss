@@ -10,6 +10,7 @@
   outline: 2px solid #a4978e;
   background-color: transparent;
   transition: outline-color 500ms;
+  width: 14em;
 }
 .register-input-group__input:is(:focus, :valid) {
   outline-color: #a4978e;

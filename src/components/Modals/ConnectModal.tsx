@@ -9,6 +9,7 @@ const ConnectModal: FC = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const { isLoggedIn, login, logout } = useAuth();
@@ -34,21 +35,27 @@ const ConnectModal: FC = () => {
 
       if (response.ok) {
         const data = await response.json(); // Obtenir les données de la réponse
-        const token = data.token; // Extraire le token de la réponse
+        const { token } = data; // Extraire le token de la réponse
         //  Stocker le token JWT dans le local storagea
         localStorage.setItem('authToken', token);
         login();
         setDisplayModal(false);
         setPassword('');
+        navigate('/');
       } else {
         //  Gérer les erreurs d'authentification ici
         console.log('id incorrect');
-        window.alert('Identifiants invalides');
+        setErrorMessage('Identifiants ou mot de passe invalides'); // Définir le message d'erreur
       }
     } catch (error) {
       //  Gérer les erreurs réseau ici
       console.error('Erreur réseau lors de la connexion', error);
     }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault(); // Empêcher le rafraîchissement de la page
+    handleLogin(); // Appeler la fonction de connexion
   };
 
   const handleLogout = () => {
@@ -152,14 +159,21 @@ const ConnectModal: FC = () => {
                       Mot de passe
                     </label>
                   </div>
+                  <div className="text-sm font-medium text-[#A4978E]">
+                    {/* Afficher le message d'erreur ici */}
+                    {errorMessage && (
+                      <div className="text-red-500">{errorMessage}</div>
+                    )}
+                  </div>
                   <button
                     type="submit"
                     className="w-full rounded-lg text-sm px-5 py-2.5 text-center text-[#BE9063] font-bold bg-[#132226] border-[#A4978E] border-4"
-                    onClick={handleLogin}
+                    onClick={handleSubmit}
                   >
                     Valider
                   </button>
-                  <div className="text-sm font-medium text-[#A4978E]">
+
+                  <div className="text-sm  font-medium text-[#A4978E]">
                     Pas encore Membre?{' '}
                     <Link
                       to="/register"
