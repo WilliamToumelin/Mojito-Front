@@ -14,7 +14,6 @@ const CocktailSubmit: React.FC = () => {
   const techniques = watch('Techniques');
   const ices = watch('Glaces');
   const glass = watch('Verres');
-  const description = watch('description');
 
   useEffect(() => {
     fetch('http://localhost:5174/api/propositions/data')
@@ -27,6 +26,7 @@ const CocktailSubmit: React.FC = () => {
   console.log(ingredientsList);
 
   const onSubmit = async (data: FieldValues) => {
+    console.log(data);
     try {
       const ingredientsData: IngredientsData = {
         ingredients: data.ingredients,
