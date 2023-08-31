@@ -33,6 +33,9 @@ const Register: React.FC = () => {
       const response = await fetch('/api/register', {
         method: 'POST',
         body: JSON.stringify({
+          lastName,
+          firstName,
+          dateOfBirth,
           username,
           password,
           pseudonym,
