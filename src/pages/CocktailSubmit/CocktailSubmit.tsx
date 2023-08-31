@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { IngredientsData } from '../../types/types';
 import ListManager from './ListManager';
 import RadioAdd from './RadioAdd';
@@ -26,21 +26,19 @@ const CocktailSubmit: React.FC = () => {
   }, []);
   console.log(ingredientsList);
 
-  const onSubmit = async (data: IngredientsData) => {
-    console.log(data);
+  const onSubmit = async (data: FieldValues) => {
     try {
-      const datas = {
-        ingredients: data,
-        techniques,
-        glass,
-        ices,
-        description,
+      const ingredientsData: IngredientsData = {
+        ingredients: data.ingredients,
+        glass: data.Verres,
+        ices: data.Glaces,
+        technicals: data.Techniques,
       };
 
       const request = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(datas),
+        body: JSON.stringify(ingredientsData),
       };
 
       const response = await fetch('API', request);
