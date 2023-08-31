@@ -81,17 +81,17 @@ const Home: React.FC<HomeProps> = ({
         }}
         className={` ${
           !categoryId ? 'relative' : ''
-        } w-4/5 lg:w-4/6 h-full mt-5 lg:h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]`}
+        } w-4/5 xl:w-4/6 h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl pb-3 bg-[#132226]`}
       >
         {/* Haut du composant avec le bouton dependant de SI PAS DE CATEGORYID avec top 5 ou liste complète */}
         {!categoryId ? (
           <>
-            <div className="text-center pb-12">
-              <h1 className="text-[#BE9063] text-5xl pt-8">
+            <div className="text-center pb-6">
+              <h1 className="text-[#BE9063] text-5xl pt-6">
                 {displayMode ? 'Le top 5' : 'Tous nos cocktails'}
               </h1>
             </div>
-            <div className="block m-auto mb-10">
+            <div className="block m-auto mb-5">
               <button
                 className="text-[#BE9063] text-6xl animate-bounce"
                 type="button"
@@ -116,7 +116,7 @@ const Home: React.FC<HomeProps> = ({
           </>
         )}
 
-        <div className="text-white flex px-12 pt-9">
+        <div className="flex px-2 md:px-12 pt-9">
           <ul className="w-full">
             {/* Liste de cocktail filré avec categoryId sinon avec la coniditon " : " alors on utlise le DisplayMode avec le Top5 et ListeComplète pour filtrer les cocktails */}
             {categoryId

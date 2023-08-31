@@ -21,8 +21,8 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
   return (
     <>
       <article
-        className={`h-[20em] flex items-center ${
-          modulo ? 'flex-row-reverse' : ''
+        className={`lg:h-[20em] flex  items-center ${
+          modulo ? 'flex-row-reverse text-right' : ''
         } ${
           animate
             ? modulo
@@ -31,7 +31,7 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
             : ''
         } transition-all ease-in duration-1200`}
       >
-        <div className="w-64 h-64 rounded-full overflow-hidden border-[#A4978E] border-8">
+        <div className="w-28 h-28 md:w-52 md:h-52 lg:w-64 lg:h-64 rounded-full overflow-hidden border-[#A4978E] border-4 md:border-8">
           <div className="relative w-full h-full">
             <img
               src={cocktail.picture}
@@ -40,16 +40,16 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
             />
           </div>
         </div>
-        <div className="pl-10 pr-10 ">
+        <div className="px-1 lg:px-10">
           <h1
-            className={`ml-3 py-2 pr-4 pl-1 leading-7 text-[#BE9063] hover:text-white text-4xl${
+            className={` md:py-2  md:p-4 leading-7 text-[#BE9063] hover:text-white xl:text-4xl text-3xl ${
               animate ? 'opacity-0 -translate-y-12' : ''
             } transition-all ease-in duration-1200`}
           >
             {cocktail.name}
           </h1>
           <p
-            className={`text-[#A4978E] text-xl p-4 flex ${
+            className={`text-[#A4978E] text-base md:text-xl md:p-4 flex ${
               modulo ? 'justify-end' : ''
             } ${
               animate
@@ -62,7 +62,7 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
             Difficulté : {cocktail.difficulty}/5
           </p>
           <p
-            className={`text-[#A4978E] text-xl p-4 flex ${
+            className={`text-[#A4978E] text-base md:text-xl md:p-4 flex ${
               modulo ? 'justify-end' : ''
             } ${
               animate ? 'opacity-0 translate-y-12' : ''

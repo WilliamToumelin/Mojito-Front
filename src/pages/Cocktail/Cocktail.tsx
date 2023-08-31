@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaCocktail, FaGlassMartiniAlt } from 'react-icons/fa';
+import { FaCocktail, FaCommentDots, FaGlassMartiniAlt } from 'react-icons/fa';
 import { GiIceCube } from 'react-icons/gi';
 import { IoIosCog } from 'react-icons/io';
 import { BsClockFill } from 'react-icons/bs';
@@ -33,7 +33,7 @@ const Cocktail: React.FC = () => {
     // TEMPORAIRE !!!!!! a rajouter un loader , parce pour l'instant il n'y a que une fenetre noir si pas de cocktail chargé encore ...
     return (
       <div className="relative bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh]">
-        <div className="w-full h-full lg:w-4/6 lg:h-4/5 flex shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]" />
+        <div className="w-full h-[95%] sm:w-5/6 xl:w-4/6 sm:h-4/5 flex overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]" />
       </div>
     );
   }
@@ -44,11 +44,11 @@ const Cocktail: React.FC = () => {
         style={{
           boxShadow: '#132226 0px 1px 22px',
         }}
-        className="w-full h-full lg:w-4/6 lg:h-4/5 flex shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]"
+        className="w-full h-[95%] sm:w-5/6 xl:w-4/6 sm:h-4/5 flex overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]"
       >
         {cocktailDetails ? (
-          <div className="flex-1 flex text-[#BE9063]">
-            <div className="w-2/5">
+          <div className="sm:flex-1 flex flex-col sm:flex-row text-[#BE9063]">
+            <div className="sm:w-2/5 w-full">
               <div className="h-full">
                 <img
                   src={cocktailDetails.picture}
@@ -57,32 +57,37 @@ const Cocktail: React.FC = () => {
                 />
               </div>
             </div>
-            <div className="w-3/5 flex-1 overflow-y-auto p-12  space-y-7">
+            <div className="sm:w-3/5 w-full flex-1 sm:overflow-y-auto p-12  space-y-7">
               <h2 className=" text-5xl font-semibold text-center">
                 {cocktailDetails.name}
               </h2>
               <div className="flex justify-between">
                 <div className="flex align-center items-center text-2xl">
-                  <div className="mr-1">
-                    <FaCocktail />
-                  </div>
-                  <p className="ml-2 text-lg mr-1 font-bold text-[#A4978E]">
-                    {cocktailDetails.rating} / 5
-                  </p>
-
-                  <span className="w-2 h-2 mx-1.5 bg-[#BE9063] rounded-full" />
-                  <Link to={`/cocktail/${cocktailDetails.slug}/commentaires`}>
-                    <div className="ml-1 text-lg text-[#A4978E] hover:text-[#BE9063] ">
-                      {cocktailDetails.comments.length}{' '}
-                      {cocktailDetails.comments.length < 2
-                        ? 'commentaire'
-                        : 'commentaires'}
+                  <div>
+                    <div className="flex">
+                      <div className="mr-1">
+                        <FaCocktail className="text-3xl md:text-4xl" />
+                      </div>
+                      <p className="ml-2 text-lg md:text-2xl mr-1 font-bold text-[#A4978E]">
+                        {cocktailDetails.rating} / 5
+                      </p>
                     </div>
-                  </Link>
+
+                    <div className="flex flex-nowrap pt-2">
+                      <Link
+                        to={`/cocktail/${cocktailDetails.slug}/commentaires`}
+                      >
+                        <div className="text-lg text-[#A4978E] hover:text-[#BE9063] flex items-center md:text-2xl">
+                          <FaCommentDots className="text-[#BE9063] mr-3 text-3xl md:text-4xl" />
+                          {cocktailDetails.comments.length} avis
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-                <div className=" text-2xl flex items-center">
-                  <BsClockFill className="" />
-                  <div className="pl-3 text-[#A4978E]">
+                <div className="p-2 text-2xl flex items-center">
+                  <BsClockFill className="ml-2 text-3xl md:text-4xl" />
+                  <div className="pl-3 text-[#A4978E] md:text-2xl">
                     {cocktailDetails.preparation_time}{' '}
                     {cocktailDetails.preparation_time < 2
                       ? 'minute'
@@ -107,19 +112,19 @@ const Cocktail: React.FC = () => {
               </div>
               <div className="flex flex-wrap justify-between ">
                 <div className=" text-2xl flex items-center">
-                  <FaGlassMartiniAlt className="" />
+                  <FaGlassMartiniAlt className="text-3xl md:text-4xl" />
                   <div className="pl-3 text-[#A4978E]">
                     {cocktailDetails.glass.name}
                   </div>
                 </div>
                 <div className=" text-2xl flex items-center">
-                  <GiIceCube className="" />
+                  <GiIceCube className="text-3xl md:text-4xl" />
                   <div className="pl-3 text-[#A4978E]">
                     {cocktailDetails.ice.name}
                   </div>
                 </div>
-                <div className=" text-2xl flex items-center">
-                  <IoIosCog className="text-3xl" />
+                <div className=" text-2xl flex items-center pt-3">
+                  <IoIosCog className="text-3xl md:text-4xl" />
                   <div className="pl-3 text-[#A4978E]">
                     {cocktailDetails.technical.name}
                   </div>

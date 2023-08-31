@@ -61,7 +61,7 @@ const CocktailSubmit: React.FC = () => {
         style={{
           boxShadow: '#132226 0px 1px 22px',
         }}
-        className="relative w-4/5 lg:w-4/6 h-full lg:h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]"
+        className="relative w-4/5 lg:w-4/6 h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]"
       >
         <h1 className="text-[#BE9063] text-5xl pt-8 text-center">
           Proposer un Cocktail

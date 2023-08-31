@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-console */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
 import { Category } from '../../types/types';
 import ConnectModal from '../Modals/ConnectModal';
+import Hr from '../common/Hr/Hr';
 
 interface HamburgerMenuProps {
   categoryId: number | null;
@@ -21,6 +24,9 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
 
   const handleCategoryClick = (clickedCategoryId: number) => {
     setCategoryId(clickedCategoryId);
+  };
+
+  const handleCloseMenu = () => {
     setIsMenuOpen(false); // Ferme le menu lorsque vous sélectionnez une catégorie
   };
 
@@ -70,14 +76,34 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
         </svg>
       </button>
       <div
-        className={`w-full z-50 absolute right-0 top-24 rounded
+        className={`w-[80%] z-50 absolute right-0 top-24 rounded
          ${isMenuOpen ? '' : 'hidden'}`}
         id="navbar-hamburger"
       >
         <ul className="w-3/4 flex flex-col font-medium mt-6 text-3xl rounded-lg bg-[#BE9063] text-center">
           <li>
-            <NavLink to="/" className="block py-2 text-white rounded">
+            <NavLink
+              to="/"
+              className="block py-2 text-white rounded"
+              onClick={() => {
+                handleCloseMenu();
+              }}
+            >
               Home
+            </NavLink>
+          </li>
+          <hr className="border-2 border-white" />
+          <li className="flex justify-center mb-2">
+            <NavLink
+              to="/proposition-cocktail"
+              className={`block py-2 text-white rounded ${
+                !isLoggedIn ? 'hidden' : ''
+              }`}
+              onClick={() => {
+                handleCloseMenu();
+              }}
+            >
+              Propose ton cocktail!
             </NavLink>
           </li>
           {categoriesDataMemo.slice(0, 6).map((categoryItem: Category) => (
@@ -89,6 +115,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
                 onClick={() => {
                   handleCategoryClick(categoryItem.id);
                   handleCategoryNameClick(categoryItem.name);
+                  handleCloseMenu();
                 }}
               >
                 {categoryItem.name}
@@ -96,7 +123,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
             </li>
           ))}
 
-          <li className="flex justify-center mb-2">
+          <li className="flex justify-center mb-2 text-xl">
             <ConnectModal />
           </li>
         </ul>

@@ -41,7 +41,7 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
     // TEMPORAIRE !!!!!! a rajouter un loader , parce pour l'instant il n'y a que une fenetre noir si pas de cocktail chargé encore ...
     return (
       <div className="bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh]">
-        <div className="relative  w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col over shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]" />
+        <div className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col over shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]" />
       </div>
     );
   }
@@ -51,28 +51,29 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
       {cocktailData.comments.length > 0 && (
         <div className="relative  w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col over shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]">
           <div className="relative w-full p-3 flex flex-col items-center pb-7">
-            <h1 className="text-[#a4978e] text-xl pt-5 text-center w-full">
-              Commentaires a propos de{' '}
-              <span className="text-[#BE9063] text-3xl font-semibold">
+            <div className="w-3/5">
+              <h1 className="text-[#a4978e] flex text-3xl pt-5 text-center w-4/5">
                 {cocktailData.name}
-              </span>
-            </h1>
-            <div className="absolute top-5 right-5">
-              <SquaredButton
-                name="laisse un commentaire"
-                onClick={handleToggleModal}
-                height={48}
-                width={200}
-                type="button"
+              </h1>
+            </div>
+            <div className="w-2/5">
+              <div className="absolute top-5 right-5">
+                <SquaredButton
+                  name="laisse un commentaire"
+                  onClick={handleToggleModal}
+                  height={48}
+                  width={200}
+                  type="button"
+                />
+              </div>
+              <CommentModal
+                displayModal={displayModal}
+                handleToggleModal={handleToggleModal}
               />
             </div>
-            <CommentModal
-              displayModal={displayModal}
-              handleToggleModal={handleToggleModal}
-            />
           </div>
           <div className="border-2 border-[#a4978e]" />
-          <div className="w-full h-full overflow-y-auto p-6 pt-0 flex flex-col items-center">
+          <div className="w-full h-full overflow-y-auto p-6 pt-0 flex flex-col items-center ">
             {cocktailData.comments.map((data) => (
               <article
                 key={data.id}

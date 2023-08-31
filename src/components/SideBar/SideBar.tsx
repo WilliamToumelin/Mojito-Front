@@ -19,7 +19,7 @@ const SideBar: React.FC<Props> = ({
   };
 
   return (
-    <div className="hidden absolute top-24 lg:block w-56 z-10 left-0">
+    <div className="hidden absolute top-24 xl:block w-52 z-10 left-0">
       <div className="flex flex-col gap-1">
         {filteredCocktails.map((cocktail: Cocktails) => (
           <NavLink

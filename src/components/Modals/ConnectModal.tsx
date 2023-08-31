@@ -91,7 +91,7 @@ const ConnectModal: FC = () => {
       )}
       {displayModal && (
         <div
-          className={`fixed top-0 right-0 z-50 w-2/6 md:w-auto p-4 overflow-x-hidden overflow-y-auto h-[calc(100% - 1rem)] max-h-full ${
+          className={`fixed top-0 right-0 z-50  w-auto p-4 overflow-x-hidden overflow-y-auto h-[calc(100% - 1rem)] max-h-full ${
             displayModal ? 'open-modal' : 'close-modal'
           }`}
           id="authentication-modal"
@@ -102,7 +102,7 @@ const ConnectModal: FC = () => {
             <div className="relative bg-[#525B56] rounded-lg shadow ">
               <button
                 type="button"
-                className="absolute top-3 right-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
+                className="absolute top-3 right-2.5 bg-transparent rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
                 data-modal-hide="authentication-modal"
                 onClick={handleToggleModal}
               >
@@ -132,7 +132,7 @@ const ConnectModal: FC = () => {
                   className="space-y-6"
                   onSubmit={handleSubmit(handleLogin)}
                 >
-                  <div className="modal-input-group mb-5">
+                  <div className="modal-input-group mb-5 ">
                     <input
                       type="email"
                       id="email"
