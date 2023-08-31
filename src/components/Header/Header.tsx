@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="bg-[#132226] w-full flex h-[20vh] items-center">
-      <div className="w-1/4 xl:w-2/12 flex pl-1 pt-1  ">
+      <div className="w-2/12 xl:w-2/12 flex pl-1 pt-1  ">
         <NavLink to="/" onClick={handleResetCategoryId}>
           <img
             className="min-w-150"

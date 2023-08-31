@@ -75,8 +75,8 @@ const ConnectModal: FC = () => {
             height={50}
             width={200}
             onClick={handleLogout}
-            bgColorHover="red-900"
-            fontcolor="red-900"
+            bgColorHover="red-cocktail"
+            fontcolor="red-cocktail"
           />
           <p className="absolute text-[#A4978E]">{connectMessage}</p>
         </>
