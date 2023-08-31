@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
 
 import './Modal.scss';
+import SquaredButton from '../common/buttons/SquaredButton';
 
 const ConnectModal: FC = () => {
   const {
@@ -68,23 +69,25 @@ const ConnectModal: FC = () => {
     <div>
       {isLoggedIn ? (
         <>
-          <button
+          <SquaredButton
+            name="Déconnexion"
             type="button"
-            className="relative text-red-900 hover:text-white border border-[#A4978E] hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            height={50}
+            width={200}
             onClick={handleLogout}
-          >
-            Déconnexion
-          </button>
+            bgColorHover="red-900"
+            fontcolor="red-900"
+          />
           <p className="absolute text-[#A4978E]">{connectMessage}</p>
         </>
       ) : (
-        <button
+        <SquaredButton
+          name="Se connecter"
           type="button"
-          className="text-[#BE9063] border border-[#A4978E] hover:bg-[#525B56] focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+          height={50}
+          width={200}
           onClick={handleToggleModal}
-        >
-          Se connecter
-        </button>
+        />
       )}
       {displayModal && (
         <div
@@ -163,12 +166,14 @@ const ConnectModal: FC = () => {
                     )}
                     <p className=" text-red-400">{connectMessage}</p>
                   </div>
-                  <button
+                  <SquaredButton
+                    name="Valider"
                     type="submit"
-                    className="w-full rounded-lg text-sm px-5 py-2.5 text-center text-[#BE9063] font-bold bg-[#132226] border-[#A4978E] border-4"
-                  >
-                    Valider
-                  </button>
+                    height={40}
+                    width={150}
+                    bgColorHover="[#A4978E]"
+                    fontColorHover="[#132226]"
+                  />
 
                   <div className="text-sm  font-medium text-[#A4978E]">
                     Pas encore Membre?{' '}

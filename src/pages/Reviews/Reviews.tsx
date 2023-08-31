@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import CommentModal from '../../components/Modals/CommentModal';
 import { Cocktails } from '../../types/types';
-import RoundedButton from '../../components/common/buttons/RoundedButton';
+import SquaredButton from '../../components/common/buttons/SquaredButton';
 
 interface Props {
   selectedCocktail: number | null;
@@ -58,11 +58,12 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
               </span>
             </h1>
             <div className="absolute top-5 right-5">
-              <RoundedButton
+              <SquaredButton
                 name="laisse un commentaire"
                 onClick={handleToggleModal}
                 height={48}
                 width={200}
+                type="button"
               />
             </div>
             <CommentModal

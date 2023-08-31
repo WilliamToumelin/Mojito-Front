@@ -4,6 +4,8 @@ import { Link, NavLink } from 'react-router-dom';
 import ConnectModal from '../Modals/ConnectModal';
 import CategorySelectBar from '../CategorySelectBar/CategorySelectBar';
 import { useAuth } from '../../contexts/AuthProvider';
+import HamburgerMenu from './HamburgerMenu';
+import SquaredButton from '../common/buttons/SquaredButton';
 
 interface HeaderProps {
   categoryId: number | null;
@@ -25,22 +27,22 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="bg-[#132226] px-3 pt-2 pb-12 w-full flex h-[20vh]">
-      <div className="w-2/12 flex pl-1 pt-1  ">
+    <header className="bg-[#132226] w-full flex h-[20vh] items-center">
+      <div className="w-1/4 xl:w-2/12 flex pl-1 pt-1  ">
         <NavLink to="/" onClick={handleResetCategoryId}>
           <img
-            className=""
+            className="min-w-150"
             width="160"
             src="../../../public/logo-cocktail.png"
             alt="Cocktail and link to home"
           />
         </NavLink>
       </div>
-      <div className="w-8/12 block">
-        <div className="text-8xl p-3 text-[#BE9063] text-center font-gluten font-extralight">
+      <div className="w-8/12 block ">
+        <div className="text-6xl md:text-8xl p-3 text-[#BE9063] text-center font-gluten font-extralight">
           <h1>Mojit&apos;o</h1>
         </div>
-        <div className="hidden lg:flex items-center justify-center">
+        <div className="hidden xl:flex items-center justify-center">
           <CategorySelectBar
             categoryId={categoryId}
             setCategoryId={setCategoryId}
@@ -48,21 +50,26 @@ const Header: React.FC<HeaderProps> = ({
           />
         </div>
       </div>
-      <div className="w-2/12 hidden lg:flex justify-end items-center">
+      <div className="w-2/12 hidden xl:flex flex-wrap justify-around space-y-2">
         {!isLoggedIn ? (
           ''
         ) : (
           <Link to="/proposition-cocktail">
-            <button
+            <SquaredButton
+              name="Propose ton cocktail !"
+              width={200}
+              height={50}
               type="button"
-              className="text-[#BE9063] border border-[#A4978E] hover:bg-[#525B56] font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-            >
-              Propose ton cocktail !
-            </button>
+            />
           </Link>
         )}
         <ConnectModal />
       </div>
+      <HamburgerMenu
+        categoryId={categoryId}
+        setCategoryId={setCategoryId}
+        setCategoryName={setCategoryName}
+      />
     </header>
   );
 };

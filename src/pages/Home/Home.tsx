@@ -81,7 +81,7 @@ const Home: React.FC<HomeProps> = ({
         }}
         className={` ${
           !categoryId ? 'relative' : ''
-        } w-4/5 lg:w-4/6 h-full lg:h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]`}
+        } w-4/5 lg:w-4/6 h-full mt-5 lg:h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]`}
       >
         {/* Haut du composant avec le bouton dependant de SI PAS DE CATEGORYID avec top 5 ou liste complète */}
         {!categoryId ? (
@@ -91,7 +91,7 @@ const Home: React.FC<HomeProps> = ({
                 {displayMode ? 'Le top 5' : 'Tous nos cocktails'}
               </h1>
             </div>
-            <div className="flex justify-center mb-10 absolute top-12 right-12">
+            <div className="block m-auto mb-10">
               <button
                 className="text-[#BE9063] text-6xl animate-bounce"
                 type="button"
@@ -99,6 +99,7 @@ const Home: React.FC<HomeProps> = ({
               >
                 {displayMode ? <CgInfinity /> : <BsTrophy />}
               </button>
+              <p className="text-[#BE9063]">click me</p>
             </div>
           </>
         ) : (

@@ -3,6 +3,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthProvider';
+import SquaredButton from '../common/buttons/SquaredButton';
 
 interface Props {
   displayModal: boolean;
@@ -60,13 +61,13 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
                   fill="none"
                   viewBox="0 0 14 14"
                 >
-                  <path
+                  {/* <path
                     stroke="currentColor"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
                     d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                  />
+                  /> */}
                 </svg>
                 <span className="sr-only text-[#132226]">Close modal</span>
               </button>
@@ -99,12 +100,12 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
                       Votre commentaire
                     </label>
                   </div>
-                  <button
+                  {/* <SquaredButton
+                    name="submitComment"
                     type="submit"
-                    className="w-full text-white bg-gradient-to-r from-purple-700 via-pink-500 to-orange-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  >
-                    Valider
-                  </button>
+                    height={28}
+                    width={200}
+                  /> */}
                 </form>
               </div>
             </div>

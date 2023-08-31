@@ -10,7 +10,7 @@ import Rating from './Rating';
 import { Cocktails } from '../../types/types';
 import { useAuth } from '../../contexts/AuthProvider';
 import Hr from '../../components/common/Hr/Hr';
-import RoundedButton from '../../components/common/buttons/RoundedButton';
+import SquaredButton from '../../components/common/buttons/SquaredButton';
 
 const Cocktail: React.FC = () => {
   const [cocktailDetails, setCocktailDetails] = useState<Cocktails | null>(
@@ -166,10 +166,11 @@ const Cocktail: React.FC = () => {
                     to={`/cocktail/${cocktailDetails.slug}/commentaires`}
                     className="menu-link flex justify-center items-center "
                   >
-                    <RoundedButton
+                    <SquaredButton
                       name="voir les commentaires"
                       height={48}
-                      width={208}
+                      width={200}
+                      type="button"
                     />
                   </Link>
                 </div>
