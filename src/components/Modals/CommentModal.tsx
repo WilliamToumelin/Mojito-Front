@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../common/buttons/SquaredButton';
 
+import './Modal.scss';
+
 interface Props {
   displayModal: boolean;
   handleToggleModal: () => void;
@@ -47,7 +49,7 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
           aria-hidden="true"
         >
           <div className="relative w-full max-h-full border-top-white m-8">
-            <div className="relative bg-[#A4978E] rounded-lg">
+            <div className="relative bg-[#525B56] rounded-lg">
               <button
                 type="button"
                 className="close-modal absolute top-3 right-2.5 text-[#132226] rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
@@ -55,24 +57,24 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
                 onClick={handleToggleModal}
               >
                 <svg
-                  className="w-3 h-3"
+                  className="w-3 h-3 text-[#132226]"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 14 14"
                 >
-                  {/* <path
+                  <path
                     stroke="currentColor"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
                     d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                  /> */}
+                  />
                 </svg>
                 <span className="sr-only text-[#132226]">Close modal</span>
               </button>
               <div className="px-6 py-6 lg:px-8">
-                <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+                <h3 className="mb-4 text-xl font-medium text-gray-900">
                   Votre commentaire
                 </h3>
                 <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -80,7 +82,7 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
                     <input
                       type="text"
                       id="name"
-                      className="modal-input-group__input"
+                      className="modal-input-group__input text-[#132226]"
                       {...register('name')}
                     />
                     <label htmlFor="name" className="modal-input-group__label">
@@ -90,22 +92,22 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
                   <div className="modal-input-group mb-5">
                     <textarea
                       id="review"
-                      className="modal-input-group__input w-full h-[10vh]"
+                      className="modal-input-group__input w-full h-[10vh] text-[#132226]"
                       {...register('review')}
                     />
                     <label
                       htmlFor="review"
-                      className="modal-input-group__label"
+                      className="modal-input-group__label text-[#a4978e]"
                     >
                       Votre commentaire
                     </label>
                   </div>
-                  {/* <SquaredButton
-                    name="submitComment"
+                  <SquaredButton
+                    name="Envoyer"
                     type="submit"
-                    height={28}
-                    width={200}
-                  /> */}
+                    height={40}
+                    width={120}
+                  />
                 </form>
               </div>
             </div>

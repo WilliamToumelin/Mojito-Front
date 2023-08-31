@@ -99,7 +99,7 @@ const Home: React.FC<HomeProps> = ({
               >
                 {displayMode ? <CgInfinity /> : <BsTrophy />}
               </button>
-              <p className="text-[#BE9063]">click me</p>
+              <p className="text-[#BE9063] text-center">click me</p>
             </div>
           </>
         ) : (

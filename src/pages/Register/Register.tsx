@@ -33,22 +33,26 @@ const Register: React.FC = () => {
       const response = await fetch('/api/register', {
         method: 'POST',
         body: JSON.stringify({
-          lastName,
-          firstName,
-          dateOfBirth,
-          username,
-          password,
-          pseudonym,
-          hasConsented,
+          data: [
+            lastName,
+            firstName,
+            dateOfBirth,
+            username,
+            password,
+            pseudonym,
+            hasConsented,
+          ],
         }),
         headers: {
           'Content-Type': 'application/json',
         },
       });
+
       if (response.ok) {
         const { token } = await response.json();
         //  Stocker le token JWT dans le local storage
         localStorage.setItem('authToken', token);
+
         register();
         login();
       } else {

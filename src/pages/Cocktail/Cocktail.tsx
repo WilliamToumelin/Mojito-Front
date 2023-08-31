@@ -73,7 +73,7 @@ const Cocktail: React.FC = () => {
                       </p>
                     </div>
 
-                    <div className="flex flex-nowrap pt-2">
+                    <div className="flex flex-nowrap pt-4">
                       <Link
                         to={`/cocktail/${cocktailDetails.slug}/commentaires`}
                       >

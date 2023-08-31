@@ -1,6 +1,5 @@
 .modal-input-group {
   position: relative;
-  display: flex;
 }
 .modal-input-group__input {
   font: inherit;
@@ -11,7 +10,7 @@
   outline: 2px solid #a4978e;
   background-color: transparent;
   transition: outline-color 500ms;
-  justify-content: flex-start;
+  width: 14em;
 }
 .modal-input-group__input:is(:focus, :valid) {
   outline-color: #a4978e;

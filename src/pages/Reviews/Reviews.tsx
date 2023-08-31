@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import CommentModal from '../../components/Modals/CommentModal';
 import { Cocktails } from '../../types/types';
+import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 
 interface Props {
@@ -20,6 +21,7 @@ function formatDate(data: string) {
 const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
   const [cocktailData, setCocktailData] = useState<Cocktails | null>(null);
   const [displayModal, setDisplayModal] = useState(false);
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
     fetch(`http://localhost:5174/api/cocktails/${selectedCocktail}/comments`)
@@ -41,7 +43,12 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
     // TEMPORAIRE !!!!!! a rajouter un loader , parce pour l'instant il n'y a que une fenetre noir si pas de cocktail chargé encore ...
     return (
       <div className="bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh]">
-        <div className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col over shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]" />
+        <div
+          style={{
+            boxShadow: '#132226 0px 1px 22px',
+          }}
+          className="relative  w-4/5 xl:w-4/6 h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl pb-3 bg-[#132226]"
+        />
       </div>
     );
   }
@@ -49,20 +56,25 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
   return (
     <div className="bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh]">
       {cocktailData.comments.length > 0 && (
-        <div className="relative  w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col over shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]">
-          <div className="relative w-full p-3 flex flex-col items-center pb-7">
-            <div className="w-3/5">
-              <h1 className="text-[#a4978e] flex text-3xl pt-5 text-center w-4/5">
+        <div
+          style={{
+            boxShadow: '#132226 0px 1px 22px',
+          }}
+          className="relative  w-4/5 xl:w-4/6 h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl pb-3 bg-[#132226]"
+        >
+          <div className="relative w-full p-3 flex flex-col flex-start pb-7">
+            <div className="w-3/5 flex">
+              <h1 className="text-[#a4978e] flex text-3xl pt-5 pl-5 text-center w-4/5">
                 {cocktailData.name}
               </h1>
             </div>
-            <div className="w-2/5">
+            <div className={`w-2/5 ${!isLoggedIn ? 'hidden' : ''}`}>
               <div className="absolute top-5 right-5">
                 <SquaredButton
-                  name="laisse un commentaire"
+                  name="Commente ! :)"
                   onClick={handleToggleModal}
-                  height={48}
-                  width={200}
+                  height={52}
+                  width={120}
                   type="button"
                 />
               </div>
