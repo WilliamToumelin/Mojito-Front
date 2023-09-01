@@ -15,12 +15,17 @@ const RadioAdd: React.FC<Props> = ({ options, selected, name, register }) => {
       {options.map((option, index) => (
         <label key={index} className="flex flex-wrap items-center">
           <div
-            className={`w-8 h-8 rounded-full border-4 border-[#525B56] flex items-center justify-center ${
-              selected === option ? `bg-[#525B56]` : 'bg-[#b3a8a0]'
+            className={`w-8 h-8 rounded-full border-4 flex items-center justify-center ${
+              selected === option
+                ? `bg-[#525B56] border-[#BE9063]`
+                : 'bg-[#b3a8a0] border-[#525B56]'
             }`}
           >
             {selected === option && (
-              <BsFillCheckCircleFill size={24} className="text-[#132226]" />
+              <BsFillCheckCircleFill
+                size={24}
+                className="text-[#132226] bg-[#BE9063]"
+              />
             )}
           </div>
           <input

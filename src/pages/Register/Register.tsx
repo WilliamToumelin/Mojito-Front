@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
 
@@ -13,12 +13,14 @@ const Register: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    watch, // Fonction pour surveiller les valeurs des champs
   } = useForm<{
     lastName: string;
     firstName: string;
     dateOfBirth: Date;
     username: string;
     password: string;
+    confirmPassword: string;
     pseudonym: string;
     hasConsented: boolean;
     warning: 0;
@@ -26,13 +28,16 @@ const Register: React.FC = () => {
     verified: boolean;
   }>();
 
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
   const [registerSuccess, setRegisterSuccess] = useState(false);
 
   const { login } = useAuth();
+
+  const password = watch('password'); // Surveille la valeur du champ password
+  const confirmPassword = watch('confirmPassword'); // Surveille la valeur du champ confirmPassword
+
+  const isPasswordValid = password === confirmPassword; // Vérifie si les mots de passe correspondent
 
   if (!useAuth) {
     // Si le contexte n'est pas défini, tu peux gérer cette situation ici
@@ -51,10 +56,6 @@ const Register: React.FC = () => {
     created_at: string;
     verified: boolean;
   }) => {
-    if (password !== confirmPassword) {
-      setErrorPasswordMessage('Les mots de passe ne correspondent pas.');
-      return;
-    }
     // Variable pour les infos direct
     const currentDate = new Date().toISOString();
     const currentWarning = 0;
@@ -90,8 +91,13 @@ const Register: React.FC = () => {
     }
   };
 
-  const passwordMatch = (value: string, compareValue: string) => {
-    return value === compareValue || 'Les mots de passe ne correspondent pas';
+  // Fonction pour vérifier si les mots de passe correspondent
+  const checkPasswordMatch = () => {
+    if (password !== confirmPassword) {
+      setIsPasswordValid(false);
+    } else {
+      setIsPasswordValid(true);
+    }
   };
 
   return (
@@ -185,17 +191,21 @@ const Register: React.FC = () => {
                         <input
                           type="password"
                           className="register-input-group__input"
-                          name="confirm-password"
+                          name="confirmPassword"
                           required
                         />
                         <label
-                          htmlFor="confirm-password"
+                          htmlFor="confirmPassword"
                           className="register-input-group__label"
                         >
                           Confirmer MdP
                         </label>
                       </div>
-                      <p>{errorPasswordMessage}</p>
+                      {password !== confirmPassword && (
+                        <div className="text-red-900">
+                          Les mots de passe ne correspondent pas.
+                        </div>
+                      )}
                       <div className="register-input-group mb-5">
                         <input
                           type="pseudonym"
@@ -241,6 +251,7 @@ const Register: React.FC = () => {
                   <button
                     type="submit"
                     className="p-2 mt-6 bg-[#BE9063] rounded-xl text-#132226"
+                    disabled={!isPasswordValid} // Désactive le bouton si les mots de passe ne correspondent pas
                   >
                     Inscription
                   </button>
