@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="bg-[#132226] w-full flex h-[20vh] items-center z-50">
+    <header className="bg-dark-gray w-full flex h-[20vh] items-center z-50">
       <div className="w-2/12 xl:w-2/12 flex pl-1 pt-1  ">
         <NavLink to="/" onClick={handleResetCategoryId}>
           <img
@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({
         </NavLink>
       </div>
       <div className="w-8/12 block ">
-        <div className="text-6xl md:text-8xl p-3 text-[#BE9063] text-center font-gluten font-extralight">
+        <div className="text-6xl md:text-8xl p-3 text-dark-brown text-center font-gluten font-extralight">
           <h1>Mojit&apos;o</h1>
         </div>
         <div className="hidden xl:flex items-center justify-center">
@@ -57,8 +57,8 @@ const Header: React.FC<HeaderProps> = ({
           <Link to="/proposition-cocktail">
             <SquaredButton
               name="Propose ton cocktail !"
-              width={200}
-              height={50}
+              width={12}
+              height={3}
               type="button"
             />
           </Link>

@@ -28,7 +28,7 @@ const SideBar: React.FC<Props> = ({
             key={cocktail.id}
             onClick={() => handleSelectCocktail(cocktail.id)}
           >
-            <GradiantButton name={cocktail.name} height={30} width={208} />
+            <GradiantButton name={cocktail.name} height={2} width={13} />
           </NavLink>
         ))}
       </div>

@@ -56,14 +56,14 @@ const CocktailSubmit: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh] text-[#BE9063]">
+    <div className="bg-light-brown flex justify-center items-center flex-1 h-[75vh] text-dark-brown">
       <div
         style={{
           boxShadow: '#132226 0px 1px 22px',
         }}
-        className="relative w-4/5 lg:w-4/6 h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]"
+        className="relative w-4/5 lg:w-4/6 h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray"
       >
-        <h1 className="text-[#BE9063] text-5xl pt-8 pb-4 text-center">
+        <h1 className="text-dark-brown text-5xl pt-8 pb-4 text-center">
           Proposer un Cocktail
         </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -133,7 +133,7 @@ const CocktailSubmit: React.FC = () => {
               <h3 className="text-lg font-medium mb-2">Description</h3>
               <textarea
                 {...register('description')}
-                className="border-xs rounded p-1 w-1/2 bg-[#b3a8a0] text-[#132226]"
+                className="border-xs rounded p-1 w-1/2 bg-[#b3a8a0] text-dark-gray"
                 rows={3}
               />
             </div>
@@ -141,8 +141,8 @@ const CocktailSubmit: React.FC = () => {
               <SquaredButton
                 name="Soumettre le cocktail"
                 type="submit"
-                height={40}
-                width={210}
+                height={3}
+                width={12}
               />
             </div>
           </div>

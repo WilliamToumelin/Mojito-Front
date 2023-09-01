@@ -31,7 +31,7 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
             : ''
         } transition-all ease-in duration-1200`}
       >
-        <div className="w-28 h-28 md:w-52 md:h-52 lg:w-64 lg:h-64 rounded-full overflow-hidden border-[#A4978E] border-4 md:border-8">
+        <div className="w-28 h-28 md:w-52 md:h-52 lg:w-64 lg:h-64 rounded-full overflow-hidden border-light-brown border-4 md:border-8">
           <div className="relative w-full h-full">
             <img
               src={cocktail.picture}
@@ -42,14 +42,14 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
         </div>
         <div className="px-1 lg:px-10">
           <h1
-            className={` md:py-2  md:p-4 leading-7 text-[#BE9063] hover:text-white xl:text-4xl text-3xl ${
+            className={` md:py-2  md:p-4 leading-7 text-dark-brown xl:text-4xl text-3xl ${
               animate ? 'opacity-0 -translate-y-12' : ''
             } transition-all ease-in duration-1200`}
           >
             {cocktail.name}
           </h1>
           <p
-            className={`text-[#A4978E] text-base md:text-xl md:p-4 flex ${
+            className={`text-light-brown text-base md:text-xl md:p-4 flex ${
               modulo ? 'justify-end' : ''
             } ${
               animate
@@ -62,14 +62,14 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
             Difficulté : {cocktail.difficulty}/5
           </p>
           <p
-            className={`text-[#A4978E] text-base md:text-xl md:p-4 flex ${
+            className={`text-light-brown text-base md:text-xl md:p-4 flex ${
               modulo ? 'justify-end' : ''
             } ${
               animate ? 'opacity-0 translate-y-12' : ''
             } transition-all ease-in duration-1200`}
           >
             Note : {cocktail.rating}
-            <span className=" text-[#BE9063] mr-1 pl-1">
+            <span className=" text-dark-brown mr-1 pl-1">
               <FaCocktail />
             </span>
           </p>

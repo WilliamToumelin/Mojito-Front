@@ -3,7 +3,6 @@
 /* eslint-disable react/button-has-type */
 import { FC, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import bcrypt from 'bcrypt';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
 
@@ -16,7 +15,7 @@ const ConnectModal: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<{
-    username: string;
+    email: string;
     password: string;
   }>();
 
@@ -34,17 +33,11 @@ const ConnectModal: FC = () => {
 
   // Code pour se connecter une fois l'API prête
 
-  const handleLogin = async (data: { username: string; password: string }) => {
+  const handleLogin = async (data: { email: string; password: string }) => {
     try {
-      // Hachez le mot de passe avant de l'envoyer
-      const hashedPassword = bcrypt.hashSync(data.password, 10);
-
       const response = await fetch('http://localhost:5174/api/login_check', {
         method: 'POST',
-        body: JSON.stringify({
-          username: data.username,
-          password: hashedPassword,
-        }),
+        body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -56,10 +49,9 @@ const ConnectModal: FC = () => {
         login();
         setDisplayModal(false);
         navigate('/');
-        setConnectMessage(`Bienvenue ${data.username}`);
+        setConnectMessage(`Bienvenue ${data.email}`);
         console.log(data.password);
-        console.log(data.username);
-        console.log(isLoggedIn);
+        console.log(data.email);
       } else {
         setConnectMessage('Identifiants ou mot de passe invalides');
       }
@@ -81,20 +73,21 @@ const ConnectModal: FC = () => {
           <SquaredButton
             name="Déconnexion"
             type="button"
-            height={50}
-            width={200}
+            height={3}
+            width={12}
             onClick={handleLogout}
-            bgColorHover="red-cocktail"
-            fontcolor="red-cocktail"
+            bgColorHover="hover:red-cocktail"
+            fontColor="red-cocktail"
           />
-          <p className="absolute text-[#A4978E]">{connectMessage}</p>
+
+          <p className="absolute text-light-brown">{connectMessage}</p>
         </>
       ) : (
         <SquaredButton
           name="Se connecter"
           type="button"
-          height={50}
-          width={200}
+          height={2.5}
+          width={11}
           onClick={handleToggleModal}
         />
       )}
@@ -108,7 +101,7 @@ const ConnectModal: FC = () => {
           aria-hidden="true"
         >
           <div className="relative w-full max-w-md max-h-full">
-            <div className="relative bg-[#525B56] rounded-lg shadow ">
+            <div className="relative bg-light-gray rounded-lg shadow ">
               <button
                 type="button"
                 className="absolute top-3 right-2.5 bg-transparent rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
@@ -134,7 +127,7 @@ const ConnectModal: FC = () => {
               </button>
 
               <div className="px-6 py-6 lg:px-8">
-                <h3 className="mb-4 text-xl font-medium text-[#BE9063]">
+                <h3 className="mb-4 text-xl font-medium text-dark-brown">
                   Se connecter
                 </h3>
                 <form
@@ -147,12 +140,12 @@ const ConnectModal: FC = () => {
                       id="email"
                       className="modal-input-group__input"
                       required
-                      {...register('username')}
+                      {...register('email')}
                     />
                     <label htmlFor="email" className="modal-input-group__label">
                       Email adress
                     </label>
-                    {errors.username && (
+                    {errors.email && (
                       <div className="text-red-500">Email requis</div>
                     )}
                   </div>
@@ -178,17 +171,17 @@ const ConnectModal: FC = () => {
                   <SquaredButton
                     name="Valider"
                     type="submit"
-                    height={40}
-                    width={150}
-                    bgColorHover="[#A4978E]"
-                    fontColorHover="[#132226]"
+                    height={2.5}
+                    width={7}
+                    bgColorHover="light-brown"
+                    fontColorHover="dark-gray"
                   />
 
-                  <div className="text-sm  font-medium text-[#A4978E]">
+                  <div className="text-sm  font-medium text-light-brown">
                     Pas encore Membre?{' '}
                     <Link
                       to="/register"
-                      className="text-[#BE9063] hover:text-[#132226]"
+                      className="text-dark-brown hover:text-dark-gray"
                       onClick={handleToggleModal}
                     >
                       Créer un compte

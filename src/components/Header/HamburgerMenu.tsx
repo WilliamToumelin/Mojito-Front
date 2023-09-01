@@ -54,7 +54,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
       <button
         type="button"
         onClick={toggleMenu} // Appel de la fonction pour basculer l'état du menu
-        className="inline-flex items-center justify-center p-2 w-fit h-fit text-lg text-[#BE9063] rounded-lg hover:bg-[#A4978E] "
+        className="inline-flex items-center justify-center p-2 w-fit h-fit text-lg text-dark-brown rounded-lg hover:bg-light-brown "
         aria-controls="navbar-hamburger"
         aria-expanded={isMenuOpen} // Mettre à jour l'attribut aria-expanded
       >
@@ -80,7 +80,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
          ${isMenuOpen ? '' : 'hidden'}`}
         id="navbar-hamburger"
       >
-        <ul className="w-3/4 flex flex-col font-medium mt-6 text-3xl rounded-lg bg-[#BE9063] text-center">
+        <ul className="w-3/4 flex flex-col font-medium mt-6 text-3xl rounded-lg bg-light-gray text-center">
           <li>
             <NavLink
               to="/"
@@ -123,7 +123,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
             </li>
           ))}
 
-          <li className="flex justify-center mb-2 text-xl">
+          <li className="flex justify-center mb-2 text-xl text-light-gray">
             <ConnectModal />
           </li>
         </ul>

@@ -20,6 +20,10 @@ export default {
       },
       colors: {
         'red-cocktail': '#8b1d1d',
+        'dark-gray': '#132226',
+        'light-gray': '#525B56',
+        'dark-brown': '#BE9063',
+        'light-brown': '#a4978e',
       },
     }
   }

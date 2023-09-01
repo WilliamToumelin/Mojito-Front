@@ -1,4 +1,3 @@
-/* eslint-disable react/button-has-type */
 /* eslint-disable react/require-default-props */
 import React from 'react';
 
@@ -8,7 +7,7 @@ interface SquaredButtonProps {
   onClick?: () => void;
   height: number;
   width: number;
-  fontcolor?: string;
+  fontColor?: string;
   fontColorHover?: string;
   bgColor?: string;
   bgColorHover?: string;
@@ -20,27 +19,33 @@ const SquaredButton: React.FC<SquaredButtonProps> = ({
   onClick = () => {},
   height,
   width,
-  fontcolor = '#BE9063',
-  bgColor = '#525B56',
-  fontColorHover = '#132226',
-  bgColorHover = '#BE9063',
+  fontColor,
+  fontColorHover,
+  bgColor,
+  bgColorHover,
 }) => {
+  const buttonStyle = {
+    width: `${width}rem`,
+    height: `${height}rem`,
+  };
   return (
     <button
-      type={type}
+      type={type === 'button' ? 'button' : 'submit'}
       onClick={onClick}
-      style={{
-        width: `${width}px`,
-        height: `${height}px`,
-        color: fontcolor,
-        backgroundColor: bgColor,
-      }
-    :hover {
-      
-    }}
-      className="menu-link flex justify-center items-center border border-[#A4978E] font-medium rounded-lg text-base text-center button" // Appliquez la classe ici
+      style={buttonStyle}
+      className={`
+        menu-link flex justify-center items-center border border-light-brown
+        font-medium rounded-lg text-base text-center ${height} ${width} 
+        ${fontColor || 'text-dark-gray'}
+        ${fontColorHover || 'hover:text-dark-gray'}
+        ${bgColor || 'bg-dark-brown'}
+        ${bgColorHover || 'hover:bg-light-brown'}
+        
+      `}
     >
       {name}
     </button>
   );
 };
+
+export default SquaredButton;

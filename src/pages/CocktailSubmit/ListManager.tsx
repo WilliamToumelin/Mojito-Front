@@ -36,7 +36,7 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
           <div key={index} className="flex p-2">
             <select
               {...register(`${category}_${index}`)}
-              className="text-[#A4978E] text-base font-bold text-center w-48 h-12 rounded p-2 bg-[#525B56] border border-[#A4978E]"
+              className="text-light-brown text-base font-bold text-center w-48 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
             >
               <option className="" value="">
                 A vous de jouer !
@@ -61,8 +61,8 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
             onClick={addSelect}
             className={`${
               isAddButtonDisabled
-                ? 'bg-red-900 text-[#A4978E] cursor-not-allowed'
-                : `text-[#A4978E] bg-[#525B56]`
+                ? 'bg-red-900 text-light-brown cursor-not-allowed'
+                : `text-light-brown bg-light-gray hover:text-dark-gray hover:bg-dark-brown`
             } p-2 rounded text-xl`}
             disabled={isAddButtonDisabled}
           >

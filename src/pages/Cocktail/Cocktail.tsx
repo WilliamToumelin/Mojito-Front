@@ -32,22 +32,22 @@ const Cocktail: React.FC = () => {
   if (!cocktailDetails) {
     // TEMPORAIRE !!!!!! a rajouter un loader , parce pour l'instant il n'y a que une fenetre noir si pas de cocktail chargé encore ...
     return (
-      <div className="relative bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh]">
-        <div className="w-full h-[95%] sm:w-5/6 xl:w-4/6 sm:h-4/5 flex overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]" />
+      <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh]">
+        <div className="w-full h-[95%] sm:w-5/6 xl:w-4/6 sm:h-4/5 flex overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray" />
       </div>
     );
   }
 
   return (
-    <div className="relative bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh]">
+    <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh]">
       <div
         style={{
           boxShadow: '#132226 0px 1px 22px',
         }}
-        className="w-full h-[95%] sm:w-5/6 xl:w-4/6 sm:h-4/5 flex overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]"
+        className="w-full h-[95%] sm:w-5/6 xl:w-4/6 sm:h-4/5 flex overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray"
       >
         {cocktailDetails ? (
-          <div className="sm:flex-1 flex flex-col sm:flex-row text-[#BE9063]">
+          <div className="sm:flex-1 flex flex-col sm:flex-row text-dark-brown">
             <div className="sm:w-2/5 w-full">
               <div className="h-full">
                 <img
@@ -68,7 +68,7 @@ const Cocktail: React.FC = () => {
                       <div className="mr-1">
                         <FaCocktail className="text-3xl md:text-4xl" />
                       </div>
-                      <p className="ml-2 text-lg md:text-2xl mr-1 font-bold text-[#A4978E]">
+                      <p className="ml-2 text-lg md:text-2xl mr-1 font-bold text-light-brown">
                         {cocktailDetails.rating} / 5
                       </p>
                     </div>
@@ -77,8 +77,8 @@ const Cocktail: React.FC = () => {
                       <Link
                         to={`/cocktail/${cocktailDetails.slug}/commentaires`}
                       >
-                        <div className="text-lg text-[#A4978E] hover:text-[#BE9063] flex items-center md:text-2xl">
-                          <FaCommentDots className="text-[#BE9063] mr-3 text-3xl md:text-4xl" />
+                        <div className="text-lg text-light-brown hover:text-dark-brown flex items-center md:text-2xl">
+                          <FaCommentDots className="text-dark-brown mr-3 text-3xl md:text-4xl" />
                           {cocktailDetails.comments.length} avis
                         </div>
                       </Link>
@@ -87,7 +87,7 @@ const Cocktail: React.FC = () => {
                 </div>
                 <div className="p-2 text-2xl flex items-center">
                   <BsClockFill className="ml-2 text-3xl md:text-4xl" />
-                  <div className="pl-3 text-[#A4978E] md:text-2xl">
+                  <div className="pl-3 text-light-brown md:text-2xl">
                     {cocktailDetails.preparation_time}{' '}
                     {cocktailDetails.preparation_time < 2
                       ? 'minute'
@@ -102,9 +102,9 @@ const Cocktail: React.FC = () => {
                   {cocktailDetails.cocktailUses.map((use, index) => (
                     <li
                       key={index}
-                      className="flex items-center text-[#A4978E]"
+                      className="flex items-center text-light-brown"
                     >
-                      <ImDiamonds className="rotate-90 text-[#BE9063] pr-2" />{' '}
+                      <ImDiamonds className="rotate-90 text-dark-brown pr-2" />{' '}
                       {use.ingredient.name} {use.quantity} {use.unit.name}
                     </li>
                   ))}
@@ -113,19 +113,19 @@ const Cocktail: React.FC = () => {
               <div className="flex flex-wrap justify-between ">
                 <div className=" text-2xl flex items-center">
                   <FaGlassMartiniAlt className="text-3xl md:text-4xl" />
-                  <div className="pl-3 text-[#A4978E]">
+                  <div className="pl-3 text-light-brown">
                     {cocktailDetails.glass.name}
                   </div>
                 </div>
                 <div className=" text-2xl flex items-center">
                   <GiIceCube className="text-3xl md:text-4xl" />
-                  <div className="pl-3 text-[#A4978E]">
+                  <div className="pl-3 text-light-brown">
                     {cocktailDetails.ice.name}
                   </div>
                 </div>
                 <div className=" text-2xl flex items-center pt-3">
                   <IoIosCog className="text-3xl md:text-4xl" />
-                  <div className="pl-3 text-[#A4978E]">
+                  <div className="pl-3 text-light-brown">
                     {cocktailDetails.technical.name}
                   </div>
                 </div>
@@ -137,7 +137,7 @@ const Cocktail: React.FC = () => {
                   {cocktailDetails.steps.map((step, index) => (
                     <li
                       key={index}
-                      className="flex items-center text-[#A4978E]"
+                      className="flex items-center text-light-brown"
                     >
                       - {step.content}
                       <br />
@@ -147,14 +147,14 @@ const Cocktail: React.FC = () => {
               </div>
               <Hr />
               <h3 className="text-3xl">Description du cocktail :</h3>
-              <p className="text-xl space-y-1 text-[#A4978E]">
+              <p className="text-xl space-y-1 text-light-brown">
                 {cocktailDetails.description}
               </p>
               <Hr />
               {cocktailDetails.trick ? (
                 <>
                   <h3 className="text-3xl ">Nos astuces :</h3>
-                  <p className="text-xl text-[#A4978E] space-y-1">
+                  <p className="text-xl text-light-brown space-y-1">
                     {cocktailDetails.trick}
                   </p>
                 </>
@@ -173,8 +173,8 @@ const Cocktail: React.FC = () => {
                   >
                     <SquaredButton
                       name="voir les commentaires"
-                      height={48}
-                      width={200}
+                      height={3}
+                      width={12}
                       type="button"
                     />
                   </Link>
@@ -183,7 +183,7 @@ const Cocktail: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="w-full h-full lg:w-3/5 lg:h-4/5 flex shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]" />
+          <div className="w-full h-full lg:w-3/5 lg:h-4/5 flex shadow-light-gray shadow-xl rounded-2xl bg-dark-gray" />
         )}
       </div>
     </div>

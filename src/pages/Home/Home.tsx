@@ -74,32 +74,32 @@ const Home: React.FC<HomeProps> = ({
   console.log(filteredCocktails);
 
   return (
-    <div className="relative bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh]">
+    <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh]">
       <div
         style={{
           boxShadow: '#132226 0px 1px 22px',
         }}
         className={` ${
           !categoryId ? 'relative' : ''
-        } w-4/5 xl:w-4/6 h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl pb-3 bg-[#132226]`}
+        } w-4/5 xl:w-4/6 h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl pb-3 bg-dark-gray`}
       >
         {/* Haut du composant avec le bouton dependant de SI PAS DE CATEGORYID avec top 5 ou liste complète */}
         {!categoryId ? (
           <>
             <div className="text-center pb-6">
-              <h1 className="text-[#BE9063] text-5xl pt-6">
+              <h1 className="text-dark-brown text-5xl pt-6">
                 {displayMode ? 'Le top 5' : 'Tous nos cocktails'}
               </h1>
             </div>
             <div className="block m-auto mb-5">
               <button
-                className="text-[#BE9063] text-6xl animate-bounce"
+                className="text-dark-brown text-6xl animate-bounce"
                 type="button"
                 onClick={handleToggle}
               >
                 {displayMode ? <CgInfinity /> : <BsTrophy />}
               </button>
-              <p className="text-[#BE9063] text-center">click me</p>
+              <p className="text-dark-brown text-center">click me</p>
             </div>
           </>
         ) : (
@@ -111,7 +111,7 @@ const Home: React.FC<HomeProps> = ({
               selectedCocktail={selectedCocktail}
             />
             <div className="text-center pb-12">
-              <h1 className="text-[#BE9063] text-5xl pt-8">{categoryName}</h1>
+              <h1 className="text-dark-brown text-5xl pt-8">{categoryName}</h1>
             </div>
           </>
         )}

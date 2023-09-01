@@ -2,16 +2,16 @@ import React from 'react';
 
 const LegalMentions: React.FC = () => {
   return (
-    <div className="bg-[#a4978e] flex justify-center items-center flex-1 h-[75vh]">
+    <div className="bg-light-brown flex justify-center items-center flex-1 h-[75vh]">
       <div
         style={{
           boxShadow: '#132226 0px 1px 22px',
         }}
-        className="relative w-4/5 lg:w-4/6 h-4/5 max-h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]"
+        className="relative w-4/5 lg:w-4/6 h-4/5 max-h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray"
       >
         <div className="text-center pb-6">
-          <h1 className="text-[#BE9063] text-5xl pt-6">Mentions légales</h1>
-          <div className="p-12 pt-12 antialiased tracking-wide leading-8 italic space-y-7 text-[#525B56]">
+          <h1 className="text-dark-brown text-5xl pt-6">Mentions légales</h1>
+          <div className="p-12 pt-12 antialiased tracking-wide leading-8 italic space-y-7 text-light-gray">
             <p>
               La réglementation de la publicité en faveur de l’alcool est un
               numéro d’équilibriste entre liberté du commerce et protection de

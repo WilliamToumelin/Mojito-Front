@@ -18,7 +18,7 @@ const Register: React.FC = () => {
     lastName: string;
     firstName: string;
     dateOfBirth: Date;
-    username: string;
+    email: string;
     password: string;
     pseudonym: string;
     hasConsented: boolean;
@@ -42,7 +42,7 @@ const Register: React.FC = () => {
     lastName: string;
     firstName: string;
     dateOfBirth: Date;
-    username: string;
+    email: string;
     password: string;
     pseudonym: string;
     hasConsented: boolean;
@@ -69,9 +69,9 @@ const Register: React.FC = () => {
       });
       console.log(data);
       if (response.ok) {
-        // const { token } = await response.json();
+        const { token } = await response.json();
         //  Stocker le token JWT dans le local storage
-        // localStorage.setItem('authToken', token);
+        localStorage.setItem('authToken', token);
         // login();
         setRegisterSuccess(true);
       } else {
@@ -85,10 +85,10 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="relative bg-[#A4978E] flex justify-center items-center flex-1 h-[100vh]">
-      <div className="relative w-4/5 lg:w-4/6 h-full p-4 lg:h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]">
+    <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[100vh]">
+      <div className="relative w-4/5 lg:w-4/6 h-full p-4 lg:h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray">
         <div className="text-center pb-12">
-          <h1 className="text-[#BE9063] pt-5 font-bold text-2xl">
+          <h1 className="text-dark-brown pt-5 font-bold text-2xl">
             Créer son compte membre
           </h1>
         </div>
@@ -130,7 +130,7 @@ const Register: React.FC = () => {
                           Prénom
                         </label>
                       </div>
-                      <label htmlFor="dateOfBirth" className="text-[#A4978E]">
+                      <label htmlFor="dateOfBirth" className="text-light-brown">
                         Date de naissance
                       </label>
                       <div className="register-input-group mb-1">
@@ -147,7 +147,7 @@ const Register: React.FC = () => {
                         <input
                           type="email"
                           className="register-input-group__input"
-                          {...register('username')}
+                          {...register('email')}
                           required
                         />
                         <label
@@ -192,13 +192,13 @@ const Register: React.FC = () => {
                   <div className="py-2">
                     <label
                       htmlFor="consentement"
-                      className="p-2 text-[#A4978E]"
+                      className="p-2 text-light-brown"
                     >
                       Consentez vous aux{' '}
                       <Link
                         to="/mentions-legales"
                         target="blank"
-                        className="text-[#BE9063] "
+                        className="text-dark-brown "
                       >
                         mentions légales
                       </Link>
@@ -216,7 +216,7 @@ const Register: React.FC = () => {
                   )}
                   <button
                     type="submit"
-                    className="p-2 mt-6 bg-[#BE9063] rounded-xl text-#132226"
+                    className="p-2 mt-6 bg-dark-brown rounded-xl text-#132226"
                   >
                     Inscription
                   </button>
@@ -227,17 +227,17 @@ const Register: React.FC = () => {
             </div>
           </div>
           <div className="text-white w-[50%] h-full px-10">
-            <h3 className=" font-semibold text-[#BE9063] text-xl">
+            <h3 className=" font-semibold text-dark-brown text-xl">
               Être membre c&apos;est quoi ?
             </h3>
             <br />
-            <p className="text-[#A4978E] text-lg">
+            <p className="text-light-brown text-lg">
               Il vous permet de commenter les recettes de cocktails. Vous
               pourrez ainsi suggérer votre touche personnelle aux autres
               utilisateurs et développer votre goût pour la créativité !
             </p>
             <br />
-            <p className="text-[#A4978E] text-lg">
+            <p className="text-light-brown text-lg">
               Vous pourrez également noter les cocktails et ainsi éclairer les
               autres utilisateurs sur la qualité de ces dernières. Cela nous
               permettra également de faire le tri et de ne garder que les

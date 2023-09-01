@@ -15,16 +15,16 @@ const RoundedButton: React.FC<RoundedButtonProps> = ({
   width,
 }) => {
   const buttonStyle = {
-    width: `${width}px`,
-    height: `${height}px`,
+    width: `${width}rem`,
+    height: `${height}rem`,
   };
   return (
     <button
       type="button"
       onClick={onClick}
       style={buttonStyle}
-      className={`menu-link flex justify-center items-center hover:bg-[#A4978E] rounded-full z-50
-      text-base text-[#BE9063] hover:text-[#525B56] bg-[#525B56] border-[#A4978E] border-2`}
+      className={`menu-link flex justify-center items-center hover:bg-light-brown rounded-full z-50
+      text-base text-dark-brown hover:text-light-gray bg-light-gray border-light-brown border-2`}
     >
       {name}
     </button>
