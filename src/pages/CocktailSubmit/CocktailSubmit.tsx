@@ -26,7 +26,7 @@ const CocktailSubmit: React.FC = () => {
   }, []);
   console.log(ingredientsList);
 
-  const onSubmit = async (data: FieldValues) => {
+  const handleCockailSubmit = async (data: FieldValues) => {
     console.log(data);
     try {
       const ingredientsData: IngredientsData = {
@@ -36,15 +36,16 @@ const CocktailSubmit: React.FC = () => {
         technicals: data.Techniques,
       };
 
-      const request = {
+      const response = await fetch('http://localhost:5174/api/cocktails/add', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(ingredientsData),
-      };
-
-      const response = await fetch('API', request);
+        headers: { 'Content-Type': 'application/json' },
+      });
 
       if (response.ok) {
+        const { token } = await response.json();
+        //  Stocker le token JWT dans le local storage
+        localStorage.setItem('authToken', token);
         console.log('Commentaire soumis avec succès');
         reset();
       } else {
@@ -66,7 +67,7 @@ const CocktailSubmit: React.FC = () => {
         <h1 className="text-dark-brown text-5xl pt-8 pb-4 text-center">
           Proposer un Cocktail
         </h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(handleCockailSubmit)}>
           <div className="py-6 px-12">
             <div className="w-full pb-6">
               <ul className="flex flex-wrap justify-center">
@@ -133,7 +134,7 @@ const CocktailSubmit: React.FC = () => {
               <h3 className="text-lg font-medium mb-2">Description</h3>
               <textarea
                 {...register('description')}
-                className="border-xs rounded p-1 w-1/2 bg-[#b3a8a0] text-dark-gray"
+                className="border-xs rounded p-1 w-1/2 bg-[#b3a8a0] text-dark-gray hover:scale-105"
                 rows={3}
               />
             </div>

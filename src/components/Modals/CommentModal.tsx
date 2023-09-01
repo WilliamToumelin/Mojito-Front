@@ -52,27 +52,13 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
             <div className="relative bg-light-gray rounded-lg">
               <button
                 type="button"
-                className="close-modal absolute top-3 right-2.5 text-dark-gray rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
+                className="close-modal absolute top-3 right-2.5 text-white bg-white rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center"
                 data-modal-hide="authentication-modal"
                 onClick={handleToggleModal}
               >
-                <svg
-                  className="w-3 h-3 text-dark-gray"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 14"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                  />
-                </svg>
-                <span className="sr-only text-dark-gray">Close modal</span>
+                X<span className="text-white">Close modal</span>
               </button>
+
               <div className="px-6 py-6 lg:px-8">
                 <h3 className="mb-4 text-xl font-medium text-gray-900">
                   Votre commentaire

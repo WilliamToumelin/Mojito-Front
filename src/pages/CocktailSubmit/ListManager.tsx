@@ -61,7 +61,7 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
             onClick={addSelect}
             className={`${
               isAddButtonDisabled
-                ? 'bg-red-900 text-light-brown cursor-not-allowed'
+                ? 'bg-red-900 text-light-brown cursor-not-allowed '
                 : `text-light-brown bg-light-gray hover:text-dark-gray hover:bg-dark-brown`
             } p-2 rounded text-xl`}
             disabled={isAddButtonDisabled}
@@ -75,7 +75,7 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
             <button
               type="button"
               onClick={onRemove}
-              className="bg-red-900 text-xl p-2 rounded text-white"
+              className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
             >
               <FaTrashAlt />
             </button>

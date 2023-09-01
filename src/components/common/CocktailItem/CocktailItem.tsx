@@ -4,6 +4,7 @@ import { FaCocktail } from 'react-icons/fa';
 import { Cocktails } from '../../../types/types';
 import './CocktailItem.scss';
 import Hr from '../Hr/Hr';
+import RandomIcons from './RandomIcons';
 
 type CocktailItemProps = {
   cocktail: Cocktails;
@@ -40,39 +41,57 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
             />
           </div>
         </div>
-        <div className="px-1 lg:px-10">
-          <h1
-            className={` md:py-2  md:p-4 leading-7 text-dark-brown xl:text-4xl text-3xl ${
-              animate ? 'opacity-0 -translate-y-12' : ''
-            } transition-all ease-in duration-1200`}
-          >
-            {cocktail.name}
-          </h1>
-          <p
-            className={`text-light-brown text-base md:text-xl md:p-4 flex ${
-              modulo ? 'justify-end' : ''
-            } ${
-              animate
-                ? modulo
-                  ? 'opacity-0 -translate-x-12'
-                  : 'opacity-0 translate-x-12'
-                : ''
-            } transition-all ease-in duration-1200`}
-          >
-            Difficulté : {cocktail.difficulty}/5
-          </p>
-          <p
-            className={`text-light-brown text-base md:text-xl md:p-4 flex ${
-              modulo ? 'justify-end' : ''
-            } ${
-              animate ? 'opacity-0 translate-y-12' : ''
-            } transition-all ease-in duration-1200`}
-          >
-            Note : {cocktail.rating}
-            <span className=" text-dark-brown mr-1 pl-1">
-              <FaCocktail />
-            </span>
-          </p>
+        <div className="w-2/3">
+          <div className="px-1 lg:px-10 w-full">
+            <h1
+              className={` md:py-2  md:p-4 leading-7 text-dark-brown text-2xl xl:text-4xl lg:text-3xl ${
+                animate ? 'opacity-0 -translate-y-12' : ''
+              } transition-all ease-in duration-1200`}
+            >
+              {cocktail.name}
+            </h1>
+            <div
+              className={`text-light-brown text-base md:text-xl md:px-4 flex ${
+                modulo ? 'justify-end' : ''
+              } ${
+                animate
+                  ? modulo
+                    ? 'opacity-0 -translate-x-12'
+                    : 'opacity-0 translate-x-12'
+                  : ''
+              } transition-all ease-in duration-1200`}
+            >
+              <div className="flex w-full justify-between items-center">
+                {modulo ? (
+                  <>
+                    <span className="relative">
+                      <RandomIcons />{' '}
+                    </span>
+                    <span>Difficulté : {cocktail.difficulty}/5 </span>
+                  </>
+                ) : (
+                  <>
+                    <span>Difficulté : {cocktail.difficulty}/5 </span>
+                    <span className="relative">
+                      <RandomIcons />{' '}
+                    </span>
+                  </>
+                )}
+              </div>
+            </div>
+            <p
+              className={`text-light-brown text-base md:text-xl md:p-4 flex ${
+                modulo ? 'justify-end' : ''
+              } ${
+                animate ? 'opacity-0 translate-y-12' : ''
+              } transition-all ease-in duration-1200`}
+            >
+              Note : {cocktail.rating}
+              <span className=" text-dark-brown mr-1 pl-1">
+                <FaCocktail />
+              </span>
+            </p>
+          </div>
         </div>
       </article>
       {!isLastItem && <Hr />}

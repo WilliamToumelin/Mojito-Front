@@ -1,36 +1,31 @@
-import React, { useState, useEffect } from 'react';
 import {
   GiIceCube,
   GiMeltingIceCube,
   GiIceCubes,
   GiDrinkMe,
 } from 'react-icons/gi';
-import { FaLemon } from 'react-icons/fa';
+import { FaLemon, FaWineGlass } from 'react-icons/fa';
 import { ImGlass } from 'react-icons/im';
 
 const icons = [
-  GiIceCube,
-  GiMeltingIceCube,
-  GiIceCubes,
-  GiDrinkMe,
-  FaLemon,
-  ImGlass,
+  <GiIceCube key="1" />,
+  <GiMeltingIceCube key="2" />,
+  <GiIceCubes key="3" />,
+  <GiDrinkMe key="4" />,
+  <FaLemon key="5" />,
+  <FaWineGlass key="6" />,
+  <ImGlass key="7" />,
 ];
 
-function RandomIcon() {
-  const [randomIcon, setRandomIcon] = useState(null);
-
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * icons.length);
-    setRandomIcon(icons[randomIndex]);
-  }, []);
+const RandomIcons = () => {
+  const randomIndex = Math.floor(Math.random() * icons.length);
+  const newRandomIcon = icons[randomIndex];
 
   return (
-    <div>
-      <h2>Icone aléatoire :</h2>
-      {randomIcon && React.createElement(randomIcon)}
+    <div className="z-10 text-dark-brown text-4xl md:text-8xl opacity-50 rotate-12">
+      {newRandomIcon}
     </div>
   );
-}
+};
 
-export default RandomIcon;
+export default RandomIcons;
