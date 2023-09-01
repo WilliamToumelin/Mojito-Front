@@ -20,30 +20,27 @@ const SquaredButton: React.FC<SquaredButtonProps> = ({
   onClick = () => {},
   height,
   width,
-  fontcolor = '[#BE9063]',
-  fontColorHover = '[#132226]',
-  bgColor = '[#525B56]',
-  bgColorHover = '[#BE9063]',
+  fontcolor = '#BE9063',
+  bgColor = '#525B56',
+  fontColorHover = '#132226',
+  bgColorHover = '#BE9063',
 }) => {
-  const buttonStyle = {
-    width: `${width}px`,
-    height: `${height}px`,
-    fontcolor,
-    fontColorHover,
-    bgColorHover,
-    bgColor,
-  };
   return (
     <button
       type={type}
       onClick={onClick}
-      style={buttonStyle}
-      className={`menu-link flex justify-center items-center w-${width} h-${height} bg-${bgColor} text-${fontcolor} border border-[#A4978E] 
-      hover:bg-${bgColorHover} hover:text-${fontColorHover} font-medium rounded-lg text-base text-center`}
+      style={{
+        width: `${width}px`,
+        height: `${height}px`,
+        color: fontcolor,
+        backgroundColor: bgColor,
+      }
+    :hover {
+      
+    }}
+      className="menu-link flex justify-center items-center border border-[#A4978E] font-medium rounded-lg text-base text-center button" // Appliquez la classe ici
     >
       {name}
     </button>
   );
 };
-
-export default SquaredButton;

@@ -20,7 +20,6 @@ const Register: React.FC = () => {
     dateOfBirth: Date;
     username: string;
     password: string;
-    confirmPassword: string;
     pseudonym: string;
     hasConsented: boolean;
     warning: 0;
@@ -33,11 +32,6 @@ const Register: React.FC = () => {
   const [registerSuccess, setRegisterSuccess] = useState(false);
 
   const { login } = useAuth();
-
-  const password = watch('password'); // Surveille la valeur du champ password
-  const confirmPassword = watch('confirmPassword'); // Surveille la valeur du champ confirmPassword
-
-  const isPasswordValid = password === confirmPassword; // Vérifie si les mots de passe correspondent
 
   if (!useAuth) {
     // Si le contexte n'est pas défini, tu peux gérer cette situation ici
@@ -64,7 +58,6 @@ const Register: React.FC = () => {
     data.created_at = currentDate;
     data.warning = currentWarning;
     data.verified = currentVerified;
-
     // Appeler votre backend pour l'authentification
     try {
       const response = await fetch('http://localhost:5174/api/register', {
@@ -88,15 +81,6 @@ const Register: React.FC = () => {
     } catch (error) {
       //  Gérer les erreurs réseau ici
       console.error("Erreur réseau lors de l'inscription", error);
-    }
-  };
-
-  // Fonction pour vérifier si les mots de passe correspondent
-  const checkPasswordMatch = () => {
-    if (password !== confirmPassword) {
-      setIsPasswordValid(false);
-    } else {
-      setIsPasswordValid(true);
     }
   };
 
@@ -187,25 +171,7 @@ const Register: React.FC = () => {
                           Mot de passe
                         </label>
                       </div>
-                      <div className="register-input-group mb-5">
-                        <input
-                          type="password"
-                          className="register-input-group__input"
-                          name="confirmPassword"
-                          required
-                        />
-                        <label
-                          htmlFor="confirmPassword"
-                          className="register-input-group__label"
-                        >
-                          Confirmer MdP
-                        </label>
-                      </div>
-                      {password !== confirmPassword && (
-                        <div className="text-red-900">
-                          Les mots de passe ne correspondent pas.
-                        </div>
-                      )}
+
                       <div className="register-input-group mb-5">
                         <input
                           type="pseudonym"
@@ -251,7 +217,6 @@ const Register: React.FC = () => {
                   <button
                     type="submit"
                     className="p-2 mt-6 bg-[#BE9063] rounded-xl text-#132226"
-                    disabled={!isPasswordValid} // Désactive le bouton si les mots de passe ne correspondent pas
                   >
                     Inscription
                   </button>

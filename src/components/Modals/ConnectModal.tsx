@@ -3,6 +3,7 @@
 /* eslint-disable react/button-has-type */
 import { FC, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import bcrypt from 'bcrypt';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
 
@@ -35,14 +36,19 @@ const ConnectModal: FC = () => {
 
   const handleLogin = async (data: { username: string; password: string }) => {
     try {
+      // Hachez le mot de passe avant de l'envoyer
+      const hashedPassword = bcrypt.hashSync(data.password, 10);
+
       const response = await fetch('http://localhost:5174/api/login_check', {
         method: 'POST',
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          username: data.username,
+          password: hashedPassword,
+        }),
         headers: {
           'Content-Type': 'application/json',
         },
       });
-
       if (response.ok) {
         const responseData = await response.json();
         const { token } = responseData;
@@ -51,6 +57,9 @@ const ConnectModal: FC = () => {
         setDisplayModal(false);
         navigate('/');
         setConnectMessage(`Bienvenue ${data.username}`);
+        console.log(data.password);
+        console.log(data.username);
+        console.log(isLoggedIn);
       } else {
         setConnectMessage('Identifiants ou mot de passe invalides');
       }
