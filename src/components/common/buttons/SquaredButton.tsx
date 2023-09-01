@@ -10,6 +10,7 @@ interface SquaredButtonProps {
   width: number;
   fontcolor?: string;
   fontColorHover?: string;
+  bgColor?: string;
   bgColorHover?: string;
 }
 
@@ -20,8 +21,9 @@ const SquaredButton: React.FC<SquaredButtonProps> = ({
   height,
   width,
   fontcolor = '[#BE9063]',
-  fontColorHover = '[#BE9063]',
-  bgColorHover = '[#525B56]',
+  fontColorHover = '[#132226]',
+  bgColor = '[#525B56]',
+  bgColorHover = '[#BE9063]',
 }) => {
   const buttonStyle = {
     width: `${width}px`,
@@ -29,13 +31,14 @@ const SquaredButton: React.FC<SquaredButtonProps> = ({
     fontcolor,
     fontColorHover,
     bgColorHover,
+    bgColor,
   };
   return (
     <button
       type={type}
       onClick={onClick}
       style={buttonStyle}
-      className={`menu-link flex justify-center items-center w-${width} h-${height} bg-[#132226] text-${fontcolor} border border-[#A4978E] 
+      className={`menu-link flex justify-center items-center w-${width} h-${height} bg-${bgColor} text-${fontcolor} border border-[#A4978E] 
       hover:bg-${bgColorHover} hover:text-${fontColorHover} font-medium rounded-lg text-base text-center`}
     >
       {name}

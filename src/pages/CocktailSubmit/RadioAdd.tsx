@@ -11,28 +11,25 @@ interface Props {
 
 const RadioAdd: React.FC<Props> = ({ options, selected, name, register }) => {
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className="block text-lg text-[#b3a8a0]">
       {options.map((option, index) => (
-        <label key={index} className="flex flex-wrap items-center p-3">
-          <div className="p-4 shadow-white border-white rounded-full">
-            {option}
-          </div>
+        <label key={index} className="flex flex-wrap items-center">
           <div
-            className={`w-8 h-8 rounded-full border-4 flex items-center justify-center ${
-              selected === option
-                ? `bg-gradient-to-r 
-              from-[#132226] via-[#525B56] to-[#A4978E] hover:bg-gradient-to-r hover:from-[#1e353b] hover:via-[rgb(106, 116, 110);] hover:to-[#b3a8a0] text-white border-none`
-                : ''
+            className={`w-8 h-8 rounded-full border-4 border-[#525B56] flex items-center justify-center ${
+              selected === option ? `bg-[#525B56]` : 'bg-[#b3a8a0]'
             }`}
           >
-            {selected === option && <BsFillCheckCircleFill size={24} />}
+            {selected === option && (
+              <BsFillCheckCircleFill size={24} className="text-[#132226]" />
+            )}
           </div>
           <input
             type="radio"
-            className="sr-only bg-[#b3a8a0]"
+            className="sr-only"
             value={option}
             {...register(name)}
           />
+          <div className="p-2 rounded-full">{option}</div>
         </label>
       ))}
     </div>

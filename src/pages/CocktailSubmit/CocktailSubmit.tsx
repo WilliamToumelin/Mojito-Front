@@ -63,13 +63,13 @@ const CocktailSubmit: React.FC = () => {
         }}
         className="relative w-4/5 lg:w-4/6 h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-[#525B56] shadow-xl rounded-2xl bg-[#132226]"
       >
-        <h1 className="text-[#BE9063] text-5xl pt-8 text-center">
+        <h1 className="text-[#BE9063] text-5xl pt-8 pb-4 text-center">
           Proposer un Cocktail
         </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="py-6 px-12 flex">
-            <div className="w-1/2 pr-4">
-              <ul>
+          <div className="py-6 px-12">
+            <div className="w-full pb-6">
+              <ul className="flex flex-wrap justify-center">
                 {ingredientsList?.ingredients?.map((category) => (
                   <ListManager
                     key={category.name}
@@ -80,9 +80,11 @@ const CocktailSubmit: React.FC = () => {
                 ))}
               </ul>
             </div>
-            <div className="flex flex-wrap justify-center pt-5 w-1/2">
-              <div className="">
-                <h3 className="text-lg font-medium mb-4 text-center">Verres</h3>
+            <div className="flex flex-wrap justify-evenly pt-8 w-full">
+              <div className="p-3">
+                <h3 className="text-2xl font-medium mb-4 text-center">
+                  Verres
+                </h3>
                 <RadioAdd
                   options={
                     ingredientsList?.glass?.map(
@@ -94,8 +96,10 @@ const CocktailSubmit: React.FC = () => {
                   name="Verres"
                 />
               </div>
-              <div className="">
-                <h3 className="text-lg font-medium mb-4 text-center">Glaces</h3>
+              <div className="p-3">
+                <h3 className="text-2xl font-medium mb-4 text-center">
+                  Glaces
+                </h3>
                 <RadioAdd
                   options={
                     ingredientsList?.ices?.map(
@@ -107,8 +111,8 @@ const CocktailSubmit: React.FC = () => {
                   name="Glaces"
                 />
               </div>
-              <div className="">
-                <h3 className="text-lg font-medium mb-4 text-center">
+              <div className="p-3">
+                <h3 className="text-2xl font-medium mb-4 text-center">
                   Techniques
                 </h3>
                 <RadioAdd

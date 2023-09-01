@@ -23,7 +23,7 @@ const RoundedButton: React.FC<RoundedButtonProps> = ({
       type="button"
       onClick={onClick}
       style={buttonStyle}
-      className={`menu-link flex justify-center items-center w-${width} h-${height} hover:bg-[#A4978E] rounded-full 
+      className={`menu-link flex justify-center items-center w-${width} h-${height} hover:bg-[#A4978E] rounded-full z-50
       text-base text-[#BE9063] hover:text-[#525B56] bg-[#525B56] border-[#A4978E] border-2`}
     >
       {name}

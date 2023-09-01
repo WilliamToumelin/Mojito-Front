@@ -28,16 +28,15 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
   const isAddButtonDisabled = selectCount >= 3;
 
   return (
-    <div className="p-6">
-      <h3 className="text-xl text-center">{category}</h3>
-      <div key={category} className="flex justify-center p-3 flex-wrap">
+    <div className="p-2">
+      <h3 className="text-2xl text-center">{category}</h3>
+      <div key={category} className="block p-3">
         {/* création d'un tableau d'un longueur max de selectCount, dans le map avec _ on ignore l'élément actuel, on a besoin que de l'index */}
         {Array.from({ length: selectCount }).map((_, index) => (
           <div key={index} className="flex p-2">
             <select
               {...register(`${category}_${index}`)}
-              className="text-white font-bold text-center max-w-xl border rounded p-1 text-bold bg-gradient-to-r 
-              from-[#132226] via-[#525B56] to-[#A4978E] hover:bg-gradient-to-r hover:from-[#1e353b] hover:via-[rgb(106, 116, 110);] hover:to-[#b3a8a0]"
+              className="text-[#A4978E] text-base font-bold text-center w-48 h-12 rounded p-2 bg-[#525B56] border border-[#A4978E]"
             >
               <option className="" value="">
                 A vous de jouer !
@@ -62,10 +61,8 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
             onClick={addSelect}
             className={`${
               isAddButtonDisabled
-                ? 'bg-gray-500 cursor-not-allowed'
-                : `text-white bg-gradient-to-r from-[#132226] via-[#525B56] to-[#A4978E]
-                hover:bg-gradient-to-r hover:from-[#1e353b] hover:via-[rgb(106, 116,
-                110);] hover:to-[#b3a8a0]`
+                ? 'bg-red-900 text-[#A4978E] cursor-not-allowed'
+                : `text-[#A4978E] bg-[#525B56]`
             } p-2 rounded text-xl`}
             disabled={isAddButtonDisabled}
           >
@@ -78,7 +75,7 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
             <button
               type="button"
               onClick={onRemove}
-              className="bg-red-700 text-xl p-2 rounded text-white"
+              className="bg-red-900 text-xl p-2 rounded text-white"
             >
               <FaTrashAlt />
             </button>

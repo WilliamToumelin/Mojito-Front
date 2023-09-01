@@ -1,60 +1,85 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
 
 import './Register.scss';
 
 const Register: React.FC = () => {
-  const [lastName, setLastName] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [username, setUsername] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<{
+    lastName: string;
+    firstName: string;
+    dateOfBirth: Date;
+    username: string;
+    password: string;
+    pseudonym: string;
+    hasConsented: boolean;
+    warning: 0;
+    created_at: string;
+    verified: boolean;
+  }>();
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [pseudonym, setPseudonym] = useState('');
-  const [hasConsented, setHasConsented] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
+  const [registerSuccess, setRegisterSuccess] = useState(false);
 
-  const { register, login } = useAuth();
+  const { login } = useAuth();
 
   if (!useAuth) {
     // Si le contexte n'est pas défini, tu peux gérer cette situation ici
     return null;
   }
 
-  const handleRegister = async () => {
+  const handleRegister = async (data: {
+    lastName: string;
+    firstName: string;
+    dateOfBirth: Date;
+    username: string;
+    password: string;
+    pseudonym: string;
+    hasConsented: boolean;
+    warning: number;
+    created_at: string;
+    verified: boolean;
+  }) => {
     if (password !== confirmPassword) {
-      setErrorMessage('Les mots de passe ne correspondent pas.');
+      setErrorPasswordMessage('Les mots de passe ne correspondent pas.');
       return;
     }
+    // Variable pour les infos direct
+    const currentDate = new Date().toISOString();
+    const currentWarning = 0;
+    const currentVerified = false;
+    // Aujout des valeurs de variables dans la data
+    data.created_at = currentDate;
+    data.warning = currentWarning;
+    data.verified = currentVerified;
+
     // Appeler votre backend pour l'authentification
     try {
-      const response = await fetch('/api/register', {
+      const response = await fetch('http://localhost:5174/api/register', {
         method: 'POST',
-        body: JSON.stringify({
-          data: [
-            lastName,
-            firstName,
-            dateOfBirth,
-            username,
-            password,
-            pseudonym,
-            hasConsented,
-          ],
-        }),
+        body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
         },
       });
-
+      console.log(data);
       if (response.ok) {
-        const { token } = await response.json();
+        // const { token } = await response.json();
         //  Stocker le token JWT dans le local storage
-        localStorage.setItem('authToken', token);
-
-        register();
-        login();
+        // localStorage.setItem('authToken', token);
+        // login();
+        setRegisterSuccess(true);
       } else {
         //  Gérer les erreurs d'authentification ici
         setErrorMessage('Erreur lors de la soumission du formulaire'); // Définir le message d'erreur
@@ -63,6 +88,10 @@ const Register: React.FC = () => {
       //  Gérer les erreurs réseau ici
       console.error("Erreur réseau lors de l'inscription", error);
     }
+  };
+
+  const passwordMatch = (value: string, compareValue: string) => {
+    return value === compareValue || 'Les mots de passe ne correspondent pas';
   };
 
   return (
@@ -76,150 +105,149 @@ const Register: React.FC = () => {
         <div className="flex">
           <div className="w-[50%] flex flex-row h-full px-10">
             <div className="w-full p-6 ">
-              <form action="POST" className="flex flex-col items-start">
-                <div className="flex w-full justify-between">
-                  <div className="">
-                    <div className="register-input-group mb-5">
-                      <input
-                        type="lastName"
-                        className="register-input-group__input"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        required
-                      />
-                      <label
-                        htmlFor="lastName"
-                        className="register-input-group__label"
-                      >
-                        Nom
-                      </label>
-                    </div>
-                    <div className="register-input-group mb-5">
-                      <input
-                        type="firstName"
-                        className="register-input-group__input"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        required
-                      />
-                      <label
-                        htmlFor="firstName"
-                        className="register-input-group__label"
-                      >
-                        Prénom
-                      </label>
-                    </div>
-                    <div className="register-input-group mb-5">
-                      <input
-                        type="dateOfBirth"
-                        className="register-input-group__input"
-                        value={dateOfBirth}
-                        onChange={(e) => setDateOfBirth(e.target.value)}
-                        required
-                      />
-                      <label
-                        htmlFor="dateOfBirth"
-                        className="register-input-group__label"
-                      >
+              {!registerSuccess ? (
+                <form
+                  onSubmit={handleSubmit(handleRegister)}
+                  className="flex flex-col items-start"
+                >
+                  <div className="flex w-full justify-between">
+                    <div className="">
+                      <div className="register-input-group mb-5">
+                        <input
+                          type="lastName"
+                          className="register-input-group__input"
+                          required
+                          {...register('lastName')}
+                        />
+                        <label
+                          htmlFor="lastName"
+                          className="register-input-group__label"
+                        >
+                          Nom
+                        </label>
+                      </div>
+                      <div className="register-input-group mb-5">
+                        <input
+                          type="firstName"
+                          className="register-input-group__input"
+                          {...register('firstName')}
+                          required
+                        />
+                        <label
+                          htmlFor="firstName"
+                          className="register-input-group__label"
+                        >
+                          Prénom
+                        </label>
+                      </div>
+                      <label htmlFor="dateOfBirth" className="text-[#A4978E]">
                         Date de naissance
                       </label>
+                      <div className="register-input-group mb-1">
+                        <input
+                          type="date"
+                          className="register-input-group__input"
+                          {...register('dateOfBirth')}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="register-input-group mb-5">
+                        <input
+                          type="email"
+                          className="register-input-group__input"
+                          {...register('username')}
+                          required
+                        />
+                        <label
+                          htmlFor="email-register"
+                          className="register-input-group__label"
+                        >
+                          Email address
+                        </label>
+                      </div>
+                      <div className="register-input-group mb-5">
+                        <input
+                          type="password"
+                          className="register-input-group__input"
+                          {...register('password')}
+                          required
+                        />
+                        <label
+                          htmlFor="password-register"
+                          className="register-input-group__label"
+                        >
+                          Mot de passe
+                        </label>
+                      </div>
+                      <div className="register-input-group mb-5">
+                        <input
+                          type="password"
+                          className="register-input-group__input"
+                          name="confirm-password"
+                          required
+                        />
+                        <label
+                          htmlFor="confirm-password"
+                          className="register-input-group__label"
+                        >
+                          Confirmer MdP
+                        </label>
+                      </div>
+                      <p>{errorPasswordMessage}</p>
+                      <div className="register-input-group mb-5">
+                        <input
+                          type="pseudonym"
+                          className="register-input-group__input"
+                          {...register('pseudonym')}
+                          required
+                        />
+                        <label
+                          htmlFor="pseudonym"
+                          className="register-input-group__label"
+                        >
+                          Pseudo
+                        </label>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <div className="register-input-group mb-5">
-                      <input
-                        type="email"
-                        className="register-input-group__input"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                      />
-                      <label
-                        htmlFor="email-register"
-                        className="register-input-group__label"
-                      >
-                        Email address
-                      </label>
-                    </div>
-                    <div className="register-input-group mb-5">
-                      <input
-                        type="password"
-                        className="register-input-group__input"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                      />
-                      <label
-                        htmlFor="password-register"
-                        className="register-input-group__label"
-                      >
-                        Mot de passe
-                      </label>
-                    </div>
-                    <div className="register-input-group mb-5">
-                      <input
-                        type="password"
-                        className="register-input-group__input"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                      />
-                      <label
-                        htmlFor="confirm-password"
-                        className="register-input-group__label"
-                      >
-                        Confirmer MdP
-                      </label>
-                    </div>
-                    <div className="register-input-group mb-5">
-                      <input
-                        type="username"
-                        className="register-input-group__input"
-                        value={pseudonym}
-                        onChange={(e) => setPseudonym(e.target.value)}
-                        required
-                      />
-                      <label
-                        htmlFor="username"
-                        className="register-input-group__label"
-                      >
-                        Pseudo
-                      </label>
-                    </div>
-                  </div>
-                </div>
 
-                <div className="py-2">
-                  <label htmlFor="consentement" className="p-2 text-[#A4978E]">
-                    Consentez vous aux{' '}
-                    <Link
-                      to="/mentions-legales"
-                      target="blank"
-                      className="text-[#BE9063] "
+                  <div className="py-2">
+                    <label
+                      htmlFor="consentement"
+                      className="p-2 text-[#A4978E]"
                     >
-                      mentions légales
-                    </Link>
-                  </label>
-                  <input
-                    type="checkbox"
-                    name="consentement"
-                    className="p-2"
-                    required
-                    onChange={() => setHasConsented(!hasConsented)}
-                  />
-                </div>
-                {/* Afficher le message d'erreur ici */}
-                {errorMessage && (
-                  <div className="text-red-500">{errorMessage}</div>
-                )}
-                <button
-                  type="submit"
-                  className="p-2 mt-6 bg-[#BE9063] rounded-xl text-#132226"
-                  onClick={handleRegister}
-                >
-                  Inscription
-                </button>
-              </form>
+                      Consentez vous aux{' '}
+                      <Link
+                        to="/mentions-legales"
+                        target="blank"
+                        className="text-[#BE9063] "
+                      >
+                        mentions légales
+                      </Link>
+                    </label>
+                    <input
+                      type="checkbox"
+                      className="p-2"
+                      required
+                      {...register('hasConsented')}
+                    />
+                  </div>
+                  {/* Afficher le message d'erreur ici */}
+                  {errorMessage && (
+                    <div className="text-red-900">{errorMessage}</div>
+                  )}
+                  <button
+                    type="submit"
+                    className="p-2 mt-6 bg-[#BE9063] rounded-xl text-#132226"
+                  >
+                    Inscription
+                  </button>
+                </form>
+              ) : (
+                <p>Création de compte réussi!</p>
+              )}
             </div>
           </div>
           <div className="text-white w-[50%] h-full px-10">
