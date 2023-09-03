@@ -7,7 +7,7 @@ const LegalMentions: React.FC = () => {
         style={{
           boxShadow: '#132226 0px 1px 22px',
         }}
-        className="relative w-4/5 lg:w-4/6 h-4/5 max-h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray"
+        className="relative w-4/5 lg:w-4/6 h-4/5 max-h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray animate-fade-in-down"
       >
         <div className="text-center pb-6">
           <h1 className="text-dark-brown text-5xl pt-6">Mentions légales</h1>

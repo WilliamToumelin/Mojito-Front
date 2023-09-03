@@ -53,12 +53,11 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
     <div className="xl:hidden w-1/4 h-full flex justify-center items-center">
       <button
         type="button"
-        onClick={toggleMenu} // Appel de la fonction pour basculer l'état du menu
+        onClick={toggleMenu}
         className="inline-flex items-center justify-center p-2 w-fit h-fit text-lg text-dark-brown rounded-lg hover:bg-light-brown "
         aria-controls="navbar-hamburger"
-        aria-expanded={isMenuOpen} // Mettre à jour l'attribut aria-expanded
+        aria-expanded={isMenuOpen}
       >
-        <span className="sr-only">Open main menu</span>
         <svg
           className="w-12 h-12 "
           aria-hidden="true"
@@ -80,11 +79,11 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
          ${isMenuOpen ? '' : 'hidden'}`}
         id="navbar-hamburger"
       >
-        <ul className="w-3/4 flex flex-col font-medium mt-6 text-3xl rounded-lg bg-light-gray text-center">
+        <ul className="w-3/4 flex flex-col font-medium mt-6 text-2xl rounded-lg bg-light-gray text-center">
           <li>
             <NavLink
               to="/"
-              className="block py-2 text-white rounded"
+              className="block py-4 text-dark-gray hover:text-dark-brown rounded"
               onClick={() => {
                 handleCloseMenu();
               }}
@@ -92,11 +91,11 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
               Home
             </NavLink>
           </li>
-          <hr className="border-2 border-white" />
-          <li className="flex justify-center mb-2">
+          <hr className="border-0.5 w-1/3 m-auto border-light-brown" />
+          <li className="flex justify-center">
             <NavLink
               to="/proposition-cocktail"
-              className={`block py-2 text-white rounded ${
+              className={`block py-5 text-dark-gray hover:text-dark-brown rounded ${
                 !isLoggedIn ? 'hidden' : ''
               }`}
               onClick={() => {
@@ -106,12 +105,13 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
               Propose ton cocktail!
             </NavLink>
           </li>
+          <hr className="border-0.5 w-1/3 m-auto border-light-brown pb-3" />
           {categoriesDataMemo.slice(0, 6).map((categoryItem: Category) => (
-            <li key={categoryItem.id}>
+            <li key={categoryItem.id} className="">
               <NavLink
                 key={categoryItem.id}
                 to="/"
-                className="block py-2 text-white rounded"
+                className="block py-2 text-light-brown hover:text-dark-brown rounded"
                 onClick={() => {
                   handleCategoryClick(categoryItem.id);
                   handleCategoryNameClick(categoryItem.name);
@@ -123,7 +123,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
             </li>
           ))}
 
-          <li className="flex justify-center mb-2 text-xl text-light-gray">
+          <li className="flex justify-center text-xl text-light-gray py-3">
             <ConnectModal />
           </li>
         </ul>

@@ -62,7 +62,7 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
           }}
           className="relative  w-4/5 xl:w-4/6 h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl pb-3 bg-dark-gray"
         >
-          <div className="relative w-full p-3 flex flex-col flex-start pb-7">
+          <div className="relative w-full p-3 flex flex-col flex-start pb-7 animate-fade-in-down">
             <div className="w-3/5 flex">
               <h1 className="text-light-brown flex text-3xl pt-5 pl-5 text-center w-4/5">
                 {cocktailData.name}
@@ -84,8 +84,8 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
               />
             </div>
           </div>
-          <div className="border-2 border-light-brown" />
-          <div className="w-full h-full overflow-y-auto p-6 pt-0 flex flex-col items-center ">
+          <div className="border-2 border-light-brown animate-fade-in-down" />
+          <div className="w-full h-full overflow-y-auto p-6 pt-0 flex flex-col items-center animate-fade-in-down">
             {cocktailData.comments.map((data) => (
               <article
                 key={data.id}

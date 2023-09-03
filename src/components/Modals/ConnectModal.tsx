@@ -69,19 +69,15 @@ const ConnectModal: FC = () => {
   return (
     <div>
       {isLoggedIn ? (
-        <>
-          <SquaredButton
-            name="Déconnexion"
-            type="button"
-            height={3}
-            width={12}
-            onClick={handleLogout}
-            bgColorHover="hover:red-cocktail"
-            fontColor="red-cocktail"
-          />
-
-          <p className="absolute text-light-brown">{connectMessage}</p>
-        </>
+        <SquaredButton
+          name="Déconnexion"
+          type="button"
+          height={3}
+          width={12}
+          onClick={handleLogout}
+          bgColorHover="hover:bg-red-cocktail"
+          fontColor="text-red-cocktail"
+        />
       ) : (
         <SquaredButton
           name="Se connecter"

@@ -67,7 +67,10 @@ const CocktailSubmit: React.FC = () => {
         <h1 className="text-dark-brown text-5xl pt-8 pb-4 text-center">
           Proposer un Cocktail
         </h1>
-        <form onSubmit={handleSubmit(handleCockailSubmit)}>
+        <form
+          onSubmit={handleSubmit(handleCockailSubmit)}
+          className="animate-fade-in-down"
+        >
           <div className="py-6 px-12">
             <div className="w-full pb-6">
               <ul className="flex flex-wrap justify-center">
@@ -134,7 +137,7 @@ const CocktailSubmit: React.FC = () => {
               <h3 className="text-lg font-medium mb-2">Description</h3>
               <textarea
                 {...register('description')}
-                className="border-xs rounded p-1 w-1/2 bg-[#b3a8a0] text-dark-gray hover:scale-105"
+                className="border-xs rounded p-1 w-1/2 bg-[#b3a8a0] text-dark-gray hover:scale-105 duration-500"
                 rows={3}
               />
             </div>

@@ -52,11 +52,11 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
             <div className="relative bg-light-gray rounded-lg">
               <button
                 type="button"
-                className="close-modal absolute top-3 right-2.5 text-white bg-white rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center"
+                className="close-modal absolute top-3 right-2.5 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center"
                 data-modal-hide="authentication-modal"
                 onClick={handleToggleModal}
               >
-                X<span className="text-white">Close modal</span>
+                X<span className="text-dark-gray">Close modal</span>
               </button>
 
               <div className="px-6 py-6 lg:px-8">
@@ -93,6 +93,7 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
                     type="submit"
                     height={2.5}
                     width={6}
+                    bgColorHover="hover:bg-dark-gray"
                   />
                 </form>
               </div>

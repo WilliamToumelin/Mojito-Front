@@ -47,7 +47,7 @@ const Cocktail: React.FC = () => {
         className="w-full h-[95%] sm:w-5/6 xl:w-4/6 sm:h-4/5 flex overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray"
       >
         {cocktailDetails ? (
-          <div className="sm:flex-1 flex flex-col sm:flex-row text-dark-brown">
+          <div className="sm:flex-1 flex flex-col sm:flex-row text-dark-brown animate-fade-in-down">
             <div className="sm:w-2/5 w-full">
               <div className="h-full">
                 <img

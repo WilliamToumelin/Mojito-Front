@@ -25,6 +25,30 @@ export default {
         'dark-brown': '#BE9063',
         'light-brown': '#a4978e',
       },
+      keyframes: {
+        wiggle: {
+          '0%, 100%': {
+            transform: 'rotate(-15deg)'
+          },
+          '50%': {
+            transform: 'rotate(15deg)'
+          },
+        },
+        'fade-in-down': {
+          '0%': {
+            opacity: '0',
+            transform: 'translateY(-10px)'
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(0)'
+          },
+        },
+      },
+      animation: {
+        wiggle: 'wiggle 2000ms ease-in-out infinite',
+        'fade-in-down': 'fade-in-down 2s ease-out',
+      }
     }
   }
 }

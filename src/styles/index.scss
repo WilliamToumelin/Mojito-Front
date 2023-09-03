@@ -1,6 +1,5 @@
 @use 'reset';
 @use 'variables' as v;
-
-a:hover {
-  color: darken(v.$primary-color, 20%);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

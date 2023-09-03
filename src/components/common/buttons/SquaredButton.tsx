@@ -37,9 +37,9 @@ const SquaredButton: React.FC<SquaredButtonProps> = ({
         menu-link flex justify-center items-center border border-light-brown
         font-medium rounded-lg text-base text-center ${height} ${width} 
         ${fontColor || 'text-dark-gray'}
-        ${fontColorHover || 'hover:text-dark-gray'}
+        ${fontColorHover || 'hover:text-dark-brown'}
         ${bgColor || 'bg-dark-brown'}
-        ${bgColorHover || 'hover:bg-light-brown'}
+        ${bgColorHover || 'hover:bg-light-gray'}
         
       `}
     >

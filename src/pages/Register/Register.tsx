@@ -92,7 +92,7 @@ const Register: React.FC = () => {
             Créer son compte membre
           </h1>
         </div>
-        <div className="flex">
+        <div className="flex animate-fade-in-down">
           <div className="w-[50%] flex flex-row h-full px-10">
             <div className="w-full p-6 ">
               {!registerSuccess ? (

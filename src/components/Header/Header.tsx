@@ -28,12 +28,12 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="bg-dark-gray w-full flex h-[20vh] items-center z-50">
-      <div className="w-2/12 xl:w-2/12 flex pl-1 pt-1  ">
+      <div className="w-2/12 xl:w-2/12 flex pl-5">
         <NavLink to="/" onClick={handleResetCategoryId}>
           <img
-            className="min-w-150"
+            className="min-w-150 rounded-full -rotate-12"
             width="160"
-            src="../../../public/logo-cocktail.png"
+            src="../../../public/logo1.webp"
             alt="Cocktail and link to home"
           />
         </NavLink>
