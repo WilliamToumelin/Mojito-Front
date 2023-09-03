@@ -6,6 +6,7 @@ interface RoundedButtonProps {
   onClick?: () => void;
   height: number;
   width: number;
+  isActive: boolean;
 }
 
 const RoundedButton: React.FC<RoundedButtonProps> = ({
@@ -13,6 +14,7 @@ const RoundedButton: React.FC<RoundedButtonProps> = ({
   onClick = () => {},
   height,
   width,
+  isActive,
 }) => {
   const buttonStyle = {
     width: `${width}rem`,
@@ -23,8 +25,13 @@ const RoundedButton: React.FC<RoundedButtonProps> = ({
       type="button"
       onClick={onClick}
       style={buttonStyle}
-      className={`menu-link flex justify-center items-center hover:bg-light-brown rounded-full z-50
-      text-base text-dark-brown hover:text-light-gray bg-light-gray border-light-brown border-2`}
+      className={`menu-link flex justify-center items-center rounded-full z-50
+      text-base border-light-brown border-2
+      ${
+        isActive
+          ? 'text-light-gray hover:text-light-gray bg-light-brown hover:bg-light-brown'
+          : 'text-dark-brown hover:text-light-gray bg-light-gray hover:bg-light-brown'
+      }`}
     >
       {name}
     </button>

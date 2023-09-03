@@ -129,7 +129,6 @@ const Home: React.FC<HomeProps> = ({
                     <CocktailItem
                       key={index}
                       cocktail={cocktail}
-                      animate={animate}
                       modulo={index % 2 !== 0}
                       isLastItem={index === filteredCocktails.length - 1}
                     />
@@ -145,7 +144,6 @@ const Home: React.FC<HomeProps> = ({
                     <CocktailItem
                       key={index}
                       cocktail={cocktail}
-                      animate={animate}
                       modulo={index % 2 !== 0}
                       isLastItem={index === cocktailTop5.length - 1}
                     />
@@ -160,7 +158,6 @@ const Home: React.FC<HomeProps> = ({
                     <CocktailItem
                       key={index}
                       cocktail={cocktail}
-                      animate={animate}
                       modulo={index % 2 !== 0}
                       isLastItem={index === cocktailListMemo.length - 1}
                     />

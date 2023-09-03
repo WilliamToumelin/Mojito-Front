@@ -4,23 +4,28 @@ import '../../styles/index.scss';
 
 const Page404: React.FC = () => {
   return (
-    <div className="relative bg-black flex justify-center items-center flex-1 h-[75vh]">
-      <div className="relative w-4/5 lg:w-3/5 h-4/5 max-h-4/5 flex flex-col overflow-y-auto shadow-purple-700 shadow-2xl rounded-2xl bg-black ">
+    <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh]">
+      <div
+        style={{
+          boxShadow: '#132226 0px 1px 22px',
+        }}
+        className="w-4/5 xl:w-4/6 h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl pb-3 bg-dark-gray"
+      >
         <div className="flex h-full">
           <div className="w-[50%] h-full p-6 flex flex-col justify-center">
-            <h3 className="m-5 mb-3 text-gray-500 dark:text-gray-400 first-line:uppercase first-line:tracking-widest text-7xl font-bold mr-3 underline">
-              OUPS
+            <h3 className="m-5 mb-3 text-dark-brown first-line:uppercase first-line:tracking-widest text-7xl font-bold mr-3 underline">
+              OUPS !
             </h3>
-            <h3 className="m-5 mb-3 text-gray-500 dark:text-gray-400 first-line:uppercase first-line:tracking-widest text-4xl font-bold mr-3">
+            <h3 className="m-5 mb-3 text-light-brown first-line:uppercase first-line:tracking-widest text-4xl font-bold mr-3">
               ERROR 404
             </h3>
-            <p className="m-5 text-gray-500 dark:text-gray-400">
+            <p className="m-5 text-light-brown">
               Rien a voir ici! A part peut être ce sacré John qui cherche un bar
               aussi ...
             </p>
-            <p className="m-5 text-gray-500 dark:text-gray-400">
+            <p className="m-5 text-light-brown">
               Pour revenir a la page d&apos;acceuil c&apos;est par{' '}
-              <Link to="/" className="text-amber-700">
+              <Link to="/" className="text-dark-brown">
                 ici !
               </Link>
             </p>

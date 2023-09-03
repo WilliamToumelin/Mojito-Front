@@ -68,6 +68,7 @@ const CategorySelectBar: React.FC<CategorySelectBarProps> = ({
               }}
               height={3}
               width={7}
+              isActive={categoryItem.id === categoryId}
             />
           </NavLink>
         ))}

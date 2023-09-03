@@ -19,7 +19,7 @@ export default {
         '1500': '1500ms',
       },
       colors: {
-        'red-cocktail': '#8b1d1d',
+        'red-cocktail': '#7f1d1d',
         'dark-gray': '#132226',
         'light-gray': '#525B56',
         'dark-brown': '#BE9063',
