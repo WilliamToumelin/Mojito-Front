@@ -5,8 +5,6 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../common/buttons/SquaredButton';
 
-import './Modal.scss';
-
 interface Props {
   displayModal: boolean;
   handleToggleModal: () => void;
@@ -50,16 +48,13 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
             <div className="relative bg-light-gray rounded-lg">
               <button
                 type="button"
-                className="absolute top-3 right-2.5 rounded-lg text-sm w-8 h-8 justify-center items-center bg-dark-brown text-dark-gray hover:bg-dark-gray hover:text-dark-brown hover:border hover:border-dark-brown"
+                className="absolute top-1 right-1 rounded-lg text-xl w-8 h-8 justify-center items-center text-dark-gray"
                 onClick={handleToggleModal}
               >
                 X
               </button>
 
-              <div className="px-6 py-6 lg:px-8">
-                <h3 className="mb-4 text-xl font-medium text-dark-gray">
-                  Votre commentaire
-                </h3>
+              <div className="px-6 py-8 lg:px-8">
                 <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                   {/* <div className="modal-input-group mb-5">
                     <input
@@ -75,12 +70,12 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
                   <div className="modal-input-group mb-5">
                     <textarea
                       id="review"
-                      className="modal-input-group__input w-full h-[10vh] text-dark-gray"
+                      className="modal-input-group__input w-full h-[10vh] text-dark-gray bg-light-brown"
                       {...register('review')}
                     />
                     <label
                       htmlFor="review"
-                      className="modal-input-group__label text-light-brown"
+                      className="modal-input-group__label text-dark-gray text-lg"
                     >
                       Votre commentaire
                     </label>
