@@ -1,34 +1,78 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../common/buttons/SquaredButton';
 
 interface Props {
+  selectedCocktail: number | null;
   displayModal: boolean;
   handleToggleModal: () => void;
 }
 
-const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
+const CommentModal: React.FC<Props> = ({
+  displayModal,
+  handleToggleModal,
+  selectedCocktail,
+}) => {
   const { isLoggedIn } = useAuth();
+  const [errorMessage, setErrorMessage] = useState('');
   const { register, handleSubmit, reset } = useForm<{
-    name: string;
-    review: string;
+    user: number;
+    content: string;
+    postedAt: Date | string;
+    cocktail: number | null;
   }>();
 
-  const onSubmit = async (data: { name: string; review: string }) => {
+  const onSubmit = async (data: {
+    user: number;
+    content: string;
+    postedAt: Date | string;
+    cocktail: number | null;
+  }) => {
     try {
-      const request = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      };
-      const response = await fetch('API', request);
-      if (response.ok) {
-        reset();
+      // Inserer la data en 'dur'
+      const currentDate = new Date();
+      const formattedDate = `${currentDate.getDate()} ${currentDate.toLocaleDateString(
+        'fr-FR',
+        {
+          month: 'long',
+          year: 'numeric',
+        }
+      )}`;
+
+      // Assigner la data en 'dur' aux champs respectif
+      data.postedAt = formattedDate;
+      data.user = 1;
+      data.cocktail = selectedCocktail;
+
+      const authTokenString = localStorage.getItem('authToken');
+      const authToken = authTokenString ? JSON.parse(authTokenString) : null;
+
+      if (authToken && authToken.token) {
+        const { token } = authToken;
+        console.log(token);
+        // Utilisez le token ici
       } else {
-        console.error('Erreur lors de la soumission du commentaire');
+        // Gérez le cas où 'token' est nul
+        // Peut-être afficher un message d'erreur ou rediriger l'utilisateur vers la page de connexion, etc.
+        console.log('erreur avec les tokens');
+      }
+
+      const response = await fetch('http://localhost:5174/api/comments/add', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        const responseData = await response.json();
+      } else {
+        setErrorMessage('Erreur lors de la soumission du commentaire');
       }
     } catch (error) {
       console.error('Erreur inattendue', error);
@@ -69,12 +113,12 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
                   </div> */}
                   <div className="modal-input-group mb-5">
                     <textarea
-                      id="review"
-                      className="modal-input-group__input w-full h-[10vh] text-dark-gray bg-light-brown"
-                      {...register('review')}
+                      id="content"
+                      className="modal-input-group__input w-full h-[10vh] text-dark-gray bg-light-grey"
+                      {...register('content')}
                     />
                     <label
-                      htmlFor="review"
+                      htmlFor="content"
                       className="modal-input-group__label text-dark-gray text-lg"
                     >
                       Votre commentaire

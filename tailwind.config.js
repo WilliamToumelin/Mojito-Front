@@ -57,7 +57,7 @@ export default {
         },
       },
       animation: {
-        wiggle: 'wiggle 1s ease-in-out infinite',
+        wiggle: 'wiggle 2s ease-in-out infinite',
         'fade-in-down': 'fade-in-down 2s ease-out',
         bounce: 'bounce 0.5s ease-in-out',
         'fadeIn': 'fadeIn 0.5s ease-in-out forwards',

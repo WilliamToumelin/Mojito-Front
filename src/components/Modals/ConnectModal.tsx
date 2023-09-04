@@ -5,6 +5,8 @@ import { FC, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
+
+import './Modal.scss';
 import SquaredButton from '../common/buttons/SquaredButton';
 
 const ConnectModal: FC = () => {
@@ -43,7 +45,8 @@ const ConnectModal: FC = () => {
       if (response.ok) {
         const responseData = await response.json();
         const { token } = responseData;
-        localStorage.setItem('authToken', token);
+        localStorage.setItem('authToken', JSON.stringify(token));
+        console.log(token);
         login();
         setDisplayModal(false);
         navigate('/');
@@ -86,7 +89,7 @@ const ConnectModal: FC = () => {
       {displayModal && (
         <div
           className={`fixed top-0 right-0 z-50  w-auto p-4 overflow-x-hidden overflow-y-auto h-[calc(100% - 1rem)] max-h-full ${
-            displayModal ? 'animate-fadeIn' : 'animate-fadeOut'
+            displayModal ? 'open-modal' : 'close-modal'
           }`}
           id="authentication-modal"
           tabIndex={-1}
@@ -96,11 +99,26 @@ const ConnectModal: FC = () => {
             <div className="relative bg-light-gray rounded-lg shadow ">
               <button
                 type="button"
-                className="absolute top-1 right-1 bg-transparent rounded-lg text-lg w-8 h-8 ml-auto inline-flex justify-center items-center text-dark-gray"
+                className="absolute top-3 right-2.5 bg-transparent rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
                 data-modal-hide="authentication-modal"
                 onClick={handleToggleModal}
               >
-                X
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+                <span className="sr-only">Close modal</span>
               </button>
 
               <div className="px-6 py-6 lg:px-8">
@@ -111,42 +129,39 @@ const ConnectModal: FC = () => {
                   className="space-y-6"
                   onSubmit={handleSubmit(handleLogin)}
                 >
-                  <div className=" mb-5 relative">
+                  <div className="modal-input-group mb-5 ">
                     <input
                       type="email"
                       id="email"
-                      className=" font-inherit p-10 border-white border-2 rounded-4px outline-2 outline-solid outline-a4978e bg-transparent transition-outline-color-500 duration-500 width-[14em]"
+                      className="modal-input-group__input"
                       required
                       {...register('email')}
                     />
-                    <label
-                      htmlFor="email"
-                      className=" absolute top-0 left-0 transition-translate-500 transition-scale-500 text-white"
-                    >
-                      Email address
+                    <label htmlFor="email" className="modal-input-group__label">
+                      Email adress
                     </label>
                     {errors.email && (
                       <div className="text-red-500">Email requis</div>
                     )}
                   </div>
-                  <div className=" mb-5 relative">
+                  <div className="modal-input-group mb-5">
                     <input
                       type="password"
                       id="password"
-                      className=" font-inherit text-a4978e p-10 border-none border-2 rounded-4px outline-2 outline-solid outline-a4978e bg-transparent transition-outline-color-500 duration-500 width-[14em]"
+                      className="modal-input-group__input"
                       required
                       {...register('password')}
                     />
                     <label
                       htmlFor="password"
-                      className=" absolute top-0 left-0 transition-translate-500 transition-scale-500 text-a4978e"
+                      className="modal-input-group__label"
                     >
                       Mot de passe
                     </label>
                     {errors.password && (
                       <div className="text-red-500">Mot de passe requis</div>
                     )}
-                    <p className="text-red-400">{connectMessage}</p>
+                    <p className=" text-red-400">{connectMessage}</p>
                   </div>
                   <SquaredButton
                     name="Valider"

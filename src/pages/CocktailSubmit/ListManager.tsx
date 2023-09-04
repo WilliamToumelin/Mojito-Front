@@ -30,10 +30,9 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
   return (
     <div className="p-2">
       <h3 className="text-2xl text-center">{category}</h3>
-      <div key={category} className="block p-3">
-        {/* création d'un tableau d'un longueur max de selectCount, dans le map avec _ on ignore l'élément actuel, on a besoin que de l'index */}
+      <div key={category} className="block p-3 space-y-2">
         {Array.from({ length: selectCount }).map((_, index) => (
-          <div key={index} className="flex p-2">
+          <div key={index} className="flex space-x-2">
             <select
               {...register(`${category}_${index}`)}
               className="text-light-brown text-base font-bold text-center w-48 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
@@ -42,15 +41,30 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
                 A vous de jouer !
               </option>
               {ingredients.map((ingredient) => (
-                <option
-                  className=""
-                  key={ingredient.id}
-                  value={ingredient.name}
-                >
+                <option className="" key={ingredient.id} value={ingredient.id}>
                   {ingredient.name}
                 </option>
               ))}
             </select>
+            <input
+              type="number"
+              {...register(`${category}_${index}_quantity`)}
+              className="text-light-brown text-xl font-bold text-center w-16 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
+              min="1"
+              max="99"
+              onKeyPress={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
+                if (
+                  // on vérifie si e.target est une instance de HTMLInputElement. Obligé car HTMLInputElement est l'élément HTML qui a la propriété 'value'
+                  e.target instanceof HTMLInputElement &&
+                  e.target.value.length >= 2
+                ) {
+                  e.preventDefault();
+                }
+              }}
+            />
           </div>
         ))}
       </div>

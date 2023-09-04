@@ -1,0 +1,65 @@
+.modal-input-group {
+  position: relative;
+}
+.modal-input-group__input {
+  font: inherit;
+  color: #a4978e;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  outline: 2px solid #a4978e;
+  background-color: transparent;
+  transition: outline-color 500ms;
+  width: 14em;
+}
+.modal-input-group__input:is(:focus, :valid) {
+  outline-color: #a4978e;
+}
+.modal-input-group__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  translate: 10px 10px;
+  color: #a4978e;
+  transition: translate 500ms, scale 500ms;
+}
+.modal-input-group__input:focus + .modal-input-group__label,
+.modal-input-group__input:valid + .modal-input-group__label {
+  padding-inline: 5px;
+  translate: 10px -14px;
+  scale: 1;
+  background-color: #525b56;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+}
+
+.open-modal {
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.close-modal {
+  animation: fadeOut 0.5s ease-in-out forwards;
+  color: rgb(39, 64, 70);
+  color: rgb(106, 116, 110);
+  color: #b3a8a0;
+}

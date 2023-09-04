@@ -75,6 +75,7 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
                   />
                 </div>
                 <CommentModal
+                  selectedCocktail={selectedCocktail}
                   displayModal={displayModal}
                   handleToggleModal={handleToggleModal}
                 />
