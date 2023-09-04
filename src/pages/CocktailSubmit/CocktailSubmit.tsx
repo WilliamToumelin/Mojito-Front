@@ -12,6 +12,7 @@ import { IngredientsData } from '../../types/types';
 import ListManager from './ListManager';
 import RadioAdd from './RadioAdd';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
+// import StepsAdd from './StepsAdd';
 
 const CocktailSubmit: React.FC = () => {
   const { register, handleSubmit, watch, reset } = useForm();
@@ -37,9 +38,15 @@ const CocktailSubmit: React.FC = () => {
         glass: data.Verres,
         ices: data.Glaces,
         technicals: data.Techniques,
+        alcool: '',
       };
       console.log(input);
 
+      if (data.alcools_0 !== '') {
+        input.alcool = 'true';
+        console.log(data.alcools_0);
+        console.log(input.alcool);
+      }
       // const output = {
       //   name: input.name,
       //   description: input.description,
@@ -227,12 +234,13 @@ const CocktailSubmit: React.FC = () => {
               </div>
             </div>
           </div>
+          {/* <StepsAdd number_step={0} content="" /> */}
           <div>
             <div className="mb-4 text-center">
               <h3 className="text-lg font-medium mb-2">Description</h3>
               <textarea
                 {...register('description')}
-                className="border-xs rounded p-1 w-1/2 bg-[#b3a8a0] text-dark-gray hover:scale-105 duration-500"
+                className="border-xs rounded p-1 w-1/2 bg-light-brown text-dark-gray hover:scale-105 duration-500"
                 rows={3}
               />
             </div>

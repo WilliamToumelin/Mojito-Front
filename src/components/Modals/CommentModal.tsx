@@ -48,17 +48,23 @@ const CommentModal: React.FC<Props> = ({
       data.user = 1;
       data.cocktail = selectedCocktail;
 
-      const authTokenString = localStorage.getItem('authToken');
-      const authToken = authTokenString ? JSON.parse(authTokenString) : null;
-
-      if (authToken && authToken.token) {
-        const { token } = authToken;
-        console.log(token);
-        // Utilisez le token ici
-      } else {
-        // Gérez le cas où 'token' est nul
-        // Peut-être afficher un message d'erreur ou rediriger l'utilisateur vers la page de connexion, etc.
-        console.log('erreur avec les tokens');
+      let token = '';
+      try {
+        const authTokenString = localStorage.getItem('authToken');
+        if (authTokenString) {
+          const authToken = JSON.parse(authTokenString);
+          if (authToken.token) {
+            token = authToken.token;
+          } else {
+            console.log('Erreur : Le token est nul dans authToken');
+          }
+        } else {
+          console.log(
+            "Erreur : L'objet authToken est nul ou introuvable dans le local storage"
+          );
+        }
+      } catch (error) {
+        console.log('Erreur de désérialisation JSON :', error);
       }
 
       const response = await fetch('http://localhost:5174/api/comments/add', {
@@ -66,11 +72,11 @@ const CommentModal: React.FC<Props> = ({
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Assurez-vous que Bearer est correctement orthographié
         },
       });
       if (response.ok) {
-        const responseData = await response.json();
+        console.log('envoi réussi');
       } else {
         setErrorMessage('Erreur lors de la soumission du commentaire');
       }
