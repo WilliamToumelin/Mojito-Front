@@ -53,7 +53,6 @@ const CategorySelectBar: React.FC<CategorySelectBarProps> = ({
   };
 
   const categoriesDataMemo = useMemo(() => categoriesData, [categoriesData]);
-  console.log(categoriesDataMemo);
 
   return (
     <div className="flex">

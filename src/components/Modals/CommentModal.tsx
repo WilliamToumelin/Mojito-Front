@@ -20,7 +20,6 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
   }>();
 
   const onSubmit = async (data: { name: string; review: string }) => {
-    console.log(data);
     try {
       const request = {
         method: 'POST',
@@ -29,7 +28,6 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
       };
       const response = await fetch('API', request);
       if (response.ok) {
-        console.log('Commentaire soumis avec succès');
         reset();
       } else {
         console.error('Erreur lors de la soumission du commentaire');
@@ -40,10 +38,10 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
   };
 
   return (
-    <div className="absolute top-20 right-5 w-1/5 h-full">
+    <div className="absolute top-20 right-5 h-full">
       {displayModal && isLoggedIn && (
         <div
-          className="absolute w-[30vw] right-0 mr-8 open-modal"
+          className="absolute w-[70vw] md:w-[50vw] right-0 mr-8 open-modal"
           id="authentication-modal"
           tabIndex={-1}
           aria-hidden="true"
@@ -52,11 +50,11 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
             <div className="relative bg-light-gray rounded-lg">
               <button
                 type="button"
-                className="close-modal absolute top-3 right-2.5 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center"
+                className="close-modal absolute top-3 right-2.5 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center text-white"
                 data-modal-hide="authentication-modal"
                 onClick={handleToggleModal}
               >
-                X<span className="text-dark-gray">Close modal</span>
+                X
               </button>
 
               <div className="px-6 py-6 lg:px-8">

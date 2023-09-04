@@ -44,11 +44,23 @@ export default {
             transform: 'translateY(0)'
           },
         },
+        bounce: {
+          '0%, 100%': {
+            transform: 'translateY(0)'
+          },
+          '20%, 80%': {
+            transform: 'translateY(-8px)'
+          },
+          '40%, 60%': {
+            transform: 'translateY(-4px)'
+          },
+        },
       },
       animation: {
-        wiggle: 'wiggle 2000ms ease-in-out infinite',
+        wiggle: 'wiggle 1s ease-in-out infinite',
         'fade-in-down': 'fade-in-down 2s ease-out',
+        bounce: 'bounce 0.5s ease-in-out',
       }
     }
   }
-}
+};

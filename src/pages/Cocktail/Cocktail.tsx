@@ -26,7 +26,6 @@ const Cocktail: React.FC = () => {
         setCocktailDetails(data);
       })
       .catch((err) => console.error(err));
-    console.log(selectedCocktailId);
   }, [selectedCocktailId]);
 
   if (!cocktailDetails) {

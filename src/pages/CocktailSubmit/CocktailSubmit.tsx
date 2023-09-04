@@ -24,10 +24,8 @@ const CocktailSubmit: React.FC = () => {
       })
       .catch((err) => console.error(err));
   }, []);
-  console.log(ingredientsList);
 
   const handleCockailSubmit = async (data: FieldValues) => {
-    console.log(data);
     try {
       const ingredientsData: IngredientsData = {
         ingredients: data.ingredients,
@@ -46,7 +44,6 @@ const CocktailSubmit: React.FC = () => {
         const { token } = await response.json();
         //  Stocker le token JWT dans le local storage
         localStorage.setItem('authToken', token);
-        console.log('Commentaire soumis avec succès');
         reset();
       } else {
         console.error('Erreur lors de la soumission du commentaire');

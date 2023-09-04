@@ -50,8 +50,6 @@ const ConnectModal: FC = () => {
         setDisplayModal(false);
         navigate('/');
         setConnectMessage(`Bienvenue ${data.email}`);
-        console.log(data.password);
-        console.log(data.email);
       } else {
         setConnectMessage('Identifiants ou mot de passe invalides');
       }

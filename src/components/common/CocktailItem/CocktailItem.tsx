@@ -33,20 +33,20 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
             />
           </div>
         </div>
-        <div className="w-2/3">
-          <div className="px-1 lg:px-10 w-full hover:scale-105 duration-500">
+        <div className="px-4 md:px-0 w-2/3">
+          <div className="px-1 lg:px-10 w-full sm:hover:scale-105 duration-500">
             <h1 className="md:py-2 md:p-4 leading-7 text-dark-brown text-2xl xl:text-4xl lg:text-3xl">
               {cocktail.name}
             </h1>
             <div
-              className={`text-light-brown text-base md:text-xl md:px-4 flex ${
+              className={` text-light-brown text-base md:text-xl md:px-4 ${
                 modulo ? 'justify-end' : ''
               }`}
             >
               <div className="flex w-full justify-between items-center">
                 {modulo ? (
                   <>
-                    <span className="relative">
+                    <span className="relative opacity-0 md:opacity-100">
                       <RandomIcons />{' '}
                     </span>
                     <span>Difficulté : {cocktail.difficulty}/5 </span>
@@ -54,7 +54,7 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
                 ) : (
                   <>
                     <span>Difficulté : {cocktail.difficulty}/5 </span>
-                    <span className="relative">
+                    <span className="relative opacity-0 md:opacity-100">
                       <RandomIcons />{' '}
                     </span>
                   </>

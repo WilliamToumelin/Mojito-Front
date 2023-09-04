@@ -3,8 +3,6 @@
 import { useState } from 'react';
 import { FaCocktail } from 'react-icons/fa';
 
-import './Rating.scss';
-
 const Rating = () => {
   const [rating, setRating] = useState(0);
   const [index, setIndex] = useState(-1);
@@ -40,7 +38,9 @@ const Rating = () => {
           onFocus={() => handleIconMouseOver(i)}
           onMouseLeave={handleIconMouseLeave}
           className={`text-3xl p-1 ${
-            i <= rating || i <= index ? 'text-dark-brown' : 'text-gray-400'
+            i <= rating || i <= index
+              ? 'text-dark-brown animate-bounce'
+              : 'text-gray-400'
           }`}
         >
           <span className="">

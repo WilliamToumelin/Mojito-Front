@@ -2,11 +2,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
 
 import './Register.scss';
+import SquaredButton from '../../components/common/buttons/SquaredButton';
+import Hr from '../../components/common/Hr/Hr';
+import InputForm from './InputForm';
 
 const Register: React.FC = () => {
   const {
@@ -85,111 +88,95 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[100vh]">
-      <div className="relative w-4/5 lg:w-4/6 h-full p-4 lg:h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray">
-        <div className="text-center pb-12">
-          <h1 className="text-dark-brown pt-5 font-bold text-2xl">
+    <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh] max-h-[75vh]">
+      <div className="relative w-4/5 lg:w-4/6 p-4 h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray">
+        <div className="text-center">
+          <h1 className="text-dark-brown pt-5 font-bold text-xl sm:text-2xl">
             Créer son compte membre
           </h1>
         </div>
-        <div className="flex animate-fade-in-down">
-          <div className="w-[50%] flex flex-row h-full px-10">
-            <div className="w-full p-6 ">
+        <Hr />
+        <div className="flex flex-col w-full animate-fade-in-down">
+          <div className="px-1 md:px-10">
+            <h3 className=" font-semibold text-dark-brown text-lg sm:text-xl">
+              Être membre c&apos;est quoi ?
+            </h3>
+            <br />
+            <p className="text-light-brown text-lg">
+              Il vous permet de commenter les recettes de cocktails. Vous
+              pourrez ainsi suggérer votre touche personnelle aux autres
+              utilisateurs et développer votre goût pour la créativité !
+            </p>
+            <br />
+            <p className="text-light-brown text-lg">
+              Vous pourrez également noter les cocktails et ainsi éclairer les
+              autres utilisateurs sur la qualité de ces dernières. Cela nous
+              permettra également de faire le tri et de ne garder que les
+              meilleures recettes sur notre site !
+            </p>
+          </div>
+          <Hr />
+          <div className="flex flex-row justify-around px-10 pt-2">
+            <div className="w-full flex justify-around">
               {!registerSuccess ? (
                 <form
                   onSubmit={handleSubmit(handleRegister)}
-                  className="flex flex-col items-start"
+                  className="flex flex-col items-center sm:items-start"
                 >
-                  <div className="flex w-full justify-between">
-                    <div className="">
-                      <div className="register-input-group mb-5">
-                        <input
-                          type="lastName"
-                          className="register-input-group__input"
-                          required
-                          {...register('lastName')}
-                        />
-                        <label
-                          htmlFor="lastName"
-                          className="register-input-group__label"
-                        >
-                          Nom
-                        </label>
-                      </div>
-                      <div className="register-input-group mb-5">
-                        <input
-                          type="firstName"
-                          className="register-input-group__input"
-                          {...register('firstName')}
-                          required
-                        />
-                        <label
-                          htmlFor="firstName"
-                          className="register-input-group__label"
-                        >
-                          Prénom
-                        </label>
-                      </div>
+                  <div className="flex flex-col sm:flex-row justify-center w-full md:justify-between">
+                    <div className="sm:m-5 mx-auto">
+                      <InputForm
+                        type="text"
+                        htmlFor="lastName"
+                        registerName="lastName"
+                        name="Nom"
+                        register={register}
+                      />
+
+                      <InputForm
+                        type="text"
+                        htmlFor="firstName"
+                        registerName="firstName"
+                        name="Prénom"
+                        register={register}
+                      />
+                      <InputForm
+                        type="text"
+                        htmlFor="pseudonym"
+                        registerName="pseudonym"
+                        name="Pseudo"
+                        register={register}
+                      />
+                    </div>
+                    <div className=" mx-auto">
                       <label htmlFor="dateOfBirth" className="text-light-brown">
                         Date de naissance
                       </label>
-                      <div className="register-input-group mb-1">
-                        <input
-                          type="date"
-                          className="register-input-group__input"
-                          {...register('dateOfBirth')}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="register-input-group mb-5">
-                        <input
-                          type="email"
-                          className="register-input-group__input"
-                          {...register('email')}
-                          required
-                        />
-                        <label
-                          htmlFor="email-register"
-                          className="register-input-group__label"
-                        >
-                          Email address
-                        </label>
-                      </div>
-                      <div className="register-input-group mb-5">
-                        <input
-                          type="password"
-                          className="register-input-group__input"
-                          {...register('password')}
-                          required
-                        />
-                        <label
-                          htmlFor="password-register"
-                          className="register-input-group__label"
-                        >
-                          Mot de passe
-                        </label>
-                      </div>
+                      <InputForm
+                        type="Date"
+                        htmlFor="dateOfBirth"
+                        registerName="dateOfBirth"
+                        register={register}
+                      />
 
-                      <div className="register-input-group mb-5">
-                        <input
-                          type="pseudonym"
-                          className="register-input-group__input"
-                          {...register('pseudonym')}
-                          required
-                        />
-                        <label
-                          htmlFor="pseudonym"
-                          className="register-input-group__label"
-                        >
-                          Pseudo
-                        </label>
-                      </div>
+                      <InputForm
+                        type="email"
+                        htmlFor="email-register"
+                        registerName="email"
+                        name="Adresse Mail"
+                        register={register}
+                      />
+                      <InputForm
+                        type="password"
+                        htmlFor="password-register"
+                        registerName="password"
+                        name="Mot de passe"
+                        register={register}
+                      />
                     </div>
                   </div>
 
-                  <div className="py-2">
+                  <div className="py-4 text-center w-full ">
                     <label
                       htmlFor="consentement"
                       className="p-2 text-light-brown"
@@ -212,37 +199,25 @@ const Register: React.FC = () => {
                   </div>
                   {/* Afficher le message d'erreur ici */}
                   {errorMessage && (
-                    <div className="text-red-900">{errorMessage}</div>
+                    <div className="w-full text-red-900 text-center">
+                      {errorMessage}
+                    </div>
                   )}
-                  <button
-                    type="submit"
-                    className="p-2 mt-6 bg-dark-brown rounded-xl text-#132226"
-                  >
-                    Inscription
-                  </button>
+                  <div className="w-full flex justify-center">
+                    <SquaredButton
+                      name="Inscription"
+                      type="submit"
+                      height={2.5}
+                      width={8}
+                    />
+                  </div>
                 </form>
               ) : (
-                <p>Création de compte réussi!</p>
+                <p className="w-full text-green-600 text-center">
+                  Création de compte réussi!
+                </p>
               )}
             </div>
-          </div>
-          <div className="text-white w-[50%] h-full px-10">
-            <h3 className=" font-semibold text-dark-brown text-xl">
-              Être membre c&apos;est quoi ?
-            </h3>
-            <br />
-            <p className="text-light-brown text-lg">
-              Il vous permet de commenter les recettes de cocktails. Vous
-              pourrez ainsi suggérer votre touche personnelle aux autres
-              utilisateurs et développer votre goût pour la créativité !
-            </p>
-            <br />
-            <p className="text-light-brown text-lg">
-              Vous pourrez également noter les cocktails et ainsi éclairer les
-              autres utilisateurs sur la qualité de ces dernières. Cela nous
-              permettra également de faire le tri et de ne garder que les
-              meilleures recettes sur notre site !
-            </p>
           </div>
         </div>
       </div>

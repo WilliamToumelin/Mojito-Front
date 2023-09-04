@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({
         </NavLink>
       </div>
       <div className="w-8/12 block ">
-        <div className="text-6xl md:text-8xl p-3 text-dark-brown text-center font-gluten font-extralight">
+        <div className="text-5xl sm:text-7xl md:text-8xl p-3 text-dark-brown text-center font-gluten font-extralight">
           <h1>Mojit&apos;o</h1>
         </div>
         <div className="hidden xl:flex items-center justify-center">

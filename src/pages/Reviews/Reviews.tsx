@@ -32,9 +32,6 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
       .catch((err) => console.error(err));
   }, [selectedCocktail]);
 
-  console.log(selectedCocktail);
-  console.log(cocktailData);
-
   const handleToggleModal = useCallback((): void => {
     setDisplayModal((prevstate) => !prevstate);
   }, []);
@@ -62,26 +59,26 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
           }}
           className="relative  w-4/5 xl:w-4/6 h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl pb-3 bg-dark-gray"
         >
-          <div className="relative w-full p-3 flex flex-col flex-start pb-7 animate-fade-in-down">
-            <div className="w-3/5 flex">
-              <h1 className="text-light-brown flex text-3xl pt-5 pl-5 text-center w-4/5">
+          <div className="relative w-full p-3 mdflex flex-col flex-start animate-fade-in-down">
+            <div className="w-full flex flex-wrap justify-around items-center">
+              <h1 className="text-dark-brown text-xl md:text-3xl">
                 {cocktailData.name}
               </h1>
-            </div>
-            <div className={`w-2/5 ${!isLoggedIn ? 'hidden' : ''}`}>
-              <div className="absolute top-5 right-5">
-                <SquaredButton
-                  name="Commente ! :)"
-                  onClick={handleToggleModal}
-                  height={3}
-                  width={9}
-                  type="button"
+              <div className={`${!isLoggedIn ? 'hidden' : ''}`}>
+                <div className="">
+                  <SquaredButton
+                    name="Commente ! :)"
+                    onClick={handleToggleModal}
+                    height={3}
+                    width={7}
+                    type="button"
+                  />
+                </div>
+                <CommentModal
+                  displayModal={displayModal}
+                  handleToggleModal={handleToggleModal}
                 />
               </div>
-              <CommentModal
-                displayModal={displayModal}
-                handleToggleModal={handleToggleModal}
-              />
             </div>
           </div>
           <div className="border-2 border-light-brown animate-fade-in-down" />
@@ -89,7 +86,7 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
             {cocktailData.comments.map((data) => (
               <article
                 key={data.id}
-                className="w-[80%] mx-auto mt-14 p-4 rounded-lg flex items-center text-center"
+                className="w-[80%] sm:mx-auto mt-4 md:mt-14 sm:p-4 rounded-lg flex items-center text-center"
               >
                 <div>
                   <svg
@@ -102,7 +99,7 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
                     <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z" />
                   </svg>
                   <blockquote>
-                    <p className="text-2xl italic font-medium text-light-brown">
+                    <p className="text-lg md:text-2xl italic font-medium text-light-brown">
                       {data.content}
                     </p>
                   </blockquote>
