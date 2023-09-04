@@ -2,7 +2,6 @@
 import React from 'react';
 import { FaCocktail } from 'react-icons/fa';
 import { Cocktails } from '../../../types/types';
-import './CocktailItem.scss';
 import Hr from '../Hr/Hr';
 import RandomIcons from './RandomIcons';
 

@@ -41,7 +41,7 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
     <div className="absolute top-20 right-5 h-full">
       {displayModal && isLoggedIn && (
         <div
-          className="absolute w-[70vw] md:w-[50vw] right-0 mr-8 open-modal"
+          className="absolute w-[70vw] md:w-[35vw] right-0 mr-8 open-modal"
           id="authentication-modal"
           tabIndex={-1}
           aria-hidden="true"
@@ -50,19 +50,18 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
             <div className="relative bg-light-gray rounded-lg">
               <button
                 type="button"
-                className="close-modal absolute top-3 right-2.5 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center text-white"
-                data-modal-hide="authentication-modal"
+                className="absolute top-3 right-2.5 rounded-lg text-sm w-8 h-8 justify-center items-center bg-dark-brown text-dark-gray hover:bg-dark-gray hover:text-dark-brown hover:border hover:border-dark-brown"
                 onClick={handleToggleModal}
               >
                 X
               </button>
 
               <div className="px-6 py-6 lg:px-8">
-                <h3 className="mb-4 text-xl font-medium text-gray-900">
+                <h3 className="mb-4 text-xl font-medium text-dark-gray">
                   Votre commentaire
                 </h3>
                 <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-                  <div className="modal-input-group mb-5">
+                  {/* <div className="modal-input-group mb-5">
                     <input
                       type="text"
                       id="name"
@@ -72,7 +71,7 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
                     <label htmlFor="name" className="modal-input-group__label">
                       Votre nom
                     </label>
-                  </div>
+                  </div> */}
                   <div className="modal-input-group mb-5">
                     <textarea
                       id="review"
