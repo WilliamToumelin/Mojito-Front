@@ -23,11 +23,17 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
   }>();
   const authToken = Cookies.get('authToken');
   const userToken = Cookies.get('userToken');
+  let userId: number | null = null;
+
+  if (userToken) {
+    const userTokenObj = JSON.parse(userToken);
+    userId = userTokenObj.id;
+  }
 
   const selectedCocktailId = Number(localStorage.getItem('selectedCocktail'));
 
   const onSubmit = async (data: {
-    user: number;
+    user: number | null;
     content: string;
     postedAt: Date | string | null;
     cocktail: number | null;
@@ -35,7 +41,7 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
     const date = new Date();
 
     data.postedAt = date;
-
+    data.user = userId;
     if (typeof selectedCocktailId === 'number') {
       data.cocktail = selectedCocktailId;
     } else {

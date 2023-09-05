@@ -47,7 +47,7 @@ const ConnectModal: FC = () => {
         console.log(data);
         // Stocker le token dans un cookie avec une date d'expiration (par exemple, 7 jours)
         Cookies.set('authToken', token, { expires: 7 });
-        Cookies.set('userToken', data, { expires: 7 });
+        Cookies.set('userToken', JSON.stringify(data), { expires: 7 });
 
         login();
         setDisplayModal(false);
