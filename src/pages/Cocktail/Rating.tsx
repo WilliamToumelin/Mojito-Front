@@ -22,10 +22,17 @@ const Rating = () => {
 
   const sendRatingToServer = async (i: number) => {
     const authToken = Cookies.get('authToken');
+    const userToken = Cookies.get('userToken');
+    let userId: number | null = null;
+
+    if (userToken) {
+      const userTokenObj = JSON.parse(userToken);
+      userId = userTokenObj.id;
+    }
 
     const data = {
       rating: i,
-      user: 1,
+      user: userId,
       cocktail: selectedCocktailId,
     };
 

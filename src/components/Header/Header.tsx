@@ -6,6 +6,7 @@ import CategorySelectBar from '../CategorySelectBar/CategorySelectBar';
 import { useAuth } from '../../contexts/AuthProvider';
 import HamburgerMenu from './HamburgerMenu';
 import SquaredButton from '../common/buttons/SquaredButton';
+import Cookies from 'js-cookie';
 
 interface HeaderProps {
   categoryId: number | null;
@@ -26,6 +27,14 @@ const Header: React.FC<HeaderProps> = ({
     setCategoryId(null);
     navigate('/');
   };
+
+  const userToken = Cookies.get('userToken');
+  let userPseudo: string | null = null;
+
+  if (userToken) {
+    const userTokenObj = JSON.parse(userToken);
+    userPseudo = userTokenObj.pseudonym;
+  }
 
   return (
     <header className="bg-dark-gray w-full flex h-[20vh] items-center z-50">

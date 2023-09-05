@@ -6,6 +6,8 @@ import ListManager from './ListManager';
 import RadioAdd from './RadioAdd';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 import StepsAdd from './StepsAdd';
+import Cookies from 'js-cookie';
+import { useAuth } from '../../contexts/AuthProvider';
 
 const CocktailSubmit: React.FC = () => {
   const { register, handleSubmit, watch, reset } = useForm();
@@ -14,6 +16,19 @@ const CocktailSubmit: React.FC = () => {
   const techniques = watch('Techniques');
   const ices = watch('Glaces');
   const glass = watch('Verres');
+
+  const authToken = Cookies.get('authToken');
+  const { isLoggedIn, login, logout } = useAuth();
+
+  useEffect(() => {
+    if (authToken) {
+      // Si le jeton JWT est présent dans les cookies, l'utilisateur est connecté
+      login(); // Utilisez la fonction de connexion fournie par useAuth
+    } else {
+      // Sinon, l'utilisateur n'est pas connecté
+      logout(); // Utilisez la fonction de déconnexion fournie par useAuth
+    }
+  }, [authToken, login, logout]);
 
   useEffect(() => {
     fetch('http://localhost:5174/api/propositions/data')
