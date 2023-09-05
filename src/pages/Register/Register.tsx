@@ -6,8 +6,6 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useAuth } from '../../contexts/AuthProvider';
-
-import './Register.scss';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 import Hr from '../../components/common/Hr/Hr';
 import InputForm from './InputForm';
