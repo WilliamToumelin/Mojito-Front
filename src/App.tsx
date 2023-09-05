@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 import Header from './components/Header/Header';
 import Home from './pages/Home/Home';
 import Cocktail from './pages/Cocktail/Cocktail';
@@ -11,7 +12,6 @@ import Reviews from './pages/Reviews/Reviews';
 import LegalMentions from './pages/LegalMentions/LegalMentions';
 import Page404 from './components/Error/Page404';
 import { useAuth } from './contexts/AuthProvider';
-import Cookies from 'js-cookie';
 
 const App = () => {
   const [categoryId, setCategoryId] = useState<number | null>(null);
@@ -36,7 +36,6 @@ const App = () => {
         categoryId={categoryId}
         setCategoryId={setCategoryId}
         setCategoryName={setCategoryName}
-        isLoggedIn={isLoggedIn} // Passez l'état d'authentification en tant que propriété
       />
       <Routes>
         <Route

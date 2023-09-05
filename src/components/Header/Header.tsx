@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
+import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
 import { Link, NavLink } from 'react-router-dom';
 import ConnectModal from '../Modals/ConnectModal';
@@ -6,13 +8,11 @@ import CategorySelectBar from '../CategorySelectBar/CategorySelectBar';
 import { useAuth } from '../../contexts/AuthProvider';
 import HamburgerMenu from './HamburgerMenu';
 import SquaredButton from '../common/buttons/SquaredButton';
-import Cookies from 'js-cookie';
 
 interface HeaderProps {
   categoryId: number | null;
   setCategoryId: (id: number | null) => void;
   setCategoryName: (name: string | null) => void;
-  isLoggedIn: boolean;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -29,6 +29,7 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   const userToken = Cookies.get('userToken');
+
   let userPseudo: string | null = null;
 
   if (userToken) {
