@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
+import Cookies from 'js-cookie';
 import { IngredientsData } from '../../types/types';
 import ListManager from './ListManager';
 import RadioAdd from './RadioAdd';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 import StepsAdd from './StepsAdd';
-import Cookies from 'js-cookie';
 
 const CocktailSubmit: React.FC = () => {
   const { register, handleSubmit, watch, reset } = useForm();
