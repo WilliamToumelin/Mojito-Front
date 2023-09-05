@@ -2,10 +2,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState } from 'react';
 import { FaCocktail } from 'react-icons/fa';
+import Cookies from 'js-cookie';
 
 const Rating = () => {
   const [rating, setRating] = useState(0);
   const [index, setIndex] = useState(-1);
+  const selectedCocktailId = localStorage.getItem('selectedCocktail');
 
   const handleIconMouseOver = (i: number) => {
     if (rating === 0) {
@@ -16,7 +18,8 @@ const Rating = () => {
   const handleIconMouseLeave = () => {
     setIndex(-1);
   };
-  const handleIconClick = (
+
+  const handleIconClick = async (
     i: number,
     event: React.MouseEvent<HTMLSpanElement>
   ) => {
@@ -26,8 +29,33 @@ const Rating = () => {
       event.currentTarget.classList.remove('bounce');
     }, 750);
     setIndex(-1);
-  };
 
+    const authToken = Cookies.get('authToken');
+
+    const data = {
+      rating: index,
+      user: 1,
+      cocktail: selectedCocktailId,
+    };
+
+    try {
+      const response = await fetch('http://localhost:5174/api/login_check', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`, // Ajouter le token JWT aux en-têtes
+        },
+      });
+      if (response.ok) {
+        console.log('envoi réussi');
+      } else {
+        console.error('Erreur lors de la soumission du commentaire');
+      }
+    } catch (error) {
+      console.error('Erreur inattendue', error);
+    }
+  };
   return (
     <div className="flex">
       {[1, 2, 3, 4, 5].map((i) => (

@@ -4,9 +4,10 @@
 import { FC, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { useAuth } from '../../contexts/AuthProvider';
 
-import './Modal.scss';
+// import './Modal.scss';
 import SquaredButton from '../common/buttons/SquaredButton';
 
 const ConnectModal: FC = () => {
@@ -45,7 +46,10 @@ const ConnectModal: FC = () => {
       if (response.ok) {
         const responseData = await response.json();
         const { token } = responseData;
-        localStorage.setItem('authToken', token);
+        console.log(token);
+        // Stocker le token dans un cookie avec une date d'expiration (par exemple, 7 jours)
+        Cookies.set('authToken', token, { expires: 7 });
+
         login();
         setDisplayModal(false);
         navigate('/');
@@ -59,8 +63,8 @@ const ConnectModal: FC = () => {
   };
 
   const handleLogout = () => {
-    //  Supprimer le token JWT du local storage
-    localStorage.removeItem('authToken');
+    // Supprimer le cookie authToken
+    Cookies.remove('authToken');
     logout();
   };
 

@@ -3,9 +3,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthProvider';
+import Cookies from 'js-cookie';
 import SquaredButton from '../common/buttons/SquaredButton';
 
-import './Modal.scss';
+// import './Modal.scss';
 
 interface Props {
   displayModal: boolean;
@@ -15,20 +16,49 @@ interface Props {
 const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
   const { isLoggedIn } = useAuth();
   const { register, handleSubmit, reset } = useForm<{
-    name: string;
-    review: string;
+    user: number;
+    content: string;
+    postedAt: Date;
+    cocktail: number | null;
   }>();
+  const authToken = Cookies.get('authToken');
+  const selectedCocktailId = Number(localStorage.getItem('selectedCocktail'));
 
-  const onSubmit = async (data: { name: string; review: string }) => {
+  const onSubmit = async (data: {
+    user: number;
+    content: string;
+    postedAt: Date | string | null;
+    cocktail: number | null;
+  }) => {
+    const date = new Date();
+    // const formattedDate = date.toLocaleDateString('fr-FR', {
+    //   month: 'long',
+    //   year: 'numeric',
+    // });
+
+    data.postedAt = date;
+
+    if (typeof selectedCocktailId === 'number') {
+      data.cocktail = selectedCocktailId;
+    } else {
+      data.cocktail = null;
+    }
+
+    data.user = 1;
+
     try {
-      const request = {
+      const response = await fetch('http://localhost:5174/api/comments/add', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
-      };
-      const response = await fetch('API', request);
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`, // Ajouter le token JWT aux en-têtes
+        },
+      });
+
       if (response.ok) {
         reset();
+        console.log('envoi réussi');
       } else {
         console.error('Erreur lors de la soumission du commentaire');
       }
@@ -74,12 +104,12 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
                   </div> */}
                   <div className="modal-input-group mb-5">
                     <textarea
-                      id="review"
+                      id="content"
                       className="modal-input-group__input w-full h-[10vh] text-dark-gray"
-                      {...register('review')}
+                      {...register('content')}
                     />
                     <label
-                      htmlFor="review"
+                      htmlFor="content"
                       className="modal-input-group__label text-light-brown"
                     >
                       Votre commentaire
