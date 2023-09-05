@@ -1,9 +1,10 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../../contexts/AuthProvider';
 import Cookies from 'js-cookie';
+import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../common/buttons/SquaredButton';
 
 // import './Modal.scss';
@@ -106,17 +107,11 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
                       <div className="modal-input-group mb-5">
                         <textarea
                           id="content"
-                          className="modal-input-group__input w-full h-[10vh] text-dark-gray"
+                          className="modal-input-group__input w-full h-[10vh] text-dark-gray bg-light-brown rounded"
                           {...register('content')}
                         />
-                        <label
-                          htmlFor="content"
-                          className="modal-input-group__label text-light-brown"
-                        >
-                          Votre commentaire
-                        </label>
                       </div>
-                      <p className="text-red-600">{errorMessage}</p>
+                      <p className="text-dark-brown">{errorMessage}</p>
                       <SquaredButton
                         name="Envoyer"
                         type="submit"

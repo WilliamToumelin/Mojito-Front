@@ -1,16 +1,16 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { useAuth } from '../../contexts/AuthProvider';
 
 import './Register.scss';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 import Hr from '../../components/common/Hr/Hr';
 import InputForm from './InputForm';
-import Cookies from 'js-cookie';
 
 const Register: React.FC = () => {
   const {
@@ -45,19 +45,7 @@ const Register: React.FC = () => {
     password: string;
     pseudonym: string;
     hasConsented: boolean;
-    // warning: number;
-    // created_at: string;
-    // verified: boolean;
   }) => {
-    // // Variable pour les infos direct
-    // const currentDate = new Date().toISOString();
-    // const currentWarning = 0;
-    // const currentVerified = false;
-    // // Aujout des valeurs de variables dans la data
-    // data.created_at = currentDate;
-    // data.warning = currentWarning;
-    // data.verified = currentVerified;
-    // // Appeler votre backend pour l'authentification
     try {
       const response = await fetch('http://localhost:5174/api/register', {
         method: 'POST',
@@ -68,11 +56,7 @@ const Register: React.FC = () => {
       });
       console.log(data);
       if (response.ok) {
-        // const responseData = await response.json();
-        // const { token } = responseData;
-        //  Stocker le token JWT dans le local storage
-        // Cookies.set('authToken', token, { expires: 7 });
-        // login();
+        // Message de confirmation de création de compte
         setRegisterSuccess(true);
       } else {
         //  Gérer les erreurs d'authentification ici

@@ -30,11 +30,14 @@ const ConnectModal: FC = () => {
 
   // Code pour se connecter une fois l'API prête
 
-  const handleLogin = async (data: { email: string; password: string }) => {
+  const handleLogin = async (connectData: {
+    email: string;
+    password: string;
+  }) => {
     try {
       const response = await fetch('http://localhost:5174/api/login_check', {
         method: 'POST',
-        body: JSON.stringify(data),
+        body: JSON.stringify(connectData),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -128,38 +131,35 @@ const ConnectModal: FC = () => {
                   Se connecter
                 </h3>
                 <form
-                  className="space-y-6"
+                  className="space-y-3"
                   onSubmit={handleSubmit(handleLogin)}
                 >
-                  <div className="modal-input-group mb-5 ">
+                  <div className="">
+                    <label htmlFor="email" className="pb-1">
+                      Email adress
+                    </label>
                     <input
                       type="email"
                       id="email"
-                      className="modal-input-group__input"
+                      className="bg-light-brown rounded-full flex items-center text-center text-base"
                       required
                       {...register('email')}
                     />
-                    <label htmlFor="email" className="modal-input-group__label">
-                      Email adress
-                    </label>
                     {errors.email && (
-                      <div className="text-red-500">Email requis</div>
+                      <div className="text-red-cocktail">Email requis</div>
                     )}
                   </div>
-                  <div className="modal-input-group mb-5">
+                  <div className="pb-4">
+                    <label htmlFor="password" className="">
+                      Mot de passe
+                    </label>
                     <input
                       type="password"
                       id="password"
-                      className="modal-input-group__input"
+                      className="bg-light-brown rounded-full flex items-center text-center text-base"
                       required
                       {...register('password')}
                     />
-                    <label
-                      htmlFor="password"
-                      className="modal-input-group__label"
-                    >
-                      Mot de passe
-                    </label>
                     {errors.password && (
                       <div className="text-red-500">Mot de passe requis</div>
                     )}
@@ -169,9 +169,8 @@ const ConnectModal: FC = () => {
                     name="Valider"
                     type="submit"
                     height={2.5}
-                    width={7}
-                    bgColorHover="light-brown"
-                    fontColorHover="dark-gray"
+                    width={6}
+                    bgColorHover="hover:bg-dark-gray"
                   />
 
                   <div className="text-sm  font-medium text-light-brown">

@@ -74,6 +74,7 @@ const CocktailSubmit: React.FC = () => {
           },
         ],
       };
+
       console.log(output);
 
       const response = await fetch('http://localhost:5174/api/cocktails/add', {
