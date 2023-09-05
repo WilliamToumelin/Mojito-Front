@@ -11,6 +11,7 @@ interface HeaderProps {
   categoryId: number | null;
   setCategoryId: (id: number | null) => void;
   setCategoryName: (name: string | null) => void;
+  isLoggedIn: boolean;
 }
 
 const Header: React.FC<HeaderProps> = ({

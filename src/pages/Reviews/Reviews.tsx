@@ -4,10 +4,7 @@ import CommentModal from '../../components/Modals/CommentModal';
 import { Cocktails } from '../../types/types';
 import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
-
-interface Props {
-  selectedCocktail: number | null;
-}
+import Cookies from 'js-cookie';
 
 function formatDate(data: string) {
   const date = new Date(data);
@@ -18,19 +15,31 @@ function formatDate(data: string) {
   return formattedDate;
 }
 
-const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
+const Reviews: React.FC = () => {
   const [cocktailData, setCocktailData] = useState<Cocktails | null>(null);
   const [displayModal, setDisplayModal] = useState(false);
-  const { isLoggedIn } = useAuth();
+  const selectedCocktailId = Number(localStorage.getItem('selectedCocktail'));
+  const authToken = Cookies.get('authToken');
+  const { isLoggedIn, login, logout } = useAuth();
 
   useEffect(() => {
-    fetch(`http://localhost:5174/api/cocktails/${selectedCocktail}/comments`)
+    if (authToken) {
+      // Si le jeton JWT est présent dans les cookies, l'utilisateur est connecté
+      login(); // Utilisez la fonction de connexion fournie par useAuth
+    } else {
+      // Sinon, l'utilisateur n'est pas connecté
+      logout(); // Utilisez la fonction de déconnexion fournie par useAuth
+    }
+  }, [authToken, login, logout]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5174/api/cocktails/${selectedCocktailId}/comments`)
       .then((response) => response.json())
       .then((data: Cocktails) => {
         setCocktailData(data);
       })
       .catch((err) => console.error(err));
-  }, [selectedCocktail]);
+  }, [selectedCocktailId]);
 
   const handleToggleModal = useCallback((): void => {
     setDisplayModal((prevstate) => !prevstate);
@@ -86,9 +95,9 @@ const Reviews: React.FC<Props> = ({ selectedCocktail }) => {
             {cocktailData.comments.map((data) => (
               <article
                 key={data.id}
-                className="w-[80%] sm:mx-auto mt-4 md:mt-14 sm:p-4 rounded-lg flex items-center text-center"
+                className="w-[80%] sm:mx-auto mt-4 md:mt-14 sm:p-4 rounded-lg flex items-center justify-center text-center"
               >
-                <div>
+                <div className="text-center">
                   <svg
                     className="w-10 h-10 mx-auto mb-3 text-gray-400 dark:text-gray-600"
                     aria-hidden="true"

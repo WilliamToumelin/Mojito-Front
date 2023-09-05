@@ -11,13 +11,26 @@ import { Cocktails } from '../../types/types';
 import { useAuth } from '../../contexts/AuthProvider';
 import Hr from '../../components/common/Hr/Hr';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
+import Cookies from 'js-cookie';
 
 const Cocktail: React.FC = () => {
   const [cocktailDetails, setCocktailDetails] = useState<Cocktails | null>(
     null
   );
-  const { isLoggedIn } = useAuth();
+
   const selectedCocktailId = Number(localStorage.getItem('selectedCocktail'));
+  const authToken = Cookies.get('authToken');
+  const { isLoggedIn, login, logout } = useAuth();
+
+  useEffect(() => {
+    if (authToken) {
+      // Si le jeton JWT est présent dans les cookies, l'utilisateur est connecté
+      login(); // Utilisez la fonction de connexion fournie par useAuth
+    } else {
+      // Sinon, l'utilisateur n'est pas connecté
+      logout(); // Utilisez la fonction de déconnexion fournie par useAuth
+    }
+  }, [authToken, login, logout]);
 
   useEffect(() => {
     fetch(`http://localhost:5174/api/cocktails/${selectedCocktailId}`)

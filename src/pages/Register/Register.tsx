@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
@@ -10,6 +10,7 @@ import './Register.scss';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 import Hr from '../../components/common/Hr/Hr';
 import InputForm from './InputForm';
+import Cookies from 'js-cookie';
 
 const Register: React.FC = () => {
   const {
@@ -33,13 +34,18 @@ const Register: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
   const [registerSuccess, setRegisterSuccess] = useState(false);
+  const authToken = Cookies.get('authToken');
+  const { isLoggedIn, login, logout } = useAuth();
 
-  const { login } = useAuth();
-
-  if (!useAuth) {
-    // Si le contexte n'est pas défini, tu peux gérer cette situation ici
-    return null;
-  }
+  useEffect(() => {
+    if (authToken) {
+      // Si le jeton JWT est présent dans les cookies, l'utilisateur est connecté
+      login(); // Utilisez la fonction de connexion fournie par useAuth
+    } else {
+      // Sinon, l'utilisateur n'est pas connecté
+      logout(); // Utilisez la fonction de déconnexion fournie par useAuth
+    }
+  }, [authToken, login, logout]);
 
   const handleRegister = async (data: {
     lastName: string;

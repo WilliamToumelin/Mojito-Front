@@ -7,6 +7,8 @@ import { CgInfinity } from 'react-icons/cg';
 import { Cocktails } from '../../types/types';
 import CocktailItem from '../../components/common/CocktailItem/CocktailItem';
 import SideBar from '../../components/SideBar/SideBar';
+import { useAuth } from '../../contexts/AuthProvider';
+import Cookies from 'js-cookie';
 
 interface HomeProps {
   categoryName: string | null;
@@ -33,6 +35,18 @@ const Home: React.FC<HomeProps> = ({
   const [cocktailList, setCocktailList] = useState<Cocktails[]>([]);
   const [displayMode, setDisplayMode] = useState(true);
   const [animate, setAnimate] = useState(true);
+  const authToken = Cookies.get('authToken');
+  const { isLoggedIn, login, logout } = useAuth();
+
+  useEffect(() => {
+    if (authToken) {
+      // Si le jeton JWT est présent dans les cookies, l'utilisateur est connecté
+      login(); // Utilisez la fonction de connexion fournie par useAuth
+    } else {
+      // Sinon, l'utilisateur n'est pas connecté
+      logout(); // Utilisez la fonction de déconnexion fournie par useAuth
+    }
+  }, [authToken, login, logout]);
 
   useEffect(() => {
     fetch('http://localhost:5174/api/cocktails')

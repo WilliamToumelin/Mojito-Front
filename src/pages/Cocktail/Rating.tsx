@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 const Rating = () => {
   const [rating, setRating] = useState(0);
   const [index, setIndex] = useState(-1);
-  const selectedCocktailId = localStorage.getItem('selectedCocktail');
+  const selectedCocktailId = Number(localStorage.getItem('selectedCocktail'));
 
   const handleIconMouseOver = (i: number) => {
     if (rating === 0) {
@@ -19,27 +19,23 @@ const Rating = () => {
     setIndex(-1);
   };
 
-  const handleIconClick = async (
-    i: number,
-    event: React.MouseEvent<HTMLSpanElement>
-  ) => {
+  const handleIconClick = (i: number) => {
     setRating(i);
-    event.currentTarget.classList.add('bounce');
-    setTimeout(() => {
-      event.currentTarget.classList.remove('bounce');
-    }, 750);
     setIndex(-1);
+    sendRatingToServer(i);
+  };
 
+  const sendRatingToServer = async (i: number) => {
     const authToken = Cookies.get('authToken');
 
     const data = {
-      rating: index,
+      rating: i,
       user: 1,
       cocktail: selectedCocktailId,
     };
 
     try {
-      const response = await fetch('http://localhost:5174/api/login_check', {
+      const response = await fetch('http://localhost:5174/api/ratings/add', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -56,12 +52,13 @@ const Rating = () => {
       console.error('Erreur inattendue', error);
     }
   };
+
   return (
     <div className="flex">
       {[1, 2, 3, 4, 5].map((i) => (
         <span
           key={i}
-          onClick={(event) => handleIconClick(i, event)}
+          onClick={() => handleIconClick(i)}
           onMouseOver={() => handleIconMouseOver(i)}
           onFocus={() => handleIconMouseOver(i)}
           onMouseLeave={handleIconMouseLeave}
