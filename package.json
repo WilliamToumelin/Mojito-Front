@@ -14,6 +14,7 @@
 		"@types/animejs": "^3.1.7",
 		"animejs": "^3.2.1",
 		"bcryptjs": "^2.4.3",
+		"cookiejs": "^2.1.2",
 		"dom": "^0.0.3",
 		"dompurify": "^3.0.5",
 		"hook-form": "^0.0.1",

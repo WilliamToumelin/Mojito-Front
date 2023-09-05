@@ -1,13 +1,9 @@
 /* eslint-disable no-console */
-/* eslint-disable no-alert */
-/* eslint-disable react/button-has-type */
 import { FC, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useAuth } from '../../contexts/AuthProvider';
-
-// import './Modal.scss';
 import SquaredButton from '../common/buttons/SquaredButton';
 
 const ConnectModal: FC = () => {

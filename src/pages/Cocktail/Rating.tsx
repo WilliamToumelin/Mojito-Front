@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState } from 'react';
@@ -19,12 +20,6 @@ const Rating = () => {
     setIndex(-1);
   };
 
-  const handleIconClick = (i: number) => {
-    setRating(i);
-    setIndex(-1);
-    sendRatingToServer(i);
-  };
-
   const sendRatingToServer = async (i: number) => {
     const authToken = Cookies.get('authToken');
 
@@ -44,13 +39,17 @@ const Rating = () => {
         },
       });
       if (response.ok) {
-        console.log('envoi réussi');
-      } else {
         console.error('Erreur lors de la soumission du commentaire');
       }
     } catch (error) {
       console.error('Erreur inattendue', error);
     }
+  };
+
+  const handleIconClick = (i: number) => {
+    setRating(i);
+    setIndex(-1);
+    sendRatingToServer(i);
   };
 
   return (

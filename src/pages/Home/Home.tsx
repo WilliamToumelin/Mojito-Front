@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-console */
 import React, { useEffect, useMemo, useState } from 'react';
+import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
 import { BsTrophy } from 'react-icons/bs';
 import { CgInfinity } from 'react-icons/cg';
@@ -8,7 +10,6 @@ import { Cocktails } from '../../types/types';
 import CocktailItem from '../../components/common/CocktailItem/CocktailItem';
 import SideBar from '../../components/SideBar/SideBar';
 import { useAuth } from '../../contexts/AuthProvider';
-import Cookies from 'js-cookie';
 
 interface HomeProps {
   categoryName: string | null;
