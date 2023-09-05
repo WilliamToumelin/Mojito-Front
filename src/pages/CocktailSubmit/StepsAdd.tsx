@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { FieldValues, UseFormRegister } from 'react-hook-form';
+import {
+  FieldValues,
+  UseFormRegister,
+  useFormContext,
+  Controller,
+} from 'react-hook-form';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { FaTrashAlt } from 'react-icons/fa';
 

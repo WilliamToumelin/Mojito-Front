@@ -10,6 +10,7 @@ import { Cocktails } from '../../types/types';
 import CocktailItem from '../../components/common/CocktailItem/CocktailItem';
 import SideBar from '../../components/SideBar/SideBar';
 import { useAuth } from '../../contexts/AuthProvider';
+import CookieConsentModal from '../../components/Modals/CookieConsentModal';
 
 interface HomeProps {
   categoryName: string | null;
@@ -36,6 +37,7 @@ const Home: React.FC<HomeProps> = ({
   const [cocktailList, setCocktailList] = useState<Cocktails[]>([]);
   const [displayMode, setDisplayMode] = useState(true);
   const [animate, setAnimate] = useState(true);
+
   const authToken = Cookies.get('authToken');
   const { isLoggedIn, login, logout } = useAuth();
 
@@ -86,6 +88,7 @@ const Home: React.FC<HomeProps> = ({
 
   return (
     <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh]">
+      <CookieConsentModal />
       <div
         style={{
           boxShadow: '#132226 0px 1px 22px',
