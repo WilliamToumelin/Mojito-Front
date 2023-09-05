@@ -8,6 +8,9 @@ import Cookies from 'js-cookie';
 const Rating = () => {
   const [rating, setRating] = useState(0);
   const [index, setIndex] = useState(-1);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [postSuccess, setPostSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const selectedCocktailId = Number(localStorage.getItem('selectedCocktail'));
 
   const handleIconMouseOver = (i: number) => {
@@ -46,7 +49,12 @@ const Rating = () => {
         },
       });
       if (response.ok) {
-        console.error('Erreur lors de la soumission du commentaire');
+        setSuccessMessage('Votre note a bien été envoyer');
+        setPostSuccess(true);
+      } else {
+        setErrorMessage(
+          "L'envoi de votre note n'a pu aboutir, peut être avez vous déja noter ce cocktail..."
+        );
       }
     } catch (error) {
       console.error('Erreur inattendue', error);
@@ -60,26 +68,34 @@ const Rating = () => {
   };
 
   return (
-    <div className="flex">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <span
-          key={i}
-          onClick={() => handleIconClick(i)}
-          onMouseOver={() => handleIconMouseOver(i)}
-          onFocus={() => handleIconMouseOver(i)}
-          onMouseLeave={handleIconMouseLeave}
-          className={`text-3xl p-1 ${
-            i <= rating || i <= index
-              ? 'text-dark-brown animate-bounce'
-              : 'text-gray-400'
-          }`}
-        >
-          <span className="">
-            <FaCocktail />
+    <div className="flex flex-col items-center">
+      <div className="flex">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <span
+            key={i}
+            onClick={() => handleIconClick(i)}
+            onMouseOver={() => handleIconMouseOver(i)}
+            onFocus={() => handleIconMouseOver(i)}
+            onMouseLeave={handleIconMouseLeave}
+            className={`text-3xl p-1 ${
+              i <= rating || i <= index
+                ? 'text-dark-brown animate-bounce'
+                : 'text-gray-400'
+            }`}
+          >
+            <span className="">
+              <FaCocktail />
+            </span>
           </span>
-        </span>
-      ))}
-      {/* {rating} */}
+        ))}
+      </div>
+      {successMessage ? (
+        <p className="text-green-700">{successMessage}</p>
+      ) : (
+        errorMessage ?? (
+          <p className="text-red-600 text center">{errorMessage}</p>
+        )
+      )}
     </div>
   );
 };

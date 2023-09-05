@@ -26,26 +26,16 @@ const Register: React.FC = () => {
     password: string;
     pseudonym: string;
     hasConsented: boolean;
-    warning: 0;
-    created_at: string;
-    verified: boolean;
+    // warning: 0;
+    // created_at: string;
+    // verified: boolean;
   }>();
 
   const [errorMessage, setErrorMessage] = useState('');
   const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
   const [registerSuccess, setRegisterSuccess] = useState(false);
-  const authToken = Cookies.get('authToken');
   const { isLoggedIn, login, logout } = useAuth();
-
-  useEffect(() => {
-    if (authToken) {
-      // Si le jeton JWT est présent dans les cookies, l'utilisateur est connecté
-      login(); // Utilisez la fonction de connexion fournie par useAuth
-    } else {
-      // Sinon, l'utilisateur n'est pas connecté
-      logout(); // Utilisez la fonction de déconnexion fournie par useAuth
-    }
-  }, [authToken, login, logout]);
+  const authToken = Cookies.get('authToken');
 
   const handleRegister = async (data: {
     lastName: string;
@@ -55,19 +45,19 @@ const Register: React.FC = () => {
     password: string;
     pseudonym: string;
     hasConsented: boolean;
-    warning: number;
-    created_at: string;
-    verified: boolean;
+    // warning: number;
+    // created_at: string;
+    // verified: boolean;
   }) => {
-    // Variable pour les infos direct
-    const currentDate = new Date().toISOString();
-    const currentWarning = 0;
-    const currentVerified = false;
-    // Aujout des valeurs de variables dans la data
-    data.created_at = currentDate;
-    data.warning = currentWarning;
-    data.verified = currentVerified;
-    // Appeler votre backend pour l'authentification
+    // // Variable pour les infos direct
+    // const currentDate = new Date().toISOString();
+    // const currentWarning = 0;
+    // const currentVerified = false;
+    // // Aujout des valeurs de variables dans la data
+    // data.created_at = currentDate;
+    // data.warning = currentWarning;
+    // data.verified = currentVerified;
+    // // Appeler votre backend pour l'authentification
     try {
       const response = await fetch('http://localhost:5174/api/register', {
         method: 'POST',
@@ -78,9 +68,10 @@ const Register: React.FC = () => {
       });
       console.log(data);
       if (response.ok) {
-        const { token } = await response.json();
+        // const responseData = await response.json();
+        // const { token } = responseData;
         //  Stocker le token JWT dans le local storage
-        localStorage.setItem('authToken', token);
+        // Cookies.set('authToken', token, { expires: 7 });
         // login();
         setRegisterSuccess(true);
       } else {

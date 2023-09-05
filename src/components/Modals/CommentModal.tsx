@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthProvider';
 import Cookies from 'js-cookie';
@@ -14,6 +14,9 @@ interface Props {
 }
 
 const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
+  const [successMessage, setSuccessMessage] = useState('');
+  const [postSuccess, setPostSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const { isLoggedIn } = useAuth();
   const { register, handleSubmit, reset } = useForm<{
     user: number;
@@ -59,10 +62,12 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
       });
 
       if (response.ok) {
-        reset();
-        console.log('envoi réussi');
+        setSuccessMessage('Votre commentaire a bien été envoyer');
+        setPostSuccess(true);
       } else {
-        console.error('Erreur lors de la soumission du commentaire');
+        setErrorMessage(
+          "L'envoi de votre commentaire n'a pu aboutir, peut être avez vous déja commenter ce cocktail..."
+        );
       }
     } catch (error) {
       console.error('Erreur inattendue', error);
@@ -89,42 +94,41 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
               </button>
 
               <div className="px-6 py-6 lg:px-8">
-                <h3 className="mb-4 text-xl font-medium text-dark-gray">
-                  Votre commentaire
-                </h3>
-                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-                  {/* <div className="modal-input-group mb-5">
-                    <input
-                      type="text"
-                      id="name"
-                      className="modal-input-group__input text-dark-gray"
-                      {...register('name')}
-                    />
-                    <label htmlFor="name" className="modal-input-group__label">
-                      Votre nom
-                    </label>
-                  </div> */}
-                  <div className="modal-input-group mb-5">
-                    <textarea
-                      id="content"
-                      className="modal-input-group__input w-full h-[10vh] text-dark-gray"
-                      {...register('content')}
-                    />
-                    <label
-                      htmlFor="content"
-                      className="modal-input-group__label text-light-brown"
-                    >
+                {!postSuccess ? (
+                  <>
+                    <h3 className="mb-4 text-xl font-medium text-dark-gray">
                       Votre commentaire
-                    </label>
-                  </div>
-                  <SquaredButton
-                    name="Envoyer"
-                    type="submit"
-                    height={2.5}
-                    width={6}
-                    bgColorHover="hover:bg-dark-gray"
-                  />
-                </form>
+                    </h3>
+                    <form
+                      className="space-y-6"
+                      onSubmit={handleSubmit(onSubmit)}
+                    >
+                      <div className="modal-input-group mb-5">
+                        <textarea
+                          id="content"
+                          className="modal-input-group__input w-full h-[10vh] text-dark-gray"
+                          {...register('content')}
+                        />
+                        <label
+                          htmlFor="content"
+                          className="modal-input-group__label text-light-brown"
+                        >
+                          Votre commentaire
+                        </label>
+                      </div>
+                      <p className="text-red-600">{errorMessage}</p>
+                      <SquaredButton
+                        name="Envoyer"
+                        type="submit"
+                        height={2.5}
+                        width={6}
+                        bgColorHover="hover:bg-dark-gray"
+                      />
+                    </form>
+                  </>
+                ) : (
+                  <p className="text-green-600">{successMessage}</p>
+                )}
               </div>
             </div>
           </div>

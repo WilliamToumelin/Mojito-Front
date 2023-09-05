@@ -29,6 +29,7 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   const userToken = Cookies.get('userToken');
+
   let userPseudo: string | null = null;
 
   if (userToken) {
