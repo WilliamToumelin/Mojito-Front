@@ -6,6 +6,7 @@ import ListManager from './ListManager';
 import RadioAdd from './RadioAdd';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 import StepsAdd from './StepsAdd';
+import Cookies from 'js-cookie';
 
 const CocktailSubmit: React.FC = () => {
   const { register, handleSubmit, watch, reset } = useForm();
@@ -14,6 +15,13 @@ const CocktailSubmit: React.FC = () => {
   const techniques = watch('Techniques');
   const ices = watch('Glaces');
   const glass = watch('Verres');
+  const userToken = Cookies.get('userToken');
+  let userId: number | null = null;
+
+  if (userToken) {
+    const userTokenObj = JSON.parse(userToken);
+    userId = userTokenObj.id;
+  }
 
   useEffect(() => {
     fetch('http://localhost:5174/api/propositions/data')
@@ -40,34 +48,36 @@ const CocktailSubmit: React.FC = () => {
         console.log(data.alcools_0);
         console.log(input.alcool);
       }
-      // const output = {
-      //   name: input.name,
-      //   description: input.description,
-      //   picture: 'aaaa',
-      //   difficulty: input.difficulty,
-      //   preparation_time: 15,
-      //   alcool: input.alcool,
-      //   user: 'user.token',
-      //   glass: input.Verres,
-      //   ice: input.Glaces,
-      //   technical: input.Techniques,
-      //   cocktailUses: [
-      //     {
-      //       quantity: input.alcools_0_quantity,
-      //       unit: 'cl',
-      //       ingredient: input.alcools_0,
-      //     },
-      //     {
-      //       quantity: input.aromates_0_quantity,
-      //       unit: 'cl',
-      //       ingredient: input.aromates_0,
-      //     },
-      //   ],
-      // };
+      const output = {
+        name: data.name,
+        description: data.description,
+        // picture: data.picture,
+        difficulty: data.difficulty,
+        preparation_time: data.preparation_time,
+        // alcool: data.alcool,
+        user: userId,
+        glass: data.Verres,
+        ice: data.Glaces,
+        technical: data.Techniques,
+        // categories: [],
+        cocktailUses: [
+          {
+            quantity: data.alcools_0_quantity,
+            unit: 'cl',
+            ingredient: data.alcools_0,
+          },
+          {
+            quantity: data.aromates_0_quantity,
+            unit: 'cl',
+            ingredient: data.aromates_0,
+          },
+        ],
+      };
+      console.log(output);
 
       const response = await fetch('http://localhost:5174/api/cocktails/add', {
         method: 'POST',
-        body: JSON.stringify(input),
+        body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' },
       });
       console.log(data);
