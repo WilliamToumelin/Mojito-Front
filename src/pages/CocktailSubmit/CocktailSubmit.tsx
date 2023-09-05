@@ -232,8 +232,8 @@ const CocktailSubmit: React.FC = () => {
           <StepsAdd register={register} />
 
           <div>
-            <div className="mb-4 text-center">
-              <h3 className="text-lg font-medium mb-2">Description</h3>
+            <div className="m-5 text-center">
+              <h3 className="text-2xl font-medium mb-2">Description</h3>
               <textarea
                 {...register('description')}
                 className="border-xs rounded p-1 w-1/2 bg-light-brown text-dark-gray hover:scale-105 duration-500"

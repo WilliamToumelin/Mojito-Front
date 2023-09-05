@@ -33,33 +33,35 @@ const StepsAdd: React.FC<Props> = ({ register }) => {
     <>
       <div className="mb-4 text-center">
         <h3 className="text-2xl font-medium mb-2">Etapes</h3>
-        {Array.from({ length: stepCount }).map((_, index) => (
-          <div
-            key={index}
-            className="flex flex-wrap justify-center items-center space-x-2"
-          >
-            <textarea
-              {...register(`step_${index}`)}
-              className="border-xs rounded p-1 w-1/5 bg-light-brown text-dark-gray hover:scale-105 duration-500"
-              rows={2}
-              value={stepContent[index]}
-              onChange={(e) => {
-                const updatedContent = [...stepContent];
-                updatedContent[index] = e.target.value;
-                setStepContent(updatedContent);
-              }}
-            />
-            {stepCount > 1 && (
-              <button
-                type="button"
-                onClick={() => removeStep(index)}
-                className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
-              >
-                <FaTrashAlt />
-              </button>
-            )}
-          </div>
-        ))}
+        <div className="flex flex-wrap justify-center p-3">
+          {Array.from({ length: stepCount }).map((_, index) => (
+            <div
+              key={index}
+              className="flex flex-wrap justify-center items-center space-x-2 p-1"
+            >
+              <textarea
+                {...register(`step_${index}`)}
+                className="border-xs rounded bg-light-brown text-dark-gray hover:scale-105 duration-500"
+                rows={2}
+                value={stepContent[index]}
+                onChange={(e) => {
+                  const updatedContent = [...stepContent];
+                  updatedContent[index] = e.target.value;
+                  setStepContent(updatedContent);
+                }}
+              />
+              {stepCount > 1 && (
+                <button
+                  type="button"
+                  onClick={() => removeStep(index)}
+                  className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
+                >
+                  <FaTrashAlt />
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
       <div className="flex justify-center">
         <div className="p-2">
