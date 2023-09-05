@@ -22,6 +22,8 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
     cocktail: number | null;
   }>();
   const authToken = Cookies.get('authToken');
+  const userToken = Cookies.get('userToken');
+
   const selectedCocktailId = Number(localStorage.getItem('selectedCocktail'));
 
   const onSubmit = async (data: {
@@ -31,10 +33,6 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
     cocktail: number | null;
   }) => {
     const date = new Date();
-    // const formattedDate = date.toLocaleDateString('fr-FR', {
-    //   month: 'long',
-    //   year: 'numeric',
-    // });
 
     data.postedAt = date;
 
@@ -43,8 +41,6 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
     } else {
       data.cocktail = null;
     }
-
-    data.user = 1;
 
     try {
       const response = await fetch('http://localhost:5174/api/comments/add', {
