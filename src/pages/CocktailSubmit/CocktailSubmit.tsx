@@ -2,17 +2,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
-import {
-  FieldValues,
-  RegisterOptions,
-  UseFormRegisterReturn,
-  useForm,
-} from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { IngredientsData } from '../../types/types';
 import ListManager from './ListManager';
 import RadioAdd from './RadioAdd';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
-// import StepsAdd from './StepsAdd';
+import StepsAdd from './StepsAdd';
 
 const CocktailSubmit: React.FC = () => {
   const { register, handleSubmit, watch, reset } = useForm();
@@ -234,7 +229,8 @@ const CocktailSubmit: React.FC = () => {
               </div>
             </div>
           </div>
-          {/* <StepsAdd number_step={0} content="" /> */}
+          <StepsAdd register={register} />
+
           <div>
             <div className="mb-4 text-center">
               <h3 className="text-lg font-medium mb-2">Description</h3>
