@@ -54,6 +54,7 @@ export type IngredientCategory = {
 };
 
 export type IngredientsData = {
+  steps: string[];
   alcool: string;
   ingredients: IngredientCategory[];
   glass: { id: number; name: string }[];

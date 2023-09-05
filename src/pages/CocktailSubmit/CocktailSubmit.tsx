@@ -32,6 +32,7 @@ const CocktailSubmit: React.FC = () => {
         ices: data.Glaces,
         technicals: data.Techniques,
         alcool: '',
+        steps: [],
       };
       console.log(input);
 

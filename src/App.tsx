@@ -17,7 +17,7 @@ const App = () => {
   const [categoryId, setCategoryId] = useState<number | null>(null);
   const [categoryName, setCategoryName] = useState<string | null>(null);
   const [selectedCocktail, setSelectedCocktail] = useState<number | null>(null);
-  const { isLoggedIn, login, logout } = useAuth(); // Obtenez l'état d'authentification et les fonctions de connexion/déconnexion depuis le contexte
+  const { login, logout } = useAuth(); // Obtenez l'état d'authentification et les fonctions de connexion/déconnexion depuis le contexte
 
   useEffect(() => {
     const authToken = Cookies.get('authToken');
