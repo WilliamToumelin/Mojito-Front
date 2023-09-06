@@ -28,7 +28,7 @@ const InputForm: React.FC<InputFormProps> = ({
       </label>
       <input
         type={type}
-        className="mt-1 focus:ring-light-brown focus:border-light-brown bg-light-brown text-dark-gray block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+        className="mt-1 focus:ring-light-brown focus:border-light-brown bg-light-brown text-dark-gray block h-[2em] w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
         required
         {...register(registerName)}
       />

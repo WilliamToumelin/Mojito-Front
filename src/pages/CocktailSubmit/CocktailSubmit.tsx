@@ -1,16 +1,17 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
-import { FieldValues, useForm } from 'react-hook-form';
+import { FieldValues, useForm, useFieldArray } from 'react-hook-form';
+import { FaTrashAlt } from 'react-icons/fa';
+import { AiFillPlusCircle } from 'react-icons/ai';
 import Cookies from 'js-cookie';
 import { IngredientsData } from '../../types/types';
 import ListManager from './ListManager';
 import RadioAdd from './RadioAdd';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
-import StepsAdd from './StepsAdd';
 
 const CocktailSubmit: React.FC = () => {
-  const { register, handleSubmit, watch, setValue } = useForm();
+  const { register, handleSubmit, watch, control } = useForm();
   const [ingredientsList, setIngredientsList] =
     useState<IngredientsData | null>(null);
   const techniques = watch('Techniques');
@@ -35,19 +36,16 @@ const CocktailSubmit: React.FC = () => {
   }, []);
 
   const handleCockailSubmit = async (data: FieldValues) => {
-    console.log(data);
-
-    const updatedSteps = [];
-    for (const key in data) {
-      if (key.startsWith('step')) {
-        const stepNumber = parseInt(key.split('_')[1], 10);
-        updatedSteps.push({
-          number_step: stepNumber,
-          content: `${data[key]}`,
-        });
-      }
-    }
-    setValue('steps', updatedSteps);
+    // const updatedSteps = [];
+    // for (const key in data) {
+    //   if (key.startsWith('step')) {
+    //     const stepNumber = parseInt(key.split('_')[1], 10);
+    //     updatedSteps.push({
+    //       content: `${data[key]}`,
+    //     });
+    //   }
+    // }
+    // setValue('steps', updatedSteps);
 
     const output = {
       name: data.name,
@@ -61,13 +59,18 @@ const CocktailSubmit: React.FC = () => {
       ice: data.Glaces,
       technical: data.Techniques,
       categories: [],
-      steps: [] as { number_step: number; content: string }[],
+      steps: data.steps,
       cocktailUses: [] as {
         quantity: number;
         unit: number;
         ingredient: string;
       }[],
     };
+
+    for (let i = 0; i < output.steps.length; i += 1) {
+      console.log(i);
+      output.steps[i].number_step = i;
+    }
 
     console.log(output);
 
@@ -93,6 +96,13 @@ const CocktailSubmit: React.FC = () => {
       console.error('Erreur inattendue', error);
     }
   };
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'steps',
+  });
+
+  const isAddStepButtonDisabled = fields.length >= 10;
 
   return (
     <div className="bg-light-brown flex justify-center items-center flex-1 h-[75vh] text-dark-brown">
@@ -235,8 +245,45 @@ const CocktailSubmit: React.FC = () => {
               </div>
             </div>
           </div>
-          <StepsAdd register={register} />
-
+          {/* ajouter des steps de préparation du cocktail */}
+          <div className="flex flex-col items-center">
+            <h3 className="text-2xl font-medium mb-4 text-center">
+              Les étapes
+            </h3>
+            <ul className="text-center ">
+              {fields.map((item, index) => (
+                <li
+                  key={item.id}
+                  className="border-xs rounded bg-dark-gery text-dark-gray hover:scale-105 duration-500 flex items-center my-2"
+                >
+                  <textarea
+                    {...register(`steps.${index}.content`)}
+                    className="rounded bg-light-brown text-dark-gray"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => remove(index)}
+                    className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
+                  >
+                    <FaTrashAlt />
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <button
+              type="button"
+              onClick={() => append({ content: '' })}
+              className={`${
+                isAddStepButtonDisabled
+                  ? 'bg-red-900 text-light-brown cursor-not-allowed '
+                  : `text-light-brown bg-light-gray hover:text-dark-gray hover:bg-dark-brown`
+              } p-2 rounded text-xl`}
+              disabled={isAddStepButtonDisabled}
+            >
+              <AiFillPlusCircle />
+            </button>
+          </div>
+          {/* ajouter une description du cocktail */}
           <div>
             <div className="m-5 text-center">
               <h3 className="text-2xl font-medium mb-2">Description</h3>

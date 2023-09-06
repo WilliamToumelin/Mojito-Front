@@ -32,8 +32,8 @@ const CookieConsentModal = () => {
     <div
       className={`fixed ${
         consent
-          ? 'opacity-0 pointer-events-none z-[-1] bottom-100 right-100 transition-opacity duration-300'
-          : 'z-50 bottom-20 right-50'
+          ? 'opacity-0 pointer-events-none z-0 bottom-100 right-100 transition-opacity duration-300'
+          : 'z-20 bottom-20 right-50'
       }`}
     >
       <div className="bg-dark-gray p-4 h-[30vh] w-[40vw] rounded border-4 border-light-gray">

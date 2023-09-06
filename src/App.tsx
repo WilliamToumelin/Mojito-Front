@@ -32,7 +32,7 @@ const App = () => {
   }, [login, logout]);
 
   return (
-    <div className="app flex flex-col text-sm h-[100vh]">
+    <div className="z-10 app flex flex-col text-sm h-[100vh]">
       <Header
         categoryId={categoryId}
         setCategoryId={setCategoryId}
