@@ -5,17 +5,17 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import * as yup from 'yup';
 import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 import Hr from '../../components/common/Hr/Hr';
-import InputForm from './InputForm';
+import InputForm from '../../components/common/InputForm/InputForm';
 
 const Register: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch, // Fonction pour surveiller les valeurs des champs
   } = useForm<{
     lastName: string;
     firstName: string;
@@ -29,8 +29,22 @@ const Register: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
   const [registerSuccess, setRegisterSuccess] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
   const { isLoggedIn, login, logout } = useAuth();
   const authToken = Cookies.get('authToken');
+
+  const passwordSchema = yup.object().shape({
+    password: yup
+      .string()
+      .min(7, 'Le mot de passe doit comporter au moins 7 caractères')
+      .matches(/\d/, 'Le mot de passe doit contenir au moins un chiffre')
+      .matches(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        'Le mot de passe doit contenir au moins un caractère spécial'
+      )
+      .matches(/[A-Z]/, 'Le mot de passe doit contenir au moins une majuscule')
+      .required('Le mot de passe est requis'),
+  });
 
   const handleRegister = async (data: {
     lastName: string;
@@ -42,6 +56,9 @@ const Register: React.FC = () => {
     hasConsented: boolean;
   }) => {
     try {
+      await passwordSchema.validate(data, { abortEarly: false });
+      // La validation a réussi, vous pouvez maintenant envoyer les données au serveur
+
       const response = await fetch('http://localhost:5174/api/register', {
         method: 'POST',
         body: JSON.stringify(data),
@@ -57,9 +74,14 @@ const Register: React.FC = () => {
         //  Gérer les erreurs d'authentification ici
         setErrorMessage('Erreur lors de la soumission du formulaire'); // Définir le message d'erreur
       }
-    } catch (error) {
-      //  Gérer les erreurs réseau ici
-      console.error("Erreur réseau lors de l'inscription", error);
+    } catch (error: any) {
+      // Gérer les erreurs de validation ici
+      console.error("Erreur lors de l'inscription", error);
+      if (error.path === 'password') {
+        setPasswordError(error.message);
+      } else {
+        setErrorMessage(error.message);
+      }
     }
   };
 
@@ -124,7 +146,7 @@ const Register: React.FC = () => {
                         register={register}
                       />
                     </div>
-                    <div className="sm:m-5 mx-auto">
+                    <div className="sm:m-5 mx-auto ">
                       <label htmlFor="dateOfBirth" className="text-light-brown">
                         Date de naissance
                       </label>
@@ -149,6 +171,13 @@ const Register: React.FC = () => {
                         name="Mot de passe"
                         register={register}
                       />
+                      <p className="text-xs text-light-gray w-[13em]">
+                        Le mot de passe doit contenir au minimum 7 caractères,
+                        dont 1 majuscule, 1 chiffre et 1 caracère spécial.
+                      </p>
+                      {passwordError && (
+                        <p className="text-red-600 ">{passwordError}</p>
+                      )}
                     </div>
                   </div>
 

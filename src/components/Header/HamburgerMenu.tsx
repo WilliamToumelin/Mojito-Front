@@ -89,7 +89,13 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
         id="navbar-hamburger"
       >
         <ul className="w-3/4 flex flex-col font-medium mt-6 text-2xl rounded-lg bg-light-gray text-center overflow-y-auto max-h-[70vh] relative">
-          <span className="absolute right-5 top-3">X</span>
+          <button
+            type="button"
+            className="absolute right-5 top-3 text-3xl p-2 text-dark-gray hover:text-dark-brown"
+            onClick={handleCloseMenu}
+          >
+            X
+          </button>
           {isLoggedIn ? (
             <li className="menu-link text-dark-brown">
               Bienvenue, {userPseudo}

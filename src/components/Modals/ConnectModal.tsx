@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../common/buttons/SquaredButton';
-import InputForm from '../../pages/Register/InputForm';
+import InputForm from '../common/InputForm/InputForm';
 
 const ConnectModal: FC = () => {
   const {
@@ -105,7 +105,7 @@ const ConnectModal: FC = () => {
             <div className="relative bg-light-gray rounded-lg shadow ">
               <button
                 type="button"
-                className="absolute top-3 right-2.5 bg-transparent rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
+                className="absolute top-3 right-2.5 bg-transparent hover:text-dark-brown text-dark-gray rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
                 data-modal-hide="authentication-modal"
                 onClick={handleToggleModal}
               >
