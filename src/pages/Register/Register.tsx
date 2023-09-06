@@ -24,9 +24,6 @@ const Register: React.FC = () => {
     password: string;
     pseudonym: string;
     hasConsented: boolean;
-    // warning: 0;
-    // created_at: string;
-    // verified: boolean;
   }>();
 
   const [errorMessage, setErrorMessage] = useState('');

@@ -48,11 +48,11 @@ const CocktailItem: React.FC<CocktailItemProps> = ({
                     <span className="relative opacity-0 md:opacity-100">
                       <RandomIcons />{' '}
                     </span>
-                    <span>Difficulté : {cocktail.difficulty}/5 </span>
+                    <span>Difficulté : {cocktail.difficulty}/3 </span>
                   </>
                 ) : (
                   <>
-                    <span>Difficulté : {cocktail.difficulty}/5 </span>
+                    <span>Difficulté : {cocktail.difficulty}/3 </span>
                     <span className="relative opacity-0 md:opacity-100">
                       <RandomIcons />{' '}
                     </span>

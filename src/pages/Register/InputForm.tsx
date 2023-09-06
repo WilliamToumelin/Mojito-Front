@@ -19,19 +19,19 @@ const InputForm: React.FC<InputFormProps> = ({
   registerName,
 }) => {
   return (
-    <div className="relative mb-5 text-light-brown">
-      <input
-        type={type}
-        className="register-input-group__input text-inherit font-inherit bg-dark-gray text-dark-gray border-light-gray border-2 px-4 py-2 rounded-md outline-2 transition duration-500 outline-gray-600 w-56 focus:outline-light-brown valid:outline-light-brown"
-        required
-        {...register(registerName)}
-      />
+    <div className="mb-4">
       <label
         htmlFor={htmlFor}
-        className="register-input-group__label translate-10/10 bg-dark-gray rounded-md px-2 py-1 transition-transform transition-duration-500 scale-100"
+        className="block text-sm font-medium text-gray-700"
       >
         {name}
       </label>
+      <input
+        type={type}
+        className="mt-1 focus:ring-light-brown focus:border-light-brown block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+        required
+        {...register(registerName)}
+      />
     </div>
   );
 };

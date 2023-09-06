@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { useAuth } from '../../contexts/AuthProvider';
 import { Category } from '../../types/types';
 import ConnectModal from '../Modals/ConnectModal';
@@ -21,6 +22,13 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [categoriesData, setCategoriesData] = useState<Category[]>([]);
   const { isLoggedIn } = useAuth();
+  const userToken = Cookies.get('userToken');
+  let userPseudo: string | null = null;
+
+  if (userToken) {
+    const userTokenObj = JSON.parse(userToken);
+    userPseudo = userTokenObj.pseudonym;
+  }
 
   const handleCategoryClick = (clickedCategoryId: number) => {
     setCategoryId(clickedCategoryId);
@@ -75,11 +83,18 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
         </svg>
       </button>
       <div
-        className={`w-[80%] z-50 absolute right-0 top-24 rounded
+        className={`w-[80%] max-w-[80%] z-50 absolute right-0 top-24 rounded 
          ${isMenuOpen ? '' : 'hidden'}`}
         id="navbar-hamburger"
       >
-        <ul className="w-3/4 flex flex-col font-medium mt-6 text-2xl rounded-lg bg-light-gray text-center">
+        <ul className="w-3/4 flex flex-col font-medium mt-6 text-2xl rounded-lg bg-light-gray text-center overflow-y-auto max-h-[70vh]">
+          {isLoggedIn ? (
+            <li className="menu-link text-dark-brown">
+              Bienvenue, {userPseudo}
+            </li>
+          ) : (
+            ''
+          )}
           <li>
             <NavLink
               to="/"

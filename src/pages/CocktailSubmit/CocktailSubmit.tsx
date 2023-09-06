@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
@@ -9,12 +10,13 @@ import SquaredButton from '../../components/common/buttons/SquaredButton';
 import StepsAdd from './StepsAdd';
 
 const CocktailSubmit: React.FC = () => {
-  const { register, handleSubmit, watch, reset } = useForm();
+  const { register, handleSubmit, watch } = useForm();
   const [ingredientsList, setIngredientsList] =
     useState<IngredientsData | null>(null);
   const techniques = watch('Techniques');
   const ices = watch('Glaces');
   const glass = watch('Verres');
+  const authToken = Cookies.get('authToken');
   const userToken = Cookies.get('userToken');
   let userId: number | null = null;
 
@@ -33,61 +35,94 @@ const CocktailSubmit: React.FC = () => {
   }, []);
 
   const handleCockailSubmit = async (data: FieldValues) => {
-    try {
-      const input: IngredientsData = {
-        ingredients: data.ingredients,
-        glass: data.Verres,
-        ices: data.Glaces,
-        technicals: data.Techniques,
-        alcool: '',
-        steps: [],
-      };
-      console.log(input);
+    console.log(data);
 
-      if (data.alcools_0 !== '') {
-        input.alcool = 'true';
-        console.log(data.alcools_0);
-        console.log(input.alcool);
+    const output = {
+      name: data.name,
+      description: data.description,
+      picture: '',
+      difficulty: Number(data.difficulty),
+      preparation_time: Number(data.preparation_time),
+      alcool: false,
+      user: 0,
+      glass: data.Verres,
+      ice: data.Glaces,
+      technical: data.Techniques,
+      categories: [],
+      steps: [] as { number_step: number; content: string }[],
+      cocktailUses: [] as {
+        quantity: number;
+        unit: number;
+        ingredient: string;
+      }[],
+    };
+
+    for (const key in data) {
+      if (key.startsWith('step')) {
+        output.steps.push({
+          number_step: parseInt(key.split('_')[1], 10),
+          content: `${data[key]}`,
+        });
       }
-      const output = {
-        name: data.name,
-        description: data.description,
-        // picture: data.picture,
-        difficulty: data.difficulty,
-        preparation_time: data.preparation_time,
-        // alcool: data.alcool,
-        user: userId,
-        glass: data.Verres,
-        ice: data.Glaces,
-        technical: data.Techniques,
-        // categories: [],
-        cocktailUses: [
-          {
-            quantity: data.alcools_0_quantity,
-            unit: 'cl',
-            ingredient: data.alcools_0,
-          },
-          {
-            quantity: data.aromates_0_quantity,
-            unit: 'cl',
-            ingredient: data.aromates_0,
-          },
-        ],
-      };
+    }
 
-      console.log(output);
+    console.log(output);
 
+    try {
+      // const input: IngredientsData = {
+      //   ingredients: data.ingredients,
+      //   glass: data.Verres,
+      //   ices: data.Glaces,
+      //   technicals: data.Techniques,
+      //   alcool: '',
+      //   steps: [],
+      // };
+      // console.log(input);
+      // if (data.alcools_0 !== '') {
+      //   input.alcool = 'true';
+      //   console.log(data.alcools_0);
+      //   console.log(input.alcool);
+      // }
+      // const output = {
+      //   name: data.name,
+      //   description: data.description,
+      //   // picture: data.picture,
+      //   difficulty: data.difficulty,
+      //   preparation_time: data.preparation_time,
+      //   // alcool: data.alcool,
+      //   user: userId,
+      //   glass: data.Verres,
+      //   ice: data.Glaces,
+      //   technical: data.Techniques,
+      //   // categories: [],
+      //   cocktailUses: [
+      //     {
+      //       quantity: data.alcools_0_quantity,
+      //       unit: 'cl',
+      //       ingredient: data.alcools_0,
+      //     },
+      //     {
+      //       quantity: data.aromates_0_quantity,
+      //       unit: 'cl',
+      //       ingredient: data.aromates_0,
+      //     },
+      //   ],
+      // };
+      // console.log(output);
       const response = await fetch('http://localhost:5174/api/cocktails/add', {
         method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(output),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`, // Ajouter le token JWT aux en-têtes
+        },
       });
       console.log(data);
       if (response.ok) {
-        const { token } = await response.json();
-        //  Stocker le token JWT dans le local storage
-        localStorage.setItem('authToken', token);
-        reset();
+        // const { token } = await response.json();
+        // //  Stocker le token JWT dans le local storage
+        // localStorage.setItem('authToken', token);
+        console.log('envoi réussi');
       } else {
         console.error('Erreur lors de la soumission du commentaire');
       }
@@ -230,11 +265,9 @@ const CocktailSubmit: React.FC = () => {
                   className="text-light-brown text-base font-bold text-center w-48 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
                 >
                   <option value="">A vous de jouez!</option>
-                  <option value="1">Très facile</option>
-                  <option value="2">Facile</option>
-                  <option value="3">Moyen</option>
-                  <option value="4">Dur!</option>
-                  <option value="5">Pour les pros!</option>
+                  <option value="1">Facile</option>
+                  <option value="2">Moyen</option>
+                  <option value="3">Pour les pros!</option>
                 </select>
               </div>
             </div>

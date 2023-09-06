@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FieldValues,
   UseFormRegister,
-  useFormContext,
-  Controller,
+  useFieldArray,
+  useForm,
 } from 'react-hook-form';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { FaTrashAlt } from 'react-icons/fa';
@@ -13,52 +13,35 @@ interface Props {
 }
 
 const StepsAdd: React.FC<Props> = ({ register }) => {
-  const [stepCount, setStepCount] = useState(1);
-  const [stepContent, setStepContent] = useState<string[]>(['']);
+  const { control } = useForm();
 
-  const addStep = () => {
-    if (stepCount <= 10) {
-      setStepCount(stepCount + 1);
-      setStepContent([...stepContent, '']);
-    }
-  };
+  const { fields, append, remove } = useFieldArray({
+    name: 'steps',
+    control,
+  });
 
-  const removeStep = (index: number) => {
-    if (stepCount > 1) {
-      setStepCount(stepCount - 1);
-      const clearContent = [...stepContent];
-      clearContent.splice(index, 1);
-      setStepContent(clearContent);
-    }
-  };
-
-  const isAddStepButtonDisabled = stepCount >= 10;
+  const isAddStepButtonDisabled = fields.length >= 10;
 
   return (
     <>
       <div className="mb-4 text-center">
         <h3 className="text-2xl font-medium mb-2">Etapes</h3>
         <div className="flex flex-wrap justify-center p-3">
-          {Array.from({ length: stepCount }).map((_, index) => (
+          {fields.map((field, index) => (
             <div
-              key={index}
+              key={field.id}
               className="flex flex-wrap justify-center items-center space-x-2 p-1"
             >
               <textarea
-                {...register(`step_${index}`)}
+                {...register(`steps.${index}.content`)}
                 className="border-xs rounded bg-light-brown text-dark-gray hover:scale-105 duration-500"
                 rows={2}
-                value={stepContent[index]}
-                onChange={(e) => {
-                  const updatedContent = [...stepContent];
-                  updatedContent[index] = e.target.value;
-                  setStepContent(updatedContent);
-                }}
+                defaultValue={field.content}
               />
-              {stepCount > 1 && (
+              {fields.length > 1 && (
                 <button
                   type="button"
-                  onClick={() => removeStep(index)}
+                  onClick={() => remove(index)}
                   className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
                 >
                   <FaTrashAlt />
@@ -72,7 +55,7 @@ const StepsAdd: React.FC<Props> = ({ register }) => {
         <div className="p-2">
           <button
             type="button"
-            onClick={addStep}
+            onClick={() => append({ content: '' })}
             className={`${
               isAddStepButtonDisabled
                 ? 'bg-red-900 text-light-brown cursor-not-allowed '

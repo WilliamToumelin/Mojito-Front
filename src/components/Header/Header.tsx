@@ -29,7 +29,6 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   const userToken = Cookies.get('userToken');
-
   let userPseudo: string | null = null;
 
   if (userToken) {
@@ -69,12 +68,17 @@ const Header: React.FC<HeaderProps> = ({
             <SquaredButton
               name="Propose ton cocktail !"
               width={12}
-              height={3}
+              height={2.5}
               type="button"
             />
           </Link>
         )}
         <ConnectModal />
+        {isLoggedIn ? (
+          <p className="menu-link text-light-brown">Bienvenue, {userPseudo}</p>
+        ) : (
+          ''
+        )}
       </div>
       <HamburgerMenu
         categoryId={categoryId}

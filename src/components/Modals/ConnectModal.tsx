@@ -76,7 +76,7 @@ const ConnectModal: FC = () => {
         <SquaredButton
           name="Déconnexion"
           type="button"
-          height={3}
+          height={2.5}
           width={12}
           onClick={handleLogout}
           bgColorHover="hover:bg-red-cocktail"
