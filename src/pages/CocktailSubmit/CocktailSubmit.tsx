@@ -6,18 +6,15 @@ import { FieldValues, useForm, useFieldArray } from 'react-hook-form';
 import { FaTrashAlt } from 'react-icons/fa';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import Cookies from 'js-cookie';
-import {
-  Category,
-  Ingredient,
-  IngredientsData,
-  IngredientCategory,
-} from '../../types/types';
+import { IngredientsData } from '../../types/types';
 import RadioAdd from './RadioAdd';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 
 const CocktailSubmit: React.FC = () => {
   const { register, handleSubmit, watch, control } = useForm();
-  const [selectCount, setSelectCount] = useState(1);
+  const [ingredientsOptions, setIngredientsOptions] = useState([
+    { name: '', quantity: '' },
+  ]);
   const [ingredientsList, setIngredientsList] =
     useState<IngredientsData | null>(null);
   const techniques = watch('Techniques');
@@ -98,41 +95,22 @@ const CocktailSubmit: React.FC = () => {
     name: 'steps',
   });
 
-  const {
-    fields: ingredientsFields,
-    append: appendIngredient,
-    remove: removeIngredient,
-  } = useFieldArray({
-    control,
-    name: 'ingredients',
-  });
-
-  console.log(ingredientsFields);
-  console.log(ingredientsList?.ingredients);
-  let alcoolsIngredients: IngredientCategory[] = [];
-
   const isAddStepButtonDisabled = stepsFields.length >= 10;
   const isAddIngredientButtonDisabled = stepsFields.length >= 3;
-  const test = [];
-  const jetesteuntruc = ingredientsList?.ingredients;
-  if (jetesteuntruc) {
-    const aromatesIngredients =
-      jetesteuntruc.find((category) => category.name === 'aromates')
-        ?.ingredients || [];
 
-    const softsIngredients =
-      jetesteuntruc.find((category) => category.name === 'softs')
-        ?.ingredients || [];
+  const [selectCount, setSelectCount] = useState(1);
+  const appendIngredient = (optionIndex: any) => {
+    if (selectCount < 3) {
+      setSelectCount(selectCount + 1);
+    }
+  };
 
-    alcoolsIngredients =
-      jetesteuntruc.find((category) => category.name === 'alcools')
-        ?.ingredients || [];
+  const removeIngredient = (optionIndex: any) => {
+    if (selectCount > 1) {
+      setSelectCount(selectCount - 1);
+    }
+  };
 
-    console.log('Aromates Ingredients:', aromatesIngredients);
-    console.log('Softs Ingredients:', softsIngredients);
-    console.log('Alcools Ingredients:', alcoolsIngredients);
-    console.log(alcoolsIngredients[0].name);
-  }
   return (
     <div className="bg-light-brown flex justify-center items-center flex-1 h-[75vh] text-dark-brown">
       <div
@@ -165,61 +143,69 @@ const CocktailSubmit: React.FC = () => {
               </div>
             </div>
 
+            {/* Liste pour ajouter les ingredients */}
             <div className="w-full pb-6">
               <ul className="flex flex-wrap justify-center">
-                {alcoolsIngredients.map((ingredient, index) => (
+                {ingredientsList?.ingredients.map((ingredient, index) => (
                   <div className="p-2" key={ingredient.id}>
-                    <h3 className="text-2xl text-center">{ingredient.id}</h3>
+                    <h3 className="text-2xl text-center">{ingredient.name}</h3>
                     <div className="block p-3 space-y-2">
-                      {Array.from({ length: selectCount }).map(
-                        (_, subIndex) => (
-                          <div key={subIndex} className="flex space-x-2">
-                            <select
-                              {...register(`ingredients[${index}].name`)}
-                              className="text-light-brown text-base font-bold text-center w-48 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
-                            >
-                              <option value="">A vous de jouer !</option>
-                              {alcoolsIngredients?.map(
-                                (ingredientOption: any, optionIndex: any) => (
-                                  <option
-                                    key={ingredientOption.id}
-                                    value={ingredientOption.id}
-                                  >
-                                    {ingredientOption.name}
-                                  </option>
-                                )
-                              )}
-                            </select>
-                            <input
-                              type="number"
-                              {...register(`ingredients[${index}].quantity`)}
-                              className="text-light-brown text-xl font-bold text-center w-16 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
-                              min="1"
-                              max="99"
-                              onKeyPress={(e) => {
-                                if (!/[0-9]/.test(e.key)) {
-                                  e.preventDefault();
-                                }
-                                if (
-                                  e.target instanceof HTMLInputElement &&
-                                  e.target.value.length >= 2
-                                ) {
-                                  e.preventDefault();
-                                }
-                              }}
-                            />
+                      <div key={index} className="flex space-x-2">
+                        <select
+                          {...register(`ingredients[${index}].name`)}
+                          className="text-light-brown text-base font-bold text-center w-48 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
+                        >
+                          <option value="">A vous de jouer !</option>
+                          {ingredient.ingredients?.map(
+                            (ingredientOption: any, optionIndex: number) => (
+                              <option
+                                key={ingredientOption.id}
+                                value={ingredientOption.id}
+                              >
+                                {ingredientOption.name}
+                              </option>
+                            )
+                          )}
+                          <div className="flex items-center justify-center">
+                            {ingredient.length > 1 && (
+                              <div className="">
+                                <button
+                                  type="button"
+                                  onClick={() => removeIngredient(index)}
+                                  className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
+                                >
+                                  <FaTrashAlt />
+                                </button>
+                              </div>
+                            )}
                           </div>
-                        )
-                      )}
+                        </select>
+                        <input
+                          type="number"
+                          {...register(`ingredients[${index}].quantity`)}
+                          className="text-light-brown text-xl font-bold text-center w-16 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
+                          min="1"
+                          max="99"
+                          onKeyPress={(e) => {
+                            if (!/[0-9]/.test(e.key)) {
+                              e.preventDefault();
+                            }
+                            if (
+                              e.target instanceof HTMLInputElement &&
+                              e.target.value.length >= 2
+                            ) {
+                              e.preventDefault();
+                            }
+                          }}
+                        />
+                      </div>
                     </div>
                     <div className="flex items-center justify-center">
-                      {ingredientsFields.length > 1 && (
+                      {ingredient.length > 1 && (
                         <div className="">
                           <button
                             type="button"
-                            onClick={() =>
-                              appendIngredient({ name: '', quantity: '' })
-                            }
+                            onClick={() => appendIngredient(index)}
                             className={`${
                               isAddIngredientButtonDisabled
                                 ? 'bg-red-900 text-light-brown cursor-not-allowed '
@@ -232,23 +218,12 @@ const CocktailSubmit: React.FC = () => {
                         </div>
                       )}
                     </div>
-                    <div className="flex items-center justify-center">
-                      {ingredientsFields.length > 1 && (
-                        <div className="">
-                          <button
-                            type="button"
-                            onClick={() => removeIngredient(index)}
-                            className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
-                          >
-                            <FaTrashAlt />
-                          </button>
-                        </div>
-                      )}
-                    </div>
                   </div>
                 ))}
               </ul>
             </div>
+
+            {/* Liste pour ajouter les verres, techniques, glaces  */}
             <div className="flex flex-wrap justify-evenly pt-8 w-full">
               <div className="p-3">
                 <h3 className="text-2xl font-medium mb-4 text-center">

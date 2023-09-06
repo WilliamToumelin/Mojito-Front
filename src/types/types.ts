@@ -51,6 +51,7 @@ export type Ingredient = {
 };
 
 export type IngredientCategory = {
+  length: number;
   id: Key | undefined;
   name: string;
   ingredients: Ingredient[];
