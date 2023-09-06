@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../common/buttons/SquaredButton';
+import InputForm from '../../pages/Register/InputForm';
 
 const ConnectModal: FC = () => {
   const {
@@ -134,31 +135,25 @@ const ConnectModal: FC = () => {
                   className="space-y-3"
                   onSubmit={handleSubmit(handleLogin)}
                 >
-                  <div className="">
-                    <label htmlFor="email" className="pb-1">
-                      Email adress
-                    </label>
-                    <input
+                  <div className="text-left">
+                    <InputForm
                       type="email"
-                      id="email"
-                      className="bg-light-brown rounded-full flex items-center text-center text-base"
-                      required
-                      {...register('email')}
+                      htmlFor="email"
+                      registerName="email"
+                      name="Email"
+                      register={register}
                     />
                     {errors.email && (
                       <div className="text-red-cocktail">Email requis</div>
                     )}
                   </div>
-                  <div className="pb-4">
-                    <label htmlFor="password" className="">
-                      Mot de passe
-                    </label>
-                    <input
+                  <div className="pb-4 text-left">
+                    <InputForm
                       type="password"
-                      id="password"
-                      className="bg-light-brown rounded-full flex items-center text-center text-base"
-                      required
-                      {...register('password')}
+                      htmlFor="password"
+                      registerName="password"
+                      name="Mot de passe"
+                      register={register}
                     />
                     {errors.password && (
                       <div className="text-red-500">Mot de passe requis</div>

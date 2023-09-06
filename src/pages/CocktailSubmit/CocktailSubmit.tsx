@@ -10,7 +10,7 @@ import SquaredButton from '../../components/common/buttons/SquaredButton';
 import StepsAdd from './StepsAdd';
 
 const CocktailSubmit: React.FC = () => {
-  const { register, handleSubmit, watch } = useForm();
+  const { register, handleSubmit, watch, setValue } = useForm();
   const [ingredientsList, setIngredientsList] =
     useState<IngredientsData | null>(null);
   const techniques = watch('Techniques');
@@ -37,6 +37,18 @@ const CocktailSubmit: React.FC = () => {
   const handleCockailSubmit = async (data: FieldValues) => {
     console.log(data);
 
+    const updatedSteps = [];
+    for (const key in data) {
+      if (key.startsWith('step')) {
+        const stepNumber = parseInt(key.split('_')[1], 10);
+        updatedSteps.push({
+          number_step: stepNumber,
+          content: `${data[key]}`,
+        });
+      }
+    }
+    setValue('steps', updatedSteps);
+
     const output = {
       name: data.name,
       description: data.description,
@@ -57,64 +69,15 @@ const CocktailSubmit: React.FC = () => {
       }[],
     };
 
-    for (const key in data) {
-      if (key.startsWith('step')) {
-        output.steps.push({
-          number_step: parseInt(key.split('_')[1], 10),
-          content: `${data[key]}`,
-        });
-      }
-    }
-
     console.log(output);
 
     try {
-      // const input: IngredientsData = {
-      //   ingredients: data.ingredients,
-      //   glass: data.Verres,
-      //   ices: data.Glaces,
-      //   technicals: data.Techniques,
-      //   alcool: '',
-      //   steps: [],
-      // };
-      // console.log(input);
-      // if (data.alcools_0 !== '') {
-      //   input.alcool = 'true';
-      //   console.log(data.alcools_0);
-      //   console.log(input.alcool);
-      // }
-      // const output = {
-      //   name: data.name,
-      //   description: data.description,
-      //   // picture: data.picture,
-      //   difficulty: data.difficulty,
-      //   preparation_time: data.preparation_time,
-      //   // alcool: data.alcool,
-      //   user: userId,
-      //   glass: data.Verres,
-      //   ice: data.Glaces,
-      //   technical: data.Techniques,
-      //   // categories: [],
-      //   cocktailUses: [
-      //     {
-      //       quantity: data.alcools_0_quantity,
-      //       unit: 'cl',
-      //       ingredient: data.alcools_0,
-      //     },
-      //     {
-      //       quantity: data.aromates_0_quantity,
-      //       unit: 'cl',
-      //       ingredient: data.aromates_0,
-      //     },
-      //   ],
-      // };
-      // console.log(output);
       const response = await fetch('http://localhost:5174/api/cocktails/add', {
         method: 'POST',
         body: JSON.stringify(output),
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`, // Ajouter le token JWT aux en-têtes
+          Authorization: `Bearer ${authToken}`,
         },
       });
       console.log(data);

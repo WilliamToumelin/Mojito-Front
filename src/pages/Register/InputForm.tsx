@@ -22,13 +22,13 @@ const InputForm: React.FC<InputFormProps> = ({
     <div className="mb-4">
       <label
         htmlFor={htmlFor}
-        className="block text-sm font-medium text-gray-700"
+        className="block text-sm font-medium text-light-brown"
       >
         {name}
       </label>
       <input
         type={type}
-        className="mt-1 focus:ring-light-brown focus:border-light-brown block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+        className="mt-1 focus:ring-light-brown focus:border-light-brown bg-light-brown text-dark-gray block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
         required
         {...register(registerName)}
       />

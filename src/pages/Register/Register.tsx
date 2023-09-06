@@ -124,7 +124,7 @@ const Register: React.FC = () => {
                         register={register}
                       />
                     </div>
-                    <div className=" mx-auto">
+                    <div className="sm:m-5 mx-auto">
                       <label htmlFor="dateOfBirth" className="text-light-brown">
                         Date de naissance
                       </label>

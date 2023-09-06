@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useAuth } from '../../contexts/AuthProvider';
 import { Category } from '../../types/types';
@@ -22,6 +22,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [categoriesData, setCategoriesData] = useState<Category[]>([]);
   const { isLoggedIn } = useAuth();
+
   const userToken = Cookies.get('userToken');
   let userPseudo: string | null = null;
 
@@ -87,7 +88,8 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
          ${isMenuOpen ? '' : 'hidden'}`}
         id="navbar-hamburger"
       >
-        <ul className="w-3/4 flex flex-col font-medium mt-6 text-2xl rounded-lg bg-light-gray text-center overflow-y-auto max-h-[70vh]">
+        <ul className="w-3/4 flex flex-col font-medium mt-6 text-2xl rounded-lg bg-light-gray text-center overflow-y-auto max-h-[70vh] relative">
+          <span className="absolute right-5 top-3">X</span>
           {isLoggedIn ? (
             <li className="menu-link text-dark-brown">
               Bienvenue, {userPseudo}
