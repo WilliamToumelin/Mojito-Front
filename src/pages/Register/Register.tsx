@@ -87,7 +87,7 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh] max-h-[75vh]">
+    <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh]">
       <div className="relative w-4/5 lg:w-4/6 p-4 h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray">
         <div className="text-center">
           <h1 className="text-dark-brown pt-5 font-bold text-xl sm:text-2xl">
