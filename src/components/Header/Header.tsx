@@ -75,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({
         )}
         <ConnectModal />
         {isLoggedIn ? (
-          <p className="menu-link text-light-brown">Bienvenue, {userPseudo}</p>
+          <p className="menu-link text-light-brown">Bonjour, {userPseudo}!</p>
         ) : (
           ''
         )}

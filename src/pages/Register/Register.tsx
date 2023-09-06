@@ -45,6 +45,32 @@ const Register: React.FC = () => {
       )
       .matches(/[A-Z]/, 'Le mot de passe doit contenir au moins une majuscule')
       .required('Le mot de passe est requis'),
+    dateOfBirth: yup
+      .date()
+      .min(
+        new Date(new Date().getFullYear() - 18, 0, 1), // Minimum date: 18 years ago from today
+        'Vous devez avoir au moins 18 ans'
+      )
+      .max(
+        new Date(1900, 11, 31), // Maximum date: 1900-12-31
+        'La date de naissance doit être après 1900'
+      )
+      .required('La date de naissance est requise'),
+    pseudonym: yup
+      .string()
+      .min(4, 'Le pseudo doit comporter au moins 4 caractères')
+      .max(12, 'Le pseudo ne doit pas dépasser 12 caractères')
+      .required('Le pseudo est requis'),
+    lastName: yup
+      .string()
+      .min(1, 'Le nom doit comporter au moins 1 caractère')
+      .max(24, 'Le nom ne doit pas dépasser 24 caractères')
+      .required('Le nom est requis'),
+    firstName: yup
+      .string()
+      .min(1, 'Le prénom doit comporter au moins 1 caractère')
+      .max(24, 'Le prénom ne doit pas dépasser 24 caractères')
+      .required('Le prénom est requis'),
   });
 
   const handleRegister = async (data: {
@@ -174,7 +200,8 @@ const Register: React.FC = () => {
                       />
                       <p className="text-xs text-light-gray w-[13em]">
                         Le mot de passe doit contenir au minimum 7 caractères,
-                        dont 1 majuscule, 1 chiffre et 1 caracère spécial.
+                        dont 1 majuscule, 1 chiffre et 1 caracère spécial de
+                        cette liste ({`!@#$%^&*(),.?":{}|<>`}).
                       </p>
                       {passwordError && (
                         <p className="text-red-600 ">{passwordError}</p>

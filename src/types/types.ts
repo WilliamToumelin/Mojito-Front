@@ -1,3 +1,5 @@
+import { Key } from 'react';
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type Category = {
   id: number;
@@ -49,11 +51,13 @@ export type Ingredient = {
 };
 
 export type IngredientCategory = {
+  id: Key | undefined;
   name: string;
   ingredients: Ingredient[];
 };
 
 export type IngredientsData = {
+  find(arg0: (category: any) => boolean): unknown;
   steps: string[];
   alcool: string;
   ingredients: IngredientCategory[];

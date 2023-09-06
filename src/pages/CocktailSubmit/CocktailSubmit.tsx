@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
@@ -5,13 +6,18 @@ import { FieldValues, useForm, useFieldArray } from 'react-hook-form';
 import { FaTrashAlt } from 'react-icons/fa';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import Cookies from 'js-cookie';
-import { IngredientsData } from '../../types/types';
-import ListManager from './ListManager';
+import {
+  Category,
+  Ingredient,
+  IngredientsData,
+  IngredientCategory,
+} from '../../types/types';
 import RadioAdd from './RadioAdd';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 
 const CocktailSubmit: React.FC = () => {
   const { register, handleSubmit, watch, control } = useForm();
+  const [selectCount, setSelectCount] = useState(1);
   const [ingredientsList, setIngredientsList] =
     useState<IngredientsData | null>(null);
   const techniques = watch('Techniques');
@@ -36,17 +42,6 @@ const CocktailSubmit: React.FC = () => {
   }, []);
 
   const handleCockailSubmit = async (data: FieldValues) => {
-    // const updatedSteps = [];
-    // for (const key in data) {
-    //   if (key.startsWith('step')) {
-    //     const stepNumber = parseInt(key.split('_')[1], 10);
-    //     updatedSteps.push({
-    //       content: `${data[key]}`,
-    //     });
-    //   }
-    // }
-    // setValue('steps', updatedSteps);
-
     const output = {
       name: data.name,
       description: data.description,
@@ -85,9 +80,6 @@ const CocktailSubmit: React.FC = () => {
       });
       console.log(data);
       if (response.ok) {
-        // const { token } = await response.json();
-        // //  Stocker le token JWT dans le local storage
-        // localStorage.setItem('authToken', token);
         console.log('envoi réussi');
       } else {
         console.error('Erreur lors de la soumission du commentaire');
@@ -97,13 +89,50 @@ const CocktailSubmit: React.FC = () => {
     }
   };
 
-  const { fields, append, remove } = useFieldArray({
+  const {
+    fields: stepsFields,
+    append: appendStep,
+    remove: removeStep,
+  } = useFieldArray({
     control,
     name: 'steps',
   });
 
-  const isAddStepButtonDisabled = fields.length >= 10;
+  const {
+    fields: ingredientsFields,
+    append: appendIngredient,
+    remove: removeIngredient,
+  } = useFieldArray({
+    control,
+    name: 'ingredients',
+  });
 
+  console.log(ingredientsFields);
+  console.log(ingredientsList?.ingredients);
+  let alcoolsIngredients: IngredientCategory[] = [];
+
+  const isAddStepButtonDisabled = stepsFields.length >= 10;
+  const isAddIngredientButtonDisabled = stepsFields.length >= 3;
+  const test = [];
+  const jetesteuntruc = ingredientsList?.ingredients;
+  if (jetesteuntruc) {
+    const aromatesIngredients =
+      jetesteuntruc.find((category) => category.name === 'aromates')
+        ?.ingredients || [];
+
+    const softsIngredients =
+      jetesteuntruc.find((category) => category.name === 'softs')
+        ?.ingredients || [];
+
+    alcoolsIngredients =
+      jetesteuntruc.find((category) => category.name === 'alcools')
+        ?.ingredients || [];
+
+    console.log('Aromates Ingredients:', aromatesIngredients);
+    console.log('Softs Ingredients:', softsIngredients);
+    console.log('Alcools Ingredients:', alcoolsIngredients);
+    console.log(alcoolsIngredients[0].name);
+  }
   return (
     <div className="bg-light-brown flex justify-center items-center flex-1 h-[75vh] text-dark-brown">
       <div
@@ -138,13 +167,85 @@ const CocktailSubmit: React.FC = () => {
 
             <div className="w-full pb-6">
               <ul className="flex flex-wrap justify-center">
-                {ingredientsList?.ingredients?.map((category) => (
-                  <ListManager
-                    key={category.name}
-                    category={category.name}
-                    ingredients={category.ingredients}
-                    register={register}
-                  />
+                {alcoolsIngredients.map((ingredient, index) => (
+                  <div className="p-2" key={ingredient.id}>
+                    <h3 className="text-2xl text-center">{ingredient.id}</h3>
+                    <div className="block p-3 space-y-2">
+                      {Array.from({ length: selectCount }).map(
+                        (_, subIndex) => (
+                          <div key={subIndex} className="flex space-x-2">
+                            <select
+                              {...register(`ingredients[${index}].name`)}
+                              className="text-light-brown text-base font-bold text-center w-48 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
+                            >
+                              <option value="">A vous de jouer !</option>
+                              {alcoolsIngredients?.map(
+                                (ingredientOption: any, optionIndex: any) => (
+                                  <option
+                                    key={ingredientOption.id}
+                                    value={ingredientOption.id}
+                                  >
+                                    {ingredientOption.name}
+                                  </option>
+                                )
+                              )}
+                            </select>
+                            <input
+                              type="number"
+                              {...register(`ingredients[${index}].quantity`)}
+                              className="text-light-brown text-xl font-bold text-center w-16 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
+                              min="1"
+                              max="99"
+                              onKeyPress={(e) => {
+                                if (!/[0-9]/.test(e.key)) {
+                                  e.preventDefault();
+                                }
+                                if (
+                                  e.target instanceof HTMLInputElement &&
+                                  e.target.value.length >= 2
+                                ) {
+                                  e.preventDefault();
+                                }
+                              }}
+                            />
+                          </div>
+                        )
+                      )}
+                    </div>
+                    <div className="flex items-center justify-center">
+                      {ingredientsFields.length > 1 && (
+                        <div className="">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              appendIngredient({ name: '', quantity: '' })
+                            }
+                            className={`${
+                              isAddIngredientButtonDisabled
+                                ? 'bg-red-900 text-light-brown cursor-not-allowed '
+                                : `text-light-brown bg-light-gray hover:text-dark-gray hover:bg-dark-brown`
+                            } p-2 rounded text-xl`}
+                            disabled={isAddIngredientButtonDisabled}
+                          >
+                            <AiFillPlusCircle />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex items-center justify-center">
+                      {ingredientsFields.length > 1 && (
+                        <div className="">
+                          <button
+                            type="button"
+                            onClick={() => removeIngredient(index)}
+                            className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
+                          >
+                            <FaTrashAlt />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 ))}
               </ul>
             </div>
@@ -245,13 +346,14 @@ const CocktailSubmit: React.FC = () => {
               </div>
             </div>
           </div>
+
           {/* ajouter des steps de préparation du cocktail */}
           <div className="flex flex-col items-center">
             <h3 className="text-2xl font-medium mb-4 text-center">
               Les étapes
             </h3>
             <ul className="text-center ">
-              {fields.map((item, index) => (
+              {stepsFields.map((item, index) => (
                 <li
                   key={item.id}
                   className="border-xs rounded bg-dark-gery text-dark-gray hover:scale-105 duration-500 flex items-center my-2"
@@ -262,7 +364,7 @@ const CocktailSubmit: React.FC = () => {
                   />
                   <button
                     type="button"
-                    onClick={() => remove(index)}
+                    onClick={() => removeStep(index)}
                     className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
                   >
                     <FaTrashAlt />
@@ -272,7 +374,7 @@ const CocktailSubmit: React.FC = () => {
             </ul>
             <button
               type="button"
-              onClick={() => append({ content: '' })}
+              onClick={() => appendStep({ content: '' })}
               className={`${
                 isAddStepButtonDisabled
                   ? 'bg-red-900 text-light-brown cursor-not-allowed '
