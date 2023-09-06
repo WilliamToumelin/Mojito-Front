@@ -47,8 +47,6 @@ const ConnectModal: FC = () => {
         const responseData = await response.json();
         const { token } = responseData;
         const { data } = responseData;
-        console.log(token);
-        console.log(data);
         // Stocker le token dans un cookie avec une date d'expiration (par exemple, 7 jours)
         Cookies.set('authToken', token, { expires: 7 });
         Cookies.set('userToken', JSON.stringify(data), { expires: 7 });

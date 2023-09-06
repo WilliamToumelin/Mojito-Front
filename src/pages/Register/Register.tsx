@@ -37,6 +37,7 @@ const Register: React.FC = () => {
     password: yup
       .string()
       .min(7, 'Le mot de passe doit comporter au moins 7 caractères')
+      // on va imposer des restrictions grace à des regex
       .matches(/\d/, 'Le mot de passe doit contenir au moins un chiffre')
       .matches(
         /[!@#$%^&*(),.?":{}|<>]/,
@@ -219,7 +220,8 @@ const Register: React.FC = () => {
                 </form>
               ) : (
                 <p className="w-full text-green-600 text-center">
-                  Création de compte réussi!
+                  Création de compte réussi! Vous pouvez maintenant vous
+                  connectez avec vos identifiants!
                 </p>
               )}
             </div>
