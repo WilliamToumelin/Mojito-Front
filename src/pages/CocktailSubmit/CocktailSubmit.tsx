@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 import { IngredientsData } from '../../types/types';
 import RadioAdd from './RadioAdd';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
+import ListManager from './ListManager';
 
 const CocktailSubmit: React.FC = () => {
   const { register, handleSubmit, watch, control } = useForm();
@@ -144,7 +145,7 @@ const CocktailSubmit: React.FC = () => {
             </div>
 
             {/* Liste pour ajouter les ingredients */}
-            <div className="w-full pb-6">
+            {/* <div className="w-full pb-6">
               <ul className="flex flex-wrap justify-center">
                 {ingredientsList?.ingredients.map((ingredient, index) => (
                   <div className="p-2" key={ingredient.id}>
@@ -166,19 +167,6 @@ const CocktailSubmit: React.FC = () => {
                               </option>
                             )
                           )}
-                          <div className="flex items-center justify-center">
-                            {ingredient.length > 1 && (
-                              <div className="">
-                                <button
-                                  type="button"
-                                  onClick={() => removeIngredient(index)}
-                                  className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
-                                >
-                                  <FaTrashAlt />
-                                </button>
-                              </div>
-                            )}
-                          </div>
                         </select>
                         <input
                           type="number"
@@ -198,6 +186,19 @@ const CocktailSubmit: React.FC = () => {
                             }
                           }}
                         />
+                        <div className="flex items-center justify-center">
+                          {ingredient.length > 1 && (
+                            <div className="">
+                              <button
+                                type="button"
+                                onClick={() => removeIngredient(index)}
+                                className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
+                              >
+                                <FaTrashAlt />
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                     <div className="flex items-center justify-center">
@@ -205,7 +206,9 @@ const CocktailSubmit: React.FC = () => {
                         <div className="">
                           <button
                             type="button"
-                            onClick={() => appendIngredient(index)}
+                            onClick={() =>
+                              appendIngredient({ name: '', quantity: '' })
+                            }
                             className={`${
                               isAddIngredientButtonDisabled
                                 ? 'bg-red-900 text-light-brown cursor-not-allowed '
@@ -219,6 +222,18 @@ const CocktailSubmit: React.FC = () => {
                       )}
                     </div>
                   </div>
+                ))}
+              </ul>
+            </div> */}
+            <div className="w-full pb-6">
+              <ul className="flex flex-wrap justify-center">
+                {ingredientsList?.ingredients?.map((category) => (
+                  <ListManager
+                    key={category.name}
+                    category={category.name}
+                    ingredients={category.ingredients}
+                    register={register}
+                  />
                 ))}
               </ul>
             </div>
