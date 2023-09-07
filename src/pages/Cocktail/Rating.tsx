@@ -40,14 +40,17 @@ const Rating = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:5174/api/ratings/add', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
+      const response = await fetch(
+        'http://celestin-j-server.eddi.cloud/api/ratings/add',
+        {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
       if (response.ok) {
         setSuccessMessage('Votre note a bien été envoyer');
         setPostSuccess(true);
