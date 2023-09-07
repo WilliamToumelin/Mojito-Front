@@ -136,15 +136,6 @@ const CocktailSubmit: React.FC = () => {
 
   const [selectCount, setSelectCount] = useState(1);
 
-  const appendIngredient = () => {
-    setSelectCount((prevstate) => prevstate + 1);
-  };
-  const removeIngredient = () => {
-    if (selectCount > 1) {
-      setSelectCount((prevstate) => prevstate - 1);
-    }
-  };
-
   return (
     <div className="bg-light-brown flex justify-center items-center flex-1 h-[75vh] text-dark-brown">
       <div
@@ -178,83 +169,7 @@ const CocktailSubmit: React.FC = () => {
             </div>
 
             {/* Liste pour ajouter les ingredients */}
-            <div className="w-full pb-6">
-              {/* <ul className="flex flex-wrap justify-center">
-                {ingredientsList?.ingredients.map((ingredient, index) => (
-                  <div className="p-2" key={ingredient.id}>
-                    <h3 className="text-2xl text-center">{ingredient.name}</h3>
-                    <div className="block p-3 space-y-2">
-                      <div key={index} className="flex space-x-2">
-                        <select
-                          {...register(`ingredients[${index}].name`)}
-                          className="text-light-brown text-base font-bold text-center w-48 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
-                        >
-                          <option value="">A vous de jouer !</option>
-                          {ingredient.ingredients?.map(
-                            (ingredientOption: any, optionIndex: number) => (
-                              <option
-                                key={ingredientOption.id}
-                                value={ingredientOption.id}
-                              >
-                                {ingredientOption.name}
-                              </option>
-                            )
-                          )}
-                        </select>
-                        <input
-                          type="number"
-                          {...register(`ingredients[${index}].quantity`, {
-                            setValueAs: (value) => Number(value), // Convertit la valeur en float lors de la soumission
-                          })}
-                          className="text-light-brown text-xl font-bold text-center w-16 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
-                          min="1"
-                          max="99"
-                          onKeyPress={(e) => {
-                            if (!/[0-9]/.test(e.key)) {
-                              e.preventDefault();
-                            }
-                            if (
-                              e.target instanceof HTMLInputElement &&
-                              e.target.value.length >= 2
-                            ) {
-                              e.preventDefault();
-                            }
-                          }}
-                        />
-                        <div className="flex items-center justify-center">
-                          <div className="">
-                            <button
-                              type="button"
-                              onClick={() => removeIngredient(index)}
-                              className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
-                            >
-                              <FaTrashAlt />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-center">
-                      <div className="">
-                        <button
-                          type="button"
-                          onClick={() =>
-                            appendIngredient({ name: '', quantity: '' })
-                          }
-                          className={`${
-                            isAddIngredientButtonDisabled
-                              ? 'bg-red-900 text-light-brown cursor-not-allowed '
-                              : `text-light-brown bg-light-gray hover:text-dark-gray hover:bg-dark-brown`
-                          } p-2 rounded text-xl`}
-                          disabled={isAddIngredientButtonDisabled}
-                        >
-                          <AiFillPlusCircle />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </ul> */}
+            <div className="w-full pb-6 flex flex-wrap">
               <ul>
                 {ingredientsList?.ingredients?.map((category) => (
                   <ListManager
