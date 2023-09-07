@@ -37,45 +37,54 @@ const CocktailSubmit: React.FC = () => {
   }, []);
 
   const handleCockailSubmit = async (data: FieldValues) => {
-    console.log(data);
+    console.log(data, 'coucou');
 
     const cocktailUses = [];
     if (data.alcools_0)
       cocktailUses.push({
-        id: data.alcools_0,
-        quantity: data.alcools_0_quantity,
+        id: Number(data.alcools_0),
+        quantity: Number(data.alcools_0_quantity),
       });
     if (data.alcools_1)
       cocktailUses.push({
-        id: data.alcools_1,
-        quantity: data.alcools_1_quantity,
+        id: Number(data.alcools_1),
+        quantity: Number(data.alcools_1_quantity),
       });
     if (data.alcools_2)
       cocktailUses.push({
-        id: data.alcools_2,
-        quantity: data.alcools_2_quantity,
+        id: Number(data.alcools_2),
+        quantity: Number(data.alcools_2_quantity),
       });
     if (data.aromates_0)
       cocktailUses.push({
-        id: data.aromates_0,
-        quantity: data.aromates_0_quantity,
+        id: Number(data.aromates_0),
+        quantity: Number(data.aromates_0_quantity),
       });
     if (data.aromates_1)
       cocktailUses.push({
-        id: data.aromates_1,
-        quantity: data.aromates_1_quantity,
+        id: Number(data.aromates_1),
+        quantity: Number(data.aromates_1_quantity),
       });
     if (data.aromates_2)
       cocktailUses.push({
-        id: data.aromates_2,
-        quantity: data.aromates_2_quantity,
+        id: Number(data.aromates_2),
+        quantity: Number(data.aromates_2_quantity),
       });
     if (data.softs_0)
-      cocktailUses.push({ id: data.softs_0, quantity: data.softs_0_quantity });
+      cocktailUses.push({
+        id: Number(data.softs_0),
+        quantity: Number(data.softs_0_quantity),
+      });
     if (data.softs_1)
-      cocktailUses.push({ id: data.softs_1, quantity: data.softs_1_quantity });
+      cocktailUses.push({
+        id: Number(data.softs_1),
+        quantity: Number(data.softs_1_quantity),
+      });
     if (data.softs_2)
-      cocktailUses.push({ id: data.softs_2, quantity: data.softs_2_quantity });
+      cocktailUses.push({
+        id: Number(data.softs_2),
+        quantity: Number(data.softs_2_quantity),
+      });
 
     console.log(cocktailUses);
 
@@ -87,13 +96,36 @@ const CocktailSubmit: React.FC = () => {
       preparation_time: Number(data.preparation_time),
       alcool: false,
       user: 0,
-      glass: data.Verres,
-      ice: data.Glaces,
-      technical: data.Techniques,
-      categories: [],
+      glass: Number(data.Verres),
+      ice: Number(data.Glaces),
+      technical: Number(data.Techniques),
+      categories: [] as number[],
       steps: data.steps,
       cocktailUses,
     };
+
+    if (data.alcools_0) {
+      output.alcool = true;
+    }
+
+    for (let i = 0; i < 3; i += 1) {
+      const categoryCheck = data[`alcools_${i}`];
+      if (categoryCheck) {
+        if (
+          categoryCheck === 0 ||
+          categoryCheck === 1 ||
+          categoryCheck === 2 ||
+          categoryCheck === 3
+        ) {
+          output.categories.push(categoryCheck);
+        } else {
+          output.categories.push(4);
+        }
+      }
+    }
+    if (output.alcool === false) {
+      output.categories.push(5);
+    }
 
     for (let i = 0; i < output.steps.length; i += 1) {
       console.log(i);
@@ -132,9 +164,6 @@ const CocktailSubmit: React.FC = () => {
   });
 
   const isAddStepButtonDisabled = stepsFields.length >= 10;
-  const isAddIngredientButtonDisabled = stepsFields.length >= 3;
-
-  const [selectCount, setSelectCount] = useState(1);
 
   return (
     <div className="bg-light-brown flex justify-center items-center flex-1 h-[75vh] text-dark-brown">
@@ -152,24 +181,51 @@ const CocktailSubmit: React.FC = () => {
           className="animate-fade-in-down"
         >
           <div className="py-6 px-12">
-            <div className="w-full space-y-2">
+            <div className="w-full space-y-2 pb-8">
+              <div className="text-center text-lg text-light-gray pb-12 space-y-1">
+                <p>
+                  Bonjour, bienvenue sur notre page de proposition de cocktails,
+                  voici quelques <span className="text-dark-brown">règles</span>{' '}
+                  pour que tout se passe bien :
+                </p>
+                <p>
+                  - Il est <span className="text-dark-brown">obligatoire</span>{' '}
+                  de choisir au moins un soft ou un alcool
+                </p>
+                <p>
+                  - Tout les autres champs sont{' '}
+                  <span className="text-dark-brown">obligatoires</span>{' '}
+                </p>
+                <p>
+                  - Vous avez un{' '}
+                  <span className="text-dark-brown">maximum de 10 étapes</span>{' '}
+                  pour expliquer la confection de votre création
+                </p>
+                <p>
+                  - La validation de votre cocktail est à{' '}
+                  <span className="text-dark-brown">
+                    l&apos;appréciation de la modération
+                  </span>{' '}
+                </p>
+                <p>Enjoy !</p>
+              </div>
               <label
                 htmlFor="name"
                 className="text-2xl text-center flex flex-wrap justify-center"
               >
                 Le nom de votre Cocktail:
               </label>
-              <div className="flex justify-center pb-8">
+              <div className="flex justify-center">
                 <input
                   type="text"
-                  className="border-xs rounded p-1 w-1/5 bg-light-brown text-dark-gray hover:scale-105 duration-500"
+                  className="border-xs rounded p-2 w-1/5 bg-light-brown text-dark-gray hover:scale-105 duration-500"
                   {...register(`name`)}
                 />
               </div>
             </div>
 
             {/* Liste pour ajouter les ingredients */}
-            <div className="w-full pb-6">
+            <div className="w-full">
               <ul className="flex flex-wrap justify-evenly">
                 {ingredientsList?.ingredients?.map((category) => (
                   <ListManager
@@ -184,7 +240,7 @@ const CocktailSubmit: React.FC = () => {
             </div>
 
             {/* Liste pour ajouter les verres, techniques, glaces  */}
-            <div className="flex flex-wrap justify-evenly pt-8 w-full">
+            <div className="flex flex-wrap justify-evenly py-2 w-full">
               <div className="p-3">
                 <h3 className="text-2xl font-medium mb-4 text-center">
                   Verres
@@ -237,7 +293,8 @@ const CocktailSubmit: React.FC = () => {
                 />
               </div>
             </div>
-            <div className="flex flex-wrap justify-evenly pt-8 w-full">
+            {/* Temps de préparation  */}
+            <div className="flex flex-wrap justify-evenly py-2 w-full">
               <div className="block justify-center">
                 <h3 className="text-2xl font-medium mb-4 text-center">
                   Temps de préparation
@@ -265,6 +322,7 @@ const CocktailSubmit: React.FC = () => {
                   <span className="pl-2 text-2xl">min</span>
                 </div>
               </div>
+              {/* Difficulté  */}
               <div className="">
                 <h3 className="text-2xl font-medium mb-4 text-center">
                   Difficulté
@@ -283,7 +341,7 @@ const CocktailSubmit: React.FC = () => {
           </div>
 
           {/* ajouter des steps de préparation du cocktail */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center py-2">
             <h3 className="text-2xl font-medium mb-4 text-center">
               Les étapes
             </h3>
@@ -291,19 +349,23 @@ const CocktailSubmit: React.FC = () => {
               {stepsFields.map((item, index) => (
                 <li
                   key={item.id}
-                  className="border-xs rounded bg-dark-gery text-dark-gray hover:scale-105 duration-500 flex items-center my-2"
+                  className="border-xs rounded bg-dark-gery text-dark-gray hover:scale-105 duration-500 flex items-center"
                 >
-                  <textarea
-                    {...register(`steps.${index}.content`)}
-                    className="rounded bg-light-brown text-dark-gray"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => removeStep(index)}
-                    className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
-                  >
-                    <FaTrashAlt />
-                  </button>
+                  <div className="p-2">
+                    <textarea
+                      {...register(`steps.${index}.content`)}
+                      className="rounded bg-light-brown text-dark-gray"
+                    />
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => removeStep(index)}
+                      className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
+                    >
+                      <FaTrashAlt />
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -320,23 +382,24 @@ const CocktailSubmit: React.FC = () => {
               <AiFillPlusCircle />
             </button>
           </div>
-          {/* ajouter une description du cocktail */}
-          <div>
+          <div className="py-2">
+            {/* ajouter une description du cocktail */}
             <div className="m-5 text-center">
               <h3 className="text-2xl font-medium mb-2">Description</h3>
               <textarea
                 {...register('description')}
-                className="border-xs rounded p-1 w-1/2 bg-light-brown text-dark-gray hover:scale-105 duration-500"
+                className="border-xs rounded p-2 w-1/2 bg-light-brown text-dark-gray hover:scale-105 duration-500"
                 rows={3}
               />
             </div>
-            <div className="m-5 text-center">
+            {/* ajouter une photo du cocktail */}
+            <div className="m-5 text-center py-2">
               <h3 className="text-2xl font-medium mb-4 text-center">
                 La photo du cocktail
               </h3>
               <input
                 {...register('picture')}
-                className="border-xs rounded p-1 w-1/2 bg-light-brown text-dark-gray hover:scale-105 duration-500"
+                className="border-xs rounded p-2 w-1/2 bg-light-brown text-dark-gray hover:scale-105 duration-500"
               />
             </div>
             <div className="flex justify-center py-2">

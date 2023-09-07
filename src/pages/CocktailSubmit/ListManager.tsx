@@ -63,7 +63,7 @@ const ListManager: React.FC<Props> = ({
   return (
     <div className="p-2">
       <h3 className="text-2xl text-center">{category}</h3>
-      <div key={category} className="block p-3 space-y-2">
+      <div key={category} className="block p-2 space-y-2">
         {Array.from({ length: selectCount }).map((_, index) => (
           <div key={index} className="d-flex space-x-2">
             <select
@@ -74,7 +74,11 @@ const ListManager: React.FC<Props> = ({
                 A vous de jouer !
               </option>
               {ingredients.map((ingredient) => (
-                <option className="" key={ingredient.id} value={ingredient.id}>
+                <option
+                  className="bg-light-gray"
+                  key={ingredient.id}
+                  value={ingredient.id}
+                >
                   {ingredient.name}
                 </option>
               ))}
