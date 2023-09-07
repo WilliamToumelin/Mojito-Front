@@ -10,6 +10,7 @@ import { Ingredients } from '../../types/types';
 
 interface Props {
   category: string;
+  units: { id: number; name: string }[];
   ingredients: Ingredients[];
   register: UseFormRegister<FieldValues>;
   unregister: UseFormUnregister<FieldValues>;
@@ -17,6 +18,7 @@ interface Props {
 
 const ListManager: React.FC<Props> = ({
   category,
+  units,
   ingredients,
   register,
   unregister,
@@ -90,6 +92,27 @@ const ListManager: React.FC<Props> = ({
                 }
               }}
             />
+            {category === 'aromates' && (
+              <select
+                {...register(`${category}_${index}_unit`, { required: true })}
+                className="text-light-brown text-xl font-bold text-center w-16
+    h-12 rounded p-2 bg-light-gray border border-light-brown
+    hover:bg-dark-brown hover:text-dark-gray"
+              >
+                <option className="" value="">
+                  A vous de jouer !
+                </option>
+                {units.map((unit) => (
+                  <option
+                    className="bg-light-gray"
+                    key={unit.id}
+                    value={unit.id}
+                  >
+                    {unit.name}
+                  </option>
+                ))}
+              </select>
+            )}
           </div>
         ))}
       </div>

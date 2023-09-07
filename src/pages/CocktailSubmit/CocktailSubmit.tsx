@@ -39,26 +39,23 @@ const CocktailSubmit: React.FC = () => {
   }, []);
 
   const handleCockailSubmit = async (data: FieldValues) => {
-    console.log(data, 'coucou');
-
     const cocktailUses = [];
     const categories = ['alcools', 'aromates', 'softs'];
     for (const category of categories) {
       for (let i = 0; i < 3; i++) {
         const id = `${category}_${i}`;
         const quantity = `${id}_quantity`;
+        const unit = `${id}_unit`;
 
         if (data[id]) {
           cocktailUses.push({
             ingredient: Number(data[id]),
             quantity: Number(data[quantity]),
-            // unit: Number(data[unit]),
+            unit: Number(data[unit]),
           });
         }
       }
     }
-
-    console.log(cocktailUses);
 
     const output = {
       name: data.name,
@@ -74,7 +71,7 @@ const CocktailSubmit: React.FC = () => {
       categories: [] as number[],
       steps: data.steps,
       cocktailUses,
-      // unit:
+      unit: Number(data.units),
     };
 
     if (data.alcools_0) {
@@ -103,11 +100,8 @@ const CocktailSubmit: React.FC = () => {
     }
 
     for (let i = 0; i < output.steps.length; i += 1) {
-      console.log(i);
       output.steps[i].number_step = i;
     }
-
-    console.log(output);
 
     try {
       const response = await fetch('http://localhost:5174/api/cocktails/add', {
@@ -118,7 +112,6 @@ const CocktailSubmit: React.FC = () => {
           Authorization: `Bearer ${authToken}`,
         },
       });
-      console.log(data);
       if (response.ok) {
         console.log('envoi réussi');
       } else {
@@ -127,6 +120,7 @@ const CocktailSubmit: React.FC = () => {
     } catch (error) {
       console.error('Erreur inattendue', error);
     }
+    console.log(output);
   };
 
   const {
@@ -209,6 +203,7 @@ const CocktailSubmit: React.FC = () => {
                     ingredients={category.ingredients}
                     register={register}
                     unregister={unregister}
+                    units={ingredientsList.units}
                   />
                 ))}
               </ul>

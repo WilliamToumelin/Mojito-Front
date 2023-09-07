@@ -65,4 +65,5 @@ export type DataCocktailSubmit = {
   glass: { id: number; name: string }[];
   ices: { id: number; name: string }[];
   technicals: { id: number; name: string }[];
+  units: { id: number; name: string }[];
 };
