@@ -86,13 +86,16 @@ const Register: React.FC = () => {
       await passwordSchema.validate(data, { abortEarly: false });
       // La validation a réussi, vous pouvez maintenant envoyer les données au serveur
 
-      const response = await fetch('http://localhost:5174/api/register', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await fetch(
+        'http://celestin-j-server.eddi.cloud/api/register',
+        {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       console.log(data);
       if (response.ok) {
         // Message de confirmation de création de compte

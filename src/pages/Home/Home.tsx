@@ -52,7 +52,7 @@ const Home: React.FC<HomeProps> = ({
   }, [authToken, login, logout]);
 
   useEffect(() => {
-    fetch('http://localhost:5174/api/cocktails')
+    fetch('http://celestin-j-server.eddi.cloud/api/cocktails')
       .then((response) => response.json())
       .then((data: Cocktails[]) => {
         setCocktailList(data);
