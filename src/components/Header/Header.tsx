@@ -60,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({
           />
         </div>
       </div>
-      <div className="w-2/12 hidden xl:flex flex-wrap flex-col justify-center justify-around space-y-2">
+      <div className="w-2/12 hidden xl:flex items-center flex-col space-y-2">
         {!isLoggedIn ? (
           ''
         ) : (
@@ -75,7 +75,9 @@ const Header: React.FC<HeaderProps> = ({
         )}
         <ConnectModal />
         {isLoggedIn ? (
-          <p className="menu-link text-light-brown">Bonjour, {userPseudo}!</p>
+          <p className="menu-link text-light-brown text-center">
+            Bonjour, {userPseudo}!
+          </p>
         ) : (
           ''
         )}

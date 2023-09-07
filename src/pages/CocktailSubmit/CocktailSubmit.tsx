@@ -191,39 +191,35 @@ const CocktailSubmit: React.FC = () => {
                           }}
                         />
                         <div className="flex items-center justify-center">
-                          {ingredient.length > 1 && (
-                            <div className="">
-                              <button
-                                type="button"
-                                onClick={() => removeIngredient(index)}
-                                className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
-                              >
-                                <FaTrashAlt />
-                              </button>
-                            </div>
-                          )}
+                          <div className="">
+                            <button
+                              type="button"
+                              onClick={() => removeIngredient(index)}
+                              className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
+                            >
+                              <FaTrashAlt />
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div className="flex items-center justify-center">
-                      {ingredient.length > 1 && (
-                        <div className="">
-                          <button
-                            type="button"
-                            onClick={() =>
-                              appendIngredient({ name: '', quantity: '' })
-                            }
-                            className={`${
-                              isAddIngredientButtonDisabled
-                                ? 'bg-red-900 text-light-brown cursor-not-allowed '
-                                : `text-light-brown bg-light-gray hover:text-dark-gray hover:bg-dark-brown`
-                            } p-2 rounded text-xl`}
-                            disabled={isAddIngredientButtonDisabled}
-                          >
-                            <AiFillPlusCircle />
-                          </button>
-                        </div>
-                      )}
+                      <div className="">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            appendIngredient({ name: '', quantity: '' })
+                          }
+                          className={`${
+                            isAddIngredientButtonDisabled
+                              ? 'bg-red-900 text-light-brown cursor-not-allowed '
+                              : `text-light-brown bg-light-gray hover:text-dark-gray hover:bg-dark-brown`
+                          } p-2 rounded text-xl`}
+                          disabled={isAddIngredientButtonDisabled}
+                        >
+                          <AiFillPlusCircle />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}
