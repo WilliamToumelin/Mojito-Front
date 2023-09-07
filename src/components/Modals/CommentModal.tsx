@@ -54,7 +54,7 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
 
     try {
       const response = await fetch(
-        'http://celestin-j-server.eddi.cloud/api/comments/add',
+        'https://celestin-j-server.eddi.cloud/api/comments/add',
         {
           method: 'POST',
           body: JSON.stringify(data),

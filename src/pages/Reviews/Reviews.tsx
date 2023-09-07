@@ -33,7 +33,9 @@ const Reviews: React.FC = () => {
   }, [authToken, login, logout]);
 
   useEffect(() => {
-    fetch(`http://localhost:5174/api/cocktails/${selectedCocktailId}/comments`)
+    fetch(
+      `https://celestin-j-server.eddi.cloud/api/cocktails/${selectedCocktailId}/comments`
+    )
       .then((response) => response.json())
       .then((data: Cocktails) => {
         setCocktailData(data);
