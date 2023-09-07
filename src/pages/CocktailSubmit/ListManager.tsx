@@ -29,7 +29,7 @@ const ListManager: React.FC<Props> = ({
     }
   };
 
-  const onRemove = () => {
+  const removeSelect = () => {
     if (selectCount > 1) {
       setSelectCount(selectCount - 1);
     }
@@ -67,7 +67,7 @@ const ListManager: React.FC<Props> = ({
         {Array.from({ length: selectCount }).map((_, index) => (
           <div key={index} className="flex space-x-2">
             <select
-              {...register(`${category}_${index}`)}
+              {...register(`${category}_${index}`, { required: true })}
               className="text-light-brown text-base font-bold text-center w-48 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
             >
               <option className="" value="">
@@ -81,7 +81,7 @@ const ListManager: React.FC<Props> = ({
             </select>
             <input
               type="number"
-              {...register(`${category}_${index}_quantity`)}
+              {...register(`${category}_${index}_quantity`, { required: true })}
               className="text-light-brown text-xl font-bold text-center w-16 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
               min="1"
               max="99"
@@ -90,7 +90,6 @@ const ListManager: React.FC<Props> = ({
                   e.preventDefault();
                 }
                 if (
-                  // on vérifie si e.target est une instance de HTMLInputElement. Obligé car HTMLInputElement est l'élément HTML qui a la propriété 'value'
                   e.target instanceof HTMLInputElement &&
                   e.target.value.length >= 2
                 ) {
@@ -121,7 +120,7 @@ const ListManager: React.FC<Props> = ({
           <div className="">
             <button
               type="button"
-              onClick={onRemove}
+              onClick={removeSelect}
               className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
             >
               <FaTrashAlt />
