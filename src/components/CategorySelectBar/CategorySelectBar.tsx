@@ -19,7 +19,7 @@ const CategorySelectBar: React.FC<CategorySelectBarProps> = ({
   const [categoriesData, setCategoriesData] = useState<Category[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:5174/api/categories')
+    fetch('http://celestin-j-server.eddi.cloud/api/categories')
       .then((response) => response.json())
       .then((data: Category[]) => {
         setCategoriesData(data);
