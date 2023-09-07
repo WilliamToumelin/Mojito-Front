@@ -36,26 +36,15 @@ const ListManager: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    unregister('alcools_0');
-    unregister('alcools_0_quantity');
-    unregister('alcools_1');
-    unregister('alcools_1_quantity');
-    unregister('alcools_2');
-    unregister('alcools_2_quantity');
+    const categories = ['alcools', 'aromates', 'softs'];
+    const indices = [0, 1, 2];
 
-    unregister('aromates_0');
-    unregister('aromates_0_quantity');
-    unregister('aromates_1');
-    unregister('aromates_1_quantity');
-    unregister('aromates_2');
-    unregister('aromates_2_quantity');
-
-    unregister('softs_0');
-    unregister('softs_0_quantity');
-    unregister('softs_1');
-    unregister('softs_1_quantity');
-    unregister('softs_2');
-    unregister('softs_2_quantity');
+    categories.forEach((item) => {
+      indices.forEach((index) => {
+        unregister(`${item}_${index}`);
+        unregister(`${item}_${index}_quantity`);
+      });
+    });
   }, [selectCount, unregister]);
 
   const isAddButtonDisabled = selectCount >= 3;

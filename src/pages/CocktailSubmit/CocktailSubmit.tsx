@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
@@ -28,7 +29,8 @@ const CocktailSubmit: React.FC = () => {
   }
 
   useEffect(() => {
-    fetch('https://celestin-j-server.eddi.cloud/api/propositions/data')
+    fetch('http://localhost:5174/api/propositions/data')
+      // fetch('https://celestin-j-server.eddi.cloud/api/propositions/data')
       .then((response) => response.json())
       .then((data: DataCocktailSubmit) => {
         setIngredientsList(data);
@@ -40,51 +42,22 @@ const CocktailSubmit: React.FC = () => {
     console.log(data, 'coucou');
 
     const cocktailUses = [];
-    if (data.alcools_0)
-      cocktailUses.push({
-        id: Number(data.alcools_0),
-        quantity: Number(data.alcools_0_quantity),
-      });
-    if (data.alcools_1)
-      cocktailUses.push({
-        id: Number(data.alcools_1),
-        quantity: Number(data.alcools_1_quantity),
-      });
-    if (data.alcools_2)
-      cocktailUses.push({
-        id: Number(data.alcools_2),
-        quantity: Number(data.alcools_2_quantity),
-      });
-    if (data.aromates_0)
-      cocktailUses.push({
-        id: Number(data.aromates_0),
-        quantity: Number(data.aromates_0_quantity),
-      });
-    if (data.aromates_1)
-      cocktailUses.push({
-        id: Number(data.aromates_1),
-        quantity: Number(data.aromates_1_quantity),
-      });
-    if (data.aromates_2)
-      cocktailUses.push({
-        id: Number(data.aromates_2),
-        quantity: Number(data.aromates_2_quantity),
-      });
-    if (data.softs_0)
-      cocktailUses.push({
-        id: Number(data.softs_0),
-        quantity: Number(data.softs_0_quantity),
-      });
-    if (data.softs_1)
-      cocktailUses.push({
-        id: Number(data.softs_1),
-        quantity: Number(data.softs_1_quantity),
-      });
-    if (data.softs_2)
-      cocktailUses.push({
-        id: Number(data.softs_2),
-        quantity: Number(data.softs_2_quantity),
-      });
+
+    const categories = ['alcools', 'aromates', 'softs'];
+
+    for (const category of categories) {
+      for (let i = 0; i < 3; i++) {
+        const id = `${category}_${i}`;
+        const quantity = `${id}_quantity`;
+
+        if (data[id]) {
+          cocktailUses.push({
+            id: Number(data[id]),
+            quantity: Number(data[quantity]),
+          });
+        }
+      }
+    }
 
     console.log(cocktailUses);
 
@@ -117,13 +90,15 @@ const CocktailSubmit: React.FC = () => {
           categoryCheck === 2 ||
           categoryCheck === 3
         ) {
-          output.categories.push(categoryCheck);
-        } else {
+          if (!output.categories.includes(categoryCheck)) {
+            output.categories.push(categoryCheck);
+          }
+        } else if (!output.categories.includes(4)) {
           output.categories.push(4);
         }
       }
     }
-    if (output.alcool === false) {
+    if (output.alcool === false && !output.categories.includes(5)) {
       output.categories.push(5);
     }
 
