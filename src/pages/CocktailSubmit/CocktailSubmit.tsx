@@ -48,11 +48,22 @@ const CocktailSubmit: React.FC = () => {
         const unit = `${id}_unit`;
 
         if (data[id]) {
-          cocktailUses.push({
+          const parsedUnit = Number(data[unit]);
+
+          const cocktailUse: {
+            ingredient: number;
+            quantity: number;
+            unit?: number;
+          } = {
             ingredient: Number(data[id]),
             quantity: Number(data[quantity]),
-            unit: Number(data[unit]),
-          });
+          };
+
+          if (!Number.isNaN(parsedUnit)) {
+            cocktailUse.unit = parsedUnit;
+          }
+
+          cocktailUses.push(cocktailUse);
         }
       }
     }
@@ -64,7 +75,7 @@ const CocktailSubmit: React.FC = () => {
       difficulty: Number(data.difficulty),
       preparation_time: Number(data.preparation_time),
       alcool: false,
-      user: 0,
+      user: userId,
       glass: Number(data.Verres),
       ice: Number(data.Glaces),
       technical: Number(data.Techniques),
