@@ -71,7 +71,6 @@ const CocktailSubmit: React.FC = () => {
       categories: [] as number[],
       steps: data.steps,
       cocktailUses,
-      unit: Number(data.units),
     };
 
     if (data.alcools_0) {
