@@ -225,18 +225,6 @@ const CocktailSubmit: React.FC = () => {
                 ))}
               </ul>
             </div>
-            {/* <div className="w-full pb-6">
-              <ul className="flex flex-wrap justify-center">
-                {ingredientsList?.ingredients?.map((category) => (
-                  <ListManager
-                    key={category.name}
-                    category={category.name}
-                    ingredients={category.ingredients}
-                    register={register}
-                  />
-                ))}
-              </ul>
-            </div>
 
             {/* Liste pour ajouter les verres, techniques, glaces  */}
             <div className="flex flex-wrap justify-evenly pt-8 w-full">

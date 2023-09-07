@@ -96,13 +96,6 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
           >
             X
           </button>
-          {isLoggedIn ? (
-            <li className="menu-link text-dark-brown">
-              Bienvenue, {userPseudo}
-            </li>
-          ) : (
-            ''
-          )}
           <li>
             <NavLink
               to="/"

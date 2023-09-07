@@ -165,7 +165,7 @@ const Cocktail: React.FC = () => {
 
               <div className="text-base items-center">
                 <p className="pb-6 text-center">Donnez votre avis !</p>
-                <div className="text-base flex items-center gap-8 justify-center">
+                <div className="text-base flex items-center flex-col lg:flex-row gap-8 justify-center">
                   {!isLoggedIn ? '' : <Rating />}
 
                   <Link

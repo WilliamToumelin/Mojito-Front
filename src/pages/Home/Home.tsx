@@ -87,15 +87,16 @@ const Home: React.FC<HomeProps> = ({
   );
 
   return (
-    <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh]">
+    <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh] ">
       <CookieConsentModal />
+
       <div
         style={{
           boxShadow: '#132226 0px 1px 22px',
         }}
         className={` ${
           !categoryId ? 'relative' : ''
-        } w-4/5 xl:w-4/6 h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl pb-3 bg-dark-gray z-20`}
+        } w-4/5 xl:w-4/6 h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl pb-3 bg-dark-gray z-20 `}
       >
         {/* Haut du composant avec le bouton dependant de SI PAS DE CATEGORYID avec top 5 ou liste complète */}
         {!categoryId ? (
@@ -105,9 +106,9 @@ const Home: React.FC<HomeProps> = ({
                 {displayMode ? 'Le top 5' : 'Tous nos cocktails'}
               </h1>
             </div>
-            <div className="block m-auto mb-5">
+            <div className="block text-center mb-5">
               <button
-                className="text-dark-brown text-6xl animate-bounce"
+                className="text-dark-brown text-5xl md:text-6xl mx-auto animate-bounce"
                 type="button"
                 onClick={handleToggle}
               >
@@ -130,7 +131,7 @@ const Home: React.FC<HomeProps> = ({
           </>
         )}
 
-        <div className="flex px-2 md:px-12 pt-9">
+        <div className="flex px-2 md:px-12 pt-9 animate-fade-in-down">
           <ul className="w-full">
             {/* Liste de cocktail filré avec categoryId sinon avec la coniditon " : " alors on utlise le DisplayMode avec le Top5 et ListeComplète pour filtrer les cocktails */}
             {categoryId

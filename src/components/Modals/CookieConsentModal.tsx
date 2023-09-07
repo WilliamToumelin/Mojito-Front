@@ -20,7 +20,6 @@ const CookieConsentModal = () => {
 
   const handleReject = () => {
     // L'utilisateur a refusé les cookies, vous pouvez gérer cela selon vos besoins
-    // Par exemple, afficher un message de refus ou limiter certaines fonctionnalités
     setConsent(false);
   };
 
@@ -33,7 +32,7 @@ const CookieConsentModal = () => {
       className={`fixed ${
         consent
           ? 'opacity-0 pointer-events-none z-0 bottom-100 right-100 transition-opacity duration-300'
-          : 'z-30 bottom-20 right-50'
+          : 'z-30 bottom-20 right-30'
       }`}
     >
       <div className="bg-dark-gray p-4 h-[30vh] w-[40vw] rounded border-4 border-light-gray">
