@@ -61,8 +61,7 @@ const CocktailSubmit: React.FC = () => {
 
           if (!Number.isNaN(parsedUnit)) {
             cocktailUse.unit = parsedUnit;
-          }
-
+          } else cocktailUse.unit = 0;
           cocktailUses.push(cocktailUse);
         }
       }
@@ -159,7 +158,7 @@ const CocktailSubmit: React.FC = () => {
           onSubmit={handleSubmit(handleCockailSubmit)}
           className="animate-fade-in-down"
         >
-          <div className="py-6 px-12">
+          <div className="py-6 px-3 md:px-12">
             <div className="w-full space-y-2 pb-8">
               <div className="text-center text-lg text-light-gray pb-12 space-y-1">
                 <p>
@@ -167,26 +166,34 @@ const CocktailSubmit: React.FC = () => {
                   voici quelques <span className="text-dark-brown">règles</span>{' '}
                   pour que tout se passe bien :
                 </p>
-                <p>
-                  - Il est <span className="text-dark-brown">obligatoire</span>{' '}
-                  de choisir au moins un soft ou un alcool
-                </p>
-                <p>
-                  - Tout les autres champs sont{' '}
-                  <span className="text-dark-brown">obligatoires</span>{' '}
-                </p>
-                <p>
-                  - Vous avez un{' '}
-                  <span className="text-dark-brown">maximum de 10 étapes</span>{' '}
-                  pour expliquer la confection de votre création
-                </p>
-                <p>
-                  - La validation de votre cocktail est à{' '}
-                  <span className="text-dark-brown">
-                    l&apos;appréciation de la modération
-                  </span>{' '}
-                </p>
-                <p>Enjoy !</p>
+                <div className="w-full md:w-1/2 text-left m-auto pt-3">
+                  <p>
+                    - Il est{' '}
+                    <span className="text-dark-brown">obligatoire</span> de
+                    choisir au moins un{' '}
+                    <span className="text-dark-brown">soft</span> ou un{' '}
+                    <span className="text-dark-brown">alcool</span>.
+                  </p>
+                  <p>
+                    - Tout les autres champs sont{' '}
+                    <span className="text-dark-brown">obligatoires</span>.
+                  </p>
+                  <p>
+                    - Vous avez un{' '}
+                    <span className="text-dark-brown">
+                      maximum de 10 étapes
+                    </span>{' '}
+                    pour expliquer la confection de votre création.
+                  </p>
+                  <p>
+                    - La validation de votre cocktail est à{' '}
+                    <span className="text-dark-brown">
+                      l&apos;appréciation de la modération
+                    </span>
+                    .
+                  </p>
+                </div>
+                <p className="text-light-brown text-xl pt-3">Enjoy !</p>
               </div>
               <label
                 htmlFor="name"
@@ -197,7 +204,7 @@ const CocktailSubmit: React.FC = () => {
               <div className="flex justify-center">
                 <input
                   type="text"
-                  className="border-xs rounded p-2 w-1/5 bg-light-brown text-dark-gray hover:scale-105 duration-500"
+                  className="border-xs rounded p-2 w-2/3 md:w-2/5 bg-light-brown text-dark-gray hover:scale-105 duration-500"
                   {...register(`name`)}
                 />
               </div>
@@ -274,9 +281,9 @@ const CocktailSubmit: React.FC = () => {
               </div>
             </div>
             {/* Temps de préparation  */}
-            <div className="flex flex-wrap justify-evenly py-2 w-full">
-              <div className="block justify-center">
-                <h3 className="text-2xl font-medium mb-4 text-center">
+            <div className="flex flex-wrap justify-evenly py-2 w-full items-center">
+              <div className="block align-center ">
+                <h3 className="text-2xl font-medium text-center">
                   Temps de préparation
                 </h3>
                 <div className="flex justify-center items-center">
@@ -303,10 +310,8 @@ const CocktailSubmit: React.FC = () => {
                 </div>
               </div>
               {/* Difficulté  */}
-              <div className="">
-                <h3 className="text-2xl font-medium mb-4 text-center">
-                  Difficulté
-                </h3>
+              <div className="block align-center mt-2">
+                <h3 className="text-2xl font-medium text-center">Difficulté</h3>
                 <select
                   {...register(`difficulty`)}
                   className="text-light-brown text-base font-bold text-center w-48 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
@@ -325,13 +330,13 @@ const CocktailSubmit: React.FC = () => {
             <h3 className="text-2xl font-medium mb-4 text-center">
               Les étapes
             </h3>
-            <ul className="text-center ">
+            <ul className="w-4/5 text-center flex flex-wrap justify-center">
               {stepsFields.map((item, index) => (
                 <li
                   key={item.id}
                   className="border-xs rounded bg-dark-gery text-dark-gray hover:scale-105 duration-500 flex items-center"
                 >
-                  <div className="p-2">
+                  <div className="p-2 flex items-center">
                     <textarea
                       {...register(`steps.${index}.content`)}
                       className="rounded bg-light-brown text-dark-gray"
@@ -368,7 +373,7 @@ const CocktailSubmit: React.FC = () => {
               <h3 className="text-2xl font-medium mb-2">Description</h3>
               <textarea
                 {...register('description')}
-                className="border-xs rounded p-2 w-1/2 bg-light-brown text-dark-gray hover:scale-105 duration-500"
+                className="border-xs rounded p-2 w-4/5 md:w-1/2 bg-light-brown text-dark-gray hover:scale-105 duration-500"
                 rows={3}
               />
             </div>
@@ -379,7 +384,7 @@ const CocktailSubmit: React.FC = () => {
               </h3>
               <input
                 {...register('picture')}
-                className="border-xs rounded p-2 w-1/2 bg-light-brown text-dark-gray hover:scale-105 duration-500"
+                className="border-xs rounded p-2 w-4/5 md:w-1/2 bg-light-brown text-dark-gray hover:scale-105 duration-500"
               />
             </div>
             <div className="flex justify-center py-2">

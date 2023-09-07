@@ -54,9 +54,12 @@ const ListManager: React.FC<Props> = ({
   return (
     <div className="p-2">
       <h3 className="text-2xl text-center">{category}</h3>
-      <div key={category} className="block p-2 space-y-2">
+      <div key={category} className="block p-2 space-y-2 ">
         {Array.from({ length: selectCount }).map((_, index) => (
-          <div key={index} className="d-flex space-x-2">
+          <div
+            key={index}
+            className="flex flex-col md:flex-row flex-wrap space-x-2 justify-center items-center"
+          >
             <select
               {...register(`${category}_${index}`, { required: true })}
               className="text-light-brown text-base font-bold text-center w-48 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
@@ -77,7 +80,7 @@ const ListManager: React.FC<Props> = ({
             <input
               type="number"
               {...register(`${category}_${index}_quantity`, { required: true })}
-              className="text-light-brown text-xl font-bold text-center w-16 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
+              className="text-light-brown text-xl font-bold text-center w-16 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray mt-2 md:mt-0"
               min="1"
               max="99"
               onKeyPress={(e) => {
@@ -96,11 +99,11 @@ const ListManager: React.FC<Props> = ({
               <select
                 {...register(`${category}_${index}_unit`, { required: true })}
                 className="text-light-brown text-xl font-bold text-center w-16
-    h-12 rounded p-2 bg-light-gray border border-light-brown
-    hover:bg-dark-brown hover:text-dark-gray"
+                          h-12 rounded p-2 bg-light-gray border border-light-brown mt-2 md:mt-0
+                        hover:bg-dark-brown hover:text-dark-gray"
               >
                 <option className="" value="">
-                  A vous de jouer !
+                  -
                 </option>
                 {units.map((unit) => (
                   <option
