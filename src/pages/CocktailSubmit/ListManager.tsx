@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiFillPlusCircle } from 'react-icons/ai';
-import { FieldValues, UseFormRegister } from 'react-hook-form';
+import {
+  FieldValues,
+  UseFormRegister,
+  UseFormUnregister,
+} from 'react-hook-form';
 import { FaTrashAlt } from 'react-icons/fa';
 import { Ingredients } from '../../types/types';
 
@@ -8,9 +12,15 @@ interface Props {
   category: string;
   ingredients: Ingredients[];
   register: UseFormRegister<FieldValues>;
+  unregister: UseFormUnregister<FieldValues>;
 }
 
-const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
+const ListManager: React.FC<Props> = ({
+  category,
+  ingredients,
+  register,
+  unregister,
+}) => {
   const [selectCount, setSelectCount] = useState(1);
 
   const addSelect = () => {
@@ -24,6 +34,29 @@ const ListManager: React.FC<Props> = ({ category, ingredients, register }) => {
       setSelectCount(selectCount - 1);
     }
   };
+
+  useEffect(() => {
+    unregister('alcools_0');
+    unregister('alcools_0_quantity');
+    unregister('alcools_1');
+    unregister('alcools_1_quantity');
+    unregister('alcools_2');
+    unregister('alcools_2_quantity');
+
+    unregister('aromates_0');
+    unregister('aromates_0_quantity');
+    unregister('aromates_1');
+    unregister('aromates_1_quantity');
+    unregister('aromates_2');
+    unregister('aromates_2_quantity');
+
+    unregister('softs_0');
+    unregister('softs_0_quantity');
+    unregister('softs_1');
+    unregister('softs_1_quantity');
+    unregister('softs_2');
+    unregister('softs_2_quantity');
+  }, [selectCount, unregister]);
 
   const isAddButtonDisabled = selectCount >= 3;
 

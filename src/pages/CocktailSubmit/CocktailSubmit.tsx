@@ -12,7 +12,7 @@ import SquaredButton from '../../components/common/buttons/SquaredButton';
 import ListManager from './ListManager';
 
 const CocktailSubmit: React.FC = () => {
-  const { register, handleSubmit, watch, control } = useForm();
+  const { register, unregister, handleSubmit, watch, control } = useForm();
   const [ingredientsList, setIngredientsList] =
     useState<DataCocktailSubmit | null>(null);
   const techniques = watch('Techniques');
@@ -37,11 +37,47 @@ const CocktailSubmit: React.FC = () => {
   }, []);
 
   const handleCockailSubmit = async (data: FieldValues) => {
-    const cocktailUses = data.ingredients.map((ingredient: any) => ({
-      ingredient: ingredient.name,
-      quantity: parseFloat(ingredient.quantity), // Conversion en float
-      unit: 1,
-    }));
+    console.log(data);
+
+    const cocktailUses = [];
+    if (data.alcools_0)
+      cocktailUses.push({
+        id: data.alcools_0,
+        quantity: data.alcools_0_quantity,
+      });
+    if (data.alcools_1)
+      cocktailUses.push({
+        id: data.alcools_1,
+        quantity: data.alcools_1_quantity,
+      });
+    if (data.alcools_2)
+      cocktailUses.push({
+        id: data.alcools_2,
+        quantity: data.alcools_2_quantity,
+      });
+    if (data.aromates_0)
+      cocktailUses.push({
+        id: data.aromates_0,
+        quantity: data.aromates_0_quantity,
+      });
+    if (data.aromates_1)
+      cocktailUses.push({
+        id: data.aromates_1,
+        quantity: data.aromates_1_quantity,
+      });
+    if (data.aromates_2)
+      cocktailUses.push({
+        id: data.aromates_2,
+        quantity: data.aromates_2_quantity,
+      });
+    if (data.softs_0)
+      cocktailUses.push({ id: data.softs_0, quantity: data.softs_0_quantity });
+    if (data.softs_1)
+      cocktailUses.push({ id: data.softs_1, quantity: data.softs_1_quantity });
+    if (data.softs_2)
+      cocktailUses.push({ id: data.softs_2, quantity: data.softs_2_quantity });
+
+    console.log(cocktailUses);
 
     const output = {
       name: data.name,
@@ -226,6 +262,7 @@ const CocktailSubmit: React.FC = () => {
                     category={category.name}
                     ingredients={category.ingredients}
                     register={register}
+                    unregister={unregister}
                   />
                 ))}
               </ul>
