@@ -21,7 +21,7 @@ const ListManager: React.FC<Props> = ({
   register,
   unregister,
 }) => {
-  const [selectCount, setSelectCount] = useState(1);
+  const [selectCount, setSelectCount] = useState(0);
 
   const addSelect = () => {
     if (selectCount < 3) {
@@ -30,7 +30,7 @@ const ListManager: React.FC<Props> = ({
   };
 
   const removeSelect = () => {
-    if (selectCount > 1) {
+    if (selectCount >= 0) {
       setSelectCount(selectCount - 1);
     }
   };
@@ -65,7 +65,7 @@ const ListManager: React.FC<Props> = ({
       <h3 className="text-2xl text-center">{category}</h3>
       <div key={category} className="block p-3 space-y-2">
         {Array.from({ length: selectCount }).map((_, index) => (
-          <div key={index} className="flex space-x-2">
+          <div key={index} className="d-flex space-x-2">
             <select
               {...register(`${category}_${index}`, { required: true })}
               className="text-light-brown text-base font-bold text-center w-48 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
@@ -116,7 +116,7 @@ const ListManager: React.FC<Props> = ({
           </button>
         </div>
 
-        {selectCount > 1 && (
+        {selectCount > 0 && (
           <div className="">
             <button
               type="button"
