@@ -43,7 +43,7 @@ const CocktailSubmit: React.FC = () => {
     const cocktailUses = data.ingredients.map((ingredient: any) => ({
       ingredient: ingredient.name,
       quantity: parseFloat(ingredient.quantity), // Conversion en float
-      unit: 1,
+      unit: 8,
     }));
 
     const output = {
@@ -191,37 +191,53 @@ const CocktailSubmit: React.FC = () => {
                           }}
                         />
                         <div className="flex items-center justify-center">
-                          <div className="">
-                            <button
-                              type="button"
-                              onClick={() => removeIngredient(index)}
-                              className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
-                            >
-                              <FaTrashAlt />
-                            </button>
-                          </div>
+                          {ingredient.length > 1 && (
+                            <div className="">
+                              <button
+                                type="button"
+                                onClick={() => removeIngredient(index)}
+                                className="bg-red-900 text-xl p-2 rounded text-white hover:bg-red-700"
+                              >
+                                <FaTrashAlt />
+                              </button>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
                     <div className="flex items-center justify-center">
-                      <div className="">
-                        <button
-                          type="button"
-                          onClick={() =>
-                            appendIngredient({ name: '', quantity: '' })
-                          }
-                          className={`${
-                            isAddIngredientButtonDisabled
-                              ? 'bg-red-900 text-light-brown cursor-not-allowed '
-                              : `text-light-brown bg-light-gray hover:text-dark-gray hover:bg-dark-brown`
-                          } p-2 rounded text-xl`}
-                          disabled={isAddIngredientButtonDisabled}
-                        >
-                          <AiFillPlusCircle />
-                        </button>
-                      </div>
+                      {ingredient.length > 1 && (
+                        <div className="">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              appendIngredient({ name: '', quantity: '' })
+                            }
+                            className={`${
+                              isAddIngredientButtonDisabled
+                                ? 'bg-red-900 text-light-brown cursor-not-allowed '
+                                : `text-light-brown bg-light-gray hover:text-dark-gray hover:bg-dark-brown`
+                            } p-2 rounded text-xl`}
+                            disabled={isAddIngredientButtonDisabled}
+                          >
+                            <AiFillPlusCircle />
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
+                ))}
+              </ul>
+            </div>
+            {/* <div className="w-full pb-6">
+              <ul className="flex flex-wrap justify-center">
+                {ingredientsList?.ingredients?.map((category) => (
+                  <ListManager
+                    key={category.name}
+                    category={category.name}
+                    ingredients={category.ingredients}
+                    register={register}
+                  />
                 ))}
               </ul>
             </div>
