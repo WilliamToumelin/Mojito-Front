@@ -45,23 +45,23 @@ export type Cocktails = {
   comments: Comment[];
 };
 
-export type Ingredient = {
+export type Ingredients = {
   id: number;
   name: string;
 };
 
-export type IngredientCategory = {
+export type Categories = {
   length: number;
   id: Key | undefined;
   name: string;
-  ingredients: Ingredient[];
+  ingredients: Ingredients[];
 };
 
-export type IngredientsData = {
+export type DataCocktailSubmit = {
   find(arg0: (category: any) => boolean): unknown;
   steps: string[];
   alcool: string;
-  ingredients: IngredientCategory[];
+  ingredients: Categories[];
   glass: { id: number; name: string }[];
   ices: { id: number; name: string }[];
   technicals: { id: number; name: string }[];

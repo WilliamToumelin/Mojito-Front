@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { FaTrashAlt } from 'react-icons/fa';
-import { Ingredient } from '../../types/types';
+import { Ingredients } from '../../types/types';
 
 interface Props {
   category: string;
-  ingredients: Ingredient[];
+  ingredients: Ingredients[];
   register: UseFormRegister<FieldValues>;
 }
 

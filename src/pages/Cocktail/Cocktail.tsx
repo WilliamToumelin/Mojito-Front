@@ -69,7 +69,7 @@ const Cocktail: React.FC = () => {
                       <div className="mr-1">
                         <FaCocktail className="text-3xl md:text-4xl" />
                       </div>
-                      <p className="ml-2 text-lg md:text-2xl mr-1 font-bold text-light-brown">
+                      <p className="ml-2 text-lg md:text-2xl mr-1 text-light-brown">
                         {cocktailDetails.rating} / 5
                       </p>
                     </div>
@@ -88,7 +88,7 @@ const Cocktail: React.FC = () => {
                 </div>
                 <div className="p-2 text-2xl flex items-center">
                   <BsClockFill className="ml-2 text-3xl md:text-4xl" />
-                  <div className="pl-3 text-light-brown md:text-2xl">
+                  <div className="pl-3 text-light-brown text-lg md:text-2xl">
                     {cocktailDetails.preparation_time}{' '}
                     {cocktailDetails.preparation_time < 2
                       ? 'minute'
@@ -111,20 +111,20 @@ const Cocktail: React.FC = () => {
                   ))}
                 </ul>
               </div>
-              <div className="flex flex-wrap justify-between ">
-                <div className=" text-2xl flex items-center">
+              <div className="flex flex-wrap justify-between items-center">
+                <div className=" text-2xl flex items-center p-2">
                   <FaGlassMartiniAlt className="text-3xl md:text-4xl" />
                   <div className="pl-3 text-light-brown">
                     {cocktailDetails.glass.name}
                   </div>
                 </div>
-                <div className=" text-2xl flex items-center">
+                <div className=" text-2xl flex items-center p-2">
                   <GiIceCube className="text-3xl md:text-4xl" />
                   <div className="pl-3 text-light-brown">
                     {cocktailDetails.ice.name}
                   </div>
                 </div>
-                <div className=" text-2xl flex items-center pt-3">
+                <div className=" text-2xl flex items-center p-2">
                   <IoIosCog className="text-3xl md:text-4xl" />
                   <div className="pl-3 text-light-brown">
                     {cocktailDetails.technical.name}

@@ -6,18 +6,15 @@ import { FieldValues, useForm, useFieldArray } from 'react-hook-form';
 import { FaTrashAlt } from 'react-icons/fa';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import Cookies from 'js-cookie';
-import { IngredientsData } from '../../types/types';
+import { DataCocktailSubmit } from '../../types/types';
 import RadioAdd from './RadioAdd';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 import ListManager from './ListManager';
 
 const CocktailSubmit: React.FC = () => {
   const { register, handleSubmit, watch, control } = useForm();
-  const [ingredientsOptions, setIngredientsOptions] = useState([
-    { name: '', quantity: '' },
-  ]);
   const [ingredientsList, setIngredientsList] =
-    useState<IngredientsData | null>(null);
+    useState<DataCocktailSubmit | null>(null);
   const techniques = watch('Techniques');
   const ices = watch('Glaces');
   const glass = watch('Verres');
@@ -33,7 +30,7 @@ const CocktailSubmit: React.FC = () => {
   useEffect(() => {
     fetch('http://localhost:5174/api/propositions/data')
       .then((response) => response.json())
-      .then((data: IngredientsData) => {
+      .then((data: DataCocktailSubmit) => {
         setIngredientsList(data);
       })
       .catch((err) => console.error(err));
@@ -102,15 +99,13 @@ const CocktailSubmit: React.FC = () => {
   const isAddIngredientButtonDisabled = stepsFields.length >= 3;
 
   const [selectCount, setSelectCount] = useState(1);
-  const appendIngredient = (optionIndex: any) => {
-    if (selectCount < 3) {
-      setSelectCount(selectCount + 1);
-    }
-  };
 
-  const removeIngredient = (optionIndex: any) => {
+  const appendIngredient = () => {
+    setSelectCount((prevstate) => prevstate + 1);
+  };
+  const removeIngredient = () => {
     if (selectCount > 1) {
-      setSelectCount(selectCount - 1);
+      setSelectCount((prevstate) => prevstate - 1);
     }
   };
 
@@ -148,7 +143,7 @@ const CocktailSubmit: React.FC = () => {
 
             {/* Liste pour ajouter les ingredients */}
             <div className="w-full pb-6">
-              <ul className="flex flex-wrap justify-center">
+              {/* <ul className="flex flex-wrap justify-center">
                 {ingredientsList?.ingredients.map((ingredient, index) => (
                   <div className="p-2" key={ingredient.id}>
                     <h3 className="text-2xl text-center">{ingredient.name}</h3>
@@ -222,6 +217,16 @@ const CocktailSubmit: React.FC = () => {
                       </div>
                     </div>
                   </div>
+                ))}
+              </ul> */}
+              <ul>
+                {ingredientsList?.ingredients?.map((category) => (
+                  <ListManager
+                    key={category.name}
+                    category={category.name}
+                    ingredients={category.ingredients}
+                    register={register}
+                  />
                 ))}
               </ul>
             </div>

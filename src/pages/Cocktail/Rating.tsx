@@ -45,7 +45,7 @@ const Rating = () => {
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`, // Ajouter le token JWT aux en-têtes
+          Authorization: `Bearer ${authToken}`,
         },
       });
       if (response.ok) {

@@ -21,9 +21,10 @@ const CookieConsentModal = () => {
   const handleReject = () => {
     // L'utilisateur a refusé les cookies, vous pouvez gérer cela selon vos besoins
     setConsent(false);
+    Cookies.set('cookieConsent', 'false', { expires: 1 }); // Expire dans 1 jour
   };
 
-  if (consent) {
+  if (consent === false || consent === true) {
     return null; // Ne rien afficher si l'utilisateur a déjà donné son consentement
   }
 
