@@ -37,7 +37,7 @@ const ConnectModal: FC = () => {
   }) => {
     try {
       const response = await fetch(
-        'celestin-j-server.eddi.cloud/api/login_check',
+        'http://celestin-j-server.eddi.cloud/api/login_check',
         {
           method: 'POST',
           body: JSON.stringify(connectData),
