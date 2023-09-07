@@ -60,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({
           />
         </div>
       </div>
-      <div className="w-2/12 hidden xl:flex flex-wrap justify-around space-y-2">
+      <div className="w-2/12 hidden xl:flex flex-wrap flex-col justify-center justify-around space-y-2">
         {!isLoggedIn ? (
           ''
         ) : (
