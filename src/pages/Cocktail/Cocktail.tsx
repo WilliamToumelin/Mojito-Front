@@ -23,7 +23,7 @@ const Cocktail: React.FC = () => {
 
   useEffect(() => {
     fetch(
-      `http://celestin-j-server.eddi.cloud/api/cocktails/${selectedCocktailId}`
+      `https://celestin-j-server.eddi.cloud/api/cocktails/${selectedCocktailId}`
     )
       .then((response) => response.json())
       .then((data) => {

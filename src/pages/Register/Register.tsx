@@ -87,7 +87,7 @@ const Register: React.FC = () => {
       // La validation a réussi, vous pouvez maintenant envoyer les données au serveur
 
       const response = await fetch(
-        'http://celestin-j-server.eddi.cloud/api/register',
+        'https://celestin-j-server.eddi.cloud/api/register',
         {
           method: 'POST',
           body: JSON.stringify(data),

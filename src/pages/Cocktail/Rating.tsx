@@ -41,7 +41,7 @@ const Rating = () => {
 
     try {
       const response = await fetch(
-        'http://celestin-j-server.eddi.cloud/api/ratings/add',
+        'https://celestin-j-server.eddi.cloud/api/ratings/add',
         {
           method: 'POST',
           body: JSON.stringify(data),
