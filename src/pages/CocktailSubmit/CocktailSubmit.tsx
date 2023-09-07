@@ -40,10 +40,16 @@ const CocktailSubmit: React.FC = () => {
   }, []);
 
   const handleCockailSubmit = async (data: FieldValues) => {
+    const cocktailUses = data.ingredients.map((ingredient: any) => ({
+      ingredient: ingredient.name,
+      quantity: parseFloat(ingredient.quantity), // Conversion en float
+      unit: 1,
+    }));
+
     const output = {
       name: data.name,
       description: data.description,
-      picture: '',
+      picture: data.picture,
       difficulty: Number(data.difficulty),
       preparation_time: Number(data.preparation_time),
       alcool: false,
@@ -53,11 +59,7 @@ const CocktailSubmit: React.FC = () => {
       technical: data.Techniques,
       categories: [],
       steps: data.steps,
-      cocktailUses: [] as {
-        quantity: number;
-        unit: number;
-        ingredient: string;
-      }[],
+      cocktailUses,
     };
 
     for (let i = 0; i < output.steps.length; i += 1) {
@@ -145,7 +147,7 @@ const CocktailSubmit: React.FC = () => {
             </div>
 
             {/* Liste pour ajouter les ingredients */}
-            {/* <div className="w-full pb-6">
+            <div className="w-full pb-6">
               <ul className="flex flex-wrap justify-center">
                 {ingredientsList?.ingredients.map((ingredient, index) => (
                   <div className="p-2" key={ingredient.id}>
@@ -170,7 +172,9 @@ const CocktailSubmit: React.FC = () => {
                         </select>
                         <input
                           type="number"
-                          {...register(`ingredients[${index}].quantity`)}
+                          {...register(`ingredients[${index}].quantity`, {
+                            setValueAs: (value) => Number(value), // Convertit la valeur en float lors de la soumission
+                          })}
                           className="text-light-brown text-xl font-bold text-center w-16 h-12 rounded p-2 bg-light-gray border border-light-brown hover:bg-dark-brown hover:text-dark-gray"
                           min="1"
                           max="99"
@@ -224,8 +228,8 @@ const CocktailSubmit: React.FC = () => {
                   </div>
                 ))}
               </ul>
-            </div> */}
-            <div className="w-full pb-6">
+            </div>
+            {/* <div className="w-full pb-6">
               <ul className="flex flex-wrap justify-center">
                 {ingredientsList?.ingredients?.map((category) => (
                   <ListManager
@@ -383,6 +387,15 @@ const CocktailSubmit: React.FC = () => {
                 {...register('description')}
                 className="border-xs rounded p-1 w-1/2 bg-light-brown text-dark-gray hover:scale-105 duration-500"
                 rows={3}
+              />
+            </div>
+            <div className="m-5 text-center">
+              <h3 className="text-2xl font-medium mb-4 text-center">
+                La photo du cocktail
+              </h3>
+              <input
+                {...register('picture')}
+                className="border-xs rounded p-1 w-1/2 bg-light-brown text-dark-gray hover:scale-105 duration-500"
               />
             </div>
             <div className="flex justify-center py-2">
