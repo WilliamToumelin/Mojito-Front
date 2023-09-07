@@ -42,9 +42,7 @@ const CocktailSubmit: React.FC = () => {
     console.log(data, 'coucou');
 
     const cocktailUses = [];
-
     const categories = ['alcools', 'aromates', 'softs'];
-
     for (const category of categories) {
       for (let i = 0; i < 3; i++) {
         const id = `${category}_${i}`;
@@ -52,8 +50,9 @@ const CocktailSubmit: React.FC = () => {
 
         if (data[id]) {
           cocktailUses.push({
-            id: Number(data[id]),
+            ingredient: Number(data[id]),
             quantity: Number(data[quantity]),
+            // unit: Number(data[unit]),
           });
         }
       }
@@ -75,6 +74,7 @@ const CocktailSubmit: React.FC = () => {
       categories: [] as number[],
       steps: data.steps,
       cocktailUses,
+      // unit:
     };
 
     if (data.alcools_0) {
