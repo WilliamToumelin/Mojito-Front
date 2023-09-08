@@ -61,7 +61,7 @@ const CocktailSubmit: React.FC = () => {
 
           if (!Number.isNaN(parsedUnit)) {
             cocktailUse.unit = parsedUnit;
-          } else cocktailUse.unit = 0;
+          } else cocktailUse.unit = 1;
           cocktailUses.push(cocktailUse);
         }
       }
@@ -87,25 +87,25 @@ const CocktailSubmit: React.FC = () => {
       output.alcool = true;
     }
 
-    for (let i = 0; i < 3; i += 1) {
+    for (let i = 1; i < 4; i += 1) {
       const categoryCheck = data[`alcools_${i}`];
       if (categoryCheck) {
         if (
-          categoryCheck === 0 ||
           categoryCheck === 1 ||
           categoryCheck === 2 ||
-          categoryCheck === 3
+          categoryCheck === 3 ||
+          categoryCheck === 4
         ) {
           if (!output.categories.includes(categoryCheck)) {
             output.categories.push(categoryCheck);
           }
-        } else if (!output.categories.includes(4)) {
-          output.categories.push(4);
+        } else if (!output.categories.includes(5)) {
+          output.categories.push(5);
         }
       }
     }
-    if (output.alcool === false && !output.categories.includes(5)) {
-      output.categories.push(5);
+    if (output.alcool === false && !output.categories.includes(6)) {
+      output.categories.push(6);
     }
 
     for (let i = 0; i < output.steps.length; i += 1) {
