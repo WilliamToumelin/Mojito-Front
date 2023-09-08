@@ -11,6 +11,7 @@ import { Cocktails } from '../../types/types';
 import { useAuth } from '../../contexts/AuthProvider';
 import Hr from '../../components/common/Hr/Hr';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
+import { apiHostName } from '../../env-config';
 
 const Cocktail: React.FC = () => {
   const [cocktailDetails, setCocktailDetails] = useState<Cocktails | null>(

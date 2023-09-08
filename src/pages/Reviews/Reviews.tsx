@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import React, { useCallback, useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 import CommentModal from '../../components/Modals/CommentModal';
 import { Cocktails } from '../../types/types';
 import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
-import Cookies from 'js-cookie';
 import { apiHostName } from '../../env-config';
 
 function formatDate(data: string) {

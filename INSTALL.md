@@ -40,7 +40,7 @@ Pour ce faire :
       # Exemple : ../../../Spe-React
 
       # lancer le script
-      ./React-modele-vite/bin/install.sh
+      ./React-modele-vite/bin/install.shcd
       # si nécessaire, donner les droits à ce fichier :
       # `chmod +x ./React-modele-vite/bin/install.sh`
       # (un `sudo` peut être nécessaire)
