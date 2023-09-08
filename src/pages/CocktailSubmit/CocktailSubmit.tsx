@@ -29,7 +29,7 @@ const CocktailSubmit: React.FC = () => {
   }
 
   useEffect(() => {
-    fetch('http://localhost:5174/api/propositions/data')
+    fetch('https://celestin-j-server.eddi.cloud/api/propositions/data')
       // fetch('https://celestin-j-server.eddi.cloud/api/propositions/data')
       .then((response) => response.json())
       .then((data: DataCocktailSubmit) => {
