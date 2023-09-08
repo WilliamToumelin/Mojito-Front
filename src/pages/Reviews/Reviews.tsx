@@ -34,7 +34,7 @@ const Reviews: React.FC = () => {
 
   useEffect(() => {
     fetch(
-      `http://williammbakop-server.eddi.cloud/api/cocktails/${selectedCocktailId}/comments`
+      `https://williammbakop-server.eddi.cloud/api/cocktails/${selectedCocktailId}/comments`
     )
       .then((response) => response.json())
       .then((data: Cocktails) => {
