@@ -11,6 +11,7 @@ import CocktailItem from '../../components/common/CocktailItem/CocktailItem';
 import SideBar from '../../components/SideBar/SideBar';
 import { useAuth } from '../../contexts/AuthProvider';
 import CookieConsentModal from '../../components/Modals/CookieConsentModal';
+import { apiHostName } from '../../env-config';
 
 interface HomeProps {
   categoryName: string | null;
@@ -52,7 +53,7 @@ const Home: React.FC<HomeProps> = ({
   }, [authToken, login, logout]);
 
   useEffect(() => {
-    fetch('https://celestin-j-server.eddi.cloud/api/cocktails')
+    fetch(`${apiHostName}/api/cocktails`)
       .then((response) => response.json())
       .then((data: Cocktails[]) => {
         setCocktailList(data);

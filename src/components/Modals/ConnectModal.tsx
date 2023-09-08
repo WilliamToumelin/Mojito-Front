@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../common/buttons/SquaredButton';
 import InputForm from '../common/InputForm/InputForm';
+import { apiHostName } from '../../env-config';
 
 const ConnectModal: FC = () => {
   const {
@@ -36,16 +37,13 @@ const ConnectModal: FC = () => {
     password: string;
   }) => {
     try {
-      const response = await fetch(
-        'https://celestin-j-server.eddi.cloud/api/login_check',
-        {
-          method: 'POST',
-          body: JSON.stringify(connectData),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${apiHostName}/api/login_check`, {
+        method: 'POST',
+        body: JSON.stringify(connectData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       if (response.ok) {
         const responseData = await response.json();
         const { token } = responseData;

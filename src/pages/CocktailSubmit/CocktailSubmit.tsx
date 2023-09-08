@@ -11,6 +11,7 @@ import { DataCocktailSubmit } from '../../types/types';
 import RadioAdd from './RadioAdd';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 import ListManager from './ListManager';
+import { apiHostName } from '../../env-config';
 
 const CocktailSubmit: React.FC = () => {
   const { register, unregister, handleSubmit, watch, control } = useForm();
@@ -29,8 +30,7 @@ const CocktailSubmit: React.FC = () => {
   }
 
   useEffect(() => {
-    fetch('http://localhost:5174/api/propositions/data')
-      // fetch('https://celestin-j-server.eddi.cloud/api/propositions/data')
+    fetch(`${apiHostName}/api/propositions/data`)
       .then((response) => response.json())
       .then((data: DataCocktailSubmit) => {
         setIngredientsList(data);
@@ -113,7 +113,7 @@ const CocktailSubmit: React.FC = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5174/api/cocktails/add', {
+      const response = await fetch(`${apiHostName}/api/cocktails/add`, {
         method: 'POST',
         body: JSON.stringify(output),
         headers: {

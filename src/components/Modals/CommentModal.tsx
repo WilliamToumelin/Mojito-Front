@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import Cookies from 'js-cookie';
 import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../common/buttons/SquaredButton';
+import { apiHostName } from '../../env-config';
 
 // import './Modal.scss';
 
@@ -53,17 +54,14 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
     }
 
     try {
-      const response = await fetch(
-        'https://celestin-j-server.eddi.cloud/api/comments/add',
-        {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${authToken}`, // Ajouter le token JWT aux en-têtes
-          },
-        }
-      );
+      const response = await fetch(`${apiHostName}/api/comments/add`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`, // Ajouter le token JWT aux en-têtes
+        },
+      });
 
       if (response.ok) {
         setSuccessMessage('Votre commentaire a bien été envoyer');

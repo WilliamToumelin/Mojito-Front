@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { FaCocktail } from 'react-icons/fa';
 import Cookies from 'js-cookie';
+import { apiHostName } from '../../env-config';
 
 const Rating = () => {
   const [rating, setRating] = useState(0);
@@ -40,17 +41,14 @@ const Rating = () => {
     };
 
     try {
-      const response = await fetch(
-        'https://celestin-j-server.eddi.cloud/api/ratings/add',
-        {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${authToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${apiHostName}/api/ratings/add`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
       if (response.ok) {
         setSuccessMessage('Votre note a bien été envoyer');
         setPostSuccess(true);

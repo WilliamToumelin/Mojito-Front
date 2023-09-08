@@ -10,6 +10,7 @@ import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 import Hr from '../../components/common/Hr/Hr';
 import InputForm from '../../components/common/InputForm/InputForm';
+import { apiHostName } from '../../env-config';
 
 const Register: React.FC = () => {
   const {
@@ -86,16 +87,13 @@ const Register: React.FC = () => {
       await passwordSchema.validate(data, { abortEarly: false });
       // La validation a réussi, vous pouvez maintenant envoyer les données au serveur
 
-      const response = await fetch(
-        'https://celestin-j-server.eddi.cloud/api/register',
-        {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${apiHostName}/api/register`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       console.log(data);
       if (response.ok) {
         // Message de confirmation de création de compte

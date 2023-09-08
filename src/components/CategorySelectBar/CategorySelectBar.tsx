@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import anime from 'animejs/lib/anime';
 import { Category } from '../../types/types';
 import RoundedButton from '../common/buttons/RoundedButton';
+import { apiHostName } from '../../env-config';
 
 interface CategorySelectBarProps {
   categoryId: number | null;
@@ -19,7 +20,7 @@ const CategorySelectBar: React.FC<CategorySelectBarProps> = ({
   const [categoriesData, setCategoriesData] = useState<Category[]>([]);
 
   useEffect(() => {
-    fetch('https://celestin-j-server.eddi.cloud/api/categories')
+    fetch(`${apiHostName}/api/categories`)
       .then((response) => response.json())
       .then((data: Category[]) => {
         setCategoriesData(data);

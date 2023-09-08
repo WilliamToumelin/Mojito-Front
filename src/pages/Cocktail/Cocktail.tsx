@@ -22,9 +22,7 @@ const Cocktail: React.FC = () => {
   const { isLoggedIn } = useAuth();
 
   useEffect(() => {
-    fetch(
-      `https://celestin-j-server.eddi.cloud/api/cocktails/${selectedCocktailId}`
-    )
+    fetch(`${apiHostName}/api/cocktails/${selectedCocktailId}`)
       .then((response) => response.json())
       .then((data) => {
         setCocktailDetails(data);

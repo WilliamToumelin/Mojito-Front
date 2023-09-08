@@ -5,6 +5,7 @@ import { Cocktails } from '../../types/types';
 import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 import Cookies from 'js-cookie';
+import { apiHostName } from '../../env-config';
 
 function formatDate(data: string) {
   const date = new Date(data);
@@ -33,9 +34,7 @@ const Reviews: React.FC = () => {
   }, [authToken, login, logout]);
 
   useEffect(() => {
-    fetch(
-      `https://celestin-j-server.eddi.cloud/api/cocktails/${selectedCocktailId}/comments`
-    )
+    fetch(`${apiHostName}/api/cocktails/${selectedCocktailId}/comments`)
       .then((response) => response.json())
       .then((data: Cocktails) => {
         setCocktailData(data);

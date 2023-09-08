@@ -7,6 +7,7 @@ import { useAuth } from '../../contexts/AuthProvider';
 import { Category } from '../../types/types';
 import ConnectModal from '../Modals/ConnectModal';
 import Hr from '../common/Hr/Hr';
+import { apiHostName } from '../../env-config';
 
 interface HamburgerMenuProps {
   categoryId: number | null;
@@ -48,7 +49,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
   };
 
   useEffect(() => {
-    fetch('http://localhost:5174/api/categories')
+    fetch(`${apiHostName}/api/categories`)
       .then((response) => response.json())
       .then((data: Category[]) => {
         setCategoriesData(data);
