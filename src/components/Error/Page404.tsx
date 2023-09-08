@@ -30,11 +30,7 @@ const Page404: React.FC = () => {
             </p>
           </div>
           <div className="w-[50%] min-h-full flex items-center">
-            <img
-              src="../../../public/john.gif"
-              className="w-[90%] h-3/5 rounded-xl"
-              alt=""
-            />
+            <img src="john.gif" className="w-[90%] h-3/5 rounded-xl" alt="" />
           </div>
         </div>
       </div>
