@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-plusplus */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-restricted-syntax */
@@ -33,8 +34,7 @@ const CocktailSubmit: React.FC = () => {
   }
 
   useEffect(() => {
-    // fetch(`${apiHostName}/api/propositions/data`)
-    fetch('http://localhost:5174/api/propositions/data')
+    fetch(`${apiHostName}/api/propositions/data`)
       .then((response) => response.json())
       .then((data: DataCocktailSubmit) => {
         setIngredientsList(data);
@@ -91,23 +91,21 @@ const CocktailSubmit: React.FC = () => {
       output.alcool = true;
     }
 
-    for (let i = 1; i < 4; i += 1) {
-      const categoryCheck = data[`alcools_${i}`];
-      if (categoryCheck) {
-        if (
-          categoryCheck === 1 ||
-          categoryCheck === 2 ||
-          categoryCheck === 3 ||
-          categoryCheck === 4
-        ) {
-          if (!output.categories.includes(categoryCheck)) {
-            output.categories.push(categoryCheck);
-          }
-        } else if (!output.categories.includes(5)) {
-          output.categories.push(5);
+    let isOneToFour = false;
+    for (let i = 0; i < 3; i += 1) {
+      const categoryCheck = parseInt(data[`alcools_${i}`], 10);
+      if (!isNaN(categoryCheck)) {
+        if ([1, 2, 3, 4].includes(categoryCheck)) {
+          isOneToFour = true;
+          output.categories.push(categoryCheck);
         }
       }
     }
+
+    if (!isOneToFour && !output.categories.includes(5)) {
+      output.categories.push(5);
+    }
+
     if (output.alcool === false && !output.categories.includes(6)) {
       output.categories.push(6);
     }
@@ -127,9 +125,11 @@ const CocktailSubmit: React.FC = () => {
       });
       if (response.ok) {
         setSuccessMessage(
-          "Votre proposition de cocktail est bien soumis, l'équipe Mojit'O vous remercie. Vous allez être redirigirer vers la page d'aceuil."
+          "Votre proposition de cocktail est bien soumis, l'équipe Mojit'O vous remercie et va examiner votre proposition. Vous allez être redirigirer vers la page d'acceuil."
         );
-        navigate('/');
+        setTimeout(() => {
+          navigate('/');
+        }, 1000);
       } else {
         console.error('Erreur lors de la soumission du commentaire');
       }
@@ -160,7 +160,7 @@ const CocktailSubmit: React.FC = () => {
           }}
           className="relative w-4/5 lg:w-4/6 h-4/5 lg:max-h-4/5 flex flex-col items-center overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray"
         >
-          <p className="text-center">{successMessage}</p>
+          <p className="text-center text-green-600">{successMessage}</p>
         </div>
       </div>
     );
