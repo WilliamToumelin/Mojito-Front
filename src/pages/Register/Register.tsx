@@ -1,20 +1,15 @@
+/* eslint-disable no-console */
 /* eslint-disable no-useless-escape */
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 import Hr from '../../components/common/Hr/Hr';
 import InputForm from '../../components/common/InputForm/InputForm';
 import { apiHostName } from '../../env-config';
 
 const Register: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<{
+  const { register, handleSubmit } = useForm<{
     lastName: string;
     firstName: string;
     dateOfBirth: Date;
@@ -27,8 +22,6 @@ const Register: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const [passwordError, setPasswordError] = useState('');
-  // const { isLoggedIn, login, logout } = useAuth();
-  const authToken = Cookies.get('authToken');
 
   const handleRegister = async (data: {
     lastName: string;
@@ -112,7 +105,6 @@ const Register: React.FC = () => {
           'Content-Type': 'application/json',
         },
       });
-      console.log(data);
       if (response.ok) {
         // Message de confirmation de création de compte
         setRegisterSuccess(true);

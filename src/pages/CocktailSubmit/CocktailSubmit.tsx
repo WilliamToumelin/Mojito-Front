@@ -16,6 +16,7 @@ import { apiHostName } from '../../env-config';
 
 const CocktailSubmit: React.FC = () => {
   const { register, unregister, handleSubmit, watch, control } = useForm();
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
   const [ingredientsList, setIngredientsList] =
     useState<DataCocktailSubmit | null>(null);
@@ -32,7 +33,8 @@ const CocktailSubmit: React.FC = () => {
   }
 
   useEffect(() => {
-    fetch(`${apiHostName}/api/propositions/data`)
+    // fetch(`${apiHostName}/api/propositions/data`)
+    fetch('http://localhost:5174/api/propositions/data')
       .then((response) => response.json())
       .then((data: DataCocktailSubmit) => {
         setIngredientsList(data);
@@ -124,7 +126,9 @@ const CocktailSubmit: React.FC = () => {
         },
       });
       if (response.ok) {
-        console.log('envoi réussi');
+        setSuccessMessage(
+          "Votre proposition de cocktail est bien soumis, l'équipe Mojit'O vous remercie. Vous allez être redirigirer vers la page d'aceuil."
+        );
         navigate('/');
       } else {
         console.error('Erreur lors de la soumission du commentaire');
@@ -133,6 +137,7 @@ const CocktailSubmit: React.FC = () => {
       console.error('Erreur inattendue', error);
     }
     console.log(output);
+    console.log(data);
   };
 
   const {
@@ -145,6 +150,21 @@ const CocktailSubmit: React.FC = () => {
   });
 
   const isAddStepButtonDisabled = stepsFields.length >= 10;
+
+  if (successMessage) {
+    return (
+      <div className="bg-light-brown flex justify-center items-center flex-1 h-[75vh] text-dark-brown">
+        <div
+          style={{
+            boxShadow: '#132226 0px 1px 22px',
+          }}
+          className="relative w-4/5 lg:w-4/6 h-4/5 lg:max-h-4/5 flex flex-col items-center overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray"
+        >
+          <p className="text-center">{successMessage}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-light-brown flex justify-center items-center flex-1 h-[75vh] text-dark-brown">

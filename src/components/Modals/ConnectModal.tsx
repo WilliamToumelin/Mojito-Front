@@ -6,7 +6,6 @@ import Cookies from 'js-cookie';
 import { useAuth } from '../../contexts/AuthProvider';
 import SquaredButton from '../common/buttons/SquaredButton';
 import InputForm from '../common/InputForm/InputForm';
-import { apiHostName } from '../../env-config';
 
 const ConnectModal: FC = () => {
   const {
