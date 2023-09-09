@@ -90,7 +90,6 @@ const Home: React.FC<HomeProps> = ({
   return (
     <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh] ">
       <CookieConsentModal />
-
       <div
         style={{
           boxShadow: '#132226 0px 1px 22px',
