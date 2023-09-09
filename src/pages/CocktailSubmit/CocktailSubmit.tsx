@@ -4,6 +4,7 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { FieldValues, useForm, useFieldArray } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { FaTrashAlt } from 'react-icons/fa';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import Cookies from 'js-cookie';
@@ -15,6 +16,7 @@ import { apiHostName } from '../../env-config';
 
 const CocktailSubmit: React.FC = () => {
   const { register, unregister, handleSubmit, watch, control } = useForm();
+  const navigate = useNavigate();
   const [ingredientsList, setIngredientsList] =
     useState<DataCocktailSubmit | null>(null);
   const techniques = watch('Techniques');
@@ -123,6 +125,7 @@ const CocktailSubmit: React.FC = () => {
       });
       if (response.ok) {
         console.log('envoi réussi');
+        navigate('/');
       } else {
         console.error('Erreur lors de la soumission du commentaire');
       }
@@ -163,37 +166,42 @@ const CocktailSubmit: React.FC = () => {
               <div className="text-center text-lg text-light-gray pb-12 space-y-1">
                 <p>
                   Bonjour, bienvenue sur notre page de proposition de cocktails,
-                  voici quelques <span className="text-dark-brown">règles</span>{' '}
-                  pour que tout se passe bien :
+                  voici quelques{' '}
+                  <span className="text-light-brown">règles</span> pour que tout
+                  se passe bien :
                 </p>
                 <div className="w-full md:w-1/2 text-left m-auto pt-3">
                   <p>
                     - Il est{' '}
-                    <span className="text-dark-brown">obligatoire</span> de
+                    <span className="text-light-brown">obligatoire</span> de
                     choisir au moins un{' '}
-                    <span className="text-dark-brown">soft</span> ou un{' '}
-                    <span className="text-dark-brown">alcool</span>.
+                    <span className="text-light-brown">soft</span> ou un{' '}
+                    <span className="text-light-brown">alcool</span>.
                   </p>
                   <p>
                     - Tout les autres champs sont{' '}
-                    <span className="text-dark-brown">obligatoires</span>.
+                    <span className="text-light-brown">obligatoires</span>.
                   </p>
                   <p>
                     - Vous avez un{' '}
-                    <span className="text-dark-brown">
+                    <span className="text-light-brown">
                       maximum de 10 étapes
                     </span>{' '}
-                    pour expliquer la confection de votre création.
+                    pour expliquer la confection de votre création.{' '}
+                    <span className="text-light-brown">
+                      Dont une est obligatoire
+                    </span>
+                    .
                   </p>
                   <p>
                     - La validation de votre cocktail est à{' '}
-                    <span className="text-dark-brown">
+                    <span className="text-light-brown">
                       l&apos;appréciation de la modération
                     </span>
                     .
                   </p>
                 </div>
-                <p className="text-light-brown text-xl pt-3">Enjoy !</p>
+                <p className="text-dark-brown text-xl pt-3">Enjoy !</p>
               </div>
               <label
                 htmlFor="name"
@@ -371,6 +379,9 @@ const CocktailSubmit: React.FC = () => {
             {/* ajouter une description du cocktail */}
             <div className="m-5 text-center">
               <h3 className="text-2xl font-medium mb-2">Description</h3>
+              <h4 className="text-red-cocktail text-base">
+                La description doit contenir entre 30 et 150 caractères
+              </h4>
               <textarea
                 {...register('description')}
                 className="border-xs rounded p-2 w-4/5 md:w-1/2 bg-light-brown text-dark-gray hover:scale-105 duration-500"
@@ -382,6 +393,9 @@ const CocktailSubmit: React.FC = () => {
               <h3 className="text-2xl font-medium mb-4 text-center">
                 La photo du cocktail
               </h3>
+              <h4 className="text-red-cocktail text-base">
+                La photo doit etre en format URL
+              </h4>
               <input
                 {...register('picture')}
                 className="border-xs rounded p-2 w-4/5 md:w-1/2 bg-light-brown text-dark-gray hover:scale-105 duration-500"
