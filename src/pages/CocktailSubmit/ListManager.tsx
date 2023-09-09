@@ -24,6 +24,14 @@ const ListManager: React.FC<Props> = ({
   unregister,
 }) => {
   const [selectCount, setSelectCount] = useState(0);
+  const [sortedIngredients, setSortedIngredients] = useState<Ingredients[]>([]);
+
+  useEffect(() => {
+    const sorted = [...ingredients].sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+    setSortedIngredients(sorted);
+  }, [ingredients]);
 
   const addSelect = () => {
     if (selectCount < 3) {
@@ -67,7 +75,7 @@ const ListManager: React.FC<Props> = ({
               <option className="" value="">
                 A vous de jouer !
               </option>
-              {ingredients.map((ingredient) => (
+              {sortedIngredients.map((ingredient) => (
                 <option
                   className="bg-light-gray"
                   key={ingredient.id}

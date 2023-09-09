@@ -1,2 +1,3 @@
 /* eslint-disable import/prefer-default-export */
-export const apiHostName = import.meta.env.VITE_APP_API_HOSTNAME;
+export const apiHostName =
+  import.meta.env.VITE_APP_API_HOSTNAME || 'localhost:5174';
