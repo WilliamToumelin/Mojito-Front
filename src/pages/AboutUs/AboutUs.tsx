@@ -19,8 +19,7 @@ const AboutUs: React.FC = () => {
           <p className="text-light-gray">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi quis
             molestiae culpa illum illo, dolor possimus laudantium enim iusto
-            totam tenetur repellat earum expedita? Voluptatem, nostrum
-            doloribus. Repellendus, minus tempore?
+            totam tenetur repellatmardiempore?
           </p>
           <h3 className="fond-bold text-2xl not-italic text-dark-brown">
             Tommy D

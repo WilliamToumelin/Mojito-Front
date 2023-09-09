@@ -10,7 +10,6 @@ import Footer from './components/Footer/Footer';
 import AboutUs from './pages/AboutUs/AboutUs';
 import Reviews from './pages/Reviews/Reviews';
 import LegalMentions from './pages/LegalMentions/LegalMentions';
-import CookieConsentModal from './components/Modals/CookieConsentModal';
 import Page404 from './components/Error/Page404';
 import { useAuth } from './contexts/AuthProvider';
 

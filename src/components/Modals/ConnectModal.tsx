@@ -37,13 +37,16 @@ const ConnectModal: FC = () => {
     password: string;
   }) => {
     try {
-      const response = await fetch(`${apiHostName}/api/login_check`, {
-        method: 'POST',
-        body: JSON.stringify(connectData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await fetch(
+        `http://williammbakop-server.eddi.cloud/back/api/login_check`,
+        {
+          method: 'POST',
+          body: JSON.stringify(connectData),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       if (response.ok) {
         const responseData = await response.json();
         const { token } = responseData;

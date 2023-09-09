@@ -31,15 +31,6 @@ const Cocktail: React.FC = () => {
       .catch((err) => console.error(err));
   }, [selectedCocktailId]);
 
-  if (!cocktailDetails) {
-    // TEMPORAIRE !!!!!! a rajouter un loader , parce pour l'instant il n'y a que une fenetre noir si pas de cocktail chargé encore ...
-    return (
-      <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh]">
-        <div className="w-full h-[95%] sm:w-5/6 xl:w-4/6 sm:h-4/5 flex overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray" />
-      </div>
-    );
-  }
-
   return (
     <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh]">
       <div

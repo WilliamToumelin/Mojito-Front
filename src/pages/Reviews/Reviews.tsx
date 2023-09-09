@@ -62,7 +62,7 @@ const Reviews: React.FC = () => {
 
   return (
     <div className="bg-light-brown flex justify-center items-center flex-1 h-[75vh]">
-      {cocktailData.comments.length > 0 && (
+      {cocktailData.comments.length >= 0 && (
         <div
           style={{
             boxShadow: '#132226 0px 1px 22px',

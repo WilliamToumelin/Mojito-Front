@@ -43,7 +43,7 @@ const Header: React.FC<HeaderProps> = ({
           <img
             className="min-w-150 rounded-full -rotate-12"
             width="160"
-            src="logo1.png"
+            src="/logo1.png"
             alt="Cocktail and link to home"
           />
         </NavLink>
