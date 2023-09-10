@@ -23,6 +23,7 @@ const Cocktail: React.FC = () => {
   const { isLoggedIn } = useAuth();
 
   useEffect(() => {
+    // fetch(`http://localhost:5174/api/cocktails/${selectedCocktailId}`)
     fetch(`${apiHostName}/api/cocktails/${selectedCocktailId}`)
       .then((response) => response.json())
       .then((data) => {
@@ -37,16 +38,16 @@ const Cocktail: React.FC = () => {
         style={{
           boxShadow: '#132226 0px 1px 22px',
         }}
-        className="w-full h-[95%] sm:w-5/6 xl:w-4/6 sm:h-4/5 flex overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray"
+        className="w-[90%] h-[90%] sm:w-5/6 xl:w-4/6 sm:h-4/5 flex overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray"
       >
         {cocktailDetails ? (
           <div className="sm:flex-1 flex flex-col sm:flex-row text-dark-brown animate-fade-in-down">
-            <div className="sm:w-2/5 w-full">
-              <div className="h-full">
+            <div className=" w-full sm:w-2/5">
+              <div className="h-fit sm:h-full">
                 <img
                   src={cocktailDetails.picture}
                   alt="cocktail"
-                  className="h-full w-full object-cover object-center rounded-l-2xl"
+                  className="h-full w-fit object-cover object-center rounded-l-2xl"
                 />
               </div>
             </div>

@@ -41,7 +41,7 @@ const CookieConsentModal = () => {
               className="rounded bg-dark-brown text-white px-4 py-2"
               onClick={handleAccept}
             >
-              OK, j'ai compris
+              OK, j&apos;ai compris
             </button>
           </div>
         </div>

@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import React, { useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import CommentModal from '../../components/Modals/CommentModal';
 import { Cocktails } from '../../types/types';
@@ -19,7 +18,6 @@ function formatDate(data: string) {
 
 const Reviews: React.FC = () => {
   const [cocktailData, setCocktailData] = useState<Cocktails | null>(null);
-  const navigate = useNavigate();
   const [displayModal, setDisplayModal] = useState(false);
   const selectedCocktailId = Number(localStorage.getItem('selectedCocktail'));
   const authToken = Cookies.get('authToken');
@@ -60,11 +58,6 @@ const Reviews: React.FC = () => {
         />
       </div>
     );
-  }
-
-  if (!isLoggedIn) {
-    // Redirigez l'utilisateur vers la page Home s'il n'est pas log
-    navigate('/');
   }
 
   return (

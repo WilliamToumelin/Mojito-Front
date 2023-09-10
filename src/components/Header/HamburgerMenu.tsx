@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import React, { useEffect, useMemo, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useAuth } from '../../contexts/AuthProvider';
 import { Category } from '../../types/types';
 import ConnectModal from '../Modals/ConnectModal';
-import Hr from '../common/Hr/Hr';
 import { apiHostName } from '../../env-config';
 
 interface HamburgerMenuProps {
@@ -23,6 +22,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [categoriesData, setCategoriesData] = useState<Category[]>([]);
   const { isLoggedIn } = useAuth();
+  const location = useLocation();
 
   const userToken = Cookies.get('userToken');
   let userPseudo: string | null = null;
@@ -47,6 +47,11 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    // Ferme le menu lorsque l'URL change
+    setIsMenuOpen(false);
+  }, [location]);
 
   useEffect(() => {
     fetch(`${apiHostName}/api/categories`)
@@ -92,7 +97,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
         <ul className="w-3/4 flex flex-col font-medium mt-6 text-2xl rounded-lg bg-light-gray text-center overflow-y-auto max-h-[70vh] relative">
           <button
             type="button"
-            className="absolute right-5 top-3 text-3xl p-2 text-dark-gray hover:text-dark-brown z-50 p-2"
+            className="absolute right-5 top-3 text-3xl p-2 text-dark-gray hover:text-dark-brown z-50"
             onClick={handleCloseMenu}
           >
             X

@@ -53,6 +53,7 @@ const Home: React.FC<HomeProps> = ({
   }, [authToken, login, logout]);
 
   useEffect(() => {
+    // fetch(`http://localhost:5174/api/cocktails`)
     fetch(`${apiHostName}/api/cocktails`)
       .then((response) => response.json())
       .then((data: Cocktails[]) => {
@@ -96,7 +97,7 @@ const Home: React.FC<HomeProps> = ({
         }}
         className={` ${
           !categoryId ? 'relative' : ''
-        } w-4/5 xl:w-4/6 h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl pb-3 bg-dark-gray z-20 `}
+        } w-[90%] xl:w-4/6 h-[90%] xl:h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl pb-3 bg-dark-gray z-20 `}
       >
         {/* Haut du composant avec le bouton dependant de SI PAS DE CATEGORYID avec top 5 ou liste complète */}
         {!categoryId ? (

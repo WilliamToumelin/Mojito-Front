@@ -136,8 +136,6 @@ const CocktailSubmit: React.FC = () => {
     } catch (error) {
       console.error('Erreur inattendue', error);
     }
-    console.log(output);
-    console.log(data);
   };
 
   const {
