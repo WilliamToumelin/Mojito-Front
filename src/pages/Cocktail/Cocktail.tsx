@@ -31,8 +31,6 @@ const Cocktail: React.FC = () => {
       .catch((err) => console.error(err));
   }, [selectedCocktailId]);
 
-  console.log(cocktailDetails);
-
   return (
     <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh]">
       <div
@@ -44,11 +42,11 @@ const Cocktail: React.FC = () => {
         {cocktailDetails && (
           <div className="sm:flex-1 flex flex-col w-max-[100%] sm:flex-row text-dark-brown animate-fade-in-down">
             <div className=" w-full sm:w-2/5">
-              <div className="h-fit sm:h-full">
+              <div className="h-full">
                 <img
                   src={cocktailDetails.picture}
                   alt="cocktail"
-                  className="h-full w-full object-contain object-center rounded-l-2xl"
+                  className="h-full w-full object-cover object-center rounded-l-2xl"
                 />
               </div>
             </div>
