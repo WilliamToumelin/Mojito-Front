@@ -46,7 +46,7 @@ const Cocktail: React.FC = () => {
                 <img
                   src={cocktailDetails.picture}
                   alt="cocktail"
-                  className="h-full w-full object-cover object-center rounded-l-2xl"
+                  className="h-full w-full object-contain object-center rounded-l-2xl"
                 />
               </div>
             </div>
