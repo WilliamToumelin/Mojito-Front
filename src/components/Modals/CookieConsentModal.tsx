@@ -22,7 +22,7 @@ const CookieConsentModal = () => {
     // Rendre le composant si l'état est null (affichage initial)
     return (
       <div className="fixed z-50 bottom-0 right-30">
-        <div className="bg-dark-gray p-4 rounded border-4 border-light-gray">
+        <div className="bg-dark-gray p-4 md:w-[70vw] rounded border-4 border-light-gray">
           <div className="flex flex-col h-full justify-center">
             <h3 className="text-xl font-medium text-dark-brown mb-3 flex items-center">
               Enjoy the experience with some{'   '}
