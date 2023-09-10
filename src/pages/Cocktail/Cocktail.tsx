@@ -31,8 +31,6 @@ const Cocktail: React.FC = () => {
       .catch((err) => console.error(err));
   }, [selectedCocktailId]);
 
-  console.log(cocktailDetails);
-
   return (
     <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh]">
       <div
