@@ -10,9 +10,9 @@ const Page403: React.FC = () => {
         }}
         className="w-4/5 xl:w-4/6 h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl pb-3 bg-dark-gray"
       >
-        <div className="flex h-full">
-          <div className="w-[50%] h-full p-6 flex flex-col justify-center">
-            <h3 className="m-5 mb-3 text-dark-brown first-line:uppercase first-line:tracking-widest text-7xl font-bold mr-3 underline">
+        <div className="flex flex-col sm:flex-row h-full">
+          <div className="sm:w-[50%] h-full p-6 flex flex-col justify-center">
+            <h3 className="m-5 mb-3 text-dark-brown first-line:uppercase first-line:tracking-widest text-4xl font-bold mr-3 underline">
               FORBIDDEN !!
             </h3>
             <h3 className="m-5 mb-3 text-light-brown first-line:uppercase first-line:tracking-widest text-4xl font-bold mr-3">
@@ -29,7 +29,7 @@ const Page403: React.FC = () => {
               </Link>
             </p>
           </div>
-          <div className="w-[50%] min-h-full flex items-center">
+          <div className="sm:w-[50%] min-h-full flex items-center">
             <img
               src="/forbidden.gif"
               className="w-[90%] h-3/5 rounded-xl"

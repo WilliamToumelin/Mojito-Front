@@ -21,15 +21,15 @@ const CookieConsentModal = () => {
   if (consent === null || consent === false) {
     // Rendre le composant si l'état est null (affichage initial)
     return (
-      <div className="fixed z-50 bottom-20 right-30">
-        <div className="bg-dark-gray p-4 h-[30vh] w-[40vw] rounded border-4 border-light-gray">
+      <div className="fixed z-50 bottom-0 right-30">
+        <div className="bg-dark-gray p-4 rounded border-4 border-light-gray">
           <div className="flex flex-col h-full justify-center">
             <h3 className="text-xl font-medium text-dark-brown mb-3 flex items-center">
               Enjoy the experience with some{'   '}
               <GiCookie className="text-[2rem]" />
               <MdCookie className="text-[2rem]" />
             </h3>
-            <p className="text-dark-brown mb-3">
+            <p className="text-dark-brown mb-3 break-all">
               Nous utilisons des cookies strictement nécessaires pour le bon
               fonctionnement de notre site, tels que le stockage de votre token
               JWT et de certaines informations de base que vous nous fournissez

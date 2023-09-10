@@ -53,7 +53,6 @@ const Home: React.FC<HomeProps> = ({
   }, [authToken, login, logout]);
 
   useEffect(() => {
-    // fetch(`http://localhost:5174/api/cocktails`)
     fetch(`${apiHostName}/api/cocktails`)
       .then((response) => response.json())
       .then((data: Cocktails[]) => {

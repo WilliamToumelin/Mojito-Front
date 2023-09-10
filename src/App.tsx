@@ -12,6 +12,7 @@ import Reviews from './pages/Reviews/Reviews';
 import LegalMentions from './pages/LegalMentions/LegalMentions';
 import Page404 from './components/Error/Page404';
 import { useAuth } from './contexts/AuthProvider';
+import Page403 from './components/Error/Page403';
 
 const App = () => {
   const [categoryId, setCategoryId] = useState<number | null>(null);
@@ -56,6 +57,7 @@ const App = () => {
         <Route path="/mentions-legales" element={<LegalMentions />} />
         <Route path="/a-propos-de-nous" element={<AboutUs />} />
         <Route path="*" element={<Page404 />} />
+        <Route path="/Page403" element={<Page403 />} />
       </Routes>
       <Footer />
     </div>

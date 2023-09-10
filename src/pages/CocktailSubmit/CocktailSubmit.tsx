@@ -14,11 +14,13 @@ import RadioAdd from './RadioAdd';
 import SquaredButton from '../../components/common/buttons/SquaredButton';
 import ListManager from './ListManager';
 import { apiHostName } from '../../env-config';
+import { useAuth } from '../../contexts/AuthProvider';
 
 const CocktailSubmit: React.FC = () => {
   const { register, unregister, handleSubmit, watch, control } = useForm();
   const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
   const [ingredientsList, setIngredientsList] =
     useState<DataCocktailSubmit | null>(null);
   const techniques = watch('Techniques');
@@ -32,6 +34,13 @@ const CocktailSubmit: React.FC = () => {
     const userTokenObj = JSON.parse(userToken);
     userId = userTokenObj.id;
   }
+
+  useEffect(() => {
+    // Si l'utilisateur n'est pas connecté, redirigez-le vers la page 403
+    if (!isLoggedIn) {
+      navigate('/Page403'); // Remplacez '/403' par l'URL de votre page d'erreur
+    }
+  }, [isLoggedIn, navigate]);
 
   useEffect(() => {
     fetch(`${apiHostName}/api/propositions/data`)
