@@ -103,6 +103,11 @@ const ListManager: React.FC<Props> = ({
                 }
               }}
             />
+            {category === 'softs' || category === 'alcools' ? (
+              <span className="p-1 text-lg">cl</span>
+            ) : (
+              ''
+            )}
             {category === 'aromates' && (
               <select
                 {...register(`${category}_${index}_unit`, { required: true })}
