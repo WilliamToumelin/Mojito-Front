@@ -19,6 +19,7 @@ import { useAuth } from '../../contexts/AuthProvider';
 const CocktailSubmit: React.FC = () => {
   const { register, unregister, handleSubmit, watch, control } = useForm();
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
   const [ingredientsList, setIngredientsList] =
@@ -140,10 +141,10 @@ const CocktailSubmit: React.FC = () => {
           navigate('/');
         }, 1000);
       } else {
-        console.error('Erreur lors de la soumission du commentaire');
+        setErrorMessage('Erreur lors de la soumission du commentaire');
       }
     } catch (error) {
-      console.error('Erreur inattendue', error);
+      setErrorMessage('Erreur inattendue');
     }
   };
 
@@ -436,6 +437,9 @@ const CocktailSubmit: React.FC = () => {
                 width={12}
               />
             </div>
+            {errorMessage && (
+              <p className="text-center text-red-900">{errorMessage}</p>
+            )}
           </div>
         </form>
       </div>
