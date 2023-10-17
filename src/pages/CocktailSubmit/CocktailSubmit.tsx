@@ -141,7 +141,7 @@ const CocktailSubmit: React.FC = () => {
           navigate('/');
         }, 1000);
       } else {
-        setErrorMessage('Erreur lors de la soumission du commentaire');
+        setErrorMessage('Erreur lors de la soumission de votre recette');
       }
     } catch (error) {
       setErrorMessage('Erreur inattendue');
@@ -407,7 +407,7 @@ const CocktailSubmit: React.FC = () => {
             {/* ajouter une description du cocktail */}
             <div className="m-5 text-center">
               <h3 className="text-2xl font-medium mb-2">Description</h3>
-              <h4 className="text-red-cocktail text-base">
+              <h4 className="text-red-200 text-base">
                 La description doit contenir entre 30 et 150 caractères
               </h4>
               <textarea
@@ -421,7 +421,7 @@ const CocktailSubmit: React.FC = () => {
               <h3 className="text-2xl font-medium mb-4 text-center">
                 La photo du cocktail
               </h3>
-              <h4 className="text-red-cocktail text-base">
+              <h4 className="text-red-200 text-base">
                 La photo doit etre en format URL
               </h4>
               <input
