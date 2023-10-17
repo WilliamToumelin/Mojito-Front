@@ -30,8 +30,6 @@ const ConnectModal: FC = () => {
     setConnectMessage('');
   }, []);
 
-  // Code pour se connecter une fois l'API prête
-
   const handleLogin = async (connectData: {
     email: string;
     password: string;

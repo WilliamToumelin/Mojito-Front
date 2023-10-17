@@ -63,17 +63,8 @@ const Home: React.FC<HomeProps> = ({
 
   const cocktailListMemo = useMemo(() => cocktailList, [cocktailList]);
 
-  useEffect(() => {
-    setAnimate(false);
-  }, []);
-
   const handleToggle = () => {
     setDisplayMode((prevToggle) => !prevToggle);
-  };
-
-  const handleSelectCocktail = (cocktailId: number) => {
-    setSelectedCocktail(cocktailId);
-    localStorage.setItem('selectedCocktail', cocktailId.toString());
   };
 
   const cocktailsData = useMemo(() => {
@@ -86,6 +77,15 @@ const Home: React.FC<HomeProps> = ({
     cocktailListMemo,
     categoryId
   );
+
+  useEffect(() => {
+    setAnimate(false);
+  }, []);
+
+  const handleSelectCocktail = (cocktailId: number) => {
+    setSelectedCocktail(cocktailId);
+    localStorage.setItem('selectedCocktail', cocktailId.toString());
+  };
 
   return (
     <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh] ">

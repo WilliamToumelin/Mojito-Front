@@ -36,11 +36,11 @@ const CocktailSubmit: React.FC = () => {
   }
 
   useEffect(() => {
-    // Si l'utilisateur n'est pas connecté, redirigez-le vers la page 403
+    // If the user isn't logged in, redirect him to page 403
     if (!isLoggedIn) {
-      navigate('/Page403'); // Remplacez '/403' par l'URL de votre page d'erreur
+      navigate('/Page403');
     }
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     fetch(`${apiHostName}/api/propositions/data`)
@@ -179,7 +179,7 @@ const CocktailSubmit: React.FC = () => {
         style={{
           boxShadow: '#132226 0px 1px 22px',
         }}
-        className="relative w-4/5 lg:w-4/6 h-4/5 lg:max-h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray"
+        className="relative w-[90%] xl:w-4/6 h-[90%] xl:h-4/5 flex flex-col overflow-y-auto shadow-light-gray shadow-xl rounded-2xl pb-3 bg-dark-gray z-20"
       >
         <h1 className="text-dark-brown text-5xl pt-8 pb-8 text-center">
           Proposer un Cocktail

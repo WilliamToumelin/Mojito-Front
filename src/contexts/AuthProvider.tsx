@@ -23,14 +23,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const login = () => {
-    // Ici, on pourra ajouter la logique de connexion (appeler l'API, etc.)
-    localStorage.setItem('authToken', 'token');
     setIsLoggedIn(true);
   };
 
   const logout = () => {
-    // Ici, on pourra ajouter la logique de déconnexion (appeler l'API, etc.)
-    localStorage.removeItem('authToken');
     setIsLoggedIn(false);
   };
 

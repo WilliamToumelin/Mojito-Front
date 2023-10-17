@@ -67,9 +67,7 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
         setSuccessMessage('Votre commentaire a bien été envoyer');
         setPostSuccess(true);
       } else {
-        setErrorMessage(
-          "L'envoi de votre commentaire n'a pu aboutir, peut être avez vous déja commenter ce cocktail..."
-        );
+        setErrorMessage("L'envoi de votre commentaire n'a pu aboutir...");
       }
     } catch (error) {
       console.error('Erreur inattendue', error);

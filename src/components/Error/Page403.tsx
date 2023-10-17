@@ -19,11 +19,11 @@ const Page403: React.FC = () => {
               ERROR 403
             </h3>
             <p className="m-5 text-light-brown">
-              Tu essaie d&aposaller la ou tu n&aposas le droit, maman ne serait
-              pas fier de toi ...
+              Tu essaie d'aller la ou tu n'as pas le droit, maman ne serait pas
+              fier de toi ...
             </p>
             <p className="m-5 text-light-brown">
-              Pour revenir a la page d&apos;acceuil c&apos;est par{' '}
+              Pour revenir a la page d'acceuil c'est par{' '}
               <Link to="/" className="text-dark-brown">
                 ici !
               </Link>

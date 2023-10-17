@@ -35,13 +35,11 @@ const Register: React.FC = () => {
     // Valider le nom
     if (data.lastName.length < 1) {
       setErrorMessage('Le nom est requis');
-      return;
     }
 
     // Valider le prénom
     if (data.firstName.length < 1) {
       setErrorMessage('Le prénom est requis');
-      return;
     }
 
     // Valider la date de naissance
@@ -53,48 +51,40 @@ const Register: React.FC = () => {
       setErrorMessage(
         'Vous devez avoir au moins 18 ans et la date de naissance doit être après 1900'
       );
-      return;
     }
 
-    // Valider l'adresse e-mail
+    // Password validation
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     if (!emailRegex.test(data.email)) {
       setErrorMessage('Adresse e-mail invalide');
-      return;
     }
 
     // Valider le mot de passe
     if (data.password.length < 7) {
       setPasswordError('Le mot de passe doit comporter au moins 7 caractères');
-      return;
-    }
-
-    if (!/\d/.test(data.password)) {
+    } else if (!/\d/.test(data.password)) {
       setPasswordError('Le mot de passe doit contenir au moins un chiffre');
-      return;
-    }
-
-    if (!/[A-Z]/.test(data.password)) {
+    } else if (!/[A-Z]/.test(data.password)) {
       setPasswordError('Le mot de passe doit contenir au moins une majuscule');
-      return;
-    }
-
-    if (!/[\!@#\$%\^&\*\(\),\.\?":\{\}\|<>\']/g.test(data.password)) {
+    } else if (!/[a-z]/.test(data.password)) {
       setPasswordError(
-        'Le mot de passe doit contenir au moins un caractère spécial parmi !@#$%^&*(),.?":{}|<>'
+        'Le mot de passe doit contenir au moins une lettre minuscule'
       );
-      return;
+    } else if (!/[\!@#\$%\^&\*\(\),\.\?":\{\}\|<>\']/g.test(data.password)) {
+      setPasswordError(
+        'Le mot de passe doit contenir au moins un caractère spécial'
+      );
+    } else {
+      setPasswordError(''); // Réinitialisez l'erreur en cas de succès
     }
 
     // Valider le pseudo
     if (data.pseudonym.length < 4) {
       setErrorMessage('Le pseudo doit comporter au moins 4 caractères');
-      return;
     }
 
     if (data.pseudonym.length > 12) {
       setErrorMessage('Le pseudo ne doit pas dépasser 12 caractères');
-      return;
     }
 
     try {
@@ -110,7 +100,6 @@ const Register: React.FC = () => {
         setRegisterSuccess(true);
       } else {
         // Gérer les erreurs d'authentification ici
-        setErrorMessage('Erreur lors de la soumission du formulaire');
       }
     } catch (error: any) {
       // Gérer les erreurs de validation ici

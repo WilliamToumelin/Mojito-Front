@@ -24,16 +24,6 @@ const Reviews: React.FC = () => {
   const { isLoggedIn, login, logout } = useAuth();
 
   useEffect(() => {
-    if (authToken) {
-      // Si le jeton JWT est présent dans les cookies, l'utilisateur est connecté
-      login(); // Utilisez la fonction de connexion fournie par useAuth
-    } else {
-      // Sinon, l'utilisateur n'est pas connecté
-      logout(); // Utilisez la fonction de déconnexion fournie par useAuth
-    }
-  }, [authToken, login, logout]);
-
-  useEffect(() => {
     fetch(`${apiHostName}/api/cocktails/${selectedCocktailId}/comments`)
       .then((response) => response.json())
       .then((data: Cocktails) => {
