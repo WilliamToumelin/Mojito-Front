@@ -61,21 +61,21 @@ const Register: React.FC = () => {
 
     // Valider le mot de passe
     if (data.password.length < 7) {
-      setPasswordError('Le mot de passe doit comporter au moins 7 caractères');
+      setErrorMessage('Le mot de passe doit comporter au moins 7 caractères');
     } else if (!/\d/.test(data.password)) {
-      setPasswordError('Le mot de passe doit contenir au moins un chiffre');
+      setErrorMessage('Le mot de passe doit contenir au moins un chiffre');
     } else if (!/[A-Z]/.test(data.password)) {
-      setPasswordError('Le mot de passe doit contenir au moins une majuscule');
+      setErrorMessage('Le mot de passe doit contenir au moins une majuscule');
     } else if (!/[a-z]/.test(data.password)) {
-      setPasswordError(
+      setErrorMessage(
         'Le mot de passe doit contenir au moins une lettre minuscule'
       );
     } else if (!/[\!@#\$%\^&\*\(\),\.\?":\{\}\|<>\']/g.test(data.password)) {
-      setPasswordError(
+      setErrorMessage(
         'Le mot de passe doit contenir au moins un caractère spécial'
       );
     } else {
-      setPasswordError(''); // Réinitialisez l'erreur en cas de succès
+      setErrorMessage(''); // Réinitialisez l'erreur en cas de succès
     }
 
     // Valider le pseudo
@@ -196,11 +196,8 @@ const Register: React.FC = () => {
                       />
                       <p className="text-xs text-light-gray w-[13em]">
                         Le mot de passe doit contenir au minimum 7 caractères,
-                        dont 1 majuscule et 1 chiffre.
+                        dont 1 majuscule, 1 chiffre et 1 caractère spécial.
                       </p>
-                      {passwordError && (
-                        <p className="text-red-600 ">{passwordError}</p>
-                      )}
                     </div>
                   </div>
 
