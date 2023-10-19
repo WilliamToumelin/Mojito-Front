@@ -157,8 +157,14 @@ const Cocktail: React.FC = () => {
 
               <div className="text-base items-center">
                 <div className="text-base flex items-center flex-col lg:flex-row gap-8 justify-center">
-                  {!isLoggedIn ? '' : <Rating />}
-                  <p className="pb-6 text-center ">Donnez votre avis !</p>
+                  {!isLoggedIn ? (
+                    ''
+                  ) : (
+                    <>
+                      <p className="pb-6 text-center ">Donnez votre avis !</p>
+                      <Rating />
+                    </>
+                  )}
                   <Link
                     to={`/cocktail/${cocktailDetails.slug}/commentaires`}
                     className="menu-link flex justify-center items-center "
