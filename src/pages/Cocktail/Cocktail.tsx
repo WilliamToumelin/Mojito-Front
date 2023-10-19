@@ -45,8 +45,8 @@ const Cocktail: React.FC = () => {
               <div className="h-full">
                 <img
                   src={cocktailDetails.picture}
-                  alt="cocktail"
-                  className="h-full w-full object-cover object-center rounded-l-2xl"
+                  alt={cocktailDetails.name}
+                  className="h-full w-full object-contain object-center rounded-l-2xl"
                 />
               </div>
             </div>
@@ -156,14 +156,9 @@ const Cocktail: React.FC = () => {
               )}
 
               <div className="text-base items-center">
-                <p
-                  className={`pb-6 text-center ${!isLoggedIn ? '' : 'hidden'}`}
-                >
-                  Donnez votre avis !
-                </p>
                 <div className="text-base flex items-center flex-col lg:flex-row gap-8 justify-center">
                   {!isLoggedIn ? '' : <Rating />}
-
+                  <p className="pb-6 text-center ">Donnez votre avis !</p>
                   <Link
                     to={`/cocktail/${cocktailDetails.slug}/commentaires`}
                     className="menu-link flex justify-center items-center "

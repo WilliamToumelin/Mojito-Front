@@ -59,7 +59,7 @@ const CommentModal: React.FC<Props> = ({ displayModal, handleToggleModal }) => {
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`, // Ajouter le token JWT aux en-têtes
+          Authorization: `Bearer ${authToken}`,
         },
       });
 
