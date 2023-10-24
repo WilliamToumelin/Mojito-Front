@@ -33,12 +33,7 @@ const Cocktail: React.FC = () => {
 
   return (
     <div className="relative bg-light-brown flex justify-center items-center flex-1 h-[75vh]">
-      <div
-        style={{
-          boxShadow: '#132226 0px 1px 22px',
-        }}
-        className="w-[90%] h-[90%] sm:w-5/6 xl:w-4/6 sm:h-4/5 flex overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray"
-      >
+      <div className="w-[90%] h-[90%] sm:w-5/6 xl:w-4/6 sm:h-4/5 flex overflow-y-auto shadow-light-gray shadow-xl rounded-2xl bg-dark-gray">
         {cocktailDetails && (
           <div className="sm:flex-1 flex flex-col w-max-[100%] sm:flex-row text-dark-brown animate-fade-in-down">
             <div className=" w-full sm:w-2/5">
@@ -65,7 +60,6 @@ const Cocktail: React.FC = () => {
                         {cocktailDetails.rating} / 5
                       </p>
                     </div>
-
                     <div className="flex flex-nowrap pt-4">
                       <Link
                         to={`/cocktail/${cocktailDetails.slug}/commentaires`}

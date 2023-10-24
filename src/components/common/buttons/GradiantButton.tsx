@@ -1,14 +1,14 @@
 /* eslint-disable react/require-default-props */
 import React from 'react';
 
-interface RoundedButtonProps {
+interface GradiantButtonProps {
   name: string;
   onClick?: () => void;
   height: number;
   width: number;
 }
 
-const RoundedButton: React.FC<RoundedButtonProps> = ({
+const GradiantButton: React.FC<GradiantButtonProps> = ({
   name,
   onClick = () => {},
   height,
@@ -32,4 +32,4 @@ const RoundedButton: React.FC<RoundedButtonProps> = ({
   );
 };
 
-export default RoundedButton;
+export default GradiantButton;

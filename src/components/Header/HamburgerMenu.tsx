@@ -90,7 +90,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
         </svg>
       </button>
       <div
-        className={`w-[80%] max-w-[80%] z-50 absolute right-0 top-24 rounded 
+        className={`w-[80%] z-50 absolute right-0 top-24 rounded 
          ${isMenuOpen ? '' : 'hidden'}`}
         id="navbar-hamburger"
       >

@@ -139,7 +139,7 @@ const CocktailSubmit: React.FC = () => {
         );
         setTimeout(() => {
           navigate('/');
-        }, 1000);
+        }, 2000);
       } else {
         setErrorMessage('Erreur lors de la soumission de votre recette');
       }

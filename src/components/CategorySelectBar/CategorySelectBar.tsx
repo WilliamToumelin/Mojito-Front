@@ -29,13 +29,9 @@ const CategorySelectBar: React.FC<CategorySelectBarProps> = ({
   }, []);
 
   const animeCategory = () => {
-    const random = () => {
-      return anime.random(0, 0);
-    };
-
     anime({
       targets: '.menu-link',
-      translateY: () => random(),
+      translateY: 0,
       scale: [0, 1],
       delay: anime.stagger(150),
     });

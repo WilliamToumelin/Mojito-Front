@@ -2,14 +2,12 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-console */
 import React, { useEffect, useMemo, useState } from 'react';
-import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
 import { BsTrophy } from 'react-icons/bs';
 import { CgInfinity } from 'react-icons/cg';
 import { Cocktails } from '../../types/types';
 import CocktailItem from '../../components/common/CocktailItem/CocktailItem';
 import SideBar from '../../components/SideBar/SideBar';
-import { useAuth } from '../../contexts/AuthProvider';
 import CookieConsentModal from '../../components/Modals/CookieConsentModal';
 import { apiHostName } from '../../env-config';
 
@@ -37,20 +35,6 @@ const Home: React.FC<HomeProps> = ({
 }) => {
   const [cocktailList, setCocktailList] = useState<Cocktails[]>([]);
   const [displayMode, setDisplayMode] = useState(true);
-  const [animate, setAnimate] = useState(true);
-
-  const authToken = Cookies.get('authToken');
-  const { isLoggedIn, login, logout } = useAuth();
-
-  useEffect(() => {
-    if (authToken) {
-      // Si le jeton JWT est présent dans les cookies, l'utilisateur est connecté
-      login(); // Utilisez la fonction de connexion fournie par useAuth
-    } else {
-      // Sinon, l'utilisateur n'est pas connecté
-      logout(); // Utilisez la fonction de déconnexion fournie par useAuth
-    }
-  }, [authToken, login, logout]);
 
   useEffect(() => {
     fetch(`${apiHostName}/api/cocktails`)
@@ -77,10 +61,6 @@ const Home: React.FC<HomeProps> = ({
     cocktailListMemo,
     categoryId
   );
-
-  useEffect(() => {
-    setAnimate(false);
-  }, []);
 
   const handleSelectCocktail = (cocktailId: number) => {
     setSelectedCocktail(cocktailId);
@@ -133,7 +113,7 @@ const Home: React.FC<HomeProps> = ({
 
         <div className="flex px-2 md:px-12 pt-9 animate-fade-in-down">
           <ul className="w-full">
-            {/* Liste de cocktail filré avec categoryId sinon avec la coniditon " : " alors on utlise le DisplayMode avec le Top5 et ListeComplète pour filtrer les cocktails */}
+            {/* Liste de cocktail filré avec categoryId sinon on utlise le DisplayMode avec le Top5 et ListeComplète pour filtrer les cocktails */}
             {categoryId
               ? filteredCocktails.map((cocktail, index) => (
                   <Link
