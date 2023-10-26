@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-useless-escape */
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -7,9 +5,15 @@ import SquaredButton from '../../components/common/buttons/SquaredButton';
 import Hr from '../../components/common/Hr/Hr';
 import InputForm from '../../components/common/InputForm/InputForm';
 import { apiHostName } from '../../env-config';
+import { useFormState } from 'react-hook-form';
 
 const Register: React.FC = () => {
-  const { register, handleSubmit } = useForm<{
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<{
     lastName: string;
     firstName: string;
     dateOfBirth: Date;
@@ -21,73 +25,48 @@ const Register: React.FC = () => {
 
   const [errorMessage, setErrorMessage] = useState('');
   const [registerSuccess, setRegisterSuccess] = useState(false);
-  const [passwordError, setPasswordError] = useState('');
 
-  const handleRegister = async (data: {
-    lastName: string;
-    firstName: string;
-    dateOfBirth: Date;
-    email: string;
-    password: string;
-    pseudonym: string;
-    hasConsented: boolean;
-  }) => {
-    // Valider le nom
-    if (data.lastName.length < 1) {
-      setErrorMessage('Le nom est requis');
+  const password = watch('password');
+
+  const ageValidator = (dateOfBirth: Date) => {
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
     }
 
-    // Valider le prénom
-    if (data.firstName.length < 1) {
-      setErrorMessage('Le prénom est requis');
-    }
+    return age >= 18;
+  };
 
-    // Valider la date de naissance
-    const currentDate = new Date();
-    const minDate = new Date(currentDate.getFullYear() - 18, 0, 1); // Minimum date: 18 years ago from today
-    const maxDate = new Date(1900, 11, 31); // Maximum date: 1900-12-31
+  const validatePassword = (password: string) => {
+    // Password should have at least 1 uppercase letter, 1 digit, and 1 special character
+    return /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])/.test(password);
+  };
 
-    if (data.dateOfBirth < minDate || data.dateOfBirth > maxDate) {
-      setErrorMessage(
-        'Vous devez avoir au moins 18 ans et la date de naissance doit être après 1900'
-      );
-    }
+  const validatePseudonym = (pseudonym: string) => {
+    return pseudonym.length >= 4;
+  };
 
-    // Password validation
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    if (!emailRegex.test(data.email)) {
-      setErrorMessage('Adresse e-mail invalide');
-    }
+  const validateEmail = (email: string) => {
+    // Use a regular expression to validate email
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
 
-    // Valider le mot de passe
-    if (data.password.length < 7) {
-      setErrorMessage('Le mot de passe doit comporter au moins 7 caractères');
-    } else if (!/\d/.test(data.password)) {
-      setErrorMessage('Le mot de passe doit contenir au moins un chiffre');
-    } else if (!/[A-Z]/.test(data.password)) {
-      setErrorMessage('Le mot de passe doit contenir au moins une majuscule');
-    } else if (!/[a-z]/.test(data.password)) {
-      setErrorMessage(
-        'Le mot de passe doit contenir au moins une lettre minuscule'
-      );
-    } else if (!/[\!@#\$%\^&\*\(\),\.\?":\{\}\|<>\']/g.test(data.password)) {
-      setErrorMessage(
-        'Le mot de passe doit contenir au moins un caractère spécial'
-      );
+  const onSubmit = async (data: any) => {
+    // Additional validation checks
+    if (!ageValidator(data.dateOfBirth)) {
+      setErrorMessage('Vous devez avoir au moins 18 ans pour vous inscrire.');
+    } else if (!validateEmail(data.email)) {
+      setErrorMessage('Adresse email invalide.');
+    } else if (!validatePseudonym(data.pseudonym)) {
+      setErrorMessage('Le pseudonyme doit avoir au moins 4 caractères.');
+    } else if (!validatePassword(data.password)) {
+      setErrorMessage('Mot de passe invalide.');
     } else {
-      setErrorMessage(''); // Réinitialisez l'erreur en cas de succès
-    }
-
-    // Valider le pseudo
-    if (data.pseudonym.length < 4) {
-      setErrorMessage('Le pseudo doit comporter au moins 4 caractères');
-    }
-
-    if (data.pseudonym.length > 12) {
-      setErrorMessage('Le pseudo ne doit pas dépasser 12 caractères');
-    }
-
-    try {
+      // Envoyer les données au serveur pour l'enregistrement
       const response = await fetch(`${apiHostName}/api/register`, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -95,16 +74,15 @@ const Register: React.FC = () => {
           'Content-Type': 'application/json',
         },
       });
+
       if (response.ok) {
         // Message de confirmation de création de compte
         setRegisterSuccess(true);
       } else {
         // Gérer les erreurs d'authentification ici
+        // Afficher un message d'erreur approprié en cas d'échec
+        setErrorMessage("Erreur lors de l'inscription");
       }
-    } catch (error: any) {
-      // Gérer les erreurs de validation ici
-      console.error("Erreur lors de l'inscription", error);
-      setErrorMessage(error.message);
     }
   };
 
@@ -141,7 +119,7 @@ const Register: React.FC = () => {
             <div className="w-full flex justify-around">
               {!registerSuccess ? (
                 <form
-                  onSubmit={handleSubmit(handleRegister)}
+                  onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col items-center sm:items-start"
                 >
                   <div className="flex flex-col sm:flex-row justify-center w-full md:justify-between">
@@ -161,6 +139,7 @@ const Register: React.FC = () => {
                         name="Prénom"
                         register={register}
                       />
+
                       <InputForm
                         type="text"
                         htmlFor="pseudonym"
@@ -187,6 +166,7 @@ const Register: React.FC = () => {
                         name="Adresse Mail"
                         register={register}
                       />
+
                       <InputForm
                         type="password"
                         htmlFor="password"
@@ -194,6 +174,7 @@ const Register: React.FC = () => {
                         name="Mot de passe"
                         register={register}
                       />
+
                       <p className="text-xs text-light-gray w-[13em]">
                         Le mot de passe doit contenir au minimum 7 caractères,
                         dont 1 majuscule, 1 chiffre et 1 caractère spécial.
@@ -224,7 +205,7 @@ const Register: React.FC = () => {
                   </div>
                   {/* Afficher le message d'erreur ici */}
                   {errorMessage && (
-                    <div className="w-full text-red-900 text-center">
+                    <div className="w-full text-red-900 flex justify-center flex-wrap mb-2">
                       {errorMessage}
                     </div>
                   )}
@@ -239,8 +220,8 @@ const Register: React.FC = () => {
                 </form>
               ) : (
                 <p className="w-full text-green-600 text-center">
-                  Création de compte réussi! Vous pouvez maintenant vous
-                  connectez avec vos identifiants!
+                  Création de compte réussi ! Vous pouvez maintenant vous
+                  connecter avec vos identifiants !
                 </p>
               )}
             </div>
